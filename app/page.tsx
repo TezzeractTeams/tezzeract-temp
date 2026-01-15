@@ -1,9 +1,15 @@
-import Image from "next/image";
+import BackgroundShape from "./components/BackgroundShape";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      
+    <div className="min-h-screen bg-gray-50">
+      <div className="w-full h-full mx-auto">
+        {/* Rounded SVG Shape */}
+        <BackgroundShape 
+          className="w-full h-[100vh] mx-auto relative"
+          borderRadius={24}
+        />
+      </div>
     </div>
   );
 }
