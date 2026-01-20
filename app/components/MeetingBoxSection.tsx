@@ -12,8 +12,8 @@ interface MeetingBoxProps {
 const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: MeetingBoxProps) => {
   return (
     <div className="relative flex flex-col h-full">
-      {/* Image area */}
-      <div className="bg-white rounded-xl w-full h-48 mb-6 flex items-center justify-center overflow-hidden shadow-sm">
+      {/* Image area - fixed height ensures alignment */}
+      <div className="bg-white w-full h-48 mb-6 flex items-center justify-center overflow-hidden">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -24,9 +24,17 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
       </div>
       
       {/* Step indicator */}
-      <div className="flex items-center mb-4 relative z-20">
-        <div className="bg-blue-600 rounded-lg w-10 h-10 flex items-center justify-center shadow-md relative z-20">
-          <span className="text-white text-lg font-semibold relative z-20">{stepNumber}</span>
+      <div className="relative mb-4 z-20">
+        {/* Line segment - hidden on small screens */}
+        <div className="hidden md:block absolute top-1/2 h-0.5 bg-blue-600 -translate-y-1/2 z-0"
+             style={{
+               left: stepNumber === 1 ? '50%' : '-100%',
+               right: stepNumber === 3 ? '50%' : '-100%',
+             }} />
+        <div className="flex items-center relative z-20">
+          <div className="bg-blue-600 rounded-lg w-10 h-10 flex items-center justify-center shadow-md">
+            <span className="text-white text-lg font-semibold">{stepNumber}</span>
+          </div>
         </div>
       </div>
       
@@ -48,16 +56,12 @@ export default function MeetingBoxSection() {
     <section className="w-full py-16 px-4 bg-white">
       <div className="w-full max-w-7xl mx-auto">
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Timeline line - goes through the center of step indicators */}
-          <div className="hidden md:block absolute top-[236px] left-0 right-0 h-0.5 bg-blue-600 z-0" 
-               style={{ marginLeft: '2%', marginRight: '2%' }} />
-          
           <div className="relative z-10">
             <MeetingBox
               stepNumber={1}
               title="Test your whole body"
               description="Get a comprehensive blood draw at one of our 2,000+ partner labs or from the comfort of your own home."
-              imageSrc="/MeetingBox3.png"
+              imageSrc="/MeetingBox3.jpg"
               imageAlt="Blood test illustration"
             />
           </div>
