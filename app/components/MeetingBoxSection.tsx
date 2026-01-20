@@ -26,7 +26,7 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
       {/* Step indicator */}
       <div className="relative mb-4 z-20">
         <div className="flex items-center relative z-20">
-          <div className="bg-blue-600 rounded-lg w-10 h-10 flex items-center justify-center shadow-md">
+          <div className="bg-gradient-to-br from-[#00A9EE] to-[#00378A] rounded-lg w-10 h-10 flex items-center justify-center shadow-md">
             <span className="text-white text-lg font-semibold">{stepNumber}</span>
           </div>
         </div>
@@ -49,8 +49,7 @@ export default function MeetingBoxSection() {
   return (
     <section className="w-full py-16 px-4 bg-white relative">
       {/* Continuous line spanning full screen width - hidden on small screens */}
-      <div className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-blue-600 z-0 top-[364px]" />
-      
+      <div className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-gradient-to-r from-[#00A9EE] to-[#00378A] z-0 top-[364px]" />
       <div className="w-full max-w-7xl mx-auto">
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="relative z-10">
