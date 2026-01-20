@@ -57,7 +57,7 @@ export default function MeetingBoxSection() {
               stepNumber={1}
               title="Test your whole body"
               description="Get a comprehensive blood draw at one of our 2,000+ partner labs or from the comfort of your own home."
-              imageSrc="/TezzzeractAvatar.png"
+              imageSrc="/MeetingBox3.png"
               imageAlt="Blood test illustration"
             />
           </div>
@@ -66,7 +66,7 @@ export default function MeetingBoxSection() {
               stepNumber={2}
               title="An actionable plan"
               description="Easy to understand results and a clear health plan with tailored recommendations on diet, lifestyle changes & supplements."
-              imageSrc="/TezzeractAvaterPlus.png"
+              imageSrc="/MeetingBox3.png"
               imageAlt="Health plan illustration"
             />
           </div>
@@ -75,7 +75,7 @@ export default function MeetingBoxSection() {
               stepNumber={3}
               title="A connected ecosystem"
               description="You can book additional diagnostics, buy curated supplements with members-only discounts in your Superpower dashboard."
-              imageSrc="/globe.svg"
+              imageSrc="/MeetingBox3.png"
               imageAlt="Ecosystem illustration"
             />
           </div>
