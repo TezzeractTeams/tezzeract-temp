@@ -13,7 +13,7 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
   return (
     <div className="relative flex flex-col h-full">
       {/* Image area - fixed height ensures alignment */}
-      <div className="bg-white w-full h-48 mb-6 flex items-center justify-center overflow-hidden">
+      <div className="bg-white w-full h-64 mb-6 flex items-center justify-center overflow-hidden">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -25,12 +25,6 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
       
       {/* Step indicator */}
       <div className="relative mb-4 z-20">
-        {/* Line segment - hidden on small screens */}
-        <div className="hidden md:block absolute top-1/2 h-0.5 bg-blue-600 -translate-y-1/2 z-0"
-             style={{
-               left: stepNumber === 1 ? '50%' : '-100%',
-               right: stepNumber === 3 ? '50%' : '-100%',
-             }} />
         <div className="flex items-center relative z-20">
           <div className="bg-blue-600 rounded-lg w-10 h-10 flex items-center justify-center shadow-md">
             <span className="text-white text-lg font-semibold">{stepNumber}</span>
@@ -40,7 +34,7 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
       
       {/* Text content */}
       <div className="flex-1 flex flex-col">
-        <h2 className="text-black text-2xl font-bold mb-3 leading-tight">
+        <h2 className="text-black text-2xl font-light mb-3 leading-tight">
           {title}
         </h2>
         <p className="text-gray-600 text-sm leading-relaxed">
@@ -53,7 +47,10 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
 
 export default function MeetingBoxSection() {
   return (
-    <section className="w-full py-16 px-4 bg-white">
+    <section className="w-full py-16 px-4 bg-white relative">
+      {/* Continuous line spanning full screen width - hidden on small screens */}
+      <div className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-blue-600 z-0 top-[364px]" />
+      
       <div className="w-full max-w-7xl mx-auto">
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="relative z-10">
