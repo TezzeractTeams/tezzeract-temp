@@ -1,67 +1,101 @@
-"use client";
-import WorldMap from "@/components/ui/world-map";
-import { motion } from "motion/react";
+import * as React from "react"
+import { createMap } from "svg-dotted-map"
 
-export function WorldMapDemo() {
+import { cn } from "@/lib/utils"
+
+interface Marker {
+  lat: number
+  lng: number
+  size?: number
+}
+
+export interface DottedMapProps extends React.SVGProps<SVGSVGElement> {
+  width?: number
+  height?: number
+  mapSamples?: number
+  markers?: Marker[]
+  dotColor?: string
+  markerColor?: string
+  dotRadius?: number
+  stagger?: boolean
+}
+
+export function DottedMap({
+  width = 150,
+  height = 75,
+  mapSamples = 8000,
+  markers = [],
+  markerColor = "#00A9EE",
+  dotRadius = 0.3,
+  stagger = true,
+  className,
+  style,
+}: DottedMapProps) {
+  const { points, addMarkers } = createMap({
+    width,
+    height,
+    mapSamples,
+  })
+
+  const processedMarkers = addMarkers(markers)
+
+  // Compute stagger helpers in a single, simple pass
+  const { xStep, yToRowIndex } = React.useMemo(() => {
+    const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x)
+    const rowMap = new Map<number, number>()
+    let step = 0
+    let prevY = Number.NaN
+    let prevXInRow = Number.NaN
+
+    for (const p of sorted) {
+      if (p.y !== prevY) {
+        // new row
+        prevY = p.y
+        prevXInRow = Number.NaN
+        if (!rowMap.has(p.y)) rowMap.set(p.y, rowMap.size)
+      }
+      if (!Number.isNaN(prevXInRow)) {
+        const delta = p.x - prevXInRow
+        if (delta > 0) step = step === 0 ? delta : Math.min(step, delta)
+      }
+      prevXInRow = p.x
+    }
+
+    return { xStep: step || 1, yToRowIndex: rowMap }
+  }, [points])
+
   return (
-    <div className=" py-40 dark:bg-black bg-white w-full">
-      <div className="max-w-7xl mx-auto text-center">
-        <p className="font-bold text-xl md:text-4xl dark:text-white text-black">
-          Remote{" "}
-          <span className="text-neutral-400">
-            {"Connectivity".split("").map((word, idx) => (
-              <motion.span
-                key={idx}
-                className="inline-block"
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: idx * 0.04 }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
-        </p>
-        <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
-          Break free from traditional boundaries. Work from anywhere, at the
-          comfort of your own studio apartment. Perfect for Nomads and
-          Travellers.
-        </p>
-      </div>
-      <WorldMap
-        dots={[
-          {
-            start: {
-              lat: 64.2008,
-              lng: -149.4937,
-            }, // Alaska (Fairbanks)
-            end: {
-              lat: 34.0522,
-              lng: -118.2437,
-            }, // Los Angeles
-          },
-          {
-            start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
-            end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-          },
-          {
-            start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-            end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
-          },
-          {
-            start: { lat: 51.5074, lng: -0.1278 }, // London
-            end: { lat: 28.6139, lng: 77.209 }, // New Delhi
-          },
-          {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-            end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
-          },
-          {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-            end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
-          },
-        ]}
-      />
-    </div>
-  );
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      className={cn("text-gray-500 dark:text-gray-500", className)}
+      style={{ width: "100%", height: "100%", ...style }}
+    >
+      {points.map((point: { x: number; y: number }, index: number) => {
+        const rowIndex = yToRowIndex.get(point.y) ?? 0
+        const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0
+        return (
+          <circle
+            cx={point.x + offsetX}
+            cy={point.y}
+            r={dotRadius}
+            fill="currentColor"
+            key={`${point.x}-${point.y}-${index}`}
+          />
+        )
+      })}
+      {processedMarkers.map((marker: { x: number; y: number; size?: number }, index: number) => {
+        const rowIndex = yToRowIndex.get(marker.y) ?? 0
+        const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0
+        return (
+          <circle
+            cx={marker.x + offsetX}
+            cy={marker.y}
+            r={marker.size ?? dotRadius}
+            fill={markerColor}
+            key={`${marker.x}-${marker.y}-${index}`}
+          />
+        )
+      })}
+    </svg>
+  )
 }
