@@ -6,60 +6,48 @@ import BentoBox4 from "./bento-boxes/BentoBox4";
 import BentoBox5 from "./bento-boxes/BentoBox5";
 import BentoBox6 from "./bento-boxes/BentoBox6";
 
-interface BentoBoxWrapperProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const BentoBoxWrapper = ({ children, className = "" }: BentoBoxWrapperProps) => {
-  return (
-    <div
-      className={`bg-white backdrop-blur-sm border-5 border-[#F5F5F5] rounded-2xl p-6 hover:border-[#B8B8B8]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#0077b6]/10 h-full w-full ${className}`}
-    >
-      {children}
-    </div>
-  );
-};
-
 export default function BentoGrid() {
   return (
-    <section className="w-full h-screen flex flex-col justify-center p-4">
+    <section className="w-full h-screen flex flex-col justify-center p-4 bg-gray-900">
       <div className="w-full h-full mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-fr h-full">
-        
-        {/* ROW 1 & 2: Box 1 (Left Sidebar) - Spans top 2 rows */}
-        <BentoBoxWrapper className="col-span-12 md:col-span-3 md:row-span-2">
-          <BentoBox1 />
-        </BentoBoxWrapper>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
+          {/* Column 1 - Left */}
+          <div className="flex flex-col gap-4 h-full">
+            {/* Box 1 - Top Left (medium-dark gray) */}
+            <div className="flex-1">
+              <BentoBox1 />
+            </div>
+            {/* Box 2 - Bottom Left (white with light blue gradient) */}
+            <div className="flex-1">
+              <BentoBox2 />
+            </div>
+          </div>
 
-        {/* ROW 1 & 2: Box 2 (Center Main) - NOW SPANS 2 ROWS (Taking Box 7's place) */}
-        <BentoBoxWrapper className="col-span-12 md:col-span-6 md:row-span-2">
-          <BentoBox2 />
-        </BentoBoxWrapper>
+          {/* Column 2 - Middle */}
+          <div className="flex flex-col gap-4 h-full">
+            {/* Box 3 - Spans both rows (white with light blue gradient) */}
+            <div className="flex-[2]">
+              <BentoBox3 />
+            </div>
+            {/* Box 4 - Bottom Middle (medium blue) */}
+            <div className="flex-1">
+              <BentoBox4 />
+            </div>
+          </div>
 
-        {/* ROW 1 & 2: Box 3 (Top Right) - Spans top 2 rows */}
-        <BentoBoxWrapper className="col-span-12 md:col-span-3 md:row-span-2">
-          <BentoBox3 />
-        </BentoBoxWrapper>
-
-        {/* ROW 3: Box 4 (Wide Bottom Left) */}
-        <BentoBoxWrapper className="col-span-12 md:col-span-5 md:row-span-1">
-          <BentoBox4 />
-        </BentoBoxWrapper>
-
-        {/* ROW 3: Box 5 (Bottom Center) */}
-        <BentoBoxWrapper className="col-span-12 md:col-span-4 md:row-span-1">
-          <BentoBox5 />
-        </BentoBoxWrapper>
-
-        {/* ROW 3: Box 6 (Bottom Right) */}
-        <BentoBoxWrapper className="col-span-12 md:col-span-3 md:row-span-1">
-          <BentoBox6 />
-        </BentoBoxWrapper>
+          {/* Column 3 - Right */}
+          <div className="flex flex-col gap-4 h-full">
+            {/* Box 5 - Top Right (dark blue) */}
+            <div className="flex-1">
+              <BentoBox5 />
+            </div>
+            {/* Box 6 - Bottom Right (very dark blue-grey) */}
+            <div className="flex-1">
+              <BentoBox6 />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 }
-
-export { BentoBoxWrapper };
