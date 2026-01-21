@@ -56,7 +56,7 @@ export default function BentoBox5() {
 
   return (
     <>
-      <svg width="0" height="0" className="absolute">
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id="bento-shape-5" clipPathUnits="objectBoundingBox">
             <path 
@@ -67,13 +67,14 @@ export default function BentoBox5() {
         </defs>
       </svg>
       <div 
-        className="h-full w-full rounded-2xl bg-gradient-to-br from-[#00A9EE] to-blue-700 flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8"
+        className="h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8"
         style={{ 
           clipPath: 'url(#bento-shape-5)',
-          backgroundImage: 'url(/bento3.png)',
+          backgroundImage: 'url(/bento5.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#00A9EE'
         }}
       >
       
@@ -101,12 +102,10 @@ export default function BentoBox5() {
 
       {/* Content inside shape */}
       <div className="relative z-10 flex flex-col h-full justify-between text-white min-h-0">
-        {/* Opening quote mark */}
-        <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-white/30 leading-none -mt-2 sm:-mt-4 -ml-1 sm:-ml-2 flex-shrink-0">"</div>
         
         {/* Testimonial text - fixed height area */}
-        <div className="flex-1 flex flex-col justify-center pt-4 py-2 sm:py-4 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
-          <p className="text-white text-base sm:text-lg md:text-xl font-normal leading-relaxed max-w-[95%] sm:max-w-[90%]">
+        <div className="flex-1 flex flex-col justify-center py-2 sm:py-6 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+          <p className="text-white text-light sm:text-lg md:text-2xl font-light max-w-[95%] sm:max-w-[90%]">
             {currentTestimonial.text}
           </p>
         </div>
