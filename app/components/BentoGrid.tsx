@@ -8,7 +8,7 @@ import BentoBox6 from "./bento-boxes/BentoBox6";
 
 export default function BentoGrid() {
   return (
-    <section className="w-full h-screen flex flex-col justify-center p-4 bg-gray-900">
+    <section className="w-full h-screen flex flex-col justify-center p-4 bg-white">
       <div className="w-full h-full mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
           {/* Column 1 - Left */}
