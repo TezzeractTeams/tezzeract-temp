@@ -104,7 +104,7 @@ export default function BentoBox5() {
       <div className="relative z-10 flex flex-col h-full justify-between text-white min-h-0">
         
         {/* Testimonial text - fixed height area */}
-        <div className="flex-1 flex flex-col justify-center py-2 sm:py-6 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+        <div className="flex-1 flex flex-col justify-start pt-8 sm:pt-12 md:pt-25 pb-2 sm:pb-6 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
           <p className="text-white text-light sm:text-lg md:text-2xl font-light max-w-[95%] sm:max-w-[90%]">
             {currentTestimonial.text}
           </p>
