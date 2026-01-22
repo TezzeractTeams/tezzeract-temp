@@ -78,7 +78,7 @@ export default function Testimonial({
       </div>
       
       {/* Blue border at bottom */}
-      <div className="h-0.5 bg-blue-500 w-full"></div>
+     
     </div>
   );
 }

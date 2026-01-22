@@ -8,6 +8,7 @@ import TezzeractButtonLight from "./ui/TezzeractButtonLight";
 import Testimonial from "./Testimonial";
 import TalentCard from "./ui/TalentCard";
 
+
 export default function LandingHero() {
 
   // Desktop path (original)
@@ -80,7 +81,7 @@ export default function LandingHero() {
 
   return (
     <div className="landing-hero-container p-6">
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
+      <svg width="0" height="0" style={{ position: 'relative' }}>
         <defs>
           <clipPath id="landing-hero-clip-desktop" clipPathUnits="objectBoundingBox">
             <path d={desktopPath}/>
@@ -175,6 +176,8 @@ export default function LandingHero() {
             rating={5}
           />
         </div>
+        
+   
     </div>
   );  
 }
