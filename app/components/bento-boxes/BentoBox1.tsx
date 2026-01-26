@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Ripple } from "./Ripple";
 export default function BentoBox1() {
   return (
     <>
@@ -13,13 +13,13 @@ export default function BentoBox1() {
         </defs>
       </svg>
       <div 
-        className="h-full w-full flex items-center justify-center"
+        className="relative h-full w-full flex items-center justify-center overflow-hidden"
         style={{ 
           clipPath: 'url(#bento-shape-1)',
           backgroundColor: '#e5e7eb'
         }}
       >
-        {/* Content can be added here */}
+        <Ripple />
       </div>
     </>
   );
