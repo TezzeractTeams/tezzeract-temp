@@ -152,7 +152,7 @@ export default function LandingHero() {
       <style jsx>{`
         .landing-hero {
           clip-path: url(#landing-hero-clip-desktop);
-          height: 94vh;
+          height: 83vh;
           width: 100%;
           background-image: url('/herobg.webp');
           background-size: cover;
@@ -167,7 +167,7 @@ export default function LandingHero() {
         }
       `}</style>
 
-<div className="mt-12 max-w-2xl absolute right-36 bottom-[-2%]">
+<div className="mt-12 max-w-2xl absolute right-36 bottom-[9%]">
           <Testimonial
             quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. More importantly, they helped us to scale faster!"
             name="Gabriele Mirabile"

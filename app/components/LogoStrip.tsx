@@ -93,7 +93,7 @@ export default function LogoStrip() {
               alt={logo.name}
               width={120}
               height={40}
-              className="object-contain py-12 opacity-90 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+              className="object-contain py-6 opacity-90 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
             />
           </div>
         ))}

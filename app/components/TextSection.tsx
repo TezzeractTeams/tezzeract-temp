@@ -66,7 +66,7 @@ export default function TextSection() {
       y: 0,
       duration: 0.8,
       ease: "power3.out",
-    }, "-=0.3"); // Start slightly before text animation ends
+    }, "-=1"); // Start much earlier in the animation sequence
 
     // Animate images with scroll scrub
     const imageTl = gsap.timeline({
