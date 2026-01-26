@@ -17,7 +17,7 @@ export const Ripple = React.memo(function Ripple({
   mainCircleOpacity = 0.24,
   numCircles = 5,
   verticalOffset = "40%",
-  borderColor = "#395464",
+  borderColor = "#42647D",
   className,
   ...props
 }: RippleProps) {
@@ -37,7 +37,7 @@ export const Ripple = React.memo(function Ripple({
         return (
           <div
             key={i}
-            className="absolute rounded-full border shadow-[0px_10px_10px_10px_#395464]"
+            className="absolute rounded-full border shadow-[0px_10px_10px_10px_#42647D]"
             style={
               {
                 width: `${size}px`,

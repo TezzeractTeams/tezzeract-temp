@@ -21,10 +21,10 @@ export default function BentoBox1() {
         className="relative h-full w-full flex items-center justify-center overflow-hidden"
         style={{ 
           clipPath: 'url(#bento-shape-1)',
-          backgroundColor: 'rgba(248, 248, 248, 0.45)',
+          backgroundColor: 'rgba(248, 248, 248, 0.22)',
           backdropFilter: 'blur(150px)',
           WebkitBackdropFilter: 'blur(150px)',
-          border: '1px solid rgba(255, 255, 255, 0.47)'
+          border: '0px solid rgba(255, 255, 255, 0.47)'
         }}
       >
         <Ripple 
