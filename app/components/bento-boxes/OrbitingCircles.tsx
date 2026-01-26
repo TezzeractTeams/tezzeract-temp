@@ -23,7 +23,7 @@ export function OrbitingCircles({
   radius = 160,
   path = true,
   iconSize = 30,
-  speed = 1,
+  speed = 0.4,
   verticalOffset,
   ...props
 }: OrbitingCirclesProps) {
