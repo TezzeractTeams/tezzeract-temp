@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Ripple } from "./Ripple";
-import { OrbitingCircles } from "./OrbitingCircles";
-import { File, Settings, Search } from "lucide-react";
+import { RippleOrbitingIcons } from "./RippleOrbitingIcons";
+import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";
 
 export default function BentoBox1() {
   return (
@@ -31,51 +31,26 @@ export default function BentoBox1() {
           mainCircleOpacity={0.5}
           numCircles={3}
           verticalOffset="85%"
+          scale={1.3}
         />
-        {/* Icons orbiting along ripple circle borders */}
-        <div 
-          className="absolute"
-          style={{
-            top: "85%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          {/* Circle 0: 105px radius */}
-          <OrbitingCircles radius={105} path={false} iconSize={30}>
-            <File className="h-4 w-4 text-gray-700" />
-            <Settings className="h-4 w-4 text-gray-700" />
-          </OrbitingCircles>
-        </div>
-        <div 
-          className="absolute"
-          style={{
-            top: "85%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          {/* Circle 1: 150px radius */}
-          <OrbitingCircles radius={150} path={false} reverse iconSize={30}>
-            <File className="h-4 w-4 text-gray-600" />
-            <Search className="h-4 w-4 text-gray-600" />
-          </OrbitingCircles>
-        </div>
-        <div 
-          className="absolute"
-          style={{
-            top: "85%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          {/* Circle 2: 195px radius */}
-          <OrbitingCircles radius={195} path={false} iconSize={40}>
-            <File className="h-5 w-5 text-gray-700" />
-            <Settings className="h-5 w-5 text-gray-700" />
-            <Search className="h-5 w-5 text-gray-700" />
-          </OrbitingCircles>
-        </div>
+        <RippleOrbitingIcons
+          mainCircleSize={210}
+          numCircles={3}
+          verticalOffset="85%"
+          scale={1.3}
+          icons={[
+            <File key="file1" className="h-5 w-5 text-gray-700" />,
+            <Settings key="settings1" className="h-5 w-5 text-gray-700" />,
+            <File key="file2" className="h-5 w-5 text-gray-600" />,
+            <Search key="search1" className="h-5 w-5 text-gray-600" />,
+            <File key="file3" className="h-6 w-6 text-gray-700" />,
+            <Settings key="settings2" className="h-6 w-6 text-gray-700" />,
+            <Search key="search2" className="h-6 w-6 text-gray-700" />,
+          ]}
+          iconSize={50}
+          reverse={[false, true, false]}
+          path={false}
+        />
       </div>
     </>
   );

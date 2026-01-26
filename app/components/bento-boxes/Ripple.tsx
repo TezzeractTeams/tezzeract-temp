@@ -10,6 +10,7 @@ interface RippleProps extends ComponentPropsWithoutRef<"div"> {
   numCircles?: number
   verticalOffset?: string
   borderColor?: string
+  scale?: number
 }
 
 export const Ripple = React.memo(function Ripple({
@@ -18,6 +19,7 @@ export const Ripple = React.memo(function Ripple({
   numCircles = 5,
   verticalOffset = "40%",
   borderColor = "#42647D",
+  scale = 1.3,
   className,
   ...props
 }: RippleProps) {
@@ -30,7 +32,7 @@ export const Ripple = React.memo(function Ripple({
       {...props}
     >
       {Array.from({ length: numCircles }, (_, i) => {
-        const size = mainCircleSize + i * 90
+        const size = mainCircleSize + i * 120
         const opacity = mainCircleOpacity - i * 0.03
         const borderStyle = "solid"
 
@@ -48,7 +50,7 @@ export const Ripple = React.memo(function Ripple({
                 borderColor: borderColor,
                 top: verticalOffset,
                 left: "50%",
-                transform: "translate(-50%, -50%) scale(1)",
+                transform: `translate(-50%, -50%) scale(${scale})`,
               } as CSSProperties
             }
           />
