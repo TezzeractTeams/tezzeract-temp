@@ -17,7 +17,7 @@ export const Ripple = React.memo(function Ripple({
   mainCircleSize = 210,
   mainCircleOpacity = 0.24,
   numCircles = 5,
-  verticalOffset = "40%",
+  verticalOffset = "50%",
   borderColor = "#42647D",
   scale = 1.3,
   className,

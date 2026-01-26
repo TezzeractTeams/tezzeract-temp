@@ -2,9 +2,8 @@
 
 import React from "react";
 import { Ripple } from "./Ripple";
-import { RippleOrbitingIcons } from "./RippleOrbitingIcons";
-import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";
-
+import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";    
+import { OrbitingCircles } from "./OrbitingCircles";
 export default function BentoBox1() {
   return (
     <>
@@ -30,27 +29,22 @@ export default function BentoBox1() {
         <Ripple 
           mainCircleOpacity={0.5}
           numCircles={3}
-          verticalOffset="85%"
+          verticalOffset="100%"
           scale={1.3}
         />
-        <RippleOrbitingIcons
-          mainCircleSize={210}
-          numCircles={3}
-          verticalOffset="85%"
-          scale={1.3}
-          icons={[
-            <File key="file1" className="h-5 w-5 text-gray-700" />,
-            <Settings key="settings1" className="h-5 w-5 text-gray-700" />,
-            <File key="file2" className="h-5 w-5 text-gray-600" />,
-            <Search key="search1" className="h-5 w-5 text-gray-600" />,
-            <File key="file3" className="h-6 w-6 text-gray-700" />,
-            <Settings key="settings2" className="h-6 w-6 text-gray-700" />,
-            <Search key="search2" className="h-6 w-6 text-gray-700" />,
-          ]}
-          iconSize={50}
-          reverse={[false, true, false]}
-          path={false}
-        />
+        <div className="relative h-[500px] w-full overflow-hidden">
+  <OrbitingCircles>
+    <File />
+    <Settings />
+    <File />
+  </OrbitingCircles>
+  <OrbitingCircles radius={100} reverse>
+    <File />
+    <Settings />
+    <File />
+    <Search />
+  </OrbitingCircles>      
+</div>  
       </div>
     </>
   );
