@@ -21,26 +21,59 @@ export default function BentoBox1() {
         className="relative h-full w-full flex items-center justify-center overflow-hidden"
         style={{ 
           clipPath: 'url(#bento-shape-1)',
-          backgroundColor: '#e5e7eb'
+          backgroundColor: 'rgba(248, 248, 248, 0.45)',
+          backdropFilter: 'blur(150px)',
+          WebkitBackdropFilter: 'blur(150px)',
+          border: '1px solid rgba(255, 255, 255, 0.47)'
         }}
       >
-        <div className="absolute inset-0" style={{ transform: 'translateY(50%)' }}>
-          <Ripple 
-            mainCircleOpacity={0.5}
-            numCircles={3}
-          />
-        </div>
-        <div className="absolute inset-0 flex items-end justify-center pb-8">
-          <OrbitingCircles iconSize={40}>
-            <File className="h-5 w-5 text-gray-700" />
-            <Settings className="h-5 w-5 text-gray-700" />
-            <File className="h-5 w-5 text-gray-700" />
+        <Ripple 
+          mainCircleOpacity={0.5}
+          numCircles={3}
+          verticalOffset="85%"
+        />
+        {/* Icons orbiting along ripple circle borders */}
+        <div 
+          className="absolute"
+          style={{
+            top: "85%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          {/* Circle 0: 105px radius */}
+          <OrbitingCircles radius={105} path={false} iconSize={30}>
+            <File className="h-4 w-4 text-gray-700" />
+            <Settings className="h-4 w-4 text-gray-700" />
           </OrbitingCircles>
-          <OrbitingCircles radius={100} reverse iconSize={30}>
-            <File className="h-4 w-4 text-gray-600" />
-            <Settings className="h-4 w-4 text-gray-600" />
+        </div>
+        <div 
+          className="absolute"
+          style={{
+            top: "85%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          {/* Circle 1: 150px radius */}
+          <OrbitingCircles radius={150} path={false} reverse iconSize={30}>
             <File className="h-4 w-4 text-gray-600" />
             <Search className="h-4 w-4 text-gray-600" />
+          </OrbitingCircles>
+        </div>
+        <div 
+          className="absolute"
+          style={{
+            top: "85%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          {/* Circle 2: 195px radius */}
+          <OrbitingCircles radius={195} path={false} iconSize={40}>
+            <File className="h-5 w-5 text-gray-700" />
+            <Settings className="h-5 w-5 text-gray-700" />
+            <Search className="h-5 w-5 text-gray-700" />
           </OrbitingCircles>
         </div>
       </div>

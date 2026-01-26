@@ -8,12 +8,16 @@ interface RippleProps extends ComponentPropsWithoutRef<"div"> {
   mainCircleSize?: number
   mainCircleOpacity?: number
   numCircles?: number
+  verticalOffset?: string
+  borderColor?: string
 }
 
 export const Ripple = React.memo(function Ripple({
   mainCircleSize = 210,
   mainCircleOpacity = 0.24,
-  numCircles = 8,
+  numCircles = 5,
+  verticalOffset = "40%",
+  borderColor = "#395464",
   className,
   ...props
 }: RippleProps) {
@@ -26,28 +30,23 @@ export const Ripple = React.memo(function Ripple({
       {...props}
     >
       {Array.from({ length: numCircles }, (_, i) => {
-        const size = mainCircleSize + i * 70
+        const size = mainCircleSize + i * 90
         const opacity = mainCircleOpacity - i * 0.03
-        const animationDelay = `${i * 0.06}s`
         const borderStyle = "solid"
 
         return (
           <div
             key={i}
-            className="absolute rounded-full border shadow-xl"
+            className="absolute rounded-full border shadow-[0px_10px_10px_10px_#395464]"
             style={
               {
-                "--i": i,
-                "--duration": "2s",
                 width: `${size}px`,
                 height: `${size}px`,
                 opacity,
-                animation: "var(--animate-ripple)",
-                animationDelay,
                 borderStyle,
                 borderWidth: "2px",
-                borderColor: `var(--foreground)`,
-                top: "50%",
+                borderColor: borderColor,
+                top: verticalOffset,
                 left: "50%",
                 transform: "translate(-50%, -50%) scale(1)",
               } as CSSProperties
