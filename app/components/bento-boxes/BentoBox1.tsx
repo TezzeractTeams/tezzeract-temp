@@ -1,5 +1,10 @@
+"use client"
+
 import React from "react";
 import { Ripple } from "./Ripple";
+import { OrbitingCircles } from "./OrbitingCircles";
+import { File, Settings, Search } from "lucide-react";
+
 export default function BentoBox1() {
   return (
     <>
@@ -19,7 +24,22 @@ export default function BentoBox1() {
           backgroundColor: '#e5e7eb'
         }}
       >
-        <Ripple />
+        <Ripple 
+          mainCircleOpacity={0.5}
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <OrbitingCircles iconSize={40}>
+            <File className="h-5 w-5 text-gray-700" />
+            <Settings className="h-5 w-5 text-gray-700" />
+            <File className="h-5 w-5 text-gray-700" />
+          </OrbitingCircles>
+          <OrbitingCircles radius={100} reverse iconSize={30}>
+            <File className="h-4 w-4 text-gray-600" />
+            <Settings className="h-4 w-4 text-gray-600" />
+            <File className="h-4 w-4 text-gray-600" />
+            <Search className="h-4 w-4 text-gray-600" />
+          </OrbitingCircles>
+        </div>
       </div>
     </>
   );

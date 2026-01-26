@@ -20,7 +20,7 @@ export const Ripple = React.memo(function Ripple({
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,white,transparent)] select-none",
+        "pointer-events-none absolute inset-0 select-none",
         className
       )}
       {...props}
@@ -45,7 +45,7 @@ export const Ripple = React.memo(function Ripple({
                 animation: "var(--animate-ripple)",
                 animationDelay,
                 borderStyle,
-                borderWidth: "1px",
+                borderWidth: "2px",
                 borderColor: `var(--foreground)`,
                 top: "50%",
                 left: "50%",
