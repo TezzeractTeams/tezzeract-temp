@@ -24,10 +24,13 @@ export default function BentoBox1() {
           backgroundColor: '#e5e7eb'
         }}
       >
-        <Ripple 
-          mainCircleOpacity={0.5}
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0" style={{ transform: 'translateY(50%)' }}>
+          <Ripple 
+            mainCircleOpacity={0.5}
+            numCircles={3}
+          />
+        </div>
+        <div className="absolute inset-0 flex items-end justify-center pb-8">
           <OrbitingCircles iconSize={40}>
             <File className="h-5 w-5 text-gray-700" />
             <Settings className="h-5 w-5 text-gray-700" />
