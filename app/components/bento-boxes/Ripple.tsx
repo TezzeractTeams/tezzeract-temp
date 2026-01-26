@@ -33,7 +33,7 @@ export const Ripple = React.memo(function Ripple({
     >
       {Array.from({ length: numCircles }, (_, i) => {
         const size = mainCircleSize + i * 120
-        const opacity = mainCircleOpacity - i * 0.03
+        const opacity = mainCircleOpacity - i * 0.025
         const borderStyle = "solid"
 
         return (
@@ -48,6 +48,7 @@ export const Ripple = React.memo(function Ripple({
                 borderStyle,
                 borderWidth: "2px",
                 borderColor: borderColor,
+                background: `radial-gradient(circle, #FFFFFF50 0%, #FFFFFF55 25%, #FFFFFF05 100%)`,
                 top: verticalOffset,
                 left: "50%",
                 transform: `translate(-50%, -50%) scale(${scale})`,
