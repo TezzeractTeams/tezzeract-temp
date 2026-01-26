@@ -12,6 +12,7 @@ export interface OrbitingCirclesProps extends React.HTMLAttributes<HTMLDivElemen
   path?: boolean
   iconSize?: number
   speed?: number
+  verticalOffset?: string
 }
 
 export function OrbitingCircles({
@@ -23,6 +24,7 @@ export function OrbitingCircles({
   path = true,
   iconSize = 30,
   speed = 1,
+  verticalOffset,
   ...props
 }: OrbitingCirclesProps) {
   const calculatedDuration = duration / speed
@@ -77,10 +79,12 @@ export function OrbitingCircles({
                 "--radius": radius,
                 "--angle": angle,
                 "--icon-size": `${iconSize}px`,
+                ...(verticalOffset ? { top: verticalOffset } : {}),
               } as React.CSSProperties
             }
             className={cn(
-              `animate-orbit absolute left-1/2 top-1/2 flex size-[var(--icon-size)] transform-gpu items-center justify-center rounded-full`,
+              `animate-orbit absolute left-1/2 flex size-[var(--icon-size)] transform-gpu items-center justify-center rounded-full bg-white`,
+              verticalOffset ? "-translate-y-1/2" : "top-1/2",
               { "[animation-direction:reverse]": reverse },
               className
             )}

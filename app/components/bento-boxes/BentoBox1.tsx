@@ -32,19 +32,43 @@ export default function BentoBox1() {
           verticalOffset="100%"
           scale={1.3}
         />
-        <div className="relative h-[500px] w-full overflow-hidden">
-  <OrbitingCircles>
-    <File />
-    <Settings />
-    <File />
-  </OrbitingCircles>
-  <OrbitingCircles radius={100} reverse>
-    <File />
-    <Settings />
-    <File />
-    <Search />
-  </OrbitingCircles>      
-</div>  
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Calculate radii matching ripple circles: (mainCircleSize + i * 120) * scale / 2 */}
+          {/* Circle 0: (210 + 0 * 120) * 1.3 / 2 = 136.5px */}
+          <OrbitingCircles 
+            radius={136.5} 
+            path={false}
+            verticalOffset="102%"
+          >
+            <File />
+            <Settings />
+            <Search />
+          </OrbitingCircles>
+          {/* Circle 1: (210 + 1 * 120) * 1.3 / 2 = 214.5px */}
+          <OrbitingCircles 
+            radius={214.5} 
+            path={false} 
+            reverse
+            verticalOffset="102%"
+          >
+            <File />
+            <Settings />
+            <Search />
+            <Zap />
+          </OrbitingCircles>
+          {/* Circle 2: (210 + 2 * 120) * 1.3 / 2 = 292.5px */}
+          <OrbitingCircles 
+            radius={292.5} 
+            path={false}
+            verticalOffset="102%"
+          >
+            <File />
+            <Settings />
+            <Search />
+            <Zap />
+            <Star />
+          </OrbitingCircles>
+        </div>  
       </div>
     </>
   );
