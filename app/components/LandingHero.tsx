@@ -8,6 +8,7 @@ import TezzeractButtonLight from "./ui/TezzeractButtonLight";
 import Testimonial from "./Testimonial";
 import TalentCard from "./ui/TalentCard";
 
+
 export default function LandingHero() {
 
   // Desktop path (original)
@@ -80,7 +81,7 @@ export default function LandingHero() {
 
   return (
     <div className="landing-hero-container p-6">
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
+      <svg width="0" height="0" style={{ position: 'relative' }}>
         <defs>
           <clipPath id="landing-hero-clip-desktop" clipPathUnits="objectBoundingBox">
             <path d={desktopPath}/>
@@ -151,7 +152,7 @@ export default function LandingHero() {
       <style jsx>{`
         .landing-hero {
           clip-path: url(#landing-hero-clip-desktop);
-          height: 94vh;
+          height: 83vh;
           width: 100%;
           background-image: url('/herobg.webp');
           background-size: cover;
@@ -166,7 +167,7 @@ export default function LandingHero() {
         }
       `}</style>
 
-<div className="mt-12 max-w-2xl absolute right-36 bottom-[-2%]">
+<div className="mt-12 max-w-2xl absolute right-36 bottom-[9%]">
           <Testimonial
             quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. More importantly, they helped us to scale faster!"
             name="Gabriele Mirabile"
@@ -175,6 +176,8 @@ export default function LandingHero() {
             rating={5}
           />
         </div>
+        
+   
     </div>
   );  
 }
