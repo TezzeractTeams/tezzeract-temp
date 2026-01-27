@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Testimonial {
   text: string;
@@ -43,16 +43,23 @@ const testimonials: Testimonial[] = [
 
 export default function BentoBox5() {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const currentTestimonial = testimonials[currentIndex];
+
+  // Auto-rotate testimonials with smooth transitions
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        setIsAnimating(false);
+      }, 500); // Half of transition duration for fade out
+    }, 5000); // Change testimonial every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -77,52 +84,34 @@ export default function BentoBox5() {
           backgroundColor: '#00A9EE'
         }}
       >
-      
-      {/* Navigation arrows */}
-      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex gap-2">
-        <button 
-          onClick={prevTestimonial}
-          className="w-7 h-7 sm:w-12 sm:h- rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
-          aria-label="Previous testimonial"
-        >
-          <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button 
-          onClick={nextTestimonial}
-          className="w-7 h-7 sm:w-12 sm:h-12 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
-          aria-label="Next testimonial"
-        >
-          <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
       {/* Content inside shape */}
       <div className="relative z-10 flex flex-col p-10 h-full justify-between text-white min-h-0">
         
         {/* Testimonial text - fixed height area */}
-        <div className="flex-1 flex flex-col justify-start pt-8 sm:pt-12 md:pt-25 pb-2 sm:pb-6  min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
-          <p className="text-white text-light sm:text-lg md:text-4xl font-light max-w-[95%] sm:max-w-[90%]">
+        <div className="flex flex-col justify-start pt-8 sm:pt-12 md:pt-25 pb-2 sm:pb-6 h-[240px] sm:h-[260px] md:h-[280px]">
+          <p 
+            key={currentIndex}
+            className="text-white text-light sm:text-lg md:text-4xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out"
+            style={{ opacity: isAnimating ? 0 : 1 }}
+          >
             {currentTestimonial.text}
           </p>
         </div>
 
         {/* Author info - fixed height */}
         <div className="flex items-center gap-3 sm:gap-4 mt-4 sm:mt-6 flex-shrink-0 h-[60px] sm:h-[72px]">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 border-2 border-white/30 overflow-hidden flex-shrink-0">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 border-2 border-white/30 overflow-hidden flex-shrink-0 transition-opacity duration-500 ease-in-out" style={{ opacity: isAnimating ? 0 : 1 }}>
             <img 
+              key={`avatar-${currentIndex}`}
               src={currentTestimonial.avatar} 
               alt={currentTestimonial.name} 
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex flex-col min-w-0 flex-1">
-            <p className="text-white font-bold text-sm sm:text-base truncate">{currentTestimonial.name}</p>
-            <p className="text-white/90 text-xs sm:text-sm truncate">{currentTestimonial.title}</p>
-            <p className="text-white/90 text-xs sm:text-sm truncate">{currentTestimonial.company}</p>
+          <div className="flex flex-col min-w-0 flex-1 transition-opacity duration-500 ease-in-out" style={{ opacity: isAnimating ? 0 : 1 }}>
+            <p key={`name-${currentIndex}`} className="text-white font-bold text-sm sm:text-base truncate">{currentTestimonial.name}</p>
+            <p key={`title-${currentIndex}`} className="text-white/90 text-xs sm:text-sm truncate">{currentTestimonial.title}</p>
+            <p key={`company-${currentIndex}`} className="text-white/90 text-xs sm:text-sm truncate">{currentTestimonial.company}</p>
           </div>
         </div>
       </div>
