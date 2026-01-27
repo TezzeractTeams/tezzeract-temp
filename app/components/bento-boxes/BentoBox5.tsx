@@ -85,13 +85,13 @@ export default function BentoBox5() {
         }}
       >
       {/* Content inside shape */}
-      <div className="relative z-10 flex flex-col p-10 h-full justify-between text-white min-h-0">
+      <div className="relative z-10 flex flex-col p-4 sm:p-6 md:p-8 lg:p-10 h-full justify-between text-white min-h-0">
         
         {/* Testimonial text - fixed height area */}
-        <div className="flex flex-col justify-start pt-8 sm:pt-12 md:pt-25 pb-2 sm:pb-6 h-[240px] sm:h-[260px] md:h-[280px]">
+        <div className="flex flex-col justify-start pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-2 sm:pb-4 md:pb-6 h-[180px] sm:h-[200px] md:h-[240px] lg:h-[260px] xl:h-[280px]">
           <p 
             key={currentIndex}
-            className="text-white text-light sm:text-lg md:text-4xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out"
+            className="text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out break-words"
             style={{ opacity: isAnimating ? 0 : 1 }}
           >
             {currentTestimonial.text}
@@ -99,7 +99,7 @@ export default function BentoBox5() {
         </div>
 
         {/* Author info - fixed height */}
-        <div className="flex items-center gap-3 sm:gap-4 mt-4 sm:mt-6 flex-shrink-0 h-[60px] sm:h-[72px]">
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mt-2 sm:mt-4 md:mt-6 flex-shrink-0 h-[50px] sm:h-[60px] md:h-[72px]">
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 border-2 border-white/30 overflow-hidden flex-shrink-0 transition-opacity duration-500 ease-in-out" style={{ opacity: isAnimating ? 0 : 1 }}>
             <img 
               key={`avatar-${currentIndex}`}
