@@ -82,7 +82,7 @@ export default function BentoBox5() {
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex gap-2">
         <button 
           onClick={prevTestimonial}
-          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
+          className="w-7 h-7 sm:w-12 sm:h- rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
           aria-label="Previous testimonial"
         >
           <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +91,7 @@ export default function BentoBox5() {
         </button>
         <button 
           onClick={nextTestimonial}
-          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
+          className="w-7 h-7 sm:w-12 sm:h-12 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
           aria-label="Next testimonial"
         >
           <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,10 +101,10 @@ export default function BentoBox5() {
       </div>
 
       {/* Content inside shape */}
-      <div className="relative z-10 flex flex-col h-full justify-between text-white min-h-0">
+      <div className="relative z-10 flex flex-col p-10 h-full justify-between text-white min-h-0">
         
         {/* Testimonial text - fixed height area */}
-        <div className="flex-1 flex flex-col justify-start pt-8 sm:pt-12 md:pt-25 pb-2 sm:pb-6 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+        <div className="flex-1 flex flex-col justify-start pt-8 sm:pt-12 md:pt-25 pb-2 sm:pb-6  min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
           <p className="text-white text-light sm:text-lg md:text-4xl font-light max-w-[95%] sm:max-w-[90%]">
             {currentTestimonial.text}
           </p>

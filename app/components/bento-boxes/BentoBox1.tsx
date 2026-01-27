@@ -4,6 +4,7 @@ import React from "react";
 import { Ripple } from "./Ripple";
 import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";    
 import { OrbitingCircles } from "./OrbitingCircles";
+
 export default function BentoBox1() {
   return (
     <>
@@ -30,7 +31,6 @@ export default function BentoBox1() {
           mainCircleOpacity={0.5}
           numCircles={3}
           verticalOffset="100%"
-          scale={1.3}
         />
         <div className="absolute inset-0 pointer-events-none">
           {/* Calculate radii matching ripple circles: (mainCircleSize + i * 120) * scale / 2 */}
@@ -38,7 +38,7 @@ export default function BentoBox1() {
           <OrbitingCircles 
             radius={136.5} 
             path={false}
-            verticalOffset="102%"
+            verticalOffset="105%"
           >
             <File />
             <Settings />
@@ -49,26 +49,14 @@ export default function BentoBox1() {
             radius={214.5} 
             path={false} 
             reverse
-            verticalOffset="102%"
+            verticalOffset="105%"
           >
             <File />
             <Settings />
             <Search />
             <Zap />
           </OrbitingCircles>
-          {/* Circle 2: (210 + 2 * 120) * 1.3 / 2 = 292.5px */}
-          <OrbitingCircles 
-            radius={292.5} 
-            path={false}
-            verticalOffset="102%"
-          >
-            <File />
-            <Settings />
-            <Search />
-            <Zap />
-            <Star />
-          </OrbitingCircles>
-        </div>  
+        </div>
       </div>
     </>
   );
