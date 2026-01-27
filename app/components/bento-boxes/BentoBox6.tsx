@@ -1,82 +1,159 @@
 "use client";
 
 import React from "react";
-import { 
-  SiNotion, 
-  SiFigma, 
-  SiSlack, 
-  SiTrello, 
-  SiAsana, 
-  SiHubspot, 
-  SiSalesforce, 
-  SiGoogleads, 
-  SiMeta 
-} from "react-icons/si";
+import Image from "next/image";
 
-interface IconConfig {
-  icon: React.ReactNode;
+interface LogoConfig {
+  src: string;
+  alt: string;
   glowColor: string;
   name: string;
 }
 
-const iconSet: IconConfig[] = [
+// Row 1: Design & Productivity tools
+const row1Logos: LogoConfig[] = [
   {
-    icon: <SiNotion className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(0, 0, 0, 0.6)",
-    name: "notion",
+    src: "/assets/chatgpt.svg",
+    alt: "ChatGPT",
+    glowColor: "rgba(16, 163, 127, 0.6)",
+    name: "chatgpt",
   },
   {
-    icon: <SiFigma className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
+    src: "/assets/figma.svg",
+    alt: "Figma",
     glowColor: "rgba(162, 89, 255, 0.6)",
     name: "figma",
   },
   {
-    icon: <SiSlack className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(91, 71, 255, 0.6)",
+    src: "/assets/notion.svg",
+    alt: "Notion",
+    glowColor: "rgba(255, 255, 255, 0.5)",
+    name: "notion",
+  },
+  {
+    src: "/assets/slack.svg",
+    alt: "Slack",
+    glowColor: "rgba(74, 21, 75, 0.6)",
     name: "slack",
   },
   {
-    icon: <SiTrello className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(0, 101, 255, 0.6)",
-    name: "trello",
+    src: "/assets/webflow.svg",
+    alt: "Webflow",
+    glowColor: "rgba(66, 99, 235, 0.6)",
+    name: "webflow",
   },
   {
-    icon: <SiAsana className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(255, 99, 135, 0.6)",
-    name: "asana",
+    src: "/assets/illustrator.svg",
+    alt: "Illustrator",
+    glowColor: "rgba(255, 154, 0, 0.6)",
+    name: "illustrator",
   },
   {
-    icon: <SiHubspot className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(255, 152, 0, 0.6)",
-    name: "hubspot",
-  },
-  {
-    icon: <SiSalesforce className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(0, 161, 223, 0.6)",
-    name: "salesforce",
-  },
-  {
-    icon: <SiGoogleads className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(255, 204, 0, 0.6)",
-    name: "googleads",
-  },
-  {
-    icon: <SiMeta className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />,
-    glowColor: "rgba(0, 132, 255, 0.6)",
-    name: "meta",
+    src: "/assets/photoshop.svg",
+    alt: "Photoshop",
+    glowColor: "rgba(49, 168, 255, 0.6)",
+    name: "photoshop",
   },
 ];
 
-// Triple duplicate icons for seamless scrolling (3x for perfect loop)
-const duplicatedIcons = [...iconSet, ...iconSet, ...iconSet];
+// Row 2: Frontend & Web technologies
+const row2Logos: LogoConfig[] = [
+  {
+    src: "/assets/react.svg",
+    alt: "React",
+    glowColor: "rgba(97, 218, 251, 0.6)",
+    name: "react",
+  },
+  {
+    src: "/assets/nextjs.svg",
+    alt: "Next.js",
+    glowColor: "rgba(255, 255, 255, 0.5)",
+    name: "nextjs",
+  },
+  {
+    src: "/assets/typescript.svg",
+    alt: "TypeScript",
+    glowColor: "rgba(49, 120, 198, 0.6)",
+    name: "typescript",
+  },
+  {
+    src: "/assets/js.svg",
+    alt: "JavaScript",
+    glowColor: "rgba(247, 223, 30, 0.6)",
+    name: "js",
+  },
+  {
+    src: "/assets/css.svg",
+    alt: "CSS",
+    glowColor: "rgba(38, 77, 228, 0.6)",
+    name: "css",
+  },
+  {
+    src: "/assets/express.svg",
+    alt: "Express",
+    glowColor: "rgba(255, 255, 255, 0.5)",
+    name: "express",
+  },
+  {
+    src: "/assets/flutter.svg",
+    alt: "Flutter",
+    glowColor: "rgba(69, 209, 253, 0.6)",
+    name: "flutter",
+  },
+];
+
+// Row 3: Backend & AI technologies
+const row3Logos: LogoConfig[] = [
+  {
+    src: "/assets/java.svg",
+    alt: "Java",
+    glowColor: "rgba(248, 152, 32, 0.6)",
+    name: "java",
+  },
+  {
+    src: "/assets/kotlin.svg",
+    alt: "Kotlin",
+    glowColor: "rgba(127, 82, 255, 0.6)",
+    name: "kotlin",
+  },
+  {
+    src: "/assets/git.svg",
+    alt: "Git",
+    glowColor: "rgba(240, 80, 51, 0.6)",
+    name: "git",
+  },
+  {
+    src: "/assets/Gemini.svg",
+    alt: "Gemini",
+    glowColor: "rgba(66, 133, 244, 0.6)",
+    name: "gemini",
+  },
+  {
+    src: "/assets/googletag.svg",
+    alt: "Google Tag",
+    glowColor: "rgba(66, 133, 244, 0.6)",
+    name: "googletag",
+  },
+  {
+    src: "/assets/premiere.svg",
+    alt: "Premiere Pro",
+    glowColor: "rgba(154, 154, 255, 0.6)",
+    name: "premiere",
+  },
+];
+
+// Triple duplicate each row for seamless scrolling (3x for perfect loop)
+const row1Duplicated = [...row1Logos, ...row1Logos, ...row1Logos];
+const row2Duplicated = [...row2Logos, ...row2Logos, ...row2Logos];
+const row3Duplicated = [...row3Logos, ...row3Logos, ...row3Logos];
 
 interface ScrollingRowProps {
-  icons: IconConfig[];
+  logos: LogoConfig[];
   direction: "right" | "left";
   className?: string;
 }
 
-function ScrollingRow({ icons, direction, className }: ScrollingRowProps) {
+function ScrollingRow({ logos, direction, className }: ScrollingRowProps) {
   return (
     <div className={`relative overflow-hidden w-full ${className || ""}`}>
       <div
@@ -88,21 +165,26 @@ function ScrollingRow({ icons, direction, className }: ScrollingRowProps) {
           width: "max-content",
         }}
       >
-        {icons.map((iconConfig, index) => (
+        {logos.map((logoConfig, index) => (
           <div
-            key={`${iconConfig.name}-${index}`}
+            key={`${logoConfig.name}-${index}`}
             className="flex-shrink-0 w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] md:w-[96px] md:h-[96px] rounded-xl sm:rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-300"
             style={{
-              boxShadow: `0 0 20px ${iconConfig.glowColor}, inset 0 0 10px ${iconConfig.glowColor}20`,
+              boxShadow: `0 0 20px ${logoConfig.glowColor}, inset 0 0 10px ${logoConfig.glowColor}20`,
             }}
           >
             <div
-              className="text-white"
+              className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
               style={{
-                filter: `drop-shadow(0 0 8px ${iconConfig.glowColor})`,
+                filter: `drop-shadow(0 0 8px ${logoConfig.glowColor})`,
               }}
             >
-              {iconConfig.icon}
+              <Image
+                src={logoConfig.src}
+                alt={logoConfig.alt}
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
         ))}
@@ -115,13 +197,13 @@ export default function BentoBox6() {
   return (
     <div className="h-full w-full rounded-2xl bg-[#1E293B] flex flex-col justify-end gap-4 sm:gap-5 md:gap-6 pt-12 sm:pt-16 md:pt-20 pb-4 sm:pb-6 md:pb-8 overflow-hidden">
       {/* Top row - scrolls right */}
-      <ScrollingRow icons={duplicatedIcons} direction="right" />
+      <ScrollingRow logos={row1Duplicated} direction="right" />
       
       {/* Middle row - scrolls left */}
-      <ScrollingRow icons={duplicatedIcons} direction="left" />
+      <ScrollingRow logos={row2Duplicated} direction="left" />
       
       {/* Bottom row - scrolls right */}
-      <ScrollingRow icons={duplicatedIcons} direction="right" />
+      <ScrollingRow logos={row3Duplicated} direction="right" />
     </div>
   );
 }
