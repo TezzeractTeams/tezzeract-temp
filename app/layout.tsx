@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Figtree, Manrope } from "next/font/google";
 import "./globals.css";
 
 const figtree = Figtree({
   variable: "--font-figtree",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -21,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${figtree.variable} antialiased`}
+        className={`${figtree.variable} ${manrope.variable} antialiased`}
       >
         {children}
       </body>

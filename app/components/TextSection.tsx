@@ -25,6 +25,9 @@ export default function TextSection() {
     const container = containerRef.current;
     const textSpans = heading.querySelectorAll("span.text-word");
     
+    // Check if mobile view (typically 768px and below)
+    const isMobile = window.innerWidth < 768;
+    
     // Set initial state for text spans
     gsap.set(textSpans, {
       opacity: 0,
@@ -46,10 +49,11 @@ export default function TextSection() {
     }
 
     // Create timeline for text animation with scroll scrub
+    // Start earlier on mobile (top 95%) vs desktop (top 90%)
     const textTl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
-        start: "top 90%",
+        start: isMobile ? "top 95%" : "top 90%",
         end: "bottom 40%",
         scrub: 1, // Smooth scrubbing, tied to scroll position
       },
@@ -69,10 +73,11 @@ export default function TextSection() {
     }, "-=1"); // Start much earlier in the animation sequence
 
     // Animate images with scroll scrub
+    // Start earlier on mobile (top 85%) vs desktop (top 80%)
     const imageTl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
-        start: "top 80%",
+        start: isMobile ? "top 85%" : "top 80%",
         end: "bottom 10%",
         scrub: 1, // Smooth scrubbing, tied to scroll position
       },
@@ -102,7 +107,7 @@ export default function TextSection() {
       ref={containerRef}
       className="w-full  mx-auto py-20 text-center"
     >
-      <h2 ref={headingRef} className="text-[64px] leading-[1.5] text-gray-400 font-light tracking-tighter">
+      <h2 ref={headingRef} className="md:text-[64px] text-[36px] leading-[1.5] text-gray-400 font-light tracking-tighter">
         {/* Tezzeract */}
         <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>Tezzeract</span>
         <span className="text-word" style={{ display: "inline-block" }}>{"\u00A0"}offers</span>
@@ -120,7 +125,7 @@ export default function TextSection() {
           ref={avatar1Ref}
           className="inline-flex align-middle mx-2 md:mx-4 relative -top-1"
         >
-          <div className="w-6 h-6 md:w-10 md:h-10 lg:w-15 lg:h-15 overflow-hidden relative">
+          <div className="w-8 h-8 md:w-10 md:h-10 lg:w-15 lg:h-15 overflow-hidden relative">
             <Image
               src="/TezzzeractAvatar.png"
               alt="Tezzeract Avatar"
@@ -148,7 +153,7 @@ export default function TextSection() {
           ref={avatar2Ref}
           className="inline-flex align-middle mx-2 md:mx-4 relative -top-1"
         >
-          <div className="w-12 h-6 md:w-24 md:h-10 lg:w-32 lg:h-15 relative">
+          <div className="w-16 h-12 md:w-24 md:h-10 lg:w-32 lg:h-15 relative">
             <Image
               src="/TezzeractAvaterPlus.png"
               alt="Tezzeract Team"

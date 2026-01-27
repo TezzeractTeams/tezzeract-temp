@@ -3,7 +3,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 
-export default function LogoStrip() {
+interface LogoStripProps {
+  className?: string;
+}
+
+export default function LogoStrip({ className }: LogoStripProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef<number>(0);
   const animationFrameRef = useRef<number | null>(null);
@@ -66,7 +70,7 @@ export default function LogoStrip() {
 
   return (
     <div 
-      className="relative w-full overflow-hidden"
+      className={`relative w-full overflow-hidden ${className || ""}`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
