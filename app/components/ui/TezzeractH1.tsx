@@ -15,7 +15,7 @@ export const TezzeractH1 = React.forwardRef<HTMLHeadingElement, TezzeractH1Props
     const lightGradient = "linear-gradient(257.31deg, #FFFFFF 16.02%, #D6D6D6 49.66%, #FFFFFF 83.98%)";
     
     // Dark variant gradient (adjusted for dark theme)
-    const darkGradient = "linear-gradient(257.31deg, #171717 16.02%, #4A4A4A 49.66%, #171717 83.98%)";
+    const darkGradient = "linear-gradient(90deg, #27AAE1 0%, #1C75BC 100%)";
 
     const gradientStyle = variant === "dark" ? darkGradient : lightGradient;
 
