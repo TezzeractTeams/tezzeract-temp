@@ -8,7 +8,7 @@ const services = [
   { name: "Service One", avatarSrc: "/box3.jpg", avatarAlt: "Service One" },
   { name: "Service Two", avatarSrc: "/box3.jpg", avatarAlt: "Service Two" },
   { name: "Service Three", avatarSrc: "/box3.jpg", avatarAlt: "Service Three" },
-  { name: "Service Five", avatarSrc: "/box3.jpg", avatarAlt: "Service Five" },
+  // x  { name: "Service Five", avatarSrc: "/box3.jpg", avatarAlt: "Service Five" },
   { name: "Service Six", avatarSrc: "/box3.jpg", avatarAlt: "Service Six" },
   { name: "Service Seven", avatarSrc: "/box3.jpg", avatarAlt: "Service Seven" },
   { name: "Service Eight", avatarSrc: "/box3.jpg", avatarAlt: "Service Eight" },
