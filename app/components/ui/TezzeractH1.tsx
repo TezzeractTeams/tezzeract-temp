@@ -8,8 +8,8 @@ export interface TezzeractH1Props extends React.HTMLAttributes<HTMLHeadingElemen
 
 export const TezzeractH1 = React.forwardRef<HTMLHeadingElement, TezzeractH1Props>(
   ({ className, variant = "light", children, style, ...props }, ref) => {
-    // Base styles
-    const baseStyles = "text-[72px] leading-[84px] tracking-[-0.05em] font-sans bg-clip-text text-transparent";
+    // Mobile-first styles: base (mobile) then md: (desktop)
+    const baseStyles = "text-[36px] leading-[42px] tracking-[-0.05em] text-center font-light bg-clip-text text-transparent md:text-[72px] md:leading-[84px] md:text-left";
     
     // Light variant gradient
     const lightGradient = "linear-gradient(257.31deg, #FFFFFF 16.02%, #D6D6D6 49.66%, #FFFFFF 83.98%)";
@@ -27,6 +27,7 @@ export const TezzeractH1 = React.forwardRef<HTMLHeadingElement, TezzeractH1Props
           backgroundImage: gradientStyle,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
+          fontFamily: "var(--font-manrope), sans-serif",
           ...style,
         }}
         {...props}

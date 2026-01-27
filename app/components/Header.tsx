@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
-      <nav className="max-full py-4  mx-auto px-4 sm:px-6 lg:px-24">
+      <nav className="max-full py-0 md:py-4  mx-auto px-4 sm:px-6 lg:px-24">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -18,7 +18,7 @@ export default function Header() {
               alt="Tezzeract Logo"
               width={180}
               height={40}
-              className="h-8 w-auto"
+              className="h-5 md:h-8 w-auto"
             />
           </div>
 

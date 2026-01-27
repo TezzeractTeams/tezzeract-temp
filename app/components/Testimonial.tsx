@@ -24,19 +24,19 @@ export default function Testimonial({
   className = "",
 }: TestimonialProps) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative w-[85%] md:w-[70%] ml-auto ${className}`}>
       {/* Main testimonial card */}
-      <div className="bg-transparent w-[800px] rounded-lg md:p-8 relative pb-8">
+      <div className="bg-transparent  rounded-lg p-2 md:p-2 relative pb-2 md:pb-8">
         {/* Two column layout */}
-        <div className="flex flex-col md:flex-row gap-6 items-end md:items-start">
+        <div className="flex flex-row gap-2 md:gap-6 items-start">
           {/* Column 1: Stars, text, and name with office */}
           <div className="flex-1 text-right">
             {/* Star rating    */}
-            <div className="flex gap-1 justify-end mb-2">
+            <div className="flex gap-0.5 md:gap-1 justify-end mb-0.5 md:mb-2">
               {Array.from({ length: 5 }).map((_, index) => (
                 <svg
                   key={index}
-                  className={`w-5 h-5 ${
+                  className={`w-3 h-3 md:w-5 md:h-5 ${
                     index < rating ? "text-yellow-400" : "text-gray-300"
                   }`}
                   fill="currentColor"
@@ -48,24 +48,24 @@ export default function Testimonial({
             </div>
 
             {/* Quote text */}
-            <TezzeractText variant="dark" className="block mb-2">
+            <TezzeractText variant="dark" className="block mb-0.5 md:mb-2 text-[12px] md:text-base leading-tight">
               {quote}
             </TezzeractText>
             
             {/* Attribution - name and company in one line */}
-            <div className="text-right w-full">
-              <TezzeractText variant="dark" className="font-bold text-lg inline">
+            <div className="text-right w-full leading-none md:leading-normal">
+              <TezzeractText variant="dark" className="font-bold text-[10px] md:text-lg inline leading-none md:leading-normal">
                 {name}
               </TezzeractText>
-              <TezzeractText variant="dark" className="font-normal inline ml-2">
+              <TezzeractText variant="dark" className="font-normal text-[10px] md:text-base inline ml-0.5 md:ml-2 leading-none md:leading-normal">
                 {title}, {company}
               </TezzeractText>
             </div>
           </div>
 
           {/* Column 2: Only the image */}
-          <div className="flex-shrink-0">
-            <div className="relative w-28 h-28 md:w-28 md:h-28 rounded-xl overflow-hidden bg-gray-200">
+          <div className="shrink-0">
+            <div className="relative w-12 h-12 md:w-28 md:h-28 rounded-xl overflow-hidden bg-gray-200">
               <Image
                 src={avatarSrc}
                 alt={name}
