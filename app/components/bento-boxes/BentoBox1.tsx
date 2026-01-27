@@ -21,7 +21,7 @@ export default function BentoBox1() {
         className="relative h-full w-full flex items-center justify-center overflow-hidden"
         style={{ 
           clipPath: 'url(#bento-shape-1)',
-          backgroundColor: 'rgba(248, 248, 248, 0.22)',
+          backgroundColor: 'rgba(0, 0, 0, 0.22)',
           backdropFilter: 'blur(150px)',
           WebkitBackdropFilter: 'blur(150px)',
           border: '0px solid rgba(255, 255, 255, 0.47)'
@@ -30,15 +30,34 @@ export default function BentoBox1() {
         <Ripple 
           mainCircleOpacity={0.5}
           numCircles={3}
-          verticalOffset="100%"
+          verticalOffset="95%"
         />
+        {/* White circle with SVG at ripple center */}
+        <div
+          className="absolute pointer-events-none flex items-center justify-center rounded-full shadow-lg"
+          style={{
+            width: '140px',
+            height: '140px',
+            top: '100%',
+            left: '50%',
+            transform: 'translate(-50%, -68%)',
+            zIndex: 1,
+            background: 'linear-gradient(to bottom right, #00A9EE 20%, #0070BC 50%, #00A9EE 100%)',
+          }}
+        >
+          <img
+            src="/TezzeractLight.svg"
+            alt="Tezzeract Light"
+            className="w-[45%] h-[45%] object-contain"
+          />
+        </div>
         <div className="absolute inset-0 pointer-events-none">
           {/* Calculate radii matching ripple circles: (mainCircleSize + i * 120) * scale / 2 */}
           {/* Circle 0: (210 + 0 * 120) * 1.3 / 2 = 136.5px */}
           <OrbitingCircles 
             radius={136.5} 
             path={false}
-            verticalOffset="105%"
+            verticalOffset="102%"
           >
             <File />
             <Settings />
@@ -49,7 +68,7 @@ export default function BentoBox1() {
             radius={214.5} 
             path={false} 
             reverse
-            verticalOffset="105%"
+            verticalOffset="102%"
           >
             <File />
             <Settings />
