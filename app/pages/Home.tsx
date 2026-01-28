@@ -5,6 +5,7 @@ import MeetingBoxSection from "../components/MeetingBoxSection";
 import TeamsSection from "../components/TeamsSection";
 import TextSection from "../components/TextSection";
 import BentoGrid from "../components/BentoGrid";
+import Footer from "../components/Footer";
 
 export default function Home() {
   
@@ -17,6 +18,7 @@ export default function Home() {
       <MeetingBoxSection />
       <TeamsSection />
       <BentoGrid />
+      <Footer />
     </>
   );
 }
