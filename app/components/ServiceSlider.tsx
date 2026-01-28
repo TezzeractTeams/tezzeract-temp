@@ -16,9 +16,9 @@ interface ServiceSliderProps {
 export default function ServiceSlider({ services }: ServiceSliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const columnRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [isPaused, setIsPaused] = useState(false);
   const [columnOpacities, setColumnOpacities] = useState<number[]>([]);
   const animationFrameRef = useRef<number | null>(null);
+  const scrollPositionRef = useRef(0);
 
   // Organize services into columns (3 items per column)
   const columns: Service[][] = [];
@@ -26,8 +26,8 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
     columns.push(services.slice(i, i + 3));
   }
 
-  // Duplicate columns for seamless loop
-  const duplicatedColumns = [...columns, ...columns];
+  // Triplicate columns for seamless infinite loop
+  const duplicatedColumns = [...columns, ...columns, ...columns];
 
   // Calculate opacity based on distance from center
   const updateOpacities = useCallback(() => {
@@ -37,7 +37,7 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
     const containerRect = container.getBoundingClientRect();
     const containerCenter = containerRect.left + containerRect.width / 2;
     // Use a wider fade zone for smoother transition
-    const fadeZone = containerRect.width * 0.4;
+    const fadeZone = containerRect.width * 0.05;
 
     const opacities = columnRefs.current.map((colRef) => {
       if (!colRef) return 1;
@@ -62,20 +62,19 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
   }, []);
 
   useEffect(() => {
-    if (!sliderRef.current || isPaused) return;
+    if (!sliderRef.current) return;
 
-    let scrollPosition = 0;
     const scrollSpeed = 0.5;
 
     const animate = () => {
-      if (!sliderRef.current || isPaused) return;
+      if (!sliderRef.current) return;
 
-      scrollPosition += scrollSpeed;
-      sliderRef.current.scrollLeft = scrollPosition;
+      scrollPositionRef.current += scrollSpeed;
+      sliderRef.current.scrollLeft = scrollPositionRef.current;
 
-      // Reset scroll position when reaching the end of first set
-      if (sliderRef.current.scrollLeft >= sliderRef.current.scrollWidth / 2) {
-        scrollPosition = 0;
+      // Reset at 1/3 for seamless loop with tripled columns
+      if (sliderRef.current.scrollLeft >= sliderRef.current.scrollWidth / 3) {
+        scrollPositionRef.current = 0;
         sliderRef.current.scrollLeft = 0;
       }
 
@@ -90,7 +89,7 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isPaused, updateOpacities]);
+  }, [updateOpacities]);
 
   // Update opacities on scroll
   useEffect(() => {
@@ -118,11 +117,7 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
   }, [duplicatedColumns.length]);
 
   return (
-    <div 
-      className="relative w-full"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <div className="relative w-full">
       {/* Slider Container with Grid Layout - horizontal scroll */}
       <div
         ref={sliderRef}
