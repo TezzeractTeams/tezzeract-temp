@@ -25,30 +25,24 @@ export default function TeamsSection() {
           <div 
             className="absolute inset-0"
             style={{
-              background: "linear-gradient(to right, #00378A 0%, #004A9E 25%, #005DB2 50%, #0070C6 75%, #00A9EE 100%)"
+              background: "linear-gradient(to right, #64B5F6 0%, #42A5F5 20%, #2196F3 40%, #1976D2 60%, #1565C0 80%, #1A237E 100%)"
             }}
           />
           
           {/* Subtle edge definition - clean aesthetic */}
-          <div className="absolute inset-0 rounded-3xl border border-white/5" />
+          <div className="absolute inset-0 " />
           
           {/* Content Container */}
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-8 md:p-12 lg:p-16">
             {/* Left Side - Text */}
             <div className="flex flex-col">
-              <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2 tracking-tight">
-                Start working
-              </h2>
-              <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2 tracking-tight">
-                with Teams
-              </h2>
               <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-light leading-tight tracking-tight">
-                specialised in
+                Start working with Teams specialised in
               </h2>
             </div>
 
             {/* Right Side - Slider */}
-            <div className="w-full">
+            <div className=" -ml-[120px] -mr-8 md:-mr-12 lg:-mr-[100px]">
               <ServiceSlider services={services} />
             </div>
           </div>
