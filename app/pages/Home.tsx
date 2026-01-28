@@ -18,6 +18,7 @@ export default function Home() {
       <MeetingBoxSection />
       <TeamsSection />
       <BentoGrid />
+      <div className="h-[1000px]"></div>
       <Footer />
     </>
   );
