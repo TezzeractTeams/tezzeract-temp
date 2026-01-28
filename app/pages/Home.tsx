@@ -5,6 +5,7 @@ import MeetingBoxSection from "../components/MeetingBoxSection";
 import TeamsSection from "../components/TeamsSection";
 import TextSection from "../components/TextSection";
 import BentoGrid from "../components/BentoGrid";
+import Footer from "../components/Footer";
 import PortfolioSection from "../components/PortfolioSection";
 import BlogSection from "../components/BlogSection";
 
@@ -18,6 +19,9 @@ export default function Home() {
       <TextSection />
       <MeetingBoxSection  />
       <TeamsSection />
+      <BentoGrid />
+      <div className="h-[1000px]"></div>
+      <Footer />
 
       <div 
         className="flex flex-col gap-4 rounded-[36px] py-24 relative "
