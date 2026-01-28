@@ -1,5 +1,5 @@
 import React from "react";
-import { Globe } from "../Globle";
+import { Globe } from "../ui/Globle";
 
 export default function BentoBox2() {
   return (
