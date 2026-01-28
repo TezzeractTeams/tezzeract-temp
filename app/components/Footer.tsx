@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="bg-gradient-to-r from-[#00A9EE] to-[#00378A] pt-20 ">
         <div className=" w-[80%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1 - Logo + Copyright */}
-          <div className="flex flex-row items-center gap-8 pr-10">
+          <div className="flex flex-row items-center gap-8">
             <Image
               src="/assets/TezzeractSquare.svg"
               alt="Tezzeract Logo"
@@ -17,7 +17,7 @@ export default function Footer() {
               className="w-auto h-12"
             />
             <p className="text-white/80 text-sm">
-              © Copyright 2024. Tezzeract Pvt Ltd. Studio.
+              © Copyright 2026. Tezzeract Pvt Ltd. Studio.
               <br />
               All rights reserved.
             </p>
@@ -105,7 +105,7 @@ export default function Footer() {
           </div>
         </div>
          {/* Bottom Section - Watermark */}
-      <div className=" flex pt-20 h-fullitems-center justify-center overflow-hidden">
+      <div className=" flex pt-30 h-fullitems-center justify-center overflow-hidden">
         <Image
           src="/assets/TezzeractLarge.svg"
           alt="Tezzeract"
