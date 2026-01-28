@@ -11,13 +11,14 @@ const BlogCard = ({ postImage, postTitle, postExcerpt }: BlogCardProps) => {
   return (
     <div className="relative pt-4 flex flex-col h-full">
       {/* Image area - fixed height ensures alignment */}
-      <div className="bg-white mb-12 flex items-center rounded-2xl justify-center overflow-hidden">
+      <div className="bg-white mb-12 flex items-center rounded-2xl justify-center overflow-hidden aspect-square">
         <Image
           src={postImage}
           alt={postTitle}
-          width={200}
-          height={200}
-          className="object-contain w-full h-full"
+          width={300}
+          height={300}
+          className="object-cover w-full h-full"
+          unoptimized={postImage.startsWith('http://localhost')}
         />
       </div>
       
