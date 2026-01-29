@@ -61,11 +61,11 @@ export default async function BlogSection() {
   }
 
   return (
-    <section className="w-full py-14 px-4 bg-white relative">
+    <section className="w-full py-14 px-8 bg-white relative">
       <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl pb-10">
         Our Blog
       </TezzeractH1>
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full  mx-auto">
         {error && (
           <div className="text-center py-10">
             <p className="text-red-600">Error: {error}</p>
@@ -120,6 +120,7 @@ export default async function BlogSection() {
                     postImage={imageUrl}
                     postTitle={title}
                     postExcerpt={excerpt}
+                    tag="test"
                   />
                 </div>
               );
