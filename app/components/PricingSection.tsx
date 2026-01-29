@@ -1,6 +1,24 @@
 "use client";
 
 import React from "react";
+import { AnimatedShinyText } from "./bento-boxes/AnimatedShinyText";
+
+export interface PricingCardTheme {
+  background?: string;
+  border?: string;
+  titleColor?: string;
+  subtitleColor?: string;
+  bodyColor?: string;
+  labelColor?: string;
+  dividerColor?: string;
+  priceColor?: string;
+  priceSuffixColor?: string;
+  badgeBg?: string;
+  badgeTextColor?: string;
+  badgeSecondaryColor?: string;
+  badgeShimmerColor?: string;
+  checkmarkColor?: string;
+}
 
 interface PricingCardProps {
   title: string;
@@ -9,37 +27,68 @@ interface PricingCardProps {
   inclusions: string[];
   specializations: string;
   price: number;
-  highlighted?: boolean;
-  backgroundStyle?: string;
+  theme?: PricingCardTheme;
 }
 
-const CheckIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="flex-shrink-0"
-  >
-    <circle cx="12" cy="12" r="10" fill="url(#checkGradient)" fillOpacity="0.2" />
-    <path
-      d="M8 12.5L10.5 15L16 9"
-      stroke="url(#checkGradient)"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <defs>
-      <linearGradient id="checkGradient" x1="4" y1="4" x2="20" y2="20">
-        <stop stopColor="#00A9EE" />
-        <stop offset="1" stopColor="#00378A" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
+const CheckIcon = ({ color = "linear-gradient(135deg, #00A9EE 0%, #00378A 100%)", uniqueId }: { color?: string; uniqueId?: string }) => {
+  const isGradient = color.startsWith("linear-gradient");
+  const gradientId = `checkGradient-${uniqueId || 'default'}`;
+  
+  if (isGradient) {
+    // Extract colors from gradient string (simple parser for common gradient formats)
+    const colorMatch = color.match(/#([0-9A-Fa-f]{6})/g) || [];
+    const startColor = colorMatch[0] || "#00A9EE";
+    const endColor = colorMatch[1] || colorMatch[0] || "#00378A";
+    
+    return (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="flex-shrink-0"
+      >
+        <circle cx="12" cy="12" r="10" fill={`url(#${gradientId})`} fillOpacity="0.2" />
+        <path
+          d="M8 12.5L10.5 15L16 9"
+          stroke={`url(#${gradientId})`}
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <defs>
+          <linearGradient id={gradientId} x1="4" y1="4" x2="20" y2="20">
+            <stop stopColor={startColor} />
+            <stop offset="1" stopColor={endColor} />
+          </linearGradient>
+        </defs>
+      </svg>
+    );
+  }
 
-const PersonIcon = () => (
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="flex-shrink-0"
+    >
+      <circle cx="12" cy="12" r="10" fill={color} fillOpacity="0.2" />
+      <path
+        d="M8 12.5L10.5 15L16 9"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+const PersonIcon = ({ color = "#9ca3af" }: { color?: string }) => (
   <svg
     width="20"
     height="20"
@@ -48,15 +97,32 @@ const PersonIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     className="flex-shrink-0"
   >
-    <circle cx="12" cy="8" r="4" stroke="#9ca3af" strokeWidth="1.5" />
+    <circle cx="12" cy="8" r="4" stroke={color} strokeWidth="1.5" />
     <path
       d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7"
-      stroke="#9ca3af"
+      stroke={color}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
   </svg>
 );
+
+const DEFAULT_THEME: Required<PricingCardTheme> = {
+  background: "linear-gradient(135deg,rgb(255, 255, 255) 0%,rgb(226, 226, 226) 50%,rgb(244, 251, 255) 100%)",
+  border: "",
+  titleColor: "linear-gradient(135deg, #00A9EE 0%, #0070BC 50%, #00378A 100%)",
+  subtitleColor: "linear-gradient(90deg, #00A9EE 0%, #0070BC 50%, #00378A 100%)",
+  bodyColor: "#242424",
+  labelColor: "#6b6b6b",
+  dividerColor: "#4a4a4a",
+  priceColor: "linear-gradient(135deg, #1a1a1a 0%, #333 100%)",
+  priceSuffixColor: "#6b6b6b",
+  badgeBg: "#ffffff",
+  badgeTextColor: "#0070BC",
+  badgeSecondaryColor: "#9ca3af",
+  badgeShimmerColor: "rgba(46, 46, 46, 0.35)",
+  checkmarkColor: "linear-gradient(135deg, #00A9EE 0%, #00378A 100%)",
+};
 
 const PricingCard = ({
   title,
@@ -65,115 +131,116 @@ const PricingCard = ({
   inclusions,
   specializations,
   price,
-  highlighted = false,
-  backgroundStyle,
+  theme: tierTheme = {},
 }: PricingCardProps) => {
-  const defaultBackground = highlighted
-    ? "linear-gradient(135deg,rgb(255, 255, 255) 0%,rgb(230, 242, 250) 50%,rgb(244, 251, 255) 100%)"
-    : "linear-gradient(135deg,rgb(255, 255, 255) 0%,rgb(226, 226, 226) 50%,rgb(244, 251, 255) 100%)";
+  const t = { ...DEFAULT_THEME, ...tierTheme };
+  const isGradient = (s: string) => s.startsWith("linear-gradient");
 
   return (
     <div
-      className={`relative flex flex-col rounded-3xl p-8 md:p-10 h-full ${
-        highlighted
-          ? "bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] ring-1 ring-[#00A9EE]/30"
-          : "bg-[#2a2a2a]"
-      }`}
-      style={{
-        background: backgroundStyle || defaultBackground,
-      }}
+      className={`relative flex flex-col rounded-3xl p-8 md:p-10 h-full ${t.border}`}
+      style={{ background: t.background }}
     >
-      {/* Title with gradient */}
       <h3
-        className="text-4xl md:text-5xl font-light  mb-4"
-        style={{
-          background: "linear-gradient(135deg, #00A9EE 0%, #0070BC 50%, #00378A 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-        }}
+        className="text-4xl md:text-5xl font-light mb-4"
+        style={
+          isGradient(t.titleColor)
+            ? {
+                background: t.titleColor,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }
+            : { color: t.titleColor }
+        }
       >
         {title}
       </h3>
 
-      {/* Subtitle with mixed styling */}
       <p className="text-base md:text-lg mb-6 leading-relaxed">
         <span
-          style={{
-            background: "linear-gradient(90deg, #00A9EE 0%, #0070BC 50%, #00378A 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          style={
+            isGradient(t.subtitleColor)
+              ? {
+                  background: t.subtitleColor,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }
+              : { color: t.subtitleColor }
+          }
         >
-          {subtitle.split(" ").slice(0, 5).join(" ")}
-        </span>{" "}
-        <span className="text-[#242]">
-          {subtitle.split(" ").slice(5).join(" ")}
+          {subtitle}
         </span>
       </p>
 
-      {/* Team size badge */}
-      <div className="inline-flex items-center gap-3 bg-[#ffffff] rounded-full px-5 py-3 mb-8 w-fit">
-        <PersonIcon />
-        <span className="text-[#0070BC]">
-          <span className="font-semibold">{teamSize} Member</span>{" "}
-          <span className="text-gray-400">Flexible Teams</span>
-        </span>
+      <div className="mb-8">
+        <div 
+          className="inline-flex items-center gap-3 py-1 sm:px-3 sm:py-1.5 !w-fit md:py-2 rounded-full backdrop-blur-lg border border-white/30"
+          style={{ backgroundColor: t.badgeBg }}
+        > 
+          <PersonIcon color={t.badgeSecondaryColor} />
+          <AnimatedShinyText 
+            className="text-md font-light" 
+            shimmerWidth={60}
+            textColor={t.badgeTextColor}
+            shimmerColor={t.badgeShimmerColor}
+          >
+            {teamSize} Member Flexible Teams
+          </AnimatedShinyText>
+        </div>
       </div>
 
-      {/* Inclusions divider */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="flex-1 h-px bg-[#4a4a4a]" />
-        <span className="text-[#6b6b6b] text-sm">Inclusions</span>
-        <div className="flex-1 h-px bg-[#4a4a4a]" />
+        <div className="flex-1 h-px" style={{ backgroundColor: t.dividerColor }} />
+        <span className="text-sm" style={{ color: t.labelColor }}>Inclusions</span>
+        <div className="flex-1 h-px" style={{ backgroundColor: t.dividerColor }} />
       </div>
 
-      {/* Inclusions list */}
       <div className="flex flex-col gap-4 mb-8">
         {inclusions.map((item, index) => (
           <div key={index} className="flex items-start gap-3">
-            <CheckIcon />
-            <span className="text-[#242424] text-sm md:text-base">{item}</span>
+            <CheckIcon color={t.checkmarkColor} uniqueId={`${title}-${index}`} />
+            <span className="text-sm md:text-base" style={{ color: t.bodyColor }}>{item}</span>
           </div>
         ))}
       </div>
 
-      {/* Specializations divider */}
       <div className="flex items-center gap-4 mb-4">
-        <div className="flex-1 h-px bg-[#4a4a4a]" />
-        <span className="text-[#6b6b6b] text-sm whitespace-nowrap">
+        <div className="flex-1 h-px" style={{ backgroundColor: t.dividerColor }} />
+        <span className="text-sm whitespace-nowrap" style={{ color: t.labelColor }}>
           Talent Specializations Covered
         </span>
-        <div className="flex-1 h-px bg-[#4a4a4a]" />
+        <div className="flex-1 h-px" style={{ backgroundColor: t.dividerColor }} />
       </div>
 
-      {/* Specializations text */}
-      <p className="text-[#242424] text-sm md:text-base mb-8 leading-relaxed">
+      <p className="text-sm md:text-base mb-8 leading-relaxed" style={{ color: t.bodyColor }}>
         {specializations}
       </p>
 
-      {/* Price */}
       <div className="mt-auto">
         <span
           className="text-4xl md:text-5xl font-light"
-          style={{
-            background: "linear-gradient(135deg, #FFFFFF 0%, #D6D6D6 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          style={
+            isGradient(t.priceColor)
+              ? {
+                  background: t.priceColor,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }
+              : { color: t.priceColor }
+          }
         >
           ${price.toLocaleString()}
         </span>
-        <span className="text-[#6b6b6b] text-base md:text-lg">/month</span>
+        <span className="text-base md:text-lg" style={{ color: t.priceSuffixColor }}>/month</span>
       </div>
     </div>
   );
 };
 
-// Pricing data for 3 tiers
-const pricingTiers = [
+const pricingTiers: (Omit<PricingCardProps, "theme"> & { theme?: PricingCardTheme })[] = [
   {
     title: "Starter",
     subtitle: "For small to medium businesses looking for reliable, cost-effective support.",
@@ -186,8 +253,17 @@ const pricingTiers = [
     specializations:
       "Marketing, creatives, content creation, UI/UX and Web development teams",
     price: 3999,
-    highlighted: false,
-    backgroundStyle: "linear-gradient(135deg,rgb(255, 255, 255) 0%,rgb(226, 226, 226) 50%,rgb(244, 251, 255) 100%)",
+    theme: {
+      titleColor: "linear-gradient(135deg,rgb(98, 98, 98) 10%,rgb(178, 178, 178) 50%,rgb(98, 98, 98) 90%)",
+      subtitleColor: "#555555",
+      background: "linear-gradient(135deg,rgb(255, 255, 255) 10%,rgb(246, 245, 245) 50%,rgb(255, 255, 255) 90%)",
+      border: "border border-[#BCBCBC]",
+      checkmarkColor: "#9B9B9B",
+      badgeShimmerColor: "rgba(36, 36, 36, 0.35)",
+      badgeBg: "rgba(0, 0, 0, 0.05)",
+      badgeTextColor: "#555555",
+      badgeSecondaryColor: "#9ca3af",
+    },
   },
   {
     title: "Growth",
@@ -202,8 +278,14 @@ const pricingTiers = [
     specializations:
       "Marketing, creatives, content creation, UI/UX, Web development, Mobile development and Data analytics teams",
     price: 6999,
-    highlighted: true,
-    backgroundStyle: "linear-gradient(135deg,rgb(255, 255, 255) 0%,rgb(230, 242, 250) 50%,rgb(244, 251, 255) 100%)",
+    theme: {
+      background: "linear-gradient(135deg,rgb(255, 255, 255) 0%,rgb(230, 242, 250) 50%,rgb(244, 251, 255) 100%)",
+      border: "ring-1 ring-[#00A9EE]/30",
+      checkmarkColor: "linear-gradient(135deg, #00A9EE 0%, #00378A 100%)",
+      badgeBg: "rgba(0, 169, 238, 0.1)",
+      badgeTextColor: "#0070BC",
+      badgeSecondaryColor: "#00A9EE",
+    },
   },
   {
     title: "Enterprise",
@@ -219,8 +301,21 @@ const pricingTiers = [
     specializations:
       "Full-stack development, DevOps, AI/ML, Marketing, Design, Content, Analytics, QA, and Project Management teams",
     price: 12999,
-    highlighted: false,
-    backgroundStyle: "linear-gradient(135deg,#00378A 0%,#27AAE1 60%, #00378A 130%)",
+    theme: {
+      background: "linear-gradient(135deg,#00378A 0%,#27AAE1 60%, #00378A 130%)",
+      titleColor: "#ffffff",
+      subtitleColor: "rgba(255,255,255,0.9)",
+      bodyColor: "#e5e5e5",
+      labelColor: "rgba(255,255,255,0.7)",
+      dividerColor: "rgba(255,255,255,0.3)",
+      priceColor: "#ffffff",
+      priceSuffixColor: "rgba(255,255,255,0.8)",
+      badgeShimmerColor: "rgba(236, 236, 236, 0.35)",
+
+      badgeBg: "rgba(255,255,255,0.15)",
+      badgeTextColor: "#ffffff",
+      badgeSecondaryColor: "rgba(255,255,255,0.8)",
+    },
   },
 ];
 
@@ -228,7 +323,6 @@ export default function PricingSection() {
   return (
     <section className="w-full py-16 md:py-24 px-4 bg-white">
       <div className="w-full max-w-7xl mx-auto">
-        {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-4">
             Choose Your <span className="text-[#00378A]">Plan</span>
@@ -238,7 +332,6 @@ export default function PricingSection() {
           </p>
         </div>
 
-        {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {pricingTiers.map((tier, index) => (
             <PricingCard
@@ -249,8 +342,7 @@ export default function PricingSection() {
               inclusions={tier.inclusions}
               specializations={tier.specializations}
               price={tier.price}
-              highlighted={tier.highlighted}
-              backgroundStyle={tier.backgroundStyle}
+              theme={tier.theme}
             />
           ))}
         </div>
