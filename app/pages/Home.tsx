@@ -20,10 +20,9 @@ export default function Home() {
       <TextSection />
       <MeetingBoxSection  />
       <TeamsSection />
-      <PricingSection />
-      <BentoGrid />
-      <div className="h-[1000px]"></div>
-      <Footer />
+     
+      
+    
 
       <div 
         className="flex flex-col gap-4 rounded-[36px] py-24 relative "
@@ -38,6 +37,7 @@ export default function Home() {
       </div>
 
       <BlogSection />
+        <Footer />
     </>
   );
 }
