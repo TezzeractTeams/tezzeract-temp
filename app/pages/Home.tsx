@@ -8,6 +8,7 @@ import BentoGrid from "../components/BentoGrid";
 import Footer from "../components/Footer";
 import PortfolioSection from "../components/PortfolioSection";
 import BlogSection from "../components/BlogSection";
+import PricingSection from "../components/PricingSection";
 
 export default function Home() {
   
