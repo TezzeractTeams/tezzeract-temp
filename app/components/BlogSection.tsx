@@ -39,7 +39,8 @@ interface Article {
 }
 
 export default async function BlogSection() {
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 
+    (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : '');
   
   let posts: Article[] = [];
   let error: string | null = null;
