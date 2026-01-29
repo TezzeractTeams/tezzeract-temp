@@ -17,13 +17,13 @@ const services = [
 
 export default function TeamsSection() {
   return (
-    <section className="w-full py-16 px-4 bg-white relative overflow-hidden">
+    <section className="w-full h-auto py-16 px-4  relative">
       {/* Main Container with Gradient Background */}
-      <div className="w-full max-w-7xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden">
+      <div className="w-full h-[500px] ">
+        <div className="relative rounded-3xl  overflow-hidden h-full">
           {/* Smooth gradual gradient background with multiple stops for seamless transition */}
           <div 
-            className="absolute inset-0"
+            className="absolute  inset-0"
             style={{
               background: "linear-gradient(to right, #64B5F6 0%, #42A5F5 20%, #2196F3 40%, #1976D2 60%, #1565C0 80%, #1A237E 100%)"
             }}
@@ -32,18 +32,25 @@ export default function TeamsSection() {
           {/* Subtle edge definition - clean aesthetic */}
           <div className="absolute inset-0 " />
           
-          {/* Content Container */}
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-8 md:p-12 lg:p-16">
-            {/* Left Side - Text */}
-            <div className="flex flex-col">
-              <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-light leading-tight tracking-tight">
-                Start working with Teams specialised in
-              </h2>
+          {/* Content Container - relative for absolute child */}
+          <div className="relative p-8 md:p-12 lg:p-16 lg:pt-[120px]">
+            {/* Layer 1 (back): Slider full width, behind text */}
+            <div className="absolute inset-0 z-0 flex items-center overflow-hidden">
+              <div className="w-full px-8 md:px-12 lg:px-16 pt-16 md:pt-12 lg:pt-[120px]">
+                <ServiceSlider services={services} />
+              </div>
             </div>
 
-            {/* Right Side - Slider */}
-            <div className=" -ml-[120px] -mr-8 md:-mr-12 lg:-mr-[100px]">
-              <ServiceSlider services={services} />
+            {/* Layer 2 (front): Grid with text on top */}
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-1 items-center">
+              {/* Left Side - Text (sits on top of slider) */}
+              <div className="flex flex-col mr-[100px]">
+                <h2 className="text-white text-4xl md:text-5xl lg:text-8xl font-light leading-tighter tracking-tighter">
+                  Start working with Teams specialised in
+                </h2>
+              </div>
+              {/* Right Side - Spacer so slider shows through from behind */}
+              <div className="-ml-[320px] -mr-8 md:-mr-12 lg:-mr-[100px] min-h-[120px]" aria-hidden />
             </div>
           </div>
         </div>

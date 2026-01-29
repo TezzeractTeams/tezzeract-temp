@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useRef, useEffect } from "react";
 import ServiceItem from "./ServiceItem";
 
 interface Service {
@@ -13,72 +13,59 @@ interface ServiceSliderProps {
   services: Service[];
 }
 
-export default function ServiceSlider({ services }: ServiceSliderProps) {
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const columnRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [columnOpacities, setColumnOpacities] = useState<number[]>([]);
+interface SliderRowProps {
+  services: Service[];
+  direction: "left" | "right";
+  speed?: number;
+}
+
+// Individual row component with its own animation
+function SliderRow({ services, direction, speed = 0.5 }: SliderRowProps) {
+  const rowRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | null>(null);
   const scrollPositionRef = useRef(0);
+  const initializedRef = useRef(false);
 
-  // Organize services into columns (3 items per column)
-  const columns: Service[][] = [];
-  for (let i = 0; i < services.length; i += 3) {
-    columns.push(services.slice(i, i + 3));
-  }
-
-  // Triplicate columns for seamless infinite loop
-  const duplicatedColumns = [...columns, ...columns, ...columns];
-
-  // Calculate opacity based on distance from center
-  const updateOpacities = useCallback(() => {
-    if (!sliderRef.current) return;
-
-    const container = sliderRef.current;
-    const containerRect = container.getBoundingClientRect();
-    const containerCenter = containerRect.left + containerRect.width / 2;
-    // Use a wider fade zone for smoother transition
-    const fadeZone = containerRect.width * 0.05;
-
-    const opacities = columnRefs.current.map((colRef) => {
-      if (!colRef) return 1;
-
-      const colRect = colRef.getBoundingClientRect();
-      const colCenter = colRect.left + colRect.width / 2;
-      const distance = Math.abs(colCenter - containerCenter);
-      
-      // Smooth fade: full opacity in center, gradually fade to 0.15 at edges
-      let opacity = 1;
-      if (distance > fadeZone) {
-        // Fade out more aggressively as we move away
-        const fadeDistance = distance - fadeZone;
-        const maxFadeDistance = containerRect.width / 2 - fadeZone;
-        opacity = Math.max(0.15, 1 - (fadeDistance / maxFadeDistance) * 0.85);
-      }
-      
-      return opacity;
-    });
-
-    setColumnOpacities(opacities);
-  }, []);
+  // Triplicate services for seamless infinite loop
+  const duplicatedServices = [...services, ...services, ...services];
 
   useEffect(() => {
-    if (!sliderRef.current) return;
+    if (!rowRef.current) return;
 
-    const scrollSpeed = 0.5;
+    const row = rowRef.current;
+
+    // Initialize scroll position for right-scrolling rows
+    if (!initializedRef.current) {
+      if (direction === "right") {
+        // Start from the middle section for right-scrolling
+        scrollPositionRef.current = row.scrollWidth / 3;
+        row.scrollLeft = scrollPositionRef.current;
+      }
+      initializedRef.current = true;
+    }
 
     const animate = () => {
-      if (!sliderRef.current) return;
+      if (!rowRef.current) return;
 
-      scrollPositionRef.current += scrollSpeed;
-      sliderRef.current.scrollLeft = scrollPositionRef.current;
-
-      // Reset at 1/3 for seamless loop with tripled columns
-      if (sliderRef.current.scrollLeft >= sliderRef.current.scrollWidth / 3) {
-        scrollPositionRef.current = 0;
-        sliderRef.current.scrollLeft = 0;
+      if (direction === "left") {
+        // Scroll left (items move right-to-left)
+        scrollPositionRef.current += speed;
+        
+        // Reset at 1/3 for seamless loop
+        if (scrollPositionRef.current >= rowRef.current.scrollWidth / 3) {
+          scrollPositionRef.current = 0;
+        }
+      } else {
+        // Scroll right (items move left-to-right)
+        scrollPositionRef.current -= speed;
+        
+        // Reset when reaching the start
+        if (scrollPositionRef.current <= 0) {
+          scrollPositionRef.current = rowRef.current.scrollWidth / 3;
+        }
       }
 
-      updateOpacities();
+      rowRef.current.scrollLeft = scrollPositionRef.current;
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
@@ -89,86 +76,62 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [updateOpacities]);
-
-  // Update opacities on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      updateOpacities();
-    };
-
-    const slider = sliderRef.current;
-    if (slider) {
-      slider.addEventListener('scroll', handleScroll);
-      // Initial calculation
-      updateOpacities();
-    }
-
-    return () => {
-      if (slider) {
-        slider.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [updateOpacities]);
-
-  // Initialize opacities
-  useEffect(() => {
-    setColumnOpacities(new Array(duplicatedColumns.length).fill(1));
-  }, [duplicatedColumns.length]);
+  }, [direction, speed]);
 
   return (
-    <div className="relative w-full">
-      {/* Slider Container with Grid Layout - horizontal scroll */}
-      <div
-        ref={sliderRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 relative z-0"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-      >
-        {duplicatedColumns.map((column, colIndex) => (
-          <div
-            key={colIndex}
-            ref={(el) => {
-              columnRefs.current[colIndex] = el;
-            }}
-            className="flex flex-col gap-4 flex-shrink-0 transition-opacity duration-300"
-            style={{ 
-              minWidth: "fit-content",
-              opacity: columnOpacities[colIndex] ?? 1
-            }}
-          >
-            {column.map((service, serviceIndex) => (
-              <ServiceItem
-                key={`${colIndex}-${serviceIndex}`}
-                name={service.name}
-                avatarSrc={service.avatarSrc}
-                avatarAlt={service.avatarAlt}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
+    <div
+      ref={rowRef}
+      className="flex gap-6 overflow-x-auto scrollbar-hide whitespace-nowrap"
+      style={{
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
+    >
+      {duplicatedServices.map((service, index) => (
+        <div key={`${index}`} className="flex-shrink-0">
+          <ServiceItem
+            name={service.name}
+            avatarSrc={service.avatarSrc}
+            avatarAlt={service.avatarAlt}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
-      {/* Optional: Navigation arrows */}
-      {/* Uncomment if you want visible navigation arrows */}
-      {/* 
-      <button
-        onClick={scrollLeft}
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 hover:bg-white/30 transition-all"
-        aria-label="Scroll left"
-      >
-        ←
-      </button>
-      <button
-        onClick={scrollRight}
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 hover:bg-white/30 transition-all"
-        aria-label="Scroll right"
-      >
-        →
-      </button>
-      */}
+export default function ServiceSlider({ services }: ServiceSliderProps) {
+  // Distribute services across 3 rows; ensure each row has enough items to scroll
+  const rowSize = Math.max(2, Math.ceil(services.length / 3));
+  const row1Services = services.slice(0, rowSize);
+  const row2Services = services.slice(rowSize, rowSize * 2);
+  const row3Services = services.slice(rowSize * 2);
+
+  // If any row is empty or has too few items to scroll, use full list so it animates
+  const minItemsToScroll = 2;
+  const filledRow1 = row1Services.length >= minItemsToScroll ? row1Services : services;
+  const filledRow2 = row2Services.length >= minItemsToScroll ? row2Services : services;
+  const filledRow3 = row3Services.length >= minItemsToScroll ? row3Services : services;
+
+  return (
+    <div
+      className="relative w-full overflow-hidden"
+      style={{
+        maskImage: "linear-gradient(to right, transparent 0%, black 20%)",
+        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 20%)",
+      }}
+    >
+      {/* 3 horizontal rows with alternating scroll directions */}
+      <div className="flex flex-col gap-4">
+        {/* Row 1: Scroll Left */}
+        <SliderRow services={filledRow1} direction="left" speed={0.5} />
+        
+        {/* Row 2: Scroll Right */}
+        <SliderRow services={filledRow2} direction="right" speed={0.5} />
+        
+        {/* Row 3: Scroll Left */}
+        <SliderRow services={filledRow3} direction="left" speed={0.5} />
+      </div>
     </div>
   );
 }

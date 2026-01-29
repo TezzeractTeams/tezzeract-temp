@@ -20,7 +20,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
     >
       {/* Service Item Container - Pill shape on hover */}
       <div
-        className="flex items-center gap-3 px-4 py-2.5 rounded-3xl transition-all duration-300 ease-in-out"
+        className="flex items-center gap-4 px-4 py-2.5 rounded-3xl transition-all duration-300 ease-in-out"
         style={{
           backgroundColor: isHovered ? "rgba(167, 217, 252, 0.12)" : "transparent",
           backdropFilter: isHovered ? "blur(10px)" : "none",
@@ -31,7 +31,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         {/* Text */}
         <span
           className={`
-            text-base md:text-lg font-medium whitespace-nowrap transition-all duration-300 ease-in-out
+            text-base md:text-2xl font-medium whitespace-nowrap transition-all duration-300 ease-in-out
             ${isHovered 
               ? "text-white font-light" 
               : "text-white/50"
