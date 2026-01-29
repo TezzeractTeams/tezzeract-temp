@@ -1,6 +1,12 @@
 // lib/strapi.ts
 export async function getPosts() {
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 
+    (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : '');
+  
+  if (!strapiUrl) {
+    throw new Error('NEXT_PUBLIC_STRAPI_URL environment variable is not set');
+  }
+  
   const apiKey = process.env.STRAPI_API_KEY;
   
   const headers: HeadersInit = {
