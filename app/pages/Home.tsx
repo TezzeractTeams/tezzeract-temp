@@ -20,16 +20,9 @@ export default function Home() {
       <TextSection />
       <MeetingBoxSection  />
       <TeamsSection />
-<<<<<<< HEAD
-      <PricingSection />
-      <BentoGrid />
-      <div className="h-[1000px]"></div>
-      <Footer />
-=======
      
       
     
->>>>>>> 4805c9cfdf5a7429e87630a865042863f31e8539
 
       <div 
         className="flex flex-col gap-4 rounded-[36px] py-24 relative "
