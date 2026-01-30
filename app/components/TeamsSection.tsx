@@ -25,7 +25,7 @@ export default function TeamsSection() {
           <div 
             className="absolute  inset-0"
             style={{
-              background: "linear-gradient(to right, #64B5F6 0%, #42A5F5 20%, #2196F3 40%, #1976D2 60%, #1565C0 80%, #1A237E 100%)"
+              background: "linear-gradient(to right, #00378A 0%,rgb(16, 117, 199) 20%, #2196F3 40%, #1976D2 60%, #1565C0 80%, #1A237E 100%)"
             }}
           />
           
