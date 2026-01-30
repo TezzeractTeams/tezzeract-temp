@@ -44,6 +44,7 @@ const testimonials: Testimonial[] = [
 export default function BentoBox5() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const currentTestimonial = testimonials[currentIndex];
 
@@ -61,6 +62,22 @@ export default function BentoBox5() {
     return () => clearInterval(interval);
   }, []);
 
+  // Check screen size for responsive clipPath
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768); // md breakpoint
+    };
+
+    // Check on mount
+    checkScreenSize();
+
+    // Add event listener
+    window.addEventListener('resize', checkScreenSize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <>
       <svg width="0" height="0" style={{ position: 'absolute' }}>
@@ -74,9 +91,9 @@ export default function BentoBox5() {
         </defs>
       </svg>
       <div 
-        className="h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8"
+        className={`h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 ${!isDesktop ? 'rounded-2xl' : ''}`}
         style={{ 
-          clipPath: 'url(#bento-shape-5)',
+          clipPath: isDesktop ? 'url(#bento-shape-5)' : 'none',
           backgroundImage: 'url(/bento5.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -91,7 +108,7 @@ export default function BentoBox5() {
         <div className="flex flex-col justify-start pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-2 sm:pb-4 md:pb-6 h-[180px] sm:h-[200px] md:h-[240px] lg:h-[260px] xl:h-[280px]">
           <p 
             key={currentIndex}
-            className="text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out break-words"
+            className="text-white text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out break-words"
             style={{ opacity: isAnimating ? 0 : 1 }}
           >
             {currentTestimonial.text}

@@ -13,9 +13,9 @@ export interface AnimatedShinyTextProps extends ComponentPropsWithoutRef<"span">
 export const AnimatedShinyText: FC<AnimatedShinyTextProps> = ({
   children,
   className,
-  shimmerWidth = 100,
+  shimmerWidth = 90,
   textColor,
-  shimmerColor = "rgba(255,255,255,0.35)",
+  shimmerColor = "rgba(255, 255, 255, 0.87)",
   style,
   ...props
 }) => {
