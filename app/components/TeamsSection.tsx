@@ -3,16 +3,16 @@
 import React from "react";
 import ServiceSlider from "./ServiceSlider";
 
-// Placeholder data - replace with your actual service data
 const services = [
-  { name: "Service One", avatarSrc: "/box3.jpg", avatarAlt: "Service One" },
-  { name: "Service Two", avatarSrc: "/box3.jpg", avatarAlt: "Service Two" },
-  { name: "Service Three", avatarSrc: "/box3.jpg", avatarAlt: "Service Three" },
-  // x  { name: "Service Five", avatarSrc: "/box3.jpg", avatarAlt: "Service Five" },
-  { name: "Service Six", avatarSrc: "/box3.jpg", avatarAlt: "Service Six" },
-  { name: "Service Seven", avatarSrc: "/box3.jpg", avatarAlt: "Service Seven" },
-  { name: "Service Eight", avatarSrc: "/box3.jpg", avatarAlt: "Service Eight" },
-  { name: "Service Nine", avatarSrc: "/box3.jpg", avatarAlt: "Service Nine" },
+  { name: "Product Development", avatarSrc: "/box3.jpg", avatarAlt: "Product Development" },
+  { name: "Web Development", avatarSrc: "/box3.jpg", avatarAlt: "Web Development" },
+  { name: "Digital Marketing", avatarSrc: "/box3.jpg", avatarAlt: "Digital Marketing" },
+  { name: "UI/UX Design", avatarSrc: "/box3.jpg", avatarAlt: "UI/UX Design" },
+  { name: "E-Commerce", avatarSrc: "/box3.jpg", avatarAlt: "E-Commerce" },
+  { name: "Branding & Creative", avatarSrc: "/box3.jpg", avatarAlt: "Branding & Creative" },
+  { name: "Content & SEO", avatarSrc: "/box3.jpg", avatarAlt: "Content & SEO" },
+  { name: "Dedicated Remote Teams", avatarSrc: "/box3.jpg", avatarAlt: "Dedicated Remote Teams" },
+  { name: "Paid Ads & Performance Marketing", avatarSrc: "/box3.jpg", avatarAlt: "Paid Ads & Performance Marketing" },
 ];
 
 export default function TeamsSection() {

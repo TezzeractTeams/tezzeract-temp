@@ -106,7 +106,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section - Watermark */}
-        <div className="flex pt-12 md:pt-35 items-center justify-center overflow-hidden">
+        <div className="flex pt-12 md:pt-35 items-center justify-center opacity-10 overflow-hidden">
           <Image
             src="/assets/TezzeractLarge.svg"
             alt="Tezzeract"
