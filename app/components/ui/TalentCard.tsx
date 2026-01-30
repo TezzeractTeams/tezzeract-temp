@@ -47,7 +47,7 @@ export default function TalentCard({
               src={imageSrc}
               alt={alt}
               fill
-              className="object-cover md:object-contain"
+              className="object-cover md:object-contain md:object-bottom"
               sizes="(max-width: 768px) 100px, 220px"
             />
           </div>

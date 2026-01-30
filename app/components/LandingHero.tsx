@@ -59,35 +59,35 @@ export default function LandingHero() {
       id: 1, 
       imageSrc: "/talentImg.png", 
       alt: "Talent 1",
-      position: { top: "-5%", left: "100%" }, // Desktop: Top left
+      position: { top: "0vh", left: "56vw" }, // Desktop: Top left
       mobilePosition: { top: "65%", left: "1%" } // Mobile position
     },
     { 
       id: 2, 
       imageSrc: "/talenImg2.png", 
       alt: "Talent 2",
-      position: { top: "-18%", left: "155%" }, // Desktop: Top right
+      position: { top: "-10vh", left: "72vw" }, // Desktop: Top right
       mobilePosition: { top: "76%", left: "35%" } // Mobile position
     },
     { 
       id: 3, 
       imageSrc: "/talenImg3.png", 
       alt: "Talent 3",
-      position: { top: "40%", left: "45%" }, // Desktop: Bottom left
+      position: { top: "33vh", left: "40vw" }, // Desktop: Bottom left
       mobilePosition: { top: "56%", left: "35%" } // Mobile position
     },
     { 
       id: 4, 
       imageSrc: "/talenImg4.png", 
       alt: "Talent 4",
-      position: { top: "50%", left: "100%" }, // Desktop: Bottom middle
+      position: { top: "26vh", left: "56vw" }, // Desktop: Bottom middle
       mobilePosition: { top: "78%", left: "69%" } // Mobile position
     },
     { 
       id: 5, 
       imageSrc: "/talenImg5.png", 
       alt: "Talent 5",
-      position: { top: "10vw", left: "42vw" }, // Desktop: Bottom right
+      position: { top: "17vh", left: "72vw" }, // Desktop: Bottom right
       mobilePosition: { top: "59%", left: "69%" } // Mobile position
     },
   ];
@@ -122,11 +122,11 @@ export default function LandingHero() {
         </div>
         
         {/* Desktop Talent Cards Container with absolute positioning */}
-        <div className="hidden md:block relative z-2" style={{ width: "500px", height: "460px", minWidth: "500px" }}>
+        <div className="hidden md:block absolute inset-0 z-2 pointer-events-none">
           {talentImages.map((talent) => (
             <div
               key={talent.id}
-              className="absolute"
+              className="absolute pointer-events-auto"
               style={{
                 top: talent.position.top,
                 left: talent.position.left,
@@ -206,7 +206,7 @@ export default function LandingHero() {
         }
       `}</style>
 
-<div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[9%] block w-[calc(100%-2rem)] md:w-auto">
+<div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[11%] block w-[calc(100%-2rem)] md:w-[50vw]">
           <Testimonial
             quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. More importantly, they helped us to scale faster!"
             name="Gabriele Mirabile"
