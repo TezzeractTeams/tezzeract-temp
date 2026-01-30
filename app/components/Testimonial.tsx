@@ -48,7 +48,7 @@ export default function Testimonial({
             </div>
 
             {/* Quote text */}
-            <TezzeractText variant="dark" className="block mb-0.5 md:mb-2 text-[12px] md:text-base leading-tight">
+            <TezzeractText variant="dark" className="block mb-0.5 md:mb-2 text-[1px] md:text-base leading-tight">
               {quote}
             </TezzeractText>
             
