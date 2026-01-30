@@ -13,7 +13,7 @@ import PricingSection from "../components/PricingSection";
 export default function Home() {
   
   return (
-    <>
+    <div className="w-[100vw] overflow-x-hidden">
    <Header />
       <LandingHero />
       <LogoStrip  />
@@ -25,7 +25,7 @@ export default function Home() {
     
 
       <div 
-        className="flex flex-col gap-4 rounded-[36px] py-24 relative "
+        className="flex flex-col gap-4 rounded-[30px] relative "
         style={{
           background: 'radial-gradient(64.55% 66.78% at 0% 0%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
           
@@ -39,6 +39,6 @@ export default function Home() {
       <BlogSection />
       <PricingSection />
         <Footer />
-    </>
+    </div>
   );
 }

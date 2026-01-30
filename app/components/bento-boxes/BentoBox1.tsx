@@ -41,7 +41,8 @@ export default function BentoBox1() {
           backgroundColor: isDesktop ? 'rgba(0, 0, 0, 0.22)' : 'rgba(0, 0, 0, 0.4)',
           backdropFilter: 'blur(150px)',
           WebkitBackdropFilter: 'blur(150px)',
-          border: '0px solid rgba(255, 255, 255, 0.47)'
+          border: '0px solid rgba(255, 255, 255, 0.47)',
+          borderRadius: '30px'
         }}
       >
         <Ripple 
