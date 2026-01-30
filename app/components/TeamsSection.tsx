@@ -19,7 +19,7 @@ export default function TeamsSection() {
   return (
     <section className="w-full h-auto py-16 px-4  relative">
       {/* Main Container with Gradient Background */}
-      <div className="w-full h-[500px] ">
+      <div className="w-full min-h-[400px] md:min-h-[450px] lg:h-[500px] ">
         <div className="relative rounded-3xl  overflow-hidden h-full">
           {/* Smooth gradual gradient background with multiple stops for seamless transition */}
           <div 
@@ -33,24 +33,24 @@ export default function TeamsSection() {
           <div className="absolute inset-0 " />
           
           {/* Content Container - relative for absolute child */}
-          <div className="relative p-8 md:p-12 lg:p-16 lg:pt-[120px]">
+          <div className="relative p-4 md:p-8 lg:p-12 lg:pt-[120px]">
             {/* Layer 1 (back): Slider full width, behind text */}
             <div className="absolute inset-0 z-0 flex items-center overflow-hidden pointer-events-auto">
-              <div className="w-full px-8 md:px-12 lg:px-16 pt-16 md:pt-12 lg:pt-[120px] ml-8 md:ml-16 lg:ml-[500px]">
+              <div className="w-full px-4 md:px-8 lg:px-16 pt-8 md:pt-12 lg:pt-[120px] ml-0 md:ml-8 lg:ml-[200px] xl:ml-[300px]">
                 <ServiceSlider services={services} />
               </div>
             </div>
 
             {/* Layer 2 (front): Grid with text on top */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-1 items-center pointer-events-none">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-2 items-center pointer-events-none">
               {/* Left Side - Text (sits on top of slider) */}
-              <div className="flex flex-col mr-[100px] pointer-events-none">
-                <h2 className="text-white text-4xl md:text-5xl lg:text-8xl font-light leading-tighter tracking-tighter">
+              <div className="flex flex-col mr-0 md:mr-8 lg:mr-[100px] pointer-events-none">
+                <h2 className="text-white p-8 md:p-0 text-4xl lg:text-6xl xl:text-8xl font-light leading-tighter tracking-tighter">
                   Start working with Teams specialised in
                 </h2>
               </div>
               {/* Right Side - Spacer so slider shows through from behind */}
-              <div className="-ml-[320px] -mr-8 md:-mr-12 lg:-mr-[100px] min-h-[120px] pointer-events-none" aria-hidden />
+              <div className="-ml-0 -mr-0 md:-ml-[100px] md:-mr-4 lg:-ml-[320px] lg:-mr-[100px] min-h-[120px] pointer-events-none" aria-hidden />
             </div>
           </div>
         </div>

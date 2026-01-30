@@ -33,7 +33,7 @@ export default function Header() {
           damping: 50,
         }}
         className={`py-0 md:py-4 ${
-          scrolled ? "px-4 sm:px-4 lg:px-3 border border-white/10" : "px-4 sm:px-6 lg:px-24"
+          scrolled ? "pr-2 border border-white/10" : "px-4 sm:px-6 lg:px-24"
         } ${
           scrolled ? "bg-white/10" : "bg-transparent"
         }`}
