@@ -106,7 +106,7 @@ function SliderRow({ services, direction, speed = 0.5 }: SliderRowProps) {
     >
       <div
         ref={contentRef}
-        className="flex gap-6 whitespace-nowrap"
+        className="flex gap-9 whitespace-nowrap"
         style={{
           willChange: "transform",
           width: "fit-content",
@@ -148,7 +148,7 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
       }}
     >
       {/* 3 horizontal rows with alternating scroll directions */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-10">
         {/* Row 1: Scroll Left */}
         <SliderRow services={filledRow1} direction="left" speed={0.5} />
         
