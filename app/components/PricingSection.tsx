@@ -26,7 +26,7 @@ interface PricingCardProps {
   teamSize: number;
   inclusions: string[];
   specializations: string;
-  price: number;
+  price: number | string;
   theme?: PricingCardTheme;
 }
 
@@ -232,9 +232,11 @@ const PricingCard = ({
               : { color: t.priceColor }
           }
         >
-          ${price.toLocaleString()}
+          {typeof price === "number" ? `$${price.toLocaleString()}` : price}
         </span>
-        <span className="text-base md:text-lg" style={{ color: t.priceSuffixColor }}>/month</span>
+        {typeof price === "number" && (
+          <span className="text-base md:text-lg" style={{ color: t.priceSuffixColor }}>/month</span>
+        )}
       </div>
     </div>
   );
@@ -259,7 +261,7 @@ const pricingTiers: (Omit<PricingCardProps, "theme"> & { theme?: PricingCardThem
       background: "linear-gradient(135deg,rgb(255, 255, 255) 10%,rgb(246, 245, 245) 50%,rgb(255, 255, 255) 90%)",
       border: "border border-[#BCBCBC]",
       checkmarkColor: "#9B9B9B",
-      badgeShimmerColor: "rgba(36, 36, 36, 0.35)",
+      badgeShimmerColor: "#909090",
       badgeBg: "rgba(0, 0, 0, 0.05)",
       badgeTextColor: "#555555",
       badgeSecondaryColor: "#9ca3af",
@@ -280,11 +282,13 @@ const pricingTiers: (Omit<PricingCardProps, "theme"> & { theme?: PricingCardThem
     price: 6999,
     theme: {
       background: "linear-gradient(135deg,rgb(255, 255, 255) 0%,rgb(230, 242, 250) 50%,rgb(244, 251, 255) 100%)",
+      subtitleColor: "#555555",
       border: "ring-1 ring-[#00A9EE]/30",
       checkmarkColor: "linear-gradient(135deg, #00A9EE 0%, #00378A 100%)",
       badgeBg: "rgba(0, 169, 238, 0.1)",
       badgeTextColor: "#0070BC",
       badgeSecondaryColor: "#00A9EE",
+      badgeShimmerColor: "#3C91CE",
     },
   },
   {
@@ -300,7 +304,7 @@ const pricingTiers: (Omit<PricingCardProps, "theme"> & { theme?: PricingCardThem
     ],
     specializations:
       "Full-stack development, DevOps, AI/ML, Marketing, Design, Content, Analytics, QA, and Project Management teams",
-    price: 12999,
+    price: "Start a Call",
     theme: {
       background: "linear-gradient(135deg,#00378A 0%,#27AAE1 60%, #00378A 130%)",
       titleColor: "#ffffff",
@@ -310,7 +314,7 @@ const pricingTiers: (Omit<PricingCardProps, "theme"> & { theme?: PricingCardThem
       dividerColor: "rgba(255,255,255,0.3)",
       priceColor: "#ffffff",
       priceSuffixColor: "rgba(255,255,255,0.8)",
-      badgeShimmerColor: "rgba(236, 236, 236, 0.35)",
+      badgeShimmerColor: "#CCEAFF",
 
       badgeBg: "rgba(255,255,255,0.15)",
       badgeTextColor: "#ffffff",

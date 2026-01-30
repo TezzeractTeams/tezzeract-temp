@@ -11,29 +11,36 @@ export default function Header() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 100);
+    setScrolled(latest >= 5);
   });
 
   return (
     <header className="fixed top-0  left-0 right-0 z-50 flex justify-center">
       <motion.nav
+        key={scrolled ? "scrolled" : "top"}
+        initial={scrolled ? { y: -100, opacity: 0 } : { y: -10, opacity: 0 }}
         animate={{
+          y: scrolled ? 20 : 0,
+          opacity: 1,
           width: scrolled ? "54%" : "100%",
           height: scrolled ? "50px" : "120px",
           backdropFilter: scrolled ? "blur(10px)" : "none",
           boxShadow: scrolled
             ? "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
             : "none",
-          y: scrolled ? 20 : 0,
           borderRadius: scrolled ? "15px" : "0px",
         }}
         transition={{
-          type: "spring",
-          stiffness: 200,
-          damping: 50,
+          y: scrolled ? { duration: 0.5, ease: "easeOut" } : { duration: 1, ease: "easeOut" },
+          opacity: scrolled ? { duration: 1, ease: "easeOut" } : { duration: 0.3, ease: "easeOut" },
+          width: { duration: 0 },
+          height: { duration: 0 },
+          backdropFilter: { duration: 0 },
+          boxShadow: { duration: 0 },
+          borderRadius: { duration: 0 },
         }}
         className={`py-0 md:py-4 ${
-          scrolled ? "pr-2 border border-white/10" : "px-4 sm:px-6 lg:px-24"
+          scrolled ? "px-4 sm:px-4 lg:px-3 border border-white/10" : "px-4 sm:px-6 lg:px-24"
         } ${
           scrolled ? "bg-white/10" : "bg-transparent"
         }`}
@@ -46,9 +53,7 @@ export default function Header() {
               scale: scrolled ? 0.6 : 1,
             }}
             transition={{
-              type: "spring",
-              stiffness: 200,
-              damping: 50,
+              duration: 0,
             }}
           >
             <Image

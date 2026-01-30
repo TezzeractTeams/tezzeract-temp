@@ -34,10 +34,10 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
       
       {/* Text content */}
       <div className="flex-1 flex flex-col">
-        <h2 className="text-black text-2xl font-light mb-3 leading-tight">
+        <h2 className="text-black text-3xl font-light mb-3 leading-tight">
           {title}
         </h2>
-        <p className="text-gray-600 text-sm leading-relaxed">
+        <p className="text-gray-600 text-base leading-relaxed">
           {description}
         </p>
       </div>
@@ -51,12 +51,12 @@ export default function MeetingBoxSection() {
       {/* Continuous line spanning full screen width - hidden on small screens */}
       <div className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-gradient-to-r from-[#00A9EE] to-[#00378A] z-0 top-[364px]" />
       <div className="w-full max-w-7xl mx-auto">
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-24">
           <div className="relative z-10">
             <MeetingBox
               stepNumber={1}
-              title="Test your whole body"
-              description="Get a comprehensive blood draw at one of our 2,000+ partner labs or from the comfort of your own home."
+              title="Discover & Match Talent"
+              description="We assess your goals, timelines, and skill requirements to match you with vetted professionals from our global talent pool—ready to integrate into your workflow."
               imageSrc="/MeetingBox3.jpg"
               imageAlt="Blood test illustration"
             />

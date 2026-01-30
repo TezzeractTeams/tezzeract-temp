@@ -11,6 +11,7 @@ interface ServiceItemProps {
 
 export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const isPaidAds = name === "Paid Ads & Performance Marketing";
 
   return (
     <div
@@ -20,7 +21,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
     >
       {/* Service Item Container - Pill shape on hover */}
       <div
-        className="flex items-center gap-3 px-4 py-2.5 rounded-3xl transition-all duration-300 ease-in-out"
+        className="flex items-center md:gap-4 px-4 py-2.5 rounded-3xl transition-all duration-300 ease-in-out"
         style={{
           backgroundColor: isHovered ? "rgba(167, 217, 252, 0.12)" : "transparent",
           backdropFilter: isHovered ? "blur(10px)" : "none",
@@ -31,7 +32,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         {/* Text */}
         <span
           className={`
-            text-base md:text-lg font-medium whitespace-nowrap transition-all duration-300 ease-in-out
+            text-base md:text-2xl font-light whitespace-nowrap transition-all duration-300 ease-in-out
             ${isHovered 
               ? "text-white font-light" 
               : "text-white/50"
@@ -51,27 +52,48 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
           →
         </span>
         
-        {/* Avatar */}
-        <div
-          className={`
-            relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
-            ${isHovered 
-              ? "ring-2 ring-white/30" 
-              : ""
-            }
-          `}
-        >
-          <Image
-            src={avatarSrc}
-            alt={avatarAlt || name}
-            width={40}
-            height={40}
+        {/* Avatar or SVG Icon */}
+        {isPaidAds ? (
+          <div
             className={`
-              object-cover w-full h-full transition-all duration-300 ease-in-out
-              ${isHovered ? "opacity-100 scale-105" : "opacity-60"}
+              relative w-10 h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300 ease-in-out
+              ${isHovered 
+                ? "" 
+                : ""
+              }
             `}
-          />
-        </div>
+          >
+            <img
+              src="/assets/Ads.svg"
+              alt={avatarAlt || name}
+              className={`
+                w-full h-full transition-all duration-300 ease-in-out
+                ${isHovered ? "opacity-100 scale-105" : "opacity-60"}
+              `}
+            />
+          </div>
+        ) : (
+          <div
+            className={`
+              relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
+              ${isHovered 
+                ? "ring-2 ring-white/30" 
+                : ""
+              }
+            `}
+          >
+            <Image
+              src={avatarSrc}
+              alt={avatarAlt || name}
+              width={40}
+              height={40}
+              className={`
+                object-cover w-full h-full transition-all duration-300 ease-in-out
+                ${isHovered ? "opacity-100 scale-105" : "opacity-60"}
+              `}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
