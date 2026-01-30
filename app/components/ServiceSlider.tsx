@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import ServiceItem from "./ServiceItem";
 
 interface Service {
@@ -21,51 +21,68 @@ interface SliderRowProps {
 
 // Individual row component with its own animation
 function SliderRow({ services, direction, speed = 0.5 }: SliderRowProps) {
-  const rowRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | null>(null);
-  const scrollPositionRef = useRef(0);
-  const initializedRef = useRef(false);
+  const positionRef = useRef(0);
+  const [singleSetWidth, setSingleSetWidth] = useState(0);
+  const [isReady, setIsReady] = useState(false);
 
   // Triplicate services for seamless infinite loop
   const duplicatedServices = [...services, ...services, ...services];
 
-  useEffect(() => {
-    if (!rowRef.current) return;
+  // Calculate content width after layout
+  useLayoutEffect(() => {
+    if (!contentRef.current) return;
 
-    const row = rowRef.current;
-
-    // Initialize scroll position for right-scrolling rows
-    if (!initializedRef.current) {
-      if (direction === "right") {
-        // Start from the middle section for right-scrolling
-        scrollPositionRef.current = row.scrollWidth / 3;
-        row.scrollLeft = scrollPositionRef.current;
+    // Use requestAnimationFrame to ensure content is fully rendered
+    const frameId = requestAnimationFrame(() => {
+      if (contentRef.current) {
+        const totalWidth = contentRef.current.scrollWidth;
+        const calculatedWidth = totalWidth / 3;
+        setSingleSetWidth(calculatedWidth);
+        
+        // Initialize position for right-scrolling rows
+        if (direction === "right") {
+          positionRef.current = calculatedWidth;
+          // Set initial transform position
+          contentRef.current.style.transform = `translateX(-${calculatedWidth}px)`;
+        }
+        
+        setIsReady(true);
       }
-      initializedRef.current = true;
-    }
+    });
+
+    return () => cancelAnimationFrame(frameId);
+  }, [direction, services]);
+
+  // Animation loop
+  useEffect(() => {
+    if (!isReady || singleSetWidth === 0 || !contentRef.current) return;
 
     const animate = () => {
-      if (!rowRef.current) return;
+      if (!contentRef.current) return;
 
       if (direction === "left") {
         // Scroll left (items move right-to-left)
-        scrollPositionRef.current += speed;
+        positionRef.current += speed;
         
-        // Reset at 1/3 for seamless loop
-        if (scrollPositionRef.current >= rowRef.current.scrollWidth / 3) {
-          scrollPositionRef.current = 0;
+        // Seamless reset: subtract one set width when reaching the boundary
+        if (positionRef.current >= singleSetWidth) {
+          positionRef.current = positionRef.current - singleSetWidth;
         }
       } else {
         // Scroll right (items move left-to-right)
-        scrollPositionRef.current -= speed;
+        positionRef.current -= speed;
         
-        // Reset when reaching the start
-        if (scrollPositionRef.current <= 0) {
-          scrollPositionRef.current = rowRef.current.scrollWidth / 3;
+        // Seamless reset: add one set width when reaching the start
+        if (positionRef.current <= 0) {
+          positionRef.current = positionRef.current + singleSetWidth;
         }
       }
 
-      rowRef.current.scrollLeft = scrollPositionRef.current;
+      // Apply transform for smooth GPU-accelerated animation
+      contentRef.current.style.transform = `translateX(-${positionRef.current}px)`;
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
@@ -76,26 +93,35 @@ function SliderRow({ services, direction, speed = 0.5 }: SliderRowProps) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [direction, speed]);
+  }, [direction, speed, isReady, singleSetWidth]);
 
   return (
     <div
-      ref={rowRef}
-      className="flex gap-6 overflow-x-auto scrollbar-hide whitespace-nowrap"
+      ref={containerRef}
+      className="overflow-hidden"
       style={{
         scrollbarWidth: "none",
         msOverflowStyle: "none",
       }}
     >
-      {duplicatedServices.map((service, index) => (
-        <div key={`${index}`} className="flex-shrink-0">
-          <ServiceItem
-            name={service.name}
-            avatarSrc={service.avatarSrc}
-            avatarAlt={service.avatarAlt}
-          />
-        </div>
-      ))}
+      <div
+        ref={contentRef}
+        className="flex gap-6 whitespace-nowrap"
+        style={{
+          willChange: "transform",
+          width: "fit-content",
+        }}
+      >
+        {duplicatedServices.map((service, index) => (
+          <div key={`${index}`} className="flex-shrink-0">
+            <ServiceItem
+              name={service.name}
+              avatarSrc={service.avatarSrc}
+              avatarAlt={service.avatarAlt}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
