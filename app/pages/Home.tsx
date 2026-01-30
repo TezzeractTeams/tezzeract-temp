@@ -28,7 +28,7 @@ export default function Home() {
         className="flex flex-col gap-4 rounded-[36px] py-24 relative "
         style={{
           background: 'radial-gradient(64.55% 66.78% at 0% 0%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
-          backgroundAttachment: 'fixed'
+          
         }}
       >
         <BentoGrid />
