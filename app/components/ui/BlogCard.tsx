@@ -23,8 +23,7 @@ const BlogCard = ({ postImage, postTitle, postExcerpt, tag }: BlogCardProps) => 
               style={{
                 background: 'radial-gradient(50.47% 50.47% at 55.88% 97.48%, rgba(155, 155, 155, 0.3) 0%, rgba(253, 253, 253, 0.06) 100%)',
                 border: '1px solid #5F5F5F4D',
-                backdropFilter: 'blur(200px)',
-                WebkitBackdropFilter: 'blur(200px)',
+                
               }}
             >
               <span
@@ -32,6 +31,8 @@ const BlogCard = ({ postImage, postTitle, postExcerpt, tag }: BlogCardProps) => 
                   background: 'linear-gradient(257.31deg, #2B2B2B 16.02%, #4A4A4A 49.66%, #505050 83.98%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
+                  backdropFilter: 'blur(200px)',
+                WebkitBackdropFilter: 'blur(200px)',
                   color: 'transparent',
                   WebkitTextFillColor: 'transparent',
                 }}
