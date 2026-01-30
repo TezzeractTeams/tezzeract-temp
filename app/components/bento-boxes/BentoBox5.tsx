@@ -85,13 +85,13 @@ export default function BentoBox5() {
           <clipPath id="bento-shape-5" clipPathUnits="objectBoundingBox">
             <path 
               transform="scale(-1, 1) translate(-1, 0)" 
-              d="M0 0.0417599C0 0.0186966 0.0250721 0 0.056 0H0.6105C0.641428 0 0.6665 0.0186965 0.6665 0.0417599V0.09C0.6665 0.115 0.691572 0.132 0.7225 0.132H0.944C0.974928 0.132 1 0.15 1 0.173V0.95824C1 0.981303 0.974928 1 0.944 1H0.056C0.0250721 1 0 0.981303 0 0.95824V0.0417599Z" 
+              d="M0 0.02C0 0.009 0.0125 0 0.028 0H0.6105C0.626 0 0.6385 0.009 0.6385 0.02V0.09C0.6385 0.102 0.651 0.11 0.6665 0.11H0.972C0.9875 0.11 1 0.118 1 0.13V0.979C1 0.99 0.9875 1 0.972 1H0.028C0.0125 1 0 0.99 0 0.979V0.02Z" 
             />
           </clipPath>
         </defs>
       </svg>
       <div 
-        className={`h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 ${!isDesktop ? 'rounded-2xl' : ''}`}
+        className={`h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 ${!isDesktop ? 'rounded-xl' : ''}`}
         style={{ 
           clipPath: isDesktop ? 'url(#bento-shape-5)' : 'none',
           backgroundImage: 'url(/bento5.png)',
