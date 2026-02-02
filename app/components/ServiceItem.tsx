@@ -21,9 +21,9 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
     >
       {/* Service Item Container - Pill shape on hover */}
       <div
-        className="flex items-center md:gap-4 px-4 py-2.5 rounded-3xl transition-all duration-300 ease-in-out"
+        className="flex items-center gap-3 md:gap-4 px-5 md:px-6 py-2.5 md:py-3 rounded-3xl transition-all duration-300 ease-in-out"
         style={{
-          backgroundColor: isHovered ? "rgba(167, 217, 252, 0.12)" : "transparent",
+          backgroundColor: isHovered ? "rgba(135, 206, 250, 0.25)" : "transparent",
           backdropFilter: isHovered ? "blur(10px)" : "none",
           transform: isHovered ? "scale(1.02)" : "translateY(0) scale(1)",
           boxShadow: isHovered ? "0 0px 12px rgba(0, 0, 0, 0.04)" : "none",
@@ -32,7 +32,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         {/* Text */}
         <span
           className={`
-            text-base md:text-2xl font-light whitespace-nowrap transition-all duration-300 ease-in-out
+            text-sm md:text-2xl font-light tracking-tighter whitespace-nowrap transition-all duration-300 ease-in-out
             ${isHovered 
               ? "text-white font-light" 
               : "text-white/50"
@@ -43,20 +43,26 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         </span>
         
         {/* Arrow - smooth opacity transition */}
-        <span 
-          className="text-white text-lg font-light transition-opacity duration-300 ease-in-out"
+        <div 
+          className="flex items-center transition-opacity duration-300 ease-in-out"
           style={{
             opacity: isHovered ? 1 : 0,
           }}
         >
-          →
-        </span>
+          <Image
+            src="/assets/Arrow.svg"
+            alt="Arrow"
+            width={34}
+            height={15}
+            className="w-auto h-3 md:h-4"
+          />
+        </div>
         
         {/* Avatar or SVG Icon */}
         {isPaidAds ? (
           <div
             className={`
-              relative w-10 h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300 ease-in-out
+              relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300 ease-in-out
               ${isHovered 
                 ? "" 
                 : ""
@@ -75,7 +81,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         ) : (
           <div
             className={`
-              relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
+              relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
               ${isHovered 
                 ? "ring-2 ring-white/30" 
                 : ""
