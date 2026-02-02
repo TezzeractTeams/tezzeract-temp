@@ -78,7 +78,7 @@ export default async function BlogSection() {
           </div>
         )}
         {!error && posts.length > 0 && (
-          <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {posts.map((article) => {
               // Handle both flat structure (direct properties) and nested structure (attributes)
               if (!article) {

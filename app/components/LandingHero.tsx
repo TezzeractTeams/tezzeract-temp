@@ -7,7 +7,6 @@ import TezzeractText from "./ui/TezzeractText";
 import TezzeractButtonLight from "./ui/TezzeractButtonLight";
 import Testimonial from "./Testimonial";
 import TalentCard from "./ui/TalentCard";
-import LogoStrip from "./LogoStrip";
 
 
 export default function LandingHero() {
@@ -52,7 +51,27 @@ export default function LandingHero() {
    
     
     Z
-  )`;
+  `;
+
+  // Tablet path (similar to mobile)
+  const tabletPath = `
+  
+    M 0.45 ,0.07
+    L 0.51,0
+    L 1,0   
+    L 1,1 
+
+
+
+    L 0.11,1  
+ 
+   L 0,1    
+    L 0,0.1   A 0.08 0.06 0,0,1
+   0.0667,0.07
+   
+    
+    Z
+  `;
 
   const talentImages = [
     { 
@@ -60,6 +79,7 @@ export default function LandingHero() {
       imageSrc: "/talentImg.png", 
       alt: "Talent 1",
       position: { top: "0vh", left: "56vw" }, // Desktop: Top left
+      tabletPosition: { top: "5vh", left: "50vw" }, // Tablet position
       mobilePosition: { top: "65%", left: "1%" } // Mobile position
     },
     { 
@@ -67,6 +87,7 @@ export default function LandingHero() {
       imageSrc: "/talenImg2.png", 
       alt: "Talent 2",
       position: { top: "-10vh", left: "72vw" }, // Desktop: Top right
+      tabletPosition: { top: "-5vh", left: "70vw" }, // Tablet position
       mobilePosition: { top: "76%", left: "35%" } // Mobile position
     },
     { 
@@ -74,6 +95,7 @@ export default function LandingHero() {
       imageSrc: "/talenImg3.png", 
       alt: "Talent 3",
       position: { top: "33vh", left: "40vw" }, // Desktop: Bottom left
+      tabletPosition: { top: "39vh", left: "30vw" }, // Tablet position
       mobilePosition: { top: "56%", left: "35%" } // Mobile position
     },
     { 
@@ -81,6 +103,7 @@ export default function LandingHero() {
       imageSrc: "/talenImg4.png", 
       alt: "Talent 4",
       position: { top: "26vh", left: "56vw" }, // Desktop: Bottom middle
+      tabletPosition: { top: "24vh", left: "50vw" }, // Tablet position
       mobilePosition: { top: "78%", left: "69%" } // Mobile position
     },
     { 
@@ -88,6 +111,7 @@ export default function LandingHero() {
       imageSrc: "/talenImg5.png", 
       alt: "Talent 5",
       position: { top: "17vh", left: "72vw" }, // Desktop: Bottom right
+      tabletPosition: { top: "17vh", left: "70vw" }, // Tablet position
       mobilePosition: { top: "59%", left: "69%" } // Mobile position
     },
   ];
@@ -99,30 +123,33 @@ export default function LandingHero() {
           <clipPath id="landing-hero-clip-desktop" clipPathUnits="objectBoundingBox">
             <path d={desktopPath}/>
           </clipPath>
+          <clipPath id="landing-hero-clip-tablet" clipPathUnits="objectBoundingBox">
+            <path d={tabletPath}/>
+          </clipPath>
           <clipPath id="landing-hero-clip-mobile" clipPathUnits="objectBoundingBox">
             <path d={mobilePath}/>
           </clipPath>
         </defs>
       </svg>
-      <div className="landing-hero md:justify-center md:pl-24  px-4 flex flex-col h-full relative">
+      <div className="landing-hero md:justify-center md:pl-12 lg:pl-24 px-4 flex flex-col h-full relative">
         
         <div className="flex flex-row gap-4 relative z-10">
-        <div className="flex flex-col gap-0 md:gap-4 w-full md:w-auto md:pt-0 pt-26">
-        <TezzeractH1 variant="light" className="text-white pb-4 md:w-[700px] w-full">
+        <div className="flex flex-col gap-0 md:gap-3 lg:gap-4 w-full md:w-[60%] md:pt-0 pt-26">
+        <TezzeractH1 variant="light" className="text-white pb-2 md:pb-3 lg:pb-4 md:w-full lg:w-[700px] w-full text-3xl md:text-6xl lg:text-7xl">
           Discover talent,
         
           form remote teams &
 
           start growing!
         </TezzeractH1>
-        <TezzeractText variant="light" className="pt-0 pb-4 w-full text-center md:text-left">
-        Tezzeract focuses on helping businesses grow digitally by providing access to<br /> scalable remote teams of professionals, tailored to meet your unique business needs. 
+        <TezzeractText variant="light" className="pt-0 pb-2 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
+        Tezzeract focuses on helping businesses grow digitally by providing access to <br className="hidden  md:block" /> scalable remote teams of professionals, tailored to meet your unique business needs. 
         </TezzeractText >
-        <TezzeractButtonLight className="w-200px md:w-[300px] self-center md:self-start">Book a call with a vetting expert</TezzeractButtonLight>
+        <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] self-center md:self-start text-sm md:text-base">Book a call with a vetting expert</TezzeractButtonLight>
         </div>
         
-        {/* Desktop Talent Cards Container with absolute positioning */}
-        <div className="hidden md:block absolute inset-0 z-2 pointer-events-none">
+        {/* Desktop Talent Cards Container with absolute positioning (lg and above) */}
+        <div className="hidden lg:block absolute inset-0 z-2 pointer-events-none">
           {talentImages.map((talent) => (
             <div
               key={talent.id}
@@ -130,6 +157,27 @@ export default function LandingHero() {
               style={{
                 top: talent.position.top,
                 left: talent.position.left,
+              }}
+            >
+              <TalentCard
+                imageSrc={talent.imageSrc}
+                alt={talent.alt}
+              />
+            </div>
+          ))}
+        </div>
+        
+        {/* Tablet Talent Cards Container with absolute positioning (md to lg) */}
+        <div className="hidden md:block lg:hidden absolute inset-0 z-2 pointer-events-none">
+          {talentImages.map((talent) => (
+            <div
+              key={talent.id}
+              className="absolute pointer-events-auto"
+              style={{
+                top: talent.tabletPosition.top,
+                left: talent.tabletPosition.left,
+                transform: 'scale(0.85)',
+                transformOrigin: 'top left',
               }}
             >
               <TalentCard
@@ -166,7 +214,7 @@ export default function LandingHero() {
 
      
         <div 
-          className="absolute pointer-events-none z-0 md:z-auto left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-20%] bottom-[-10%] md:bottom-[-5%] w-[120%] md:w-[80%] h-[60%] md:h-[80%]"
+          className="absolute pointer-events-none z-0 md:z-auto left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-15%] lg:right-[-20%] bottom-[-10%] md:bottom-[0%] md:top-[40%] lg:bottom-[-5%] w-[120%] md:w-[70%] lg:w-[80%] h-[60%] md:h-[75%] lg:h-[80%]"
         >
           {/* Desktop Image */}
           <Image
@@ -174,7 +222,7 @@ export default function LandingHero() {
             alt="Tezzeract Cube Side"
             height={1000}
             width={1000}
-            className="hidden md:block object-contain w-full h-full"
+            className="hidden md:block  lg:h-full object-contain w-full h-full"
             priority
           />
           {/* Mobile Image */}
@@ -199,18 +247,24 @@ export default function LandingHero() {
           background-repeat: no-repeat;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .landing-hero {
+            clip-path: url(#landing-hero-clip-tablet);
+          }
+        }
+
+        @media (max-width: 767px) {
           .landing-hero {
             clip-path: url(#landing-hero-clip-mobile);
           }
         }
       `}</style>
 
-<div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[11%] block w-[calc(100%-2rem)] md:w-[50vw]">
+<div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[12%] lg:bottom-[11%] block w-[calc(100%-2rem)] md:w-[55vw] lg:w-[50vw]">
           <Testimonial
             quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. More importantly, they helped us to scale faster!"
             name="Gabriele Mirabile"
-            className=" hidden md:block "
+            className=" hidden lg:block "
             title="Chief Marketing Officer"
             company="Beentouch"
             rating={5}
