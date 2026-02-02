@@ -17,10 +17,10 @@ export default function TalentCard({
 }: TalentCardProps) {
   return (
     <div
-      className={cn("relative", className)}
+      className={cn("relative md:h-[19vh] lg:h-[25vh] h-[25vh]", className)}
       style={{
         width: "14vw", // Approximately 220px at 1920px viewport
-        height: "25vh", // Approximately 220px at 1000px viewport height
+       
         minWidth: "180px", // Fallback for smaller screens
         minHeight: "180px", // Fallback for smaller screens
       }}

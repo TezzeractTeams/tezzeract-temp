@@ -105,9 +105,9 @@ export default function TextSection() {
   return (
     <div
       ref={containerRef}
-      className="w-full  mx-auto py-20 text-center"
+      className="w-full  mx-auto py-20 md:py-10 text-center"
     >
-      <h2 ref={headingRef} className="md:text-[64px] text-[36px] leading-[1.5] text-gray-400 font-light tracking-tighter">
+      <h2 ref={headingRef} className="md:text-[60px] text-[36px] leading-[1.5] text-gray-400 font-light tracking-tighter">
         {/* Tezzeract */}
         <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>Tezzeract</span>
         <span className="text-word" style={{ display: "inline-block" }}>{"\u00A0"}offers</span>
