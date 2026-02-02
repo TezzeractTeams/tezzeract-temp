@@ -195,15 +195,25 @@ function ScrollingRow({ logos, direction, className }: ScrollingRowProps) {
 
 export default function BentoBox6() {
   return (
-    <div className="h-full w-full rounded-2xl bg-[#1E293B] flex flex-col justify-end gap-4 sm:gap-5 md:gap-6 pt-12 sm:pt-16 md:pt-20 pb-4 sm:pb-6 md:pb-8 overflow-hidden">
-      {/* Top row - scrolls right */}
-      <ScrollingRow logos={row1Duplicated} direction="right" />
+    <div className="h-full w-full rounded-2xl bg-[#1E293B] flex flex-col justify-between gap-4 sm:gap-5 md:gap-6 pt-4 sm:pt-6 md:pt-8 pb-4 sm:pb-6 md:pb-8 overflow-hidden">
+      {/* Text content at the top */}
+      <div className="px-4 sm:px-6 md:px-8">
+        <p className="text-white text-sm sm:text-base md:text-lg font-light leading-relaxed">
+          Teams built for high productivity and ready to execute across tools in tech, marketing, design, and analytics
+        </p>
+      </div>
       
-      {/* Middle row - scrolls left */}
-      <ScrollingRow logos={row2Duplicated} direction="left" />
-      
-      {/* Bottom row - scrolls right */}
-      <ScrollingRow logos={row3Duplicated} direction="right" />
+      {/* Scrolling logo rows */}
+      <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
+        {/* Top row - scrolls right */}
+        <ScrollingRow logos={row1Duplicated} direction="right" />
+        
+        {/* Middle row - scrolls left */}
+        <ScrollingRow logos={row2Duplicated} direction="left" />
+        
+        {/* Bottom row - scrolls right */}
+        <ScrollingRow logos={row3Duplicated} direction="right" />
+      </div>
     </div>
   );
 }
