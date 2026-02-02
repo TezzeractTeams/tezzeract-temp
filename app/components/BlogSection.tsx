@@ -62,10 +62,13 @@ export default async function BlogSection() {
   }
 
   return (
-    <section className="w-full py-14 px-8 bg-white relative">
+    <section className="w-full py-14 lg:px-8 px-2 bg-white relative">
       <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl pb-10">
-        Our Blog
+      Explore the knowledge base
       </TezzeractH1>
+      <p className="text-[#555555] font-light text-base md:text-lg lg:pb-16 pb-8 md:pb-16 lg:w-[75%] md:w-[80%] w-full mx-auto text-center">
+      Tezzeract focuses on helping businesses grow digitally by providi Tezzeract focuses on helping businesses grow digitally by providi Tezzeract focuses on helping businesses grow digitally by providi Tezzeract focuses on helping businesses grow digitally by providi
+      </p>
       <div className="w-full  mx-auto">
         {error && (
           <div className="text-center py-10">

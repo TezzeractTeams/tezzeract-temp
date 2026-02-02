@@ -331,23 +331,24 @@ export default function PricingSection() {
           <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-4">
             Choose Your <span className="text-[#00378A]">Plan</span>
           </h2>
-          <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 font-light text-base md:text-lg max-w-2xl mx-auto">
             Flexible pricing that scales with your business needs
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {pricingTiers.map((tier, index) => (
-            <PricingCard
-              key={index}
-              title={tier.title}
-              subtitle={tier.subtitle}
-              teamSize={tier.teamSize}
-              inclusions={tier.inclusions}
-              specializations={tier.specializations}
-              price={tier.price}
-              theme={tier.theme}
-            />
+            <div key={index} className={index === 2 ? "md:col-span-2" : ""}>
+              <PricingCard
+                title={tier.title}
+                subtitle={tier.subtitle}
+                teamSize={tier.teamSize}
+                inclusions={tier.inclusions}
+                specializations={tier.specializations}
+                price={tier.price}
+                theme={tier.theme}
+              />
+            </div>
           ))}
         </div>
       </div>

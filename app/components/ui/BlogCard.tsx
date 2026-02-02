@@ -44,7 +44,7 @@ const BlogCard = ({ postImage, postTitle, postExcerpt, tag }: BlogCardProps) => 
         )}
         
         {/* Title */}
-        <h2 className="text-[#340E0E] text-[24px] md:text-2xl font-light mb-3 leading-tight">
+        <h2 className="text-[#340E0E] text-[20px] md:text-2xl font-light mb-3 leading-tight">
           {postTitle}
         </h2>
         
