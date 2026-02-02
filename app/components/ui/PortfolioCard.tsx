@@ -57,7 +57,7 @@ export default function PortfolioCard({
         </div>
 
         {/* Case Study Title */}
-        <h3 className="text-sm sm:text-lg md:text-sm lg:text-2xl text-white font-light tracking-tight mb-4">
+        <h3 className="text-sm sm:text-lg md:text-base lg:text-2xl text-white font-light tracking-tight mb-4">
           {caseStudyTitle}
         </h3>
 
