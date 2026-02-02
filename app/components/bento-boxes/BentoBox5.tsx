@@ -110,7 +110,7 @@ export default function BentoBox5() {
         <div className="flex flex-col justify-start pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-2 sm:pb-4 md:pb-6 h-[180px] sm:h-[200px] md:h-[240px] lg:h-[260px] xl:h-[280px]">
           <p 
             key={currentIndex}
-            className="text-white text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out break-words"
+            className="text-white text-2xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out break-words"
             style={{ opacity: isAnimating ? 0 : 1 }}
           >
             {currentTestimonial.text}

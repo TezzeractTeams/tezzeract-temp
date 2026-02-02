@@ -168,16 +168,10 @@ function ScrollingRow({ logos, direction, className }: ScrollingRowProps) {
         {logos.map((logoConfig, index) => (
           <div
             key={`${logoConfig.name}-${index}`}
-            className="flex-shrink-0 w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] md:w-[96px] md:h-[96px] rounded-xl sm:rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-300"
-            style={{
-              boxShadow: `0 0 20px ${logoConfig.glowColor}, inset 0 0 10px ${logoConfig.glowColor}20`,
-            }}
+            className="flex-shrink-0 w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[70px] md:h-[70px] rounded-xl sm:rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-300"
           >
             <div
               className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
-              style={{
-                filter: `drop-shadow(0 0 8px ${logoConfig.glowColor})`,
-              }}
             >
               <Image
                 src={logoConfig.src}
@@ -195,15 +189,25 @@ function ScrollingRow({ logos, direction, className }: ScrollingRowProps) {
 
 export default function BentoBox6() {
   return (
-    <div className="h-full w-full rounded-2xl bg-[#1E293B] flex flex-col justify-end gap-4 sm:gap-5 md:gap-6 pt-12 sm:pt-16 md:pt-20 pb-4 sm:pb-6 md:pb-8 overflow-hidden">
-      {/* Top row - scrolls right */}
-      <ScrollingRow logos={row1Duplicated} direction="right" />
+    <div className="h-full w-full rounded-2xl bg-[#1E293B] flex flex-col justify-between gap-4 sm:gap-5 md:gap-6 pt-4 sm:pt-6 md:pt-8 pb-2 sm:pb-6 md:pb-2 overflow-hidden">
+      {/* Text content at the top */}
+      <div className="px-4 sm:px-6 md:px-8">
+        <p className="text-white text-sm sm:text-base md:text-lg font-light leading-relaxed">
+          Teams built for high productivity and ready to execute across tools in tech, marketing, design, and analytics
+        </p>
+      </div>
       
-      {/* Middle row - scrolls left */}
-      <ScrollingRow logos={row2Duplicated} direction="left" />
-      
-      {/* Bottom row - scrolls right */}
-      <ScrollingRow logos={row3Duplicated} direction="right" />
+      {/* Scrolling logo rows */}
+      <div className="flex flex-col gap-4 sm:gap-5 md:gap-3">
+        {/* Top row - scrolls right */}
+        <ScrollingRow logos={row1Duplicated} direction="right" />
+        
+        {/* Middle row - scrolls left */}
+        <ScrollingRow logos={row2Duplicated} direction="left" />
+        
+        {/* Bottom row - scrolls right */}
+        <ScrollingRow logos={row3Duplicated} direction="right" />
+      </div>
     </div>
   );
 }

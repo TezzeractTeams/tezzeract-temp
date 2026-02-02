@@ -14,15 +14,14 @@ export default function LogoStrip({ className }: LogoStripProps) {
   const [isPaused, setIsPaused] = useState(false);
   const speed = 0.5;
 
-  // Logos array - using same image for now, will add more later
+  // Logos array - client logos from assets/clients folder
   const logos = [
-    { name: "Echo Valley", logoSrc: "/echo 1.png" },
-    { name: "Echo Valley", logoSrc: "/echo 1.png" },
-    { name: "Echo Valley", logoSrc: "/echo 1.png" },
-    { name: "Echo Valley", logoSrc: "/echo 1.png" },
-    { name: "Echo Valley", logoSrc: "/echo 1.png" },
-    { name: "Echo Valley", logoSrc: "/echo 1.png" },
-    { name: "Echo Valley", logoSrc: "/echo 1.png" },
+    { name: "Beentouch", logoSrc: "/assets/clients/beentouch.svg" },
+    { name: "DMS", logoSrc: "/assets/clients/dms.svg" },
+    { name: "Heifer", logoSrc: "/assets/clients/heifer.svg" },
+    { name: "Panomatics", logoSrc: "/assets/clients/panomatics.svg" },
+    { name: "Uncamino", logoSrc: "/assets/clients/uncamino.svg" },
+    { name: "Work Paradise", logoSrc: "/assets/clients/workparadise.svg" },
   ];
 
   // Duplicate logos for seamless loop
@@ -89,7 +88,7 @@ export default function LogoStrip({ className }: LogoStripProps) {
             key={`${logo.name}-${index}`}
             className="shrink-0 flex items-center justify-center"
             style={{
-              width: "150px",
+              width: "120px",
             }}
           >
             <Image
