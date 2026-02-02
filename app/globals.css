@@ -96,3 +96,26 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* BentoBox responsive styles - prevents hydration mismatch */
+.bento-box-1 {
+  clip-path: none;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 768px) {
+  .bento-box-1 {
+    clip-path: url(#bento-shape-1);
+    background-color: rgba(0, 0, 0, 0.22);
+  }
+}
+
+.bento-box-5 {
+  clip-path: none;
+}
+
+@media (min-width: 768px) {
+  .bento-box-5 {
+    clip-path: url(#bento-shape-5);
+  }
+}
