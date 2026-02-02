@@ -34,6 +34,7 @@ export default function BentoBox1() {
           </clipPath>
         </defs>
       </svg>
+     
       <div 
         className={`relative h-full w-full flex items-center justify-center overflow-hidden ${!isDesktop ? 'rounded-xl min-h-[400px]' : ''}`}
         style={{ 
@@ -45,6 +46,15 @@ export default function BentoBox1() {
           borderRadius: '30px'
         }}
       >
+        {/* Text content - top left */}
+        <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10 pointer-events-none">
+          <div className="text-white p-5">
+            <div className="text-6xl  md:text-7xl font-light tracking-tighter">250+</div>
+            <p className="text-2xl sm:text-[20px] md:text-3xl font-light leading-tight pr-25 mt-1">
+              professionals across the world, specialised across multiple domains.
+            </p>
+          </div>
+        </div>
         <Ripple 
           mainCircleOpacity={0.5}
           numCircles={3}

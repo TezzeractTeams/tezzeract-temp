@@ -88,7 +88,7 @@ export default function LogoStrip({ className }: LogoStripProps) {
             key={`${logo.name}-${index}`}
             className="shrink-0 flex items-center justify-center"
             style={{
-              width: "150px",
+              width: "120px",
             }}
           >
             <Image
