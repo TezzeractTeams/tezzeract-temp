@@ -1,5 +1,14 @@
-import React from "react";
+"use client";
+
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface MeetingBoxProps {
   title: string;
@@ -46,10 +55,53 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber }: Meet
 };
 
 export default function MeetingBoxSection() {
+  const lineRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!lineRef.current || !sectionRef.current) return;
+
+    // Set initial state: line scaled to 0, anchored to left
+    gsap.set(lineRef.current, {
+      scaleX: 0,
+      transformOrigin: "left",
+    });
+
+    // Create ScrollTrigger animation
+    const animation = gsap.to(lineRef.current, {
+      scaleX: 1,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 50%",
+        end: "bottom 20%",
+        scrub: true,
+      },
+    });
+
+    // Refresh ScrollTrigger to ensure proper initialization
+    ScrollTrigger.refresh();
+
+    // Cleanup
+    return () => {
+      animation.kill();
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger === sectionRef.current) {
+          trigger.kill();
+        }
+      });
+      
+    };
+  }, []);
+
   return (
-    <section className="w-full py-16 px-4 bg-white relative">
+    <section ref={sectionRef} className="w-full py-16 px-4 bg-white relative">
       {/* Continuous line spanning full screen width - hidden on small screens */}
-      <div className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-gradient-to-r from-[#00A9EE] to-[#00378A] z-0 top-[364px]" />
+      <div 
+        ref={lineRef}
+        className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-gradient-to-r from-[#00A9EE] to-[#00378A] z-0 top-[364px]" 
+      />
       <div className="w-full max-w-7xl mx-auto">
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-24">
           <div className="relative z-10">
