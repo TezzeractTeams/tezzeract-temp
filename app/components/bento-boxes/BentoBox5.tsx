@@ -44,7 +44,6 @@ const testimonials: Testimonial[] = [
 export default function BentoBox5() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
 
   const currentTestimonial = testimonials[currentIndex];
 
@@ -62,22 +61,6 @@ export default function BentoBox5() {
     return () => clearInterval(interval);
   }, []);
 
-  // Check screen size for responsive clipPath
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768); // md breakpoint
-    };
-
-    // Check on mount
-    checkScreenSize();
-
-    // Add event listener
-    window.addEventListener('resize', checkScreenSize);
-
-    // Cleanup
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
   return (
     <>
       <svg width="0" height="0" style={{ position: 'absolute' }}>
@@ -91,16 +74,14 @@ export default function BentoBox5() {
         </defs>
       </svg>
       <div 
-        className={`h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 ${!isDesktop ? 'rounded-xl' : ''}`}
+        className="bento-box-5 h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 rounded-xl"
         style={{ 
-          clipPath: isDesktop ? 'url(#bento-shape-5)' : 'none',
           backgroundImage: 'url(/bento5.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundColor: '#00A9EE',
           borderRadius: '30px'  
-          
         }}
       >
       {/* Content inside shape */}
