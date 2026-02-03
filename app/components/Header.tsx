@@ -9,6 +9,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
 
   useEffect(() => {
@@ -24,12 +25,33 @@ export default function Header() {
     setScrolled(latest > 100);
   });
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, [scrolled]);
+
+
+  const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
+  const isTablet = windowWidth >= 768 && windowWidth < 1200;
+  // Use wider width for tablet sizes to prevent button overflow
+  const navWidth = scrolled 
+    ? (isMobile ? "95%" : isTablet ? "85%" : "54%") 
+    : "100%";
+  const navHeight = scrolled ? (isMobile ? "80px" : "50px") : "120px";
+
   return (
     <header className="fixed top-0  left-0 right-0 z-50 flex justify-center">
       <motion.nav
         animate={{
           width: scrolled ? (isDesktop ? "54%" : "74%") : "100%",
           height: scrolled ? "50px" : "120px",
+          width: navWidth,
+          height: navHeight,
           backdropFilter: scrolled ? "blur(10px)" : "none",
           boxShadow: scrolled
             ? "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
@@ -43,17 +65,19 @@ export default function Header() {
           damping: 50,
         }}
         className={`py-0 md:py-4 ${
-          scrolled ? "pr-2 border border-white/10" : "px-4 sm:px-6 lg:px-24"
+          scrolled 
+            ? (isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-3 border border-white/10")
+            : "px-4 sm:px-6 lg:px-24"
         } ${
           scrolled ? "bg-white/10" : "bg-transparent"
         }`}
       >
-        <div className="flex items-center justify-between h-full">
+        <div className="flex items-center justify-between h-full min-w-0">
           {/* Logo */}
           <motion.div
             className="flex-shrink-0"
             animate={{
-              scale: scrolled ? 0.6 : 1,
+              scale: scrolled ? (isMobile ? 0.8 : 0.6) : 1,
             }}
             transition={{
               type: "spring",
@@ -71,7 +95,7 @@ export default function Header() {
           </motion.div>
 
           {/* Desktop Navigation - Middle */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 flex-shrink min-w-0">
             <a
               href="#home"
               className="text-white hover:text-white/80 transition-colors font-light"
@@ -85,10 +109,10 @@ export default function Header() {
               What we do
             </a>
             <a
-              href="#teams"
+              href="/about-us"
               className="text-white hover:text-white/80 transition-colors font-light"
             >
-              Teams
+              About us
             </a>
             <a
               href="#projects"
@@ -99,8 +123,8 @@ export default function Header() {
           </div>
 
           {/* Desktop Book a Call Button - Right */}
-          <div className="hidden md:block">
-            <TezzeractButton className="w-[180px]">
+          <div className="hidden md:block flex-shrink-0">
+            <TezzeractButton className="w-[180px] min-w-[140px]">
               Book a call
             </TezzeractButton>
           </div>
@@ -146,10 +170,10 @@ export default function Header() {
               What we do
             </a>
             <a
-              href="#teams"
+              href="/about-us"
               className="block text-white hover:text-white/80 transition-colors py-2"
             >
-              Teams
+              About us
             </a>
             <a
               href="#projects"

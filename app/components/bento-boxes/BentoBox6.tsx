@@ -189,10 +189,10 @@ function ScrollingRow({ logos, direction, className }: ScrollingRowProps) {
 
 export default function BentoBox6() {
   return (
-    <div className="h-full w-full rounded-2xl bg-[#1E293B] flex flex-col justify-between gap-4 sm:gap-5 md:gap-6 pt-4 sm:pt-6 md:pt-8 pb-2 sm:pb-6 md:pb-2 overflow-hidden">
+    <div className="h-full w-full rounded-2xl bg-[#1E293B] flex flex-col justify-between gap-4 sm:gap-5 md:gap-6  sm:pt-6  pb-2 sm:pb-6 md:pb-2 overflow-hidden">
       {/* Text content at the top */}
-      <div className="px-4 sm:px-6 md:px-8">
-        <p className="text-white text-sm sm:text-base md:text-lg font-light leading-relaxed">
+      <div className="p-5 sm:px-6 md:px-10">
+        <p className="text-white text-sm sm:text-base md:text-3xl font-light leading-tight">
           Teams built for high productivity and ready to execute across tools in tech, marketing, design, and analytics
         </p>
       </div>

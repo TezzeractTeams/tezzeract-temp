@@ -78,10 +78,10 @@ export default function Footer() {
             <h4 className="text-white/60 text-sm font-medium mb-2">Pages</h4>
             <div className="grid grid-cols-2 gap-3">
               <a
-                href="#teams"
+                href="/about-us"
                 className="text-white hover:text-white/80 transition-colors"
               >
-                Teams
+                About us
               </a>
               <a
                 href="#home"
