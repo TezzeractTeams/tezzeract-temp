@@ -18,7 +18,7 @@ interface BlogCardProps {
 
 const BlogCard = ({ postImage, postTitle, postExcerpt, tag, slug, author }: BlogCardProps) => {
   return (
-    <Link href={`/blog/${slug}`} className="block h-full">
+    <Link href={`/blog/${slug}`} className="block h-full" target="_blank" rel="noopener noreferrer">
       <div className="relative flex flex-col h-full rounded-2xl overflow-hidden" style={{ backgroundColor: '#F9F9F9' }}>
       {/* Content area */}
       <div className="flex-1 p-8 flex flex-col justify-between">
