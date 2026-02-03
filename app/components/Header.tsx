@@ -40,7 +40,7 @@ export default function Header() {
         animate={{
           width: navWidth,
           height: navHeight,
-          backdropFilter: scrolled ? "blur(50px)" : "none",
+          backdropFilter: scrolled ? "blur(100px)" : "none",
           boxShadow: scrolled
             ? "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
             : "none",
@@ -59,7 +59,7 @@ export default function Header() {
         } ${scrolled ? "" : "bg-transparent"}`}
         style={{
           background: scrolled
-            ? "radial-gradient(circle at 50% 900%, #CBF0FF 55%, rgba(255, 255, 255, 0.85) 70%)"
+            ? "radial-gradient(circle at 50% 900%, #CBF0FF 55%, rgba(255, 255, 255, 0.7) 70%)"
             : undefined,
         }}
       >
