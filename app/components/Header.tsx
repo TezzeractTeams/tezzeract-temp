@@ -59,7 +59,7 @@ export default function Header() {
         } ${scrolled ? "" : "bg-transparent"}`}
         style={{
           background: scrolled
-            ? "radial-gradient(circle at 50% 300%, rgba(224, 234, 253, 0.92) 20%, rgba(255, 255, 255, 0.85) 80%)"
+            ? "radial-gradient(circle at 50% 900%, #CBF0FF 55%, rgba(255, 255, 255, 0.85) 70%)"
             : undefined,
         }}
       >
