@@ -336,9 +336,9 @@ export default function PricingSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {pricingTiers.map((tier, index) => (
-            <div key={index} className={index === 2 ? "md:col-span-2" : ""}>
+            <div key={index} className={index === 2 ? "md:col-span-2 lg:col-span-1" : ""}>
               <PricingCard
                 title={tier.title}
                 subtitle={tier.subtitle}
