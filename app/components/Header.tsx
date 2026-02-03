@@ -59,7 +59,7 @@ export default function Header() {
         } ${scrolled ? "" : "bg-transparent"}`}
         style={{
           background: scrolled
-            ? "radial-gradient(circle at 50% 700%, rgba(147, 178, 237, 0.92) 10%, rgba(255, 255, 255, 0.85) 5%, transparent 800%)"
+            ? "radial-gradient(circle at 50% 300%, rgba(224, 234, 253, 0.92) 20%, rgba(255, 255, 255, 0.85) 80%)"
             : undefined,
         }}
       >
@@ -89,47 +89,67 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-8 flex-shrink min-w-0">
             <a
               href="#home"
-              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
-              style={scrolled ? {
-                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              } : undefined}
+              className={`group relative inline-block px-3 py-1.5 font-light transition-colors ${!scrolled ? "text-white hover:text-white/80" : ""}`}
             >
-              Home
+              <span className="absolute inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              <span
+                className={`relative inline-block ${scrolled ? "text-transparent group-hover:opacity-80" : "text-white"}`}
+                style={scrolled ? {
+                  backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                } : undefined}
+              >
+                Home
+              </span>
             </a>
             <a
               href="/pricing"
-              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
-              style={scrolled ? {
-                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              } : undefined}
+              className={`group relative inline-block px-3 py-1.5 font-light transition-colors ${!scrolled ? "text-white hover:text-white/80" : ""}`}
             >
-              Pricing
+              <span className="absolute inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              <span
+                className={`relative inline-block ${scrolled ? "text-transparent group-hover:opacity-80" : "text-white"}`}
+                style={scrolled ? {
+                  backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                } : undefined}
+              >
+                Pricing
+              </span>
             </a>
             <a
               href="/about-us"
-              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
-              style={scrolled ? {
-                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              } : undefined}
+              className={`group relative inline-block px-3 py-1.5 font-light transition-colors ${!scrolled ? "text-white hover:text-white/80" : ""}`}
             >
-              About us
+              <span className="absolute inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              <span
+                className={`relative inline-block ${scrolled ? "text-transparent group-hover:opacity-80" : "text-white"}`}
+                style={scrolled ? {
+                  backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                } : undefined}
+              >
+                About us
+              </span>
             </a>
             <a
               href="#projects"
-              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
-              style={scrolled ? {
-                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              } : undefined}
+              className={`group relative inline-block px-3 py-1.5 font-light transition-colors ${!scrolled ? "text-white hover:text-white/80" : ""}`}
             >
-              Projects
+              <span className="absolute inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              <span
+                className={`relative inline-block ${scrolled ? "text-transparent group-hover:opacity-80" : "text-white"}`}
+                style={scrolled ? {
+                  backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                } : undefined}
+              >
+                Projects
+              </span>
             </a>
           </div>
 
