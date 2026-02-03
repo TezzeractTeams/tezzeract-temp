@@ -54,12 +54,12 @@ export default function Header() {
         }}
         className={`py-0 md:py-4 ${
           scrolled
-            ? (isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-3 border border-white/10")
+            ? (isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-3 border-2 border-white/25")
             : "px-4 sm:px-6 lg:px-24"
         } ${scrolled ? "" : "bg-transparent"}`}
         style={{
           background: scrolled
-            ? "radial-gradient(circle at 50% 900%, #CBF0FF 55%, rgba(255, 255, 255, 0.7) 70%)"
+            ? "radial-gradient(circle at 50% 900%, #CBF0FF 55%, rgba(255, 255, 255, 0.7) 70%) "
             : undefined,
         }}
       >
