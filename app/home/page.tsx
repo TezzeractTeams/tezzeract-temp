@@ -9,20 +9,22 @@ import Footer from "../components/Footer";
 import PortfolioSection from "../components/PortfolioSection";
 import BlogSection from "../components/BlogSection";
 import PricingSection from "../components/PricingSection";
+import SnapScrollProvider from "../components/SnapScrollProvider";
 
 export default function Home() {
   
   return (
     <div className="w-screen overflow-x-hidden">
-   <Header />
+      <SnapScrollProvider />
+      <Header />
       <LandingHero />
       <LogoStrip  />
       <TextSection />
       <MeetingBoxSection  />
-      <TeamsSection />
+      <div id="snap-teams">
+        <TeamsSection />
+      </div>
      
-      
-    
 
       <div 
         className="flex flex-col gap-4 rounded-[30px] relative "
@@ -31,8 +33,12 @@ export default function Home() {
           
         }}
       >
-        <BentoGrid />
-        <PortfolioSection />
+        <div id="snap-bento">
+          <BentoGrid />
+        </div>
+        <div id="snap-portfolio">
+          <PortfolioSection />
+        </div>
        
       </div>
 
