@@ -2,42 +2,24 @@
 
 import React from "react";
 import Image from "next/image";
-import { TrendingUp, Megaphone, Building2, Rocket } from "lucide-react";
-
-interface TeamMember {
-  name: string;
-  title: string;
-  avatarSrc: string;
-}
-
-const teamMembers: TeamMember[] = [
-  { name: "Jhone", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-  { name: "Amile", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-  { name: "Bob", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-  { name: "Michel", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-  { name: "David", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-  { name: "Jane", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-  { name: "Nikolas", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-  { name: "Ana", title: "Head of Engineering", avatarSrc: "/box3.jpg" },
-];
 
 export default function AboutUsSection() {
   return (
-    <section className="w-full min-h-screen">
-      {/* Hero Section with Gradient Background */}
-      
-        {/* White overlay with upward fade for shadowy glow effect */}
-        
-        <div className="w-full  mx-auto relative ">
-        <div 
-        className="w-full pt-32 pb-16 px-4 md:px-8 lg:px-24 relative"
-        style={{
-          background: "radial-gradient(circle at center, rgba(18, 163, 253, 0.85) 0%, rgba(255, 255, 255, 1) 160%)"
-        }}
-      >
+
+ 
+   
+        <div >
+       
           
           {/* Main Heading */}
-          <div className="text-center mb-8 md:mb-12 ">
+          <div 
+            className="flex items-center justify-center text-center h-[85vh]"
+            style={{
+              background: "radial-gradient(152.39% 60.24% at 50% 70.48%, #00378A 1.02%, #96D6F2 37.56%, #FFFFFF 65.93%)"
+         
+
+            }}
+          >
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter">
               <span className="text-[#00A9EE] font-light">Teams</span>{" "}
               <span className="inline-flex items-center text-3xl md:text-4xl lg:text-5xl">
@@ -68,23 +50,15 @@ export default function AboutUsSection() {
           </div>
 
           {/* Growth Specialists Element */}
-        
-        </div>
+
         <div 
-          className="absolute bottom-0 -mt-[50px] left-0 w-full h-1/3 z-100 pointer-events-none"
-          style={{
-            background: "white",
-            borderTopLeftRadius: "100px",
-            borderTopRightRadius: "100px"
-          }}
+          className="bg-white -mt-40 w-full rounded-t-4xl h-screen z-2"
         />
-      </div>
 
       {/* Content Section - White Background */}
       
-
       {/* Team Members Section */}
     
-    </section>
+        </div>
   );
 }
