@@ -25,13 +25,17 @@ export default function AboutUsSection() {
   return (
     <section className="w-full min-h-screen">
       {/* Hero Section with Gradient Background */}
-      <div 
-        className="w-full pt-32 pb-16 px-4 md:px-8 lg:px-24"
+      
+        {/* White overlay with upward fade for shadowy glow effect */}
+        
+        <div className="w-full  mx-auto relative ">
+        <div 
+        className="w-full pt-32 pb-16 px-4 md:px-8 lg:px-24 relative"
         style={{
-          background: "linear-gradient(to bottom, rgba(135, 206, 250, 0.3) 0%, rgba(255, 255, 255, 1) 40%)"
+          background: "radial-gradient(circle at center, rgba(18, 163, 253, 0.85) 0%, rgba(255, 255, 255, 1) 160%)"
         }}
       >
-        <div className="w-full max-w-7xl mx-auto">
+          
           {/* Main Heading */}
           <div className="text-center mb-8 md:mb-12 ">
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter">
@@ -60,11 +64,20 @@ export default function AboutUsSection() {
               <span className="text-gray-700"> at every stage.</span>
             
             </h1>
+            
           </div>
 
           {/* Growth Specialists Element */}
         
         </div>
+        <div 
+          className="absolute bottom-0 -mt-[50px] left-0 w-full h-1/3 z-100 pointer-events-none"
+          style={{
+            background: "white",
+            borderTopLeftRadius: "100px",
+            borderTopRightRadius: "100px"
+          }}
+        />
       </div>
 
       {/* Content Section - White Background */}
