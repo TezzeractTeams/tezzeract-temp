@@ -28,6 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${figtree.variable} ${manrope.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>
