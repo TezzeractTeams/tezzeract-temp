@@ -40,7 +40,7 @@ export default function Header() {
         animate={{
           width: navWidth,
           height: navHeight,
-          backdropFilter: scrolled ? "blur(10px)" : "none",
+          backdropFilter: scrolled ? "blur(50px)" : "none",
           boxShadow: scrolled
             ? "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
             : "none",
@@ -53,12 +53,15 @@ export default function Header() {
           damping: 50,
         }}
         className={`py-0 md:py-4 ${
-          scrolled 
+          scrolled
             ? (isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-3 border border-white/10")
             : "px-4 sm:px-6 lg:px-24"
-        } ${
-          scrolled ? "bg-white/10" : "bg-transparent"
-        }`}
+        } ${scrolled ? "" : "bg-transparent"}`}
+        style={{
+          background: scrolled
+            ? "radial-gradient(circle at 50% 700%, rgba(147, 178, 237, 0.92) 10%, rgba(255, 255, 255, 0.85) 5%, transparent 800%)"
+            : undefined,
+        }}
       >
         <div className="flex items-center justify-between h-full min-w-0">
           {/* Logo */}
@@ -86,25 +89,45 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-8 flex-shrink min-w-0">
             <a
               href="#home"
-              className="text-white hover:text-white/80 transition-colors font-light"
+              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
+              style={scrolled ? {
+                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              } : undefined}
             >
               Home
             </a>
             <a
               href="/pricing"
-              className="text-white hover:text-white/80 transition-colors font-light"
+              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
+              style={scrolled ? {
+                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              } : undefined}
             >
               Pricing
             </a>
             <a
               href="/about-us"
-              className="text-white hover:text-white/80 transition-colors font-light"
+              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
+              style={scrolled ? {
+                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              } : undefined}
             >
               About us
             </a>
             <a
               href="#projects"
-              className="text-white hover:text-white/80 transition-colors font-light"
+              className={`font-light transition-colors ${scrolled ? "text-transparent hover:opacity-80" : "text-white hover:text-white/80"}`}
+              style={scrolled ? {
+                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              } : undefined}
             >
               Projects
             </a>
