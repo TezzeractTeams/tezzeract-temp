@@ -145,8 +145,8 @@ export default function LandingHero() {
         <TezzeractText variant="light" className="pt-0 pb-2 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
         Tezzeract focuses on helping businesses grow digitally by providing access to <br className="hidden  md:block" /> scalable remote teams of professionals, tailored to meet your unique business needs. 
         </TezzeractText >
-        <a href="https://tezzeract.lt/bookcall" target="_blank" rel="noopener noreferrer" className="self-center md:self-start">
-          <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] text-sm md:text-base">Book a call with a vetting expert</TezzeractButtonLight>
+        <a href="https://tezzeract.lt/bookcall" target="_blank" rel="noopener noreferrer" className="self-center md:self-start cursor-pointer transition-transform duration-200 ">
+          <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] text-sm md:text-base cursor-pointer">Book a call with a vetting expert</TezzeractButtonLight>
         </a>
         </div>
         

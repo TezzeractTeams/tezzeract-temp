@@ -1,18 +1,19 @@
 import React from "react";
 import Image from "next/image";
 
-const UserCard = () => {
-  // Sample data - will make reusable later
-  const name = "Wehan Withana";
-  const title = "Head of Development Services";
-  const avatarSrc = "/TezzzeractAvatar.png"; // Using existing avatar path or placeholder
+interface UserCardProps {
+  name: string;
+  position: string;
+  avatar: string;
+}
 
+const UserCard = ({ name, position, avatar }: UserCardProps) => {
   return (
     <div className="flex items-center gap-3 mt-4">
       {/* Profile Picture */}
       <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg overflow-hidden shrink-0">
         <Image
-          src={avatarSrc}
+          src={avatar}
           alt={name}
           width={48}
           height={48}
@@ -26,7 +27,7 @@ const UserCard = () => {
           {name}
         </span>
         <span className="text-gray-500 text-xs md:text-sm">
-          {title}
+          {position}
         </span>
       </div>
     </div>

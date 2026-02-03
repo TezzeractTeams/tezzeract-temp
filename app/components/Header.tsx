@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { TezzeractButton } from "./ui/TezzeractButton";
 
@@ -84,13 +85,15 @@ export default function Header() {
               damping: 50,
             }}
           >
-            <Image
-              src="/tezzeractLogo.png"
-              alt="Tezzeract Logo"
-              width={180}
-              height={40}
-              className="h-5 md:h-8 w-auto"
-            />
+            <Link href="/" className="block w-[12%] md:w-[140%]">
+              <Image
+                src="/tezzeractLogo.png"
+                alt="Tezzeract Logo"
+                width={180}
+                height={40}
+                className="w-full h-auto"
+              />
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation - Middle */}
