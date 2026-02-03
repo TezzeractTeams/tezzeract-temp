@@ -26,9 +26,9 @@ export default function PortfolioCard({
       
       {/* Gradient blur overlay */}
       <div 
-        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        className="absolute bottom-0 sm:h-[40%] md:h-[60%] lg:h-[35%] left-0 right-0 pointer-events-none"
         style={{
-          height: '40%',
+        
           borderRadius: '0 0 30px 30px',
           background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 00%, rgba(4, 4, 4, 0.5) 100%)',
           backdropFilter: 'blur(4px)',
@@ -37,11 +37,11 @@ export default function PortfolioCard({
       />
 
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 px-4 py-2 md:px-10 md:py-6 transition-transform duration-300 group-hover:-translate-y-2">
+      <div className="absolute bottom-0 left-0 right-0 z-10 px-4 py-2 md:px-4 md:py-0 lg:py-10 lg:px-10 transition-transform duration-300 group-hover:-translate-y-2">
         {/* Tag */}
         <div className="mb-3 inline-block">
           <span
-            className="text-[10px] md:text-sm text-white font-light flex items-center justify-center w-[120px] h-[28px] md:w-[172px] md:h-[43px]"
+            className="text-[10px] md:text-[10px] lg:text-sm text-white font-light flex items-center justify-center w-[120px] h-[28px] md:w-[140px] md:h-[32px] lg:w-[172px] lg:h-[43px]"
             style={{
               borderRadius: '24px',
               borderWidth: '1px',
@@ -57,7 +57,7 @@ export default function PortfolioCard({
         </div>
 
         {/* Case Study Title */}
-        <h3 className="text-sm sm:text-lg md:text-2xl text-white font-light tracking-tight mb-4">
+        <h3 className="text-sm sm:text-lg md:text-base lg:text-2xl text-white font-light tracking-tight mb-4">
           {caseStudyTitle}
         </h3>
 

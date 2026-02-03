@@ -1,28 +1,11 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Ripple } from "./Ripple";
 import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";    
 import { OrbitingCircles } from "./OrbitingCircles";
 
 export default function BentoBox1() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768); // md breakpoint
-    };
-
-    // Check on mount
-    checkScreenSize();
-
-    // Add event listener
-    window.addEventListener('resize', checkScreenSize);
-
-    // Cleanup
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
   return (
     <>
       <svg width="0" height="0" style={{ position: 'absolute' }}>
@@ -36,10 +19,8 @@ export default function BentoBox1() {
       </svg>
      
       <div 
-        className={`relative h-full w-full flex items-center justify-center overflow-hidden ${!isDesktop ? 'rounded-xl min-h-[400px]' : ''}`}
+        className="bento-box-1 relative h-full w-full flex items-center justify-center overflow-hidden rounded-xl min-h-[400px] md:min-h-0"
         style={{ 
-          clipPath: isDesktop ? 'url(#bento-shape-1)' : 'none',
-          backgroundColor: isDesktop ? 'rgba(0, 0, 0, 0.22)' : 'rgba(0, 0, 0, 0.4)',
           backdropFilter: 'blur(150px)',
           WebkitBackdropFilter: 'blur(150px)',
           border: '0px solid rgba(255, 255, 255, 0.47)',

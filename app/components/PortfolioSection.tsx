@@ -195,7 +195,9 @@ function PortfolioSection() {
 
   return (
     <div className='bg-transparent py-10 md:py-20'>
-      <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl mb-12">Our Portfolio</TezzeractH1>  
+      <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl mb-12">Work That Creates Impact</TezzeractH1>  
+      <p className="text-[#ffffff] font-light text-base md:text-lg lg:pb-16 pb-8 md:pb-16 lg:w-[60%] md:w-[80%] px-4 w-full mx-auto text-center">
+      Tezzeract teams deliver high-impact projects across tech, marketing, design, and analytics. Specialized, tool-ready, and execution-focused, they help businesses scale and succeed.      </p>
       
       {/* First Carousel Row - Scrolls Right */}
       <div 
