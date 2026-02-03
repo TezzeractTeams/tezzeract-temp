@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { TezzeractButton } from "./ui/TezzeractButton";
@@ -8,7 +8,17 @@ import { TezzeractButton } from "./ui/TezzeractButton";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint for desktop/webview
+    };
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+    return () => window.removeEventListener("resize", checkDesktop);
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 100);
@@ -18,7 +28,7 @@ export default function Header() {
     <header className="fixed top-0  left-0 right-0 z-50 flex justify-center">
       <motion.nav
         animate={{
-          width: scrolled ? "54%" : "100%",
+          width: scrolled ? (isDesktop ? "54%" : "74%") : "100%",
           height: scrolled ? "50px" : "120px",
           backdropFilter: scrolled ? "blur(10px)" : "none",
           boxShadow: scrolled
