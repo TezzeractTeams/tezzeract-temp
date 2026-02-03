@@ -53,7 +53,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       )}
 
       {/* Content */}
-      <article className="max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-16">
+      <article className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
         {/* Tag */}
         {post.tag && (
           <div className="mb-6 inline-block">
@@ -96,21 +96,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         {/* Content */}
-        <div className="prose prose-lg max-w-none">
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-            {post.description}
-          </p>
-          
-          {/* Extended content - you can expand this later */}
-          <div className="text-base md:text-lg text-gray-600 leading-relaxed space-y-4">
-            <p>
-              {post.description}
-            </p>
-            <p>
-              This is a placeholder for the full blog post content. You can expand this section with more detailed content, 
-              paragraphs, images, and other elements as needed.
-            </p>
-          </div>
+        <div className="blog-content">
+          {/* Rich HTML Content */}
+          <div 
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
         </div>
       </article>
     </div>
