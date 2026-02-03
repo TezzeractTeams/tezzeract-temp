@@ -96,10 +96,10 @@ export default function Footer() {
                 Projects
               </a>
               <a
-                href="#what-we-do"
+                href="/pricing"
                 className="text-white hover:text-white/80 transition-colors"
               >
-                What we do
+                Pricing
               </a>
             </div>
           </div>

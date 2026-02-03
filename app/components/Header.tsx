@@ -91,10 +91,10 @@ export default function Header() {
               Home
             </a>
             <a
-              href="#what-we-do"
+              href="/pricing"
               className="text-white hover:text-white/80 transition-colors font-light"
             >
-              What we do
+              Pricing
             </a>
             <a
               href="/about-us"
@@ -152,10 +152,10 @@ export default function Header() {
               Home
             </a>
             <a
-              href="#what-we-do"
+              href="/pricing"
               className="block text-white hover:text-white/80 transition-colors py-2"
             >
-              What we do
+              Pricing
             </a>
             <a
               href="/about-us"

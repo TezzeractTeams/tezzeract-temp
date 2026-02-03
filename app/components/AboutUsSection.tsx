@@ -21,7 +21,7 @@ export default function AboutUsSection() {
     <div>
       {/* Main Heading */}
       <div
-        className="flex items-center justify-center text-center h-[85vh]"
+        className="flex items-center justify-center text-center h-[85vh] pb-20"
         style={{
           background:
             "radial-gradient(160.39% 60.24% at 50% 90%,rgb(0, 135, 239) 1.02%, #96D6F2 37.56%, #FFFFFF 70%)",
