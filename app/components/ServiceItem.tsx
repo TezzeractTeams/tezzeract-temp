@@ -21,7 +21,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
     >
       {/* Service Item Container - Pill shape on hover */}
       <div
-        className="flex items-center gap-3 md:gap-4 px-5 md:px-6 py-2.5 md:py-3 rounded-3xl transition-all duration-300 ease-in-out"
+        className="flex items-center gap-3 md:gap-2 px-5 md:px-6 py-2.5 md:py-4 rounded-3xl transition-all duration-300 ease-in-out"
         style={{
           backgroundColor: isHovered ? "rgba(135, 206, 250, 0.25)" : "transparent",
           backdropFilter: isHovered ? "blur(10px)" : "none",
@@ -32,7 +32,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         {/* Text */}
         <span
           className={`
-            text-sm md:text-2xl font-light tracking-tighter whitespace-nowrap transition-all duration-300 ease-in-out
+            text-sm md:text-3xl font-light tracking-tighter whitespace-nowrap transition-all duration-300 ease-in-out
             ${isHovered 
               ? "text-white font-light" 
               : "text-white/50"
@@ -44,7 +44,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         
         {/* Arrow - smooth opacity transition */}
         <div 
-          className="flex items-center transition-opacity duration-300 ease-in-out"
+          className="flex items-center transition-opacity px-2 duration-300 ease-in-out"
           style={{
             opacity: isHovered ? 1 : 0,
           }}
