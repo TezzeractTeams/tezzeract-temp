@@ -2,14 +2,25 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { TezzeractButton } from "./ui/TezzeractButton";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint for desktop/webview
+    };
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+    return () => window.removeEventListener("resize", checkDesktop);
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 100);
@@ -40,7 +51,7 @@ export default function Header() {
         animate={{
           width: navWidth,
           height: navHeight,
-          backdropFilter: scrolled ? "blur(100px)" : "none",
+          backdropFilter: scrolled ? "blur(10px)" : "none",
           boxShadow: scrolled
             ? "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
             : "none",
@@ -76,13 +87,15 @@ export default function Header() {
               damping: 50,
             }}
           >
-            <Image
-              src="/tezzeractLogo.png"
-              alt="Tezzeract Logo"
-              width={180}
-              height={40}
-              className="h-5 md:h-8 w-auto"
-            />
+            <Link href="/" className="block w-[12%] md:w-[140%]">
+              <Image
+                src="/tezzeractLogo.png"
+                alt="Tezzeract Logo"
+                width={180}
+                height={40}
+                className="w-full h-auto"
+              />
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation - Middle */}

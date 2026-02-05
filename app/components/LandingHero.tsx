@@ -6,7 +6,7 @@ import { TezzeractH1 } from "./ui/TezzeractH1";
 import TezzeractText from "./ui/TezzeractText";
 import TezzeractButtonLight from "./ui/TezzeractButtonLight";
 import Testimonial from "./Testimonial";
-import TalentCard from "./ui/TalentCard";
+// import TalentCard from "./ui/TalentCard";
 
 
 export default function LandingHero() {
@@ -73,48 +73,48 @@ export default function LandingHero() {
     Z
   `;
 
-  const talentImages = [
-    { 
-      id: 1, 
-      imageSrc: "/talentImg.png", 
-      alt: "Talent 1",
-      position: { top: "0vh", left: "56vw" }, // Desktop: Top left
-      tabletPosition: { top: "5vh", left: "50vw" }, // Tablet position
-      mobilePosition: { top: "65%", left: "1%" } // Mobile position
-    },
-    { 
-      id: 2, 
-      imageSrc: "/talenImg2.png", 
-      alt: "Talent 2",
-      position: { top: "-10vh", left: "72vw" }, // Desktop: Top right
-      tabletPosition: { top: "-5vh", left: "70vw" }, // Tablet position
-      mobilePosition: { top: "76%", left: "35%" } // Mobile position
-    },
-    { 
-      id: 3, 
-      imageSrc: "/talenImg3.png", 
-      alt: "Talent 3",
-      position: { top: "33vh", left: "40vw" }, // Desktop: Bottom left
-      tabletPosition: { top: "39vh", left: "30vw" }, // Tablet position
-      mobilePosition: { top: "56%", left: "35%" } // Mobile position
-    },
-    { 
-      id: 4, 
-      imageSrc: "/talenImg4.png", 
-      alt: "Talent 4",
-      position: { top: "26vh", left: "56vw" }, // Desktop: Bottom middle
-      tabletPosition: { top: "24vh", left: "50vw" }, // Tablet position
-      mobilePosition: { top: "78%", left: "69%" } // Mobile position
-    },
-    { 
-      id: 5, 
-      imageSrc: "/talenImg5.png", 
-      alt: "Talent 5",
-      position: { top: "17vh", left: "72vw" }, // Desktop: Bottom right
-      tabletPosition: { top: "17vh", left: "70vw" }, // Tablet position
-      mobilePosition: { top: "59%", left: "69%" } // Mobile position
-    },
-  ];
+  // const talentImages = [
+  //   { 
+  //     id: 1, 
+  //     imageSrc: "/talentImg.png", 
+  //     alt: "Talent 1",
+  //     position: { top: "0vh", left: "56vw" }, // Desktop: Top left
+  //     tabletPosition: { top: "5vh", left: "50vw" }, // Tablet position
+  //     mobilePosition: { top: "65%", left: "1%" } // Mobile position
+  //   },
+  //   { 
+  //     id: 2, 
+  //     imageSrc: "/talenImg2.png", 
+  //     alt: "Talent 2",
+  //     position: { top: "-10vh", left: "72vw" }, // Desktop: Top right
+  //     tabletPosition: { top: "-5vh", left: "70vw" }, // Tablet position
+  //     mobilePosition: { top: "76%", left: "35%" } // Mobile position
+  //   },
+  //   { 
+  //     id: 3, 
+  //     imageSrc: "/talenImg3.png", 
+  //     alt: "Talent 3",
+  //     position: { top: "33vh", left: "40vw" }, // Desktop: Bottom left
+  //     tabletPosition: { top: "39vh", left: "30vw" }, // Tablet position
+  //     mobilePosition: { top: "56%", left: "35%" } // Mobile position
+  //   },
+  //   { 
+  //     id: 4, 
+  //     imageSrc: "/talenImg4.png", 
+  //     alt: "Talent 4",
+  //     position: { top: "26vh", left: "56vw" }, // Desktop: Bottom middle
+  //     tabletPosition: { top: "24vh", left: "50vw" }, // Tablet position
+  //     mobilePosition: { top: "78%", left: "69%" } // Mobile position
+  //   },
+  //   { 
+  //     id: 5, 
+  //     imageSrc: "/talenImg5.png", 
+  //     alt: "Talent 5",
+  //     position: { top: "17vh", left: "72vw" }, // Desktop: Bottom right
+  //     tabletPosition: { top: "17vh", left: "70vw" }, // Tablet position
+  //     mobilePosition: { top: "59%", left: "69%" } // Mobile position
+  //   },
+  // ];
 
   return (
     <div className="landing-hero-container md:m-6 m-3 rounded-3xl overflow-hidden border-blue-500">
@@ -145,11 +145,13 @@ export default function LandingHero() {
         <TezzeractText variant="light" className="pt-0 pb-2 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
         Tezzeract focuses on helping businesses grow digitally by providing access to <br className="hidden  md:block" /> scalable remote teams of professionals, tailored to meet your unique business needs. 
         </TezzeractText >
-        <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] self-center md:self-start text-sm md:text-base">Book a call with a vetting expert</TezzeractButtonLight>
+        <a href="https://tezzeract.lt/bookcall" target="_blank" rel="noopener noreferrer" className="self-center md:self-start cursor-pointer transition-transform duration-200 ">
+          <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] text-sm md:text-base cursor-pointer">Book a call with a vetting expert</TezzeractButtonLight>
+        </a>
         </div>
         
         {/* Desktop Talent Cards Container with absolute positioning (lg and above) */}
-        <div className="hidden lg:block absolute inset-0 z-2 pointer-events-none">
+        {/* <div className="hidden lg:block absolute inset-0 z-2 pointer-events-none">
           {talentImages.map((talent) => (
             <div
               key={talent.id}
@@ -165,10 +167,10 @@ export default function LandingHero() {
               />
             </div>
           ))}
-        </div>
+        </div> */}
         
         {/* Tablet Talent Cards Container with absolute positioning (md to lg) */}
-        <div className="hidden md:block lg:hidden absolute inset-0 z-2 pointer-events-none">
+        {/* <div className="hidden md:block lg:hidden absolute inset-0 z-2 pointer-events-none">
           {talentImages.map((talent) => (
             <div
               key={talent.id}
@@ -186,12 +188,12 @@ export default function LandingHero() {
               />
             </div>
           ))}
-        </div>
+        </div> */}
         
         </div>
         
         {/* Mobile Talent Cards Container with absolute positioning */}
-        <div className="block md:hidden absolute right-0 top-0 z-2" style={{ width: "100%", height: "100%" }}>
+        {/* <div className="block md:hidden absolute right-0 top-0 z-2" style={{ width: "100%", height: "100%" }}>
           {talentImages.map((talent) => (
             <div
               key={talent.id}
@@ -209,16 +211,16 @@ export default function LandingHero() {
               />
             </div>
           ))}
-        </div>
+        </div> */}
         
 
      
         <div 
-          className="absolute pointer-events-none z-0 md:z-auto left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-15%] lg:right-[-20%] bottom-[-10%] md:bottom-[0%] md:top-[40%] lg:bottom-[-5%] w-[120%] md:w-[70%] lg:w-[80%] h-[60%] md:h-[75%] lg:h-[80%]"
+          className="absolute pointer-events-none z-0 md:z-auto left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-15%] lg:right-[-30%] bottom-[-10%] md:bottom-[0%] md:top-[40%] lg:top-[10%] w-[120%] md:w-[70%] lg:w-[110%] h-[60%] md:h-[75%] lg:h-full"
         >
           {/* Desktop Image */}
           <Image
-            src="/tezzeractcubeside.png"
+            src="/tezzeractlogo2.webp"
             alt="Tezzeract Cube Side"
             height={1000}
             width={1000}
@@ -262,7 +264,7 @@ export default function LandingHero() {
 
 <div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[12%] lg:bottom-[11%] block w-[calc(100%-2rem)] md:w-[55vw] lg:w-[50vw]">
           <Testimonial
-            quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. More importantly, they helped us to scale faster!"
+            quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. "
             name="Gabriele Mirabile"
             className=" hidden lg:block "
             title="Chief Marketing Officer"

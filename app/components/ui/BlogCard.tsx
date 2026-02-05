@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import UserCard from "./UserCard";
 
 interface BlogCardProps {
@@ -7,11 +8,18 @@ interface BlogCardProps {
   postTitle: string;
   postExcerpt: string;
   tag?: string;
+  slug: string;
+  author: {
+    name: string;
+    position: string;
+    avatar: string;
+  };
 }
 
-const BlogCard = ({ postImage, postTitle, postExcerpt, tag }: BlogCardProps) => {
+const BlogCard = ({ postImage, postTitle, postExcerpt, tag, slug, author }: BlogCardProps) => {
   return (
-    <div className="relative flex flex-col h-full rounded-2xl overflow-hidden" style={{ backgroundColor: '#F9F9F9' }}>
+    <Link href={`/blog/${slug}`} className="block h-full" target="_blank" rel="noopener noreferrer">
+      <div className="relative flex flex-col h-full rounded-2xl overflow-hidden" style={{ backgroundColor: '#F9F9F9' }}>
       {/* Content area */}
       <div className="flex-1 p-8 flex flex-col justify-between">
         {/* Tag */}
@@ -19,7 +27,7 @@ const BlogCard = ({ postImage, postTitle, postExcerpt, tag }: BlogCardProps) => 
         {tag && (
           <div className="mb-3 inline-block">
             <span
-              className="text-xs sm:text-sm md:text-base font-light inline-block px-10 py-1 rounded-[24px]"
+              className="text-xs sm:text-sm md:text-base font-light inline-block px-6 py-1 rounded-[24px]"
               style={{
                 background: 'radial-gradient(50.47% 50.47% at 55.88% 97.48%, rgba(155, 155, 155, 0.3) 0%, rgba(253, 253, 253, 0.06) 100%)',
                 border: '1px solid #5F5F5F4D',
@@ -56,7 +64,11 @@ const BlogCard = ({ postImage, postTitle, postExcerpt, tag }: BlogCardProps) => 
 
         <div>
               {/* User Card */}
-        <UserCard />
+        <UserCard 
+          name={author.name}
+          position={author.position}
+          avatar={author.avatar}
+        />
         </div>
     
       </div>
@@ -73,6 +85,7 @@ const BlogCard = ({ postImage, postTitle, postExcerpt, tag }: BlogCardProps) => 
         />
       </div>
     </div>
+    </Link>
   );
 };
 
