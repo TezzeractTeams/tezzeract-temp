@@ -74,11 +74,11 @@ export default function Header() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="pointer-events-auto w-full px-4 sm:px-6 lg:px-24 py-0 md:py-4 bg-transparent flex items-center justify-between h-[120px]"
+            className="pointer-events-auto w-full px-4 sm:px-6 lg:px-24 py-0 md:py-4 bg-transparent flex items-center justify-between h-[70px] md:h-[100px] lg:h-[120px]"
           >
             {/* LOGO */}
             <div className="flex-shrink-0">
-              <Link href="/" className="block w-[12%] md:w-[200%] lg:w-[280px]">
+              <Link href="/" className="block w-[100%] md:w-[200%] lg:w-[280px]">
                 <Image
                   src="/tezzeractLogo.png"
                   alt="Tezzeract Logo"
@@ -144,7 +144,7 @@ export default function Header() {
               y: 20,
               opacity: 1,
               width: isMobile ? "95%" : isTablet ? "85%" : "54%",
-              height: isMobile ? "80px" : "50px",
+              height: isMobile ? "50px" : "50px",
             }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
@@ -165,7 +165,7 @@ export default function Header() {
               initial={{ scale: 0.8 }}
               animate={{ scale: isMobile ? 0.8 : 0.6 }}
             >
-              <Link href="/" className="block w-[12%] md:w-[120%] lg:w-[220px]">
+              <Link href="/" className="block w-[100%] md:w-[120%] lg:w-[220px]">
                 <Image
                   src="/tezzeractLogo.png"
                   alt="Tezzeract Logo"
