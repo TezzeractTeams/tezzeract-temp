@@ -46,7 +46,7 @@ export default function TeamsSection() {
               }}
               className="absolute inset-0 z-0 flex items-center justify-center overflow-visible pointer-events-auto"
             >
-              <div className="w-full px-10 md:px-8 lg:px-16  ml-0 md:ml-8 lg:ml-[200px] xl:ml-[300px]">
+              <div className="w-full px-10 md:px-8 lg:px-16  ml-0 md:ml-8 lg:ml-[200px] xl:ml-[850px]">
                 <ServiceSlider services={services} />
               </div>
             </div>

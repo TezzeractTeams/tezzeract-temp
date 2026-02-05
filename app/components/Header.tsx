@@ -91,7 +91,7 @@ export default function Header() {
               <Image
                 src="/tezzeractLogo.png"
                 alt="Tezzeract Logo"
-                width={180}
+                width={140}
                 height={40}
                 className="w-full h-auto"
               />
