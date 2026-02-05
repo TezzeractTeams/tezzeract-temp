@@ -78,7 +78,7 @@ export default function Header() {
           >
             {/* LOGO */}
             <div className="flex-shrink-0">
-              <Link href="/" className="block w-[12%] md:w-[200%] lg:w-[130%]">
+              <Link href="/" className="block w-[12%] md:w-[200%] lg:w-[280px]">
                 <Image
                   src="/tezzeractLogo.png"
                   alt="Tezzeract Logo"
@@ -165,7 +165,7 @@ export default function Header() {
               initial={{ scale: 0.8 }}
               animate={{ scale: isMobile ? 0.8 : 0.6 }}
             >
-              <Link href="/" className="block w-[12%] md:w-[200%] lg:w-[120%]">
+              <Link href="/" className="block w-[12%] md:w-[120%] lg:w-[220px]">
                 <Image
                   src="/tezzeractLogo.png"
                   alt="Tezzeract Logo"
