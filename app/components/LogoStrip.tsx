@@ -75,7 +75,7 @@ export default function LogoStrip({ className }: LogoStripProps) {
     >
       <div
         ref={sliderRef}
-        className="flex flex-nowrap gap-8 md:gap-12 items-center scrollbar-hide overflow-x-auto"
+        className="flex flex-nowrap gap-8 md:gap-12 items-center scrollbar-hide overflow-x-auto w-full min-w-0"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
