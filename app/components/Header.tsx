@@ -78,7 +78,7 @@ export default function Header() {
           >
             {/* LOGO */}
             <div className="flex-shrink-0">
-              <Link href="/" className="block w-[12%] md:w-[300%]">
+              <Link href="/" className="block w-[12%] md:w-[200%]">
                 <Image
                   src="/tezzeractLogo.png"
                   alt="Tezzeract Logo"
