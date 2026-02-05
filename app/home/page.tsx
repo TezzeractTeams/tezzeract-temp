@@ -14,7 +14,7 @@ import SnapScrollProvider from "../components/SnapScrollProvider";
 export default function Home() {
   
   return (
-    <div className="w-screen overflow-x-hidden">
+    <div className="w-full overflow-x-hidden">
       <SnapScrollProvider />
       <Header />
       <LandingHero />
@@ -27,7 +27,7 @@ export default function Home() {
      
 
       <div 
-        className="flex flex-col gap-4 rounded-[30px] relative "
+        className="flex w-full flex-col gap-4 rounded-[30px] relative "
         style={{
           background: 'radial-gradient(64.55% 66.78% at 0% 0%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
           

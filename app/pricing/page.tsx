@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 export default function PricingPage() {
   return (
-    <div className="w-[100vw] overflow-x-hidden">
+    <div className="w-full overflow-x-hidden">
       <Header />
       <PricingPageSection />
       <FAQ />

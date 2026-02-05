@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer>
       {/* Top Section - Blue Gradient */}
-      <div className="bg-gradient-to-r from-[#00A9EE] to-[#00378A] pt-20 md:pt-30">
+      <div className="bg-gradient-to-r w-full overflow-x-hidden from-[#00A9EE] to-[#00378A] pt-20 md:pt-30">
         <div className="w-full px-6 md:w-[90%] lg:w-[80%] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {/* Column 1 - Logo + Copyright */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-8">
