@@ -6,7 +6,6 @@ import UserCard from "./UserCard";
 interface BlogCardProps {
   postImage: string;
   postTitle: string;
-  postExcerpt: string;
   tag?: string;
   slug: string;
   author: {
@@ -16,50 +15,48 @@ interface BlogCardProps {
   };
 }
 
-const BlogCard = ({ postImage, postTitle, postExcerpt, tag, slug, author }: BlogCardProps) => {
+const BlogCard = ({ postImage, postTitle, tag, slug, author }: BlogCardProps) => {
   return (
     <Link href={`/blog/${slug}`} className="block h-full" target="_blank" rel="noopener noreferrer">
       <div className="relative flex flex-col h-full rounded-2xl overflow-hidden" style={{ backgroundColor: '#F9F9F9' }}>
-      {/* Content area */}
-      <div className="flex-1 p-8 flex flex-col justify-between">
-        {/* Tag */}
-        <div>
+      {/* Image area - at the top */}
+      <div className="relative bg-white h-[265px] flex items-center rounded-3xl justify-center overflow-hidden aspect-square">
+        <Image
+          src={postImage}
+          alt={postTitle}
+          width={300}
+          height={300}
+          className="object-cover w-full h-full"
+          unoptimized={postImage.startsWith('http://localhost')}
+        />
+        {/* Tag overlay - bottom left */}
         {tag && (
-          <div className="mb-3 inline-block">
+          <div className="absolute bottom-4 left-4 z-10">
             <span
-              className="text-xs sm:text-sm md:text-base font-light inline-block px-6 py-1 rounded-[24px]"
+              className="text-[10px] md:text-[10px] lg:text-sm text-white font-light inline-block px-8 py-2"
               style={{
-                background: 'radial-gradient(50.47% 50.47% at 55.88% 97.48%, rgba(155, 155, 155, 0.3) 0%, rgba(253, 253, 253, 0.06) 100%)',
-                border: '1px solid #5F5F5F4D',
-                
+                borderRadius: '24px',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: '#EBEBEB4D',
+                background: 'radial-gradient(50.47% 50.47% at 55.88% 97.48%, rgba(253, 253, 253, 0.06) 0%, rgba(61, 61, 58, 0.3) 100%)',
+                backdropFilter: 'blur(200px)',
+                WebkitBackdropFilter: 'blur(200px)',
               }}
             >
-              <span
-                style={{
-                  background: 'linear-gradient(257.31deg, #2B2B2B 16.02%, #4A4A4A 49.66%, #505050 83.98%)',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  backdropFilter: 'blur(200px)',
-                WebkitBackdropFilter: 'blur(200px)',
-                  color: 'transparent',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                {tag}
-              </span>
+              {tag}
             </span>
           </div>
         )}
-        
+      </div>
+      
+      {/* Content area */}
+      <div className="flex-1 p-8 flex flex-col justify-between">
+        <div>
         {/* Title */}
         <h2 className="text-[#340E0E] text-[20px] md:text-2xl font-light mb-3 leading-tight">
           {postTitle}
         </h2>
-        
-        {/* Description */}
-        <p className="text-gray-600 text-[14px] md:text-[16px] leading-relaxed">
-          {postExcerpt}
-        </p>
         </div>
 
         <div>
@@ -71,18 +68,6 @@ const BlogCard = ({ postImage, postTitle, postExcerpt, tag, slug, author }: Blog
         />
         </div>
     
-      </div>
-      
-      {/* Image area - at the bottom */}
-      <div className="bg-white h-[265px] flex items-center rounded-b-2xl justify-center overflow-hidden aspect-square">
-        <Image
-          src={postImage}
-          alt={postTitle}
-          width={300}
-          height={300}
-          className="object-cover w-full h-full"
-          unoptimized={postImage.startsWith('http://localhost')}
-        />
       </div>
     </div>
     </Link>
