@@ -6,11 +6,38 @@ import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
 import { TezzeractButton } from "./ui/TezzeractButton";
 
+// Navigation Links Data
+const navLinks = [
+  { href: "#home", label: "Home" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/about-us", label: "About us" },
+  { href: "#projects", label: "Projects" },
+];
+
+// MobileMenu component - moved outside to avoid creating during render
+const MobileMenu = () => (
+  <div className="md:hidden bg-blue-600/95 backdrop-blur-sm rounded-lg mt-2 py-4 px-4 space-y-3">
+    {navLinks.map((link) => (
+      <a
+        key={link.href}
+        href={link.href}
+        className="block text-white hover:text-white/80 transition-colors py-2"
+      >
+        {link.label}
+      </a>
+    ))}
+    <TezzeractButton fullWidth className="mt-2">
+      Book a call
+    </TezzeractButton>
+  </div>
+);
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const { scrollY } = useScroll();
 
   useEffect(() => {
@@ -36,33 +63,16 @@ export default function Header() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []); // Removed dependency on scrolled to avoid unnecessary re-renders
 
-  const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
-  const isTablet = windowWidth >= 768 && windowWidth < 1200;
+  useEffect(() => {
+    const checkTablet = () => {
+      const width = window.innerWidth;
+      setIsTablet(width >= 768 && width < 1200);
+    };
 
-  // Navigation Links Data
-  const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/about-us", label: "About us" },
-    { href: "#projects", label: "Projects" },
-  ];
-
-  const MobileMenu = () => (
-    <div className="md:hidden bg-blue-600/95 backdrop-blur-sm rounded-lg mt-2 py-4 px-4 space-y-3">
-      {navLinks.map((link) => (
-        <a
-          key={link.href}
-          href={link.href}
-          className="block text-white hover:text-white/80 transition-colors py-2"
-        >
-          {link.label}
-        </a>
-      ))}
-      <TezzeractButton fullWidth className="mt-2">
-        Book a call
-      </TezzeractButton>
-    </div>
-  );
+    checkTablet();
+    window.addEventListener("resize", checkTablet);
+    return () => window.removeEventListener("resize", checkTablet);
+  }, []);
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 flex justify-center pointer-events-none">
@@ -77,8 +87,8 @@ export default function Header() {
             className="pointer-events-auto w-full px-4 sm:px-6 lg:px-24 py-0 md:py-4 bg-transparent flex items-center justify-between h-[70px] md:h-[100px] lg:h-[120px]"
           >
             {/* LOGO */}
-            <div className="flex-shrink-0">
-              <Link href="/" className="block w-[100%] md:w-[200%] lg:w-[280px]">
+            <div className="shrink-0">
+              <Link href="/" className="block w-full md:w-[200%] lg:w-[200px]">
                 <Image
                   src="/tezzeractLogo.png"
                   alt="Tezzeract Logo"
@@ -90,14 +100,14 @@ export default function Header() {
             </div>
 
             {/* DESKTOP NAV */}
-            <div className="hidden md:flex items-center space-x-8 flex-shrink min-w-0">
+            <div className="hidden md:flex items-center space-x-8 shrink min-w-0">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   className="group relative inline-block px-3 py-1.5 font-light transition-colors text-white hover:text-white/80"
                 >
-                  <span className="absolute inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <span className="absolute  inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                   <span className="relative inline-block text-white">
                     {link.label}
                   </span>
@@ -150,14 +160,14 @@ export default function Header() {
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
             style={{
               backdropFilter: "blur(10px)",
-              background: "radial-gradient(circle at 50% 900%, #CBF0FF 55%, rgba(255, 255, 255, 0.7) 70%)",
+              background: "radial-gradient(circle at 50% 900%, #FFFFFF 55%, rgba(255, 255, 255, 0.7) 80%)",
               boxShadow: "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset",
               borderRadius: "15px",
               left: 0,
               right: 0,
               margin: "0 auto"
             }}
-            className={`pointer-events-auto fixed flex justify-between items-center ${isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-3 border-2 border-white/25"}`}
+            className={`pointer-events-auto fixed flex justify-between items-center ${isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-[4px] border-2 border-white/25"}`}
           >
             {/* LOGO (Smaller) */}
             <motion.div
@@ -182,7 +192,7 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group relative inline-block px-3 py-1.5 font-light transition-colors"
+                  className="group font-normal relative inline-block px-3 py-1.5 transition-colors"
                 >
                   <span className="relative inline-block text-transparent group-hover:opacity-80"
                     style={{
