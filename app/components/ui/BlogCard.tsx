@@ -33,7 +33,7 @@ const BlogCard = ({ postImage, postTitle, tag, slug, author }: BlogCardProps) =>
         {tag && (
           <div className="absolute bottom-4 left-4 z-10">
             <span
-              className="text-[10px] md:text-[10px] lg:text-sm text-white font-light inline-block px-8 py-2"
+              className="text-[12px] md:text-[10px] lg:text-sm text-white font-light inline-block px-8 py-2"
               style={{
                 borderRadius: '24px',
                 borderWidth: '1px',
