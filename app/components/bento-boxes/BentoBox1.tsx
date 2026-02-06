@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Ripple } from "./Ripple";
-import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";    
+import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";
 import { OrbitingCircles } from "./OrbitingCircles";
 
 export default function BentoBox1() {
@@ -11,16 +11,16 @@ export default function BentoBox1() {
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id="bento-shape-1" clipPathUnits="objectBoundingBox">
-            <path 
-              d="M0 0.02C0 0.009 0.0125 0 0.028 0H0.6105C0.626 0 0.6385 0.009 0.6385 0.02V0.09C0.6385 0.102 0.651 0.11 0.6665 0.11H0.972C0.9875 0.11 1 0.118 1 0.13V0.979C1 0.99 0.9875 1 0.972 1H0.028C0.0125 1 0 0.99 0 0.979V0.02Z" 
+            <path
+              d="M0 0.02C0 0.009 0.0125 0 0.028 0H0.6105C0.626 0 0.6385 0.009 0.6385 0.02V0.09C0.6385 0.102 0.651 0.11 0.6665 0.11H0.972C0.9875 0.11 1 0.118 1 0.13V0.979C1 0.99 0.9875 1 0.972 1H0.028C0.0125 1 0 0.99 0 0.979V0.02Z"
             />
           </clipPath>
         </defs>
       </svg>
-     
-      <div 
+
+      <div
         className="bento-box-1 relative h-full w-full flex items-center justify-center overflow-hidden rounded-xl min-h-[400px] md:min-h-0"
-        style={{ 
+        style={{
           backdropFilter: 'blur(150px)',
           WebkitBackdropFilter: 'blur(150px)',
           border: '0px solid rgba(255, 255, 255, 0.47)',
@@ -28,15 +28,15 @@ export default function BentoBox1() {
         }}
       >
         {/* Text content - top left */}
-        <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10 pointer-events-none">
+        <div className="absolute top-4 left-4 md:top-6 md:left-3 z-10 pointer-events-none">
           <div className="text-white p-5">
             <div className="text-6xl  md:text-7xl font-light tracking-tighter">250+</div>
-            <p className="text-2xl  md:text-2xl lg:text-3xl font-light leading-tight pr-25 mt-1">
+            <p className="text-2xl  md:text-xl lg:text-3xl font-light leading-tight pr-10 lg:pr-25 mt-1">
               professionals across the world, specialised across multiple domains.
             </p>
           </div>
         </div>
-        <Ripple 
+        <Ripple
           mainCircleOpacity={0.5}
           numCircles={3}
           verticalOffset="95%"
@@ -63,8 +63,8 @@ export default function BentoBox1() {
         <div className="absolute inset-0 pointer-events-none">
           {/* Calculate radii matching ripple circles: (mainCircleSize + i * 120) * scale / 2 */}
           {/* Circle 0: (210 + 0 * 120) * 1.3 / 2 = 136.5px */}
-          <OrbitingCircles 
-            radius={136.5} 
+          <OrbitingCircles
+            radius={136.5}
             path={false}
             verticalOffset="102%"
           >
@@ -73,9 +73,9 @@ export default function BentoBox1() {
             <Search />
           </OrbitingCircles>
           {/* Circle 1: (210 + 1 * 120) * 1.3 / 2 = 214.5px */}
-          <OrbitingCircles 
-            radius={214.5} 
-            path={false} 
+          <OrbitingCircles
+            radius={214.5}
+            path={false}
             reverse
             verticalOffset="102%"
           >
