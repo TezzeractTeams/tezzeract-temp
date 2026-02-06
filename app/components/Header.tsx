@@ -107,7 +107,7 @@ export default function Header() {
                   href={link.href}
                   className="group relative inline-block px-3 py-1.5 font-light transition-colors text-white hover:text-white/80"
                 >
-                  <span className="absolute inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <span className="absolute  inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                   <span className="relative inline-block text-white">
                     {link.label}
                   </span>
@@ -160,14 +160,14 @@ export default function Header() {
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
             style={{
               backdropFilter: "blur(10px)",
-              background: "radial-gradient(circle at 50% 900%, #CBF0FF 55%, rgba(255, 255, 255, 0.7) 70%)",
+              background: "radial-gradient(circle at 50% 900%, #FFFFFF 55%, rgba(255, 255, 255, 0.7) 80%)",
               boxShadow: "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset",
               borderRadius: "15px",
               left: 0,
               right: 0,
               margin: "0 auto"
             }}
-            className={`pointer-events-auto fixed flex justify-between items-center ${isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-3 border-2 border-white/25"}`}
+            className={`pointer-events-auto fixed flex justify-between items-center ${isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-[4px] border-2 border-white/25"}`}
           >
             {/* LOGO (Smaller) */}
             <motion.div
@@ -192,7 +192,7 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group relative inline-block px-3 py-1.5 font-light transition-colors"
+                  className="group font-normal relative inline-block px-3 py-1.5 transition-colors"
                 >
                   <span className="relative inline-block text-transparent group-hover:opacity-80"
                     style={{

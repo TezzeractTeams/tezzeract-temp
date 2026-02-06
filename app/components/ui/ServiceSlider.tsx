@@ -171,7 +171,7 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
       }}
     >
       {/* 3 horizontal rows with alternating scroll directions and staggered vertical offsets */}
-      <div className="flex flex-col md:gap-12 gap-6 items-center">
+      <div className="flex flex-col pt-6 md:pt-10 lg:pt-0 md:gap-0 gap-0 lg:gap-6 items-center">
         {/* Row 1: Scroll Left - No offset */}
         <div ref={row1Ref} className="w-full flex justify-center" style={{ transform: "translateY(0)" }}>
           <SliderRow services={filledRow1} direction="left" speed={0.5} />
@@ -183,7 +183,7 @@ export default function ServiceSlider({ services }: ServiceSliderProps) {
         </div>
         
         {/* Row 3: Scroll Left - More offset */}
-        <div ref={row3Ref} className="w-full flex justify-center" style={{ transform: "translateY(16px)" }}>
+        <div ref={row3Ref} className="w-full pb-10 lg:pb-0 md:pb-4 flex justify-center" style={{ transform: "translateY(16px)" }}>
           <SliderRow services={filledRow3} direction="left" speed={0.5} />
         </div>
       </div>

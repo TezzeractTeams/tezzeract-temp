@@ -32,7 +32,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         {/* Text */}
         <span
           className={`
-            text-sm md:text-3xl font-light tracking-tighter whitespace-nowrap transition-all duration-300 ease-in-out
+            text-2xl md:text-2xl lg:text-4xl font-light  tracking-tighter  whitespace-nowrap transition-all duration-300 ease-in-out
             ${isHovered 
               ? "text-white font-light" 
               : "text-white/50"
@@ -54,7 +54,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
             alt="Arrow"
             width={34}
             height={15}
-            className="w-auto h-3 md:h-4"
+            className="w-auto h-3 md:h-"
           />
         </div>
         
