@@ -31,7 +31,7 @@ export default function BentoBox1() {
         <div className="absolute top-4 left-4 md:top-6 md:left-3 z-10 pointer-events-none">
           <div className="text-white p-5">
             <div className="text-6xl  md:text-7xl font-light tracking-tighter">250+</div>
-            <p className="text-2xl  md:text-xl lg:text-3xl font-light leading-tight pr-10 lg:pr-25 mt-1">
+            <p className="text-[16px]  md:text-xl lg:text-3xl font-light leading-tight pr-10 lg:pr-25 mt-1">
               professionals across the world, specialised across multiple domains.
             </p>
           </div>
