@@ -79,10 +79,11 @@ void main() {
                                    0.02 * tOffset) +
                            sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
 
-  vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
-  col.a = 1.0;
+  float p = clamp((pattern - 0.3) / 0.4, 0.0, 1.0);
+  vec3 baseColor = mix(vec3(1.0, 1.0, 1.0), uColor, p);
+  vec4 col = vec4(baseColor - rnd / 15.0 * uNoiseIntensity, 1.0);
+  col.rgb = clamp(col.rgb, 0.0, 1.0);
   gl_FragColor = col;
-}
 `;
 
 interface SilkPlaneProps {
@@ -143,6 +144,8 @@ const Silk: React.FC<SilkProps> = ({ speed = 5, scale = 1, color = '#7B7481', no
 
   return (
     <Canvas dpr={[1, 2]} frameloop="always">
+            <color attach="background" args={['#ffffff']} />
+
       <SilkPlane ref={meshRef} uniforms={uniforms} />
     </Canvas>
   );

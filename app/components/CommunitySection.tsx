@@ -2,11 +2,19 @@
 
 import React from "react";
 import Image from "next/image";
+import Silk from "./Silk";
 import { TestimonialTooltip } from "./ui/Tooltip";
 
 export default function CommunitySection() {
   return (
     <div>
+<Silk
+  speed={5}
+  scale={1}
+  color="#1657FF"
+  noiseIntensity={1.5}
+  rotation={0}
+/>
       {/* Main Heading */}
       <div
         className="flex items-center justify-center text-center h-[85vh] pb-20"
