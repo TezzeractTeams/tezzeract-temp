@@ -1,10 +1,10 @@
 import React from "react";
 import BlogCard from "./ui/BlogCard";
 import TezzeractH1 from "./ui/TezzeractH1";
-import { getBlogPosts } from "../lib/blogData";
+import { getPosts } from "../lib/strapi";
 
-export default function BlogSection() {
-  const posts = getBlogPosts();
+export default async function BlogSection() {
+  const posts = await getPosts();
 
   return (
     <section className="w-full pt-26 py-14 lg:px-8 px-2 bg-white relative">

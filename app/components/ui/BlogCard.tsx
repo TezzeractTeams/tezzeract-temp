@@ -30,24 +30,22 @@ const BlogCard = ({ postImage, postTitle, tag, slug, author }: BlogCardProps) =>
           unoptimized={postImage.startsWith('http://localhost')}
         />
         {/* Tag overlay - bottom left */}
-        {tag && (
-          <div className="absolute bottom-4 left-4 z-10">
-            <span
-              className="text-[12px] md:text-[10px] lg:text-sm text-white font-light inline-block px-8 py-2"
-              style={{
-                borderRadius: '24px',
-                borderWidth: '1px',
-                borderStyle: 'solid',
-                borderColor: '#EBEBEB4D',
-                background: 'radial-gradient(50.47% 50.47% at 55.88% 97.48%, rgba(253, 253, 253, 0.06) 0%, rgba(61, 61, 58, 0.3) 100%)',
-                backdropFilter: 'blur(200px)',
-                WebkitBackdropFilter: 'blur(200px)',
-              }}
-            >
-              {tag}
-            </span>
-          </div>
-        )}
+        <div className="absolute bottom-4 left-4 z-10">
+          <span
+            className="text-[12px] md:text-[10px] lg:text-sm text-white font-light inline-block px-8 py-2"
+            style={{
+              borderRadius: '24px',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: '#EBEBEB4D',
+              background: 'radial-gradient(50.47% 50.47% at 55.88% 97.48%, rgba(253, 253, 253, 0.06) 0%, rgba(61, 61, 58, 0.3) 100%)',
+              backdropFilter: 'blur(200px)',
+              WebkitBackdropFilter: 'blur(200px)',
+            }}
+          >
+            {tag || 'Article'}
+          </span>
+        </div>
       </div>
       
       {/* Content area */}

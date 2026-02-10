@@ -23,7 +23,7 @@ const UserCard = ({ name, position, avatar }: UserCardProps) => {
       
       {/* Name and Title */}
       <div className="flex flex-col">
-        <span className="text-black font-semibold text-sm md:text-base">
+        <span className="text-black font-normal text-sm md:text-base">
           {name}
         </span>
         <span className="text-gray-500 text-xs md:text-sm">
