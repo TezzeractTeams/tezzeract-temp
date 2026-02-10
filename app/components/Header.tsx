@@ -106,7 +106,7 @@ export default function Header() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 bg-white/1 backdrop-blur-[50px] z-40 lg:hidden"
+            className="fixed inset-0 bg-white/1 backdrop-blur-[30px] z-40 lg:hidden"
           />
         )}
       </AnimatePresence>
@@ -126,7 +126,7 @@ export default function Header() {
             <div className="shrink-0">
               <Link href="/" className="block w-full md:w-[200%] lg:w-[200px]">
                 <Image
-                  src="/tezzeractLogo.png"
+                  src="/tezzeractLogo.svg"
                   alt="Tezzeract Logo"
                   width={140}
                   height={40}
@@ -232,7 +232,7 @@ export default function Header() {
             >
               <Link href="/" className="block w-[100%] md:w-[120%] lg:w-[220px]">
                 <Image
-                  src="/tezzeractLogo.png"
+                  src="/tezzeractLogo.svg"
                   alt="Tezzeract Logo"
                   width={140}
                   height={40}
