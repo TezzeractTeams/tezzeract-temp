@@ -218,7 +218,7 @@ export default function MeetingBoxSection() {
               stepNumber={3}
               title="A connected ecosystem"
               description="You can book additional diagnostics, buy curated supplements with members-only discounts in your Superpower dashboard."
-              imageSrc="/MeetingBox3.png"
+              imageSrc="/assets/scale.png"
               imageAlt="Ecosystem illustration"
               numberRef={number3Ref}
             />

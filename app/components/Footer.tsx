@@ -84,6 +84,12 @@ export default function Footer() {
                 About us
               </a>
               <a
+                href="/community"
+                className="text-white hover:text-white/80 transition-colors"
+              >
+                Community
+              </a>
+              <a
                 href="#home"
                 className="text-white hover:text-white/80 transition-colors"
               >
