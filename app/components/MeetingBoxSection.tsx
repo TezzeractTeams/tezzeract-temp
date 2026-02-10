@@ -23,7 +23,7 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber, number
   return (
     <div className="relative flex flex-col h-full">
       {/* Image area - fixed height ensures alignment */}
-      <div className="bg-white w-full h-64 mb-6 flex items-center justify-center overflow-hidden">
+      <div className="order-2 md:order-1 bg-white w-full h-64 mb-6 flex items-center justify-center overflow-hidden">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -34,7 +34,7 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber, number
       </div>
       
       {/* Number and text content - side by side on mobile, stacked on desktop */}
-      <div className="flex flex-row md:flex-col items-start gap-4 md:gap-0 mb-4 md:mb-4 z-20">
+      <div className="order-1 md:order-2 flex flex-row md:flex-col items-start gap-4 md:gap-0 mb-6 md:mb-4 z-20">
         {/* Step indicator */}
         <div className="relative z-20 shrink-0 -ml-8 md:ml-0 md:mb-4">
           <div 
