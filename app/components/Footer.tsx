@@ -24,8 +24,8 @@ export default function Footer() {
           </div>
 
           {/* Column 2 - Legal */}
-          <div className="flex flex-col gap-2 md:gap-3 items-end text-right">
-            <h4 className="text-white/60 text-sm font-medium mb-2">Legal</h4>
+          <div className="flex flex-col gap-2 md:gap-3 items-start text-left">
+            <h4 className="text-white/60 text-sm font-light mb-2">Legal</h4>
             <a
               href="#"
               className="text-white hover:text-white/80 transition-colors"
@@ -41,8 +41,8 @@ export default function Footer() {
           </div>
 
           {/* Column 3 - Social Media */}
-          <div className="flex flex-col gap-2 md:gap-3 items-start text-left lg:items-end lg:text-right">
-            <h4 className="text-white/60 text-sm font-medium mb-2">
+          <div className="flex flex-col gap-2 md:gap-3 pt-5 sm:pt-0 items-start text-left">
+            <h4 className="text-white/60 text-sm font-light mb-2">
               Social Media
             </h4>
             <div className="grid grid-cols-2 gap-3">
@@ -74,8 +74,8 @@ export default function Footer() {
           </div>
 
           {/* Column 4 - Pages */}
-          <div className="flex flex-col gap-2 md:gap-3 items-end text-right">
-            <h4 className="text-white/60 text-sm font-medium mb-2">Pages</h4>
+          <div className="flex flex-col gap-2 md:gap-3 pt-5 sm:pt-0 items-start text-left">
+            <h4 className="text-white/60 text-sm font-light mb-2">Pages</h4>
             <div className="grid grid-cols-2 gap-3">
               <a
                 href="/about-us"
