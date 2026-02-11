@@ -123,194 +123,194 @@ export default function Header() {
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
               className="pointer-events-auto w-full px-4 sm:px-6 lg:px-24 py-0 md:py-4 bg-transparent flex items-center justify-between h-[70px] md:h-[100px] lg:h-[120px] relative isolate"
             >
-            {/* LOGO */}
-            <div className="shrink-0">
-              <Link href="/" className="block w-full md:w-[200%] lg:w-[200px]">
-                <Image
-                  src="/tezzeractLogo.svg"
-                  alt="Tezzeract Logo"
-                  width={140}
-                  height={40}
-                  className="w-full h-auto"
-                />
-              </Link>
-            </div>
+              {/* LOGO */}
+              <div className="shrink-0">
+                <Link href="/" className="block pl-3 sm:pl-0 w-[150px] md:w-[120%] lg:w-[220px]">
+                  <Image
+                    src="/tezzeractLogo.svg"
+                    alt="Tezzeract Logo"
+                    width={140}
+                    height={40}
+                    className="w-full h-auto"
+                  />
+                </Link>
+              </div>
 
-            {/* DESKTOP NAV */}
-            <div className="hidden lg:flex items-center space-x-8 shrink min-w-0">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="group relative inline-block px-3 py-1.5 font-light transition-colors text-white hover:text-white/80"
-                >
-                  <span className="absolute  inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                  <span className="relative inline-block text-white">
-                    {link.label}
-                  </span>
-                </a>
-              ))}
-            </div>
-
-            {/* BUTTON */}
-            <div className="hidden lg:block flex-shrink-0">
-              <TezzeractButton className="w-[180px] min-w-[140px]">
-                Book a call
-              </TezzeractButton>
-            </div>
-
-            {/* MOBILE TOGGLE */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-              >
-                <motion.svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                >
-                  {mobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </motion.svg>
-              </button>
-            </div>
-
-            {/* Mobile Menu Dropdown inside the nav context */}
-            <AnimatePresence>
-              {mobileMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className="absolute top-[100%] left-1/2 -translate-x-1/2 w-[95vw] lg:hidden z-[110]"
-                >
-                  <MobileMenu />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.nav>
-        ) : (
-          <motion.nav
-            key="floating-header"
-            initial={{
-              y: -100,
-              opacity: 0,
-              width: isMobile ? "95%" : isTablet ? "85%" : "54%",
-              height: isMobile ? "80px" : "50px",
-            }}
-            animate={{
-              y: 20,
-              opacity: 1,
-              width: isMobile ? "95%" : isTablet ? "85%" : "54%",
-              height: isMobile ? "50px" : "50px",
-            }}
-            exit={{ y: -100, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            style={{
-              backdropFilter: "blur(10px)",
-              background: "radial-gradient(circle at 50% 900%, #FFFFFF 55%, rgba(255, 255, 255, 0.7) 80%)",
-              boxShadow: "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset",
-              borderRadius: "15px",
-              left: 0,
-              right: 0,
-              margin: "0 auto"
-            }}
-            className={`pointer-events-auto fixed flex justify-between items-center isolate ${isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-[4px] border-2 border-white/25"}`}
-          >
-            {/* LOGO (Smaller) */}
-            <motion.div
-              className="flex-shrink-0"
-              initial={{ scale: 0.8 }}
-              animate={{ scale: isMobile ? 0.8 : 0.6 }}
-            >
-              <Link href="/" className="block w-full md:w-[120%] lg:w-[220px]">
-                <Image
-                  src="/tezzeractLogo.svg"
-                  alt="Tezzeract Logo"
-                  width={140}
-                  height={40}
-                  className="w-full h-auto"
-                />
-              </Link>
-            </motion.div>
-
-            {/* NAV LINKS (Gradient Text) */}
-            <div className="hidden lg:flex items-center space-x-8 flex-shrink min-w-0">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="group font-normal relative inline-block px-3 py-1.5 transition-colors"
-                >
-                  <span className="relative inline-block text-transparent group-hover:opacity-80"
-                    style={{
-                      backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
-                      WebkitBackgroundClip: "text",
-                      backgroundClip: "text",
-                    }}
+              {/* DESKTOP NAV */}
+              <div className="hidden lg:flex items-center space-x-8 shrink min-w-0">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="group relative inline-block px-3 py-1.5 font-light transition-colors text-white hover:text-white/80"
                   >
-                    {link.label}
-                  </span>
-                </a>
-              ))}
-            </div>
+                    <span className="absolute  inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    <span className="relative inline-block text-white">
+                      {link.label}
+                    </span>
+                  </a>
+                ))}
+              </div>
 
-            {/* BUTTON (Smaller wrapper if needed, but keeping same for now or hiding if too small) */}
-            <div className="hidden lg:block flex-shrink-0">
-              <TezzeractButton className="w-[110px] min-w-[110px]">
-                Book a call
-              </TezzeractButton>
-            </div>
+              {/* BUTTON */}
+              <div className="hidden lg:block flex-shrink-0">
+                <TezzeractButton className="w-[180px] min-w-[140px]">
+                  Book a call
+                </TezzeractButton>
+              </div>
 
-            {/* MOBILE TOGGLE (Floating) */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+              {/* MOBILE TOGGLE */}
+              <div className="lg:hidden">
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+                >
+                  <motion.svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  >
+                    {mobileMenuOpen ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    )}
+                  </motion.svg>
+                </button>
+              </div>
+
+              {/* Mobile Menu Dropdown inside the nav context */}
+              <AnimatePresence>
+                {mobileMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="absolute top-[100%] left-1/2 -translate-x-1/2 w-[95vw] lg:hidden z-[110]"
+                  >
+                    <MobileMenu />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.nav>
+          ) : (
+            <motion.nav
+              key="floating-header"
+              initial={{
+                y: -100,
+                opacity: 0,
+                width: isMobile ? "95%" : isTablet ? "85%" : "54%",
+                height: isMobile ? "80px" : "50px",
+              }}
+              animate={{
+                y: 20,
+                opacity: 1,
+                width: isMobile ? "95%" : isTablet ? "85%" : "54%",
+                height: isMobile ? "50px" : "50px",
+              }}
+              exit={{ y: -100, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              style={{
+                backdropFilter: "blur(10px)",
+                background: "radial-gradient(circle at 50% 900%, #FFFFFF 55%, rgba(255, 255, 255, 0.7) 80%)",
+                boxShadow: "0 0 24px rgba(245, 245, 245, 0.06), 0 1px 1px rgba(238, 238, 238, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset",
+                borderRadius: "15px",
+                left: 0,
+                right: 0,
+                margin: "0 auto"
+              }}
+              className={`pointer-events-auto fixed flex justify-between items-center isolate ${isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-[4px] border-2 border-white/25"}`}
+            >
+              {/* LOGO (Smaller) */}
+              <motion.div
+                className="flex-shrink-0"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: isMobile ? 0.7 : 0.6 }}
               >
-                <motion.svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="#0068B5"
-                  viewBox="0 0 24 24"
-                  animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                >
-                  {mobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </motion.svg>
-              </button>
-            </div>
+                <Link href="/" className="block w-full md:w-[120%] lg:w-[220px]">
+                  <Image
+                    src="/tezzeractLogo.svg"
+                    alt="Tezzeract Logo"
+                    width={140}
+                    height={40}
+                    className="w-full h-auto"
+                  />
+                </Link>
+              </motion.div>
 
-            {/* Mobile Menu for Floating Header */}
-            <AnimatePresence>
-              {mobileMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className="absolute top-[100%] left-1/2 -translate-x-1/2 w-[95vw] md:w-[85vw] lg:hidden z-[110]"
+              {/* NAV LINKS (Gradient Text) */}
+              <div className="hidden lg:flex items-center space-x-8 flex-shrink min-w-0">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="group font-normal relative inline-block px-3 py-1.5 transition-colors"
+                  >
+                    <span className="relative inline-block text-transparent group-hover:opacity-80"
+                      style={{
+                        backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                      }}
+                    >
+                      {link.label}
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              {/* BUTTON (Smaller wrapper if needed, but keeping same for now or hiding if too small) */}
+              <div className="hidden lg:block flex-shrink-0">
+                <TezzeractButton className="w-[110px] min-w-[110px]">
+                  Book a call
+                </TezzeractButton>
+              </div>
+
+              {/* MOBILE TOGGLE (Floating) */}
+              <div className="lg:hidden">
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2 rounded-lg hover:bg-white/10 transition-colors"
                 >
-                  <MobileMenu />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </header>
+                  <motion.svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="#0068B5"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  >
+                    {mobileMenuOpen ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    )}
+                  </motion.svg>
+                </button>
+              </div>
+
+              {/* Mobile Menu for Floating Header */}
+              <AnimatePresence>
+                {mobileMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="absolute top-[100%] left-1/2 -translate-x-1/2 w-[95vw] md:w-[85vw] lg:hidden z-[110]"
+                  >
+                    <MobileMenu />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </header>
     </>
   );
 }
