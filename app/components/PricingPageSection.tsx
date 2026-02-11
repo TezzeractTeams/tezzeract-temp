@@ -70,7 +70,7 @@ export default function PricingPageSection() {
               backgroundClip: "text",
             }}
           >businesses</span>
-          
+
           <span className="text-gray-700"> of all sizes</span>{" "}
           <span className="inline-flex items-center text-3xl md:text-4xl lg:text-5xl">
             <Image
@@ -87,9 +87,9 @@ export default function PricingPageSection() {
 
       {/* Content Section - White Background */}
       <div className="bg-white -mt-40 w-full rounded-t-4xl z-2 px-4 md:px-8 lg:px-24 pt-40 pb-20">
-       <PricingSection />
+        <PricingSection />
 
-      
+
       </div>
     </div>
   );

@@ -33,8 +33,8 @@ export default function AboutUsSection() {
             <Image
               src="/assets/Teams.svg"
               alt="Teams"
-              width={70}
-              height={70}
+              width={30}
+              height={30}
               className="inline-block"
             />
           </span>{" "}
@@ -46,8 +46,8 @@ export default function AboutUsSection() {
             <Image
               src="/assets/Goals.svg"
               alt="Goals"
-              width={70}
-              height={70}
+              width={30}
+              height={30}
               className="inline-block"
             />
           </span>{" "}
