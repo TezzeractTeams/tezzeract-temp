@@ -142,7 +142,7 @@ export default function LandingHero() {
 
           start growing!
         </TezzeractH1>
-        <TezzeractText variant="light" className="pt-0 pb-2 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
+        <TezzeractText variant="light" className="pt-4 pb-4 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
         Tezzeract focuses on helping businesses grow digitally by providing access to <br className="hidden  md:block" /> scalable remote teams of professionals, tailored to meet your unique business needs. 
         </TezzeractText >
         <a href="https://tezzeract.lt/bookcall" target="_blank" rel="noopener noreferrer" className="self-center md:self-start cursor-pointer transition-transform duration-200 ">
