@@ -90,13 +90,13 @@ export default function Footer() {
                 Community
               </a>
               <a
-                href="#home"
+                href="/"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Home
               </a>
               <a
-                href="#projects"
+                href="/#projects"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Projects

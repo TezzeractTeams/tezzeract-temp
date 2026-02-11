@@ -8,11 +8,11 @@ import { TezzeractButton } from "./ui/TezzeractButton";
 
 // Navigation Links Data
 const navLinks = [
-  { href: "#home", label: "Home" },
+  { href: "/", label: "Home" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about-us", label: "About us" },
   { href: "/community", label: "Community" },
-  { href: "#projects", label: "Projects" },
+  { href: "/#projects", label: "Projects" },
 ];
 
 // MobileMenu component - moved outside to avoid creating during render
