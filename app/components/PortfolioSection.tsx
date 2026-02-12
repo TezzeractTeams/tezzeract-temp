@@ -306,7 +306,7 @@ function PortfolioSection() {
               pauseOnMouseEnter: true,
             }}
             loop={true}
-            speed={5000}
+            speed={10000}
             slidesPerView="auto"
             spaceBetween={16}
             allowTouchMove={true}
@@ -317,7 +317,7 @@ function PortfolioSection() {
               },
             }}
           >
-            {duplicatedItems.map((item, index) => (
+            {swiperItems.map((item, index) => (
               <SwiperSlide
                 key={`carousel3-${index}`}
                 className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
@@ -335,6 +335,50 @@ function PortfolioSection() {
               transition-timing-function: linear;
             }
           `}</style>
+        </div>
+      </div>
+
+      {/* Fourth Carousel Row - Scrolls Right (Natural Loop with Drag) */}
+      <div className="relative w-full overflow-hidden px-0 md:px-4 pt-8">
+        <div>
+          <Swiper
+            modules={[FreeMode, Autoplay]}
+            freeMode={{
+              enabled: true,
+              momentum: false,
+              momentumBounce: false,
+            }}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+              reverseDirection: true,
+            }}
+            loop={true}
+            speed={10000}
+            slidesPerView="auto"
+            spaceBetween={16}
+            allowTouchMove={true}
+            className="overflow-visible! swiper-linear-ease"
+            breakpoints={{
+              640: {
+                spaceBetween: 24,
+              },
+            }}
+          >
+            {swiperItems.map((item, index) => (
+              <SwiperSlide
+                key={`carousel4-${index}`}
+                className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
+              >
+                <PortfolioCard
+                  tag={item.tag}
+                  caseStudyTitle={item.caseStudyTitle}
+                  image={item.image}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </div>
