@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/pricing", label: "Pricing" },
   { href: "/about-us", label: "About us" },
   { href: "/community", label: "Community" },
-  { href: "/#projects", label: "Projects" },
+  { href: "/portfolio", label: "Portfolio" },
 ];
 
 // MobileMenu component - moved outside to avoid creating during render
