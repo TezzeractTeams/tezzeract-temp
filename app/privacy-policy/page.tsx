@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PrivacyContactForm from '../components/PrivacyContactForm';
 
 export default function PrivacyPolicy() {
     return (
@@ -90,6 +91,8 @@ export default function PrivacyPolicy() {
                         Visitor comments may be checked through an automated spam detection service.
                     </p>
                 </section>
+
+                <PrivacyContactForm />
             </main>
             <Footer />
         </div>
