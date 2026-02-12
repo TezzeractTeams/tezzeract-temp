@@ -1,19 +1,22 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type PortfolioCardProps = {
   tag: string;
   caseStudyTitle: string;
   image: string;
+  slug?: string;
 };
 
 export default function PortfolioCard({
   tag,
   caseStudyTitle,
   image,
+  slug,
 }: PortfolioCardProps) {
   return (
-    <div className="rounded-[30px] flex flex-col justify-end overflow-hidden relative group w-full aspect-[3/4] md:aspect-[4/3] cursor-pointer">
+    <div className="rounded-[30px] flex flex-col justify-end overflow-hidden relative group w-full aspect-[3/4] md:aspect-[4/3]">
       {/* Background Image */}
       <Image
         src={image}
@@ -66,10 +69,13 @@ export default function PortfolioCard({
         </h3>
 
         {/* Read the Full Case Study Link - Hidden by default, appears on hover */}
-        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-white">
+        <Link
+          href={`/portfolio/${slug || '#'}`}
+          className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-white w-fit cursor-pointer"
+        >
           <span className="text-sm font-light  underline">Read the Full Case Study</span>
           <ArrowUpRight className="h-4 w-4 shrink-0" />
-        </div>
+        </Link>
       </div>
     </div>
   );
