@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode } from 'swiper/modules'
+import { FreeMode, Autoplay } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import Link from 'next/link'
 import { TezzeractH1 } from './ui/TezzeractH1'
@@ -11,6 +11,7 @@ import PortfolioCard from './ui/PortfolioCard'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/free-mode'
+import 'swiper/css/autoplay'
 
 export type PortfolioItem = {
   id: number | string;
@@ -30,8 +31,10 @@ function PortfolioSection({ initialData = [] }: PortfolioSectionProps) {
   const portfolioItems = initialData;
 
 
-  // Duplicate items for seamless infinite loop
+  // Duplicate items for seamless infinite loop (Ref 1 & 2)
   const duplicatedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems];
+  // Duplicate items for Swiper (Ref 3) - more duplicates for smoother loop if needed
+  const swiperItems = [...portfolioItems, ...portfolioItems, ...portfolioItems, ...portfolioItems];
 
   const swiperRef1 = useRef<SwiperType | null>(null);
   const swiperRef2 = useRef<SwiperType | null>(null);
@@ -232,6 +235,11 @@ function PortfolioSection({ initialData = [] }: PortfolioSectionProps) {
                 key={`carousel1-${index}`}
                 className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
               >
+                <PortfolioCard
+                  tag={item.tag}
+                  caseStudyTitle={item.caseStudyTitle}
+                  image={item.image}
+                />
                 <Link href={`/portfolio/${encodeURIComponent(item.slug)}`} className="block h-full">
                   <PortfolioCard
                     tag={item.tag}
@@ -278,6 +286,54 @@ function PortfolioSection({ initialData = [] }: PortfolioSectionProps) {
                 key={`carousel2-${index}`}
                 className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
               >
+                <PortfolioCard
+                  tag={item.tag}
+                  caseStudyTitle={item.caseStudyTitle}
+                  image={item.image}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+
+      {/* Third Carousel Row - Scrolls Left (Natural Loop with Drag) */}
+      <div className="relative w-full overflow-hidden px-0 md:px-4 pt-8">
+        <div>
+          <Swiper
+            modules={[FreeMode, Autoplay]}
+            freeMode={{
+              enabled: true,
+              momentum: false,
+              momentumBounce: false,
+            }}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            loop={true}
+            speed={5000}
+            slidesPerView="auto"
+            spaceBetween={16}
+            allowTouchMove={true}
+            className="overflow-visible! swiper-linear-ease"
+            breakpoints={{
+              640: {
+                spaceBetween: 24,
+              },
+            }}
+          >
+            {duplicatedItems.map((item, index) => (
+              <SwiperSlide
+                key={`carousel3-${index}`}
+                className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
+              >
+                <PortfolioCard
+                  tag={item.tag}
+                  caseStudyTitle={item.caseStudyTitle}
+                  image={item.image}
+                />
                 <Link href={`/portfolio/${encodeURIComponent(item.slug)}`} className="block h-full">
                   <PortfolioCard
                     tag={item.tag}
@@ -288,6 +344,11 @@ function PortfolioSection({ initialData = [] }: PortfolioSectionProps) {
               </SwiperSlide>
             ))}
           </Swiper>
+          <style jsx global>{`
+            .swiper-linear-ease .swiper-wrapper {
+              transition-timing-function: linear;
+            }
+          `}</style>
         </div>
       </div>
     </div>
