@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Autoplay } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
+import Link from 'next/link'
 import { TezzeractH1 } from './ui/TezzeractH1'
 import PortfolioCard from './ui/PortfolioCard'
 
@@ -12,24 +13,23 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/autoplay'
 
-function PortfolioSection() {
-  const portfolioItems = [
-    {
-      tag: "Industry Expertise",
-      caseStudyTitle: "Helped Beentouch to grow their revenue by 10%",
-      image: "/portfolioimage1.jpg"
-    },
-    {
-      tag: "Digital Transformation",
-      caseStudyTitle: "Transformed startup's digital presence with scalable solutions",
-      image: "/portfolioimage1.jpg"
-    },
-    {
-      tag: "Growth Strategy",
-      caseStudyTitle: "Increased client engagement by 25% through innovative approach",
-      image: "/portfolioimage1.jpg"
-    }
-  ];
+export type PortfolioItem = {
+  id: number | string;
+  slug: string;
+  tag: string;
+  caseStudyTitle: string;
+  image: string;
+};
+
+interface PortfolioSectionProps {
+  initialData?: PortfolioItem[];
+}
+
+function PortfolioSection({ initialData = [] }: PortfolioSectionProps) {
+  // Directly use initialData to avoid hydration mismatches.
+  // We removed the fallback data to prevent the "placeholder flash" and the server/client mismatch.
+  const portfolioItems = initialData;
+
 
   // Duplicate items for seamless infinite loop (Ref 1 & 2)
   const duplicatedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems];
@@ -240,6 +240,13 @@ function PortfolioSection() {
                   caseStudyTitle={item.caseStudyTitle}
                   image={item.image}
                 />
+                <Link href={`/portfolio/${encodeURIComponent(item.slug)}`} className="block h-full">
+                  <PortfolioCard
+                    tag={item.tag}
+                    caseStudyTitle={item.caseStudyTitle}
+                    image={item.image}
+                  />
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -327,6 +334,13 @@ function PortfolioSection() {
                   caseStudyTitle={item.caseStudyTitle}
                   image={item.image}
                 />
+                <Link href={`/portfolio/${encodeURIComponent(item.slug)}`} className="block h-full">
+                  <PortfolioCard
+                    tag={item.tag}
+                    caseStudyTitle={item.caseStudyTitle}
+                    image={item.image}
+                  />
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
