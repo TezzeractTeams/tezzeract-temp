@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
+import Link from 'next/link'
 import { TezzeractH1 } from './ui/TezzeractH1'
 import PortfolioCard from './ui/PortfolioCard'
 
@@ -11,24 +12,23 @@ import PortfolioCard from './ui/PortfolioCard'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 
-function PortfolioSection() {
-  const portfolioItems = [
-    {
-      tag: "Industry Expertise",
-      caseStudyTitle: "Helped Beentouch to grow their revenue by 10%",
-      image: "/portfolioimage1.jpg"
-    },
-    {
-      tag: "Digital Transformation",
-      caseStudyTitle: "Transformed startup's digital presence with scalable solutions",
-      image: "/portfolioimage1.jpg"
-    },
-    {
-      tag: "Growth Strategy",
-      caseStudyTitle: "Increased client engagement by 25% through innovative approach",
-      image: "/portfolioimage1.jpg"
-    }
-  ];
+export type PortfolioItem = {
+  id: number | string;
+  slug: string;
+  tag: string;
+  caseStudyTitle: string;
+  image: string;
+};
+
+interface PortfolioSectionProps {
+  initialData?: PortfolioItem[];
+}
+
+function PortfolioSection({ initialData = [] }: PortfolioSectionProps) {
+  // Directly use initialData to avoid hydration mismatches.
+  // We removed the fallback data to prevent the "placeholder flash" and the server/client mismatch.
+  const portfolioItems = initialData;
+
 
   // Duplicate items for seamless infinite loop
   const duplicatedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems];
@@ -68,7 +68,7 @@ function PortfolioSection() {
       const wrapper = container.querySelector('.swiper-wrapper') as HTMLElement;
       if (wrapper) {
         wrapper.style.transform = `translate3d(-${scrollPositionRef1.current}px, 0, 0)`;
-        
+
         // Reset when we've scrolled through one full set (1/3 of total width)
         const thirdWidth = wrapper.scrollWidth / 3;
         if (scrollPositionRef1.current >= thirdWidth) {
@@ -110,7 +110,7 @@ function PortfolioSection() {
           }
         }
       };
-      
+
       // Try initialization multiple times until wrapper is ready
       const initInterval = setInterval(() => {
         const container = containerRef2.current;
@@ -147,7 +147,7 @@ function PortfolioSection() {
       const wrapper = container.querySelector('.swiper-wrapper') as HTMLElement;
       if (wrapper) {
         wrapper.style.transform = `translate3d(-${scrollPositionRef2.current}px, 0, 0)`;
-        
+
         // Reset when we've scrolled through one full set
         if (scrollPositionRef2.current <= 0) {
           const thirdWidth = wrapper.scrollWidth / 3;
@@ -195,12 +195,12 @@ function PortfolioSection() {
 
   return (
     <div className='bg-transparent py-10 md:py-20'>
-      <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl mb-12">Work That Creates Impact</TezzeractH1>  
+      <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl mb-12">Work That Creates Impact</TezzeractH1>
       <p className="text-[#ffffff] font-light text-base md:text-lg lg:pb-16 pb-8 md:pb-16 lg:w-[60%] md:w-[80%] px-4 w-full mx-auto text-center">
-      Tezzeract teams deliver high-impact projects across tech, marketing, design, and analytics. Specialized, tool-ready, and execution-focused, they help businesses scale and succeed.      </p>
-      
+        Tezzeract teams deliver high-impact projects across tech, marketing, design, and analytics. Specialized, tool-ready, and execution-focused, they help businesses scale and succeed.      </p>
+
       {/* First Carousel Row - Scrolls Right */}
-      <div 
+      <div
         className="relative w-full overflow-hidden mb-6 px-0 md:px-4"
         onMouseEnter={onMouseEnter1}
         onMouseLeave={onMouseLeave1}
@@ -227,24 +227,26 @@ function PortfolioSection() {
               },
             }}
           >
-          {duplicatedItems.map((item, index) => (
-            <SwiperSlide
-              key={`carousel1-${index}`}
-              className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
-            >
-              <PortfolioCard
-                tag={item.tag}
-                caseStudyTitle={item.caseStudyTitle}
-                image={item.image}
-              />
-            </SwiperSlide>
-          ))}
+            {duplicatedItems.map((item, index) => (
+              <SwiperSlide
+                key={`carousel1-${index}`}
+                className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
+              >
+                <Link href={`/portfolio/${encodeURIComponent(item.slug)}`} className="block h-full">
+                  <PortfolioCard
+                    tag={item.tag}
+                    caseStudyTitle={item.caseStudyTitle}
+                    image={item.image}
+                  />
+                </Link>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
 
       {/* Second Carousel Row - Scrolls Left */}
-      <div 
+      <div
         className="relative w-full overflow-hidden px-0 md:px-4 pt-8"
         onMouseEnter={onMouseEnter2}
         onMouseLeave={onMouseLeave2}
@@ -271,18 +273,20 @@ function PortfolioSection() {
               },
             }}
           >
-          {duplicatedItems.map((item, index) => (
-            <SwiperSlide
-              key={`carousel2-${index}`}
-              className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
-            >
-              <PortfolioCard
-                tag={item.tag}
-                caseStudyTitle={item.caseStudyTitle}
-                image={item.image}
-              />
-            </SwiperSlide>
-          ))}
+            {duplicatedItems.map((item, index) => (
+              <SwiperSlide
+                key={`carousel2-${index}`}
+                className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
+              >
+                <Link href={`/portfolio/${encodeURIComponent(item.slug)}`} className="block h-full">
+                  <PortfolioCard
+                    tag={item.tag}
+                    caseStudyTitle={item.caseStudyTitle}
+                    image={item.image}
+                  />
+                </Link>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
