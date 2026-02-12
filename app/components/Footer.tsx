@@ -27,7 +27,7 @@ export default function Footer() {
           <div className="flex flex-col gap-2 md:gap-3 items-start text-left">
             <h4 className="text-white/60 text-sm font-light mb-2">Legal</h4>
             <a
-              href="#"
+              href="/privacy-policy"
               className="text-white hover:text-white/80 transition-colors"
             >
               Privacy Policy
@@ -47,25 +47,25 @@ export default function Footer() {
             </h4>
             <div className="grid grid-cols-2 gap-3">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/tezzeractofficial/"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 LinkedIn
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/TezzeractOfficial"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Facebook
               </a>
               <a
-                href="#"
+                href="https://x.com/TezzeractTeams"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 X
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/tezzeractteams/"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Instagram
