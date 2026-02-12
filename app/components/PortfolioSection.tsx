@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode } from 'swiper/modules'
+import { FreeMode, Autoplay } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import { TezzeractH1 } from './ui/TezzeractH1'
 import PortfolioCard from './ui/PortfolioCard'
@@ -10,6 +10,7 @@ import PortfolioCard from './ui/PortfolioCard'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/free-mode'
+import 'swiper/css/autoplay'
 
 function PortfolioSection() {
   const portfolioItems = [
@@ -30,8 +31,10 @@ function PortfolioSection() {
     }
   ];
 
-  // Duplicate items for seamless infinite loop
+  // Duplicate items for seamless infinite loop (Ref 1 & 2)
   const duplicatedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems];
+  // Duplicate items for Swiper (Ref 3) - more duplicates for smoother loop if needed
+  const swiperItems = [...portfolioItems, ...portfolioItems, ...portfolioItems, ...portfolioItems];
 
   const swiperRef1 = useRef<SwiperType | null>(null);
   const swiperRef2 = useRef<SwiperType | null>(null);
@@ -68,7 +71,7 @@ function PortfolioSection() {
       const wrapper = container.querySelector('.swiper-wrapper') as HTMLElement;
       if (wrapper) {
         wrapper.style.transform = `translate3d(-${scrollPositionRef1.current}px, 0, 0)`;
-        
+
         // Reset when we've scrolled through one full set (1/3 of total width)
         const thirdWidth = wrapper.scrollWidth / 3;
         if (scrollPositionRef1.current >= thirdWidth) {
@@ -110,7 +113,7 @@ function PortfolioSection() {
           }
         }
       };
-      
+
       // Try initialization multiple times until wrapper is ready
       const initInterval = setInterval(() => {
         const container = containerRef2.current;
@@ -147,7 +150,7 @@ function PortfolioSection() {
       const wrapper = container.querySelector('.swiper-wrapper') as HTMLElement;
       if (wrapper) {
         wrapper.style.transform = `translate3d(-${scrollPositionRef2.current}px, 0, 0)`;
-        
+
         // Reset when we've scrolled through one full set
         if (scrollPositionRef2.current <= 0) {
           const thirdWidth = wrapper.scrollWidth / 3;
@@ -195,12 +198,12 @@ function PortfolioSection() {
 
   return (
     <div className='bg-transparent py-10 md:py-20'>
-      <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl mb-12">Work That Creates Impact</TezzeractH1>  
+      <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl mb-12">Work That Creates Impact</TezzeractH1>
       <p className="text-[#ffffff] font-light text-base md:text-lg lg:pb-16 pb-8 md:pb-16 lg:w-[60%] md:w-[80%] px-4 w-full mx-auto text-center">
-      Tezzeract teams deliver high-impact projects across tech, marketing, design, and analytics. Specialized, tool-ready, and execution-focused, they help businesses scale and succeed.      </p>
-      
+        Tezzeract teams deliver high-impact projects across tech, marketing, design, and analytics. Specialized, tool-ready, and execution-focused, they help businesses scale and succeed.      </p>
+
       {/* First Carousel Row - Scrolls Right */}
-      <div 
+      <div
         className="relative w-full overflow-hidden mb-6 px-0 md:px-4"
         onMouseEnter={onMouseEnter1}
         onMouseLeave={onMouseLeave1}
@@ -227,24 +230,24 @@ function PortfolioSection() {
               },
             }}
           >
-          {duplicatedItems.map((item, index) => (
-            <SwiperSlide
-              key={`carousel1-${index}`}
-              className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
-            >
-              <PortfolioCard
-                tag={item.tag}
-                caseStudyTitle={item.caseStudyTitle}
-                image={item.image}
-              />
-            </SwiperSlide>
-          ))}
+            {duplicatedItems.map((item, index) => (
+              <SwiperSlide
+                key={`carousel1-${index}`}
+                className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
+              >
+                <PortfolioCard
+                  tag={item.tag}
+                  caseStudyTitle={item.caseStudyTitle}
+                  image={item.image}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
 
       {/* Second Carousel Row - Scrolls Left */}
-      <div 
+      <div
         className="relative w-full overflow-hidden px-0 md:px-4 pt-8"
         onMouseEnter={onMouseEnter2}
         onMouseLeave={onMouseLeave2}
@@ -271,19 +274,67 @@ function PortfolioSection() {
               },
             }}
           >
-          {duplicatedItems.map((item, index) => (
-            <SwiperSlide
-              key={`carousel2-${index}`}
-              className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
-            >
-              <PortfolioCard
-                tag={item.tag}
-                caseStudyTitle={item.caseStudyTitle}
-                image={item.image}
-              />
-            </SwiperSlide>
-          ))}
+            {duplicatedItems.map((item, index) => (
+              <SwiperSlide
+                key={`carousel2-${index}`}
+                className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
+              >
+                <PortfolioCard
+                  tag={item.tag}
+                  caseStudyTitle={item.caseStudyTitle}
+                  image={item.image}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
+        </div>
+      </div>
+
+      {/* Third Carousel Row - Scrolls Left (Natural Loop with Drag) */}
+      <div className="relative w-full overflow-hidden px-0 md:px-4 pt-8">
+        <div>
+          <Swiper
+            modules={[FreeMode, Autoplay]}
+            freeMode={{
+              enabled: true,
+              momentum: false,
+              momentumBounce: false,
+            }}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            loop={true}
+            speed={5000}
+            slidesPerView="auto"
+            spaceBetween={16}
+            allowTouchMove={true}
+            className="overflow-visible! swiper-linear-ease"
+            breakpoints={{
+              640: {
+                spaceBetween: 24,
+              },
+            }}
+          >
+            {duplicatedItems.map((item, index) => (
+              <SwiperSlide
+                key={`carousel3-${index}`}
+                className="w-[calc((100%-1rem)/1.5)]! md:w-[calc((100%-3rem)/2.5)]!"
+              >
+                <PortfolioCard
+                  tag={item.tag}
+                  caseStudyTitle={item.caseStudyTitle}
+                  image={item.image}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <style jsx global>{`
+            .swiper-linear-ease .swiper-wrapper {
+              transition-timing-function: linear;
+            }
+          `}</style>
         </div>
       </div>
     </div>
