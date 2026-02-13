@@ -1,5 +1,23 @@
 // lib/strapi.ts
-import { BlogPost } from './blogData';
+
+export interface BlogAuthor {
+  name: string;
+  position: string;
+  avatar: string;
+}
+
+export interface BlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  cover?: {
+    url: string;
+  };
+  tag?: string;
+  author: BlogAuthor;
+  content: string;
+}
 
 interface StrapiArticle {
   id: number;
@@ -43,52 +61,52 @@ interface StrapiSingleResponse {
 }
 
 async function fetchFromStrapi(endpoint: string) {
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL ||
     (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : '');
-  
+
   if (!strapiUrl) {
     throw new Error('NEXT_PUBLIC_STRAPI_URL environment variable is not set');
   }
-  
+
   const apiKey = process.env.STRAPI_API_KEY;
-  
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
-  
+
   // Add API key to headers if provided
   if (apiKey) {
     headers['Authorization'] = `Bearer ${apiKey}`;
   }
-  
+
   const fullUrl = `${strapiUrl}${endpoint}`;
-  
+
   const res = await fetch(fullUrl, {
     headers,
     // Add cache revalidation for better performance
     next: { revalidate: 60 } // Revalidate every 60 seconds
   });
-  
+
   if (!res.ok) {
     const errorText = await res.text();
     throw new Error(`Failed to fetch from Strapi: ${res.status} ${errorText}`);
   }
-  
+
   return res.json();
 }
 
 function transformStrapiArticle(article: any): BlogPost {
   // Handle both Strapi v4 structure (with attributes) and potential other structures
   const attrs = article.attributes || article;
-  
+
   if (!attrs) {
     console.error('Invalid article structure:', article);
     throw new Error('Invalid article structure');
   }
-  
+
   // Extract cover URL - handle different possible structures
   let coverUrl: string | undefined;
-  
+
   // Try all possible paths for cover image
   if (attrs.cover?.data?.attributes?.url) {
     coverUrl = attrs.cover.data.attributes.url;
@@ -109,11 +127,11 @@ function transformStrapiArticle(article: any): BlogPost {
   } else if (typeof attrs.cover === 'string') {
     coverUrl = attrs.cover;
   }
-  
+
   // Handle author as relation (author.data.attributes) or direct fields (author.name)
   let authorData: any = null;
   let avatarUrl: string | undefined;
-  
+
   if (attrs.author?.data?.attributes) {
     // Author is a relation
     authorData = attrs.author.data.attributes;
@@ -159,26 +177,26 @@ function transformStrapiArticle(article: any): BlogPost {
       avatarUrl = attrs.author.avatar;
     }
   }
-  
+
   // Build full URLs for images
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL ||
     (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : '');
-  
-  const fullCoverUrl = coverUrl 
+
+  const fullCoverUrl = coverUrl
     ? (coverUrl.startsWith('http') ? coverUrl : `${strapiUrl}${coverUrl}`)
     : undefined;
-  
+
   const fullAvatarUrl = avatarUrl
     ? (avatarUrl.startsWith('http') ? avatarUrl : `${strapiUrl}${avatarUrl}`)
     : '/default-avatar.png';
-  
+
   // Convert blocks/dynamic zones content to HTML
   // Check for different possible field names (content, blocks, contentBlocks, etc.)
   // IMPORTANT: Make sure we're using content, not description
   // Also check for capitalized field names (Content, Blocks, etc.)
   let contentData = attrs.content || attrs.Content || attrs.blocks || attrs.Blocks || attrs.contentBlocks || attrs.body || attrs.Body;
   let htmlContent = '';
-  
+
   if (contentData) {
     // If content is a JSON string, parse it first
     if (typeof contentData === 'string') {
@@ -195,7 +213,7 @@ function transformStrapiArticle(article: any): BlogPost {
         htmlContent = contentData;
       }
     }
-    
+
     // Process parsed content or object content
     if (!htmlContent && contentData) {
       if (Array.isArray(contentData)) {
@@ -216,10 +234,10 @@ function transformStrapiArticle(article: any): BlogPost {
       }
     }
   }
-  
+
   // Extract tag - check for different possible field names (tag, Tag, category, Category, etc.)
   const tag = attrs.tag || attrs.Tag || attrs.category || attrs.Category || attrs.label || attrs.Label || undefined;
-  
+
   return {
     id: article.id || attrs.id || 0,
     slug: attrs.slug || '',
@@ -242,45 +260,45 @@ function convertBlocksToHTML(blocks: any[], strapiUrl: string): string {
   if (!Array.isArray(blocks)) {
     return '';
   }
-  
+
   return blocks.map(block => {
     // Handle Strapi dynamic zones (have __component field)
     if (block.__component) {
       return convertDynamicZoneBlock(block, strapiUrl);
     }
-    
+
     // Handle Strapi rich text blocks (have type field)
     switch (block.type) {
       case 'paragraph':
         return `<p>${convertInlineNodes(block.children || [], strapiUrl)}</p>`;
-      
+
       case 'heading':
         const level = block.level || 2;
         return `<h${level}>${convertInlineNodes(block.children || [], strapiUrl)}</h${level}>`;
-      
+
       case 'list':
         const listTag = block.format === 'ordered' ? 'ol' : 'ul';
-        const items = (block.children || []).map((item: any) => 
+        const items = (block.children || []).map((item: any) =>
           `<li>${convertInlineNodes(item.children || [], strapiUrl)}</li>`
         ).join('');
         return `<${listTag}>${items}</${listTag}>`;
-      
+
       case 'quote':
         return `<blockquote>${convertInlineNodes(block.children || [], strapiUrl)}</blockquote>`;
-      
+
       case 'code':
         return `<pre><code>${escapeHtml(convertInlineNodes(block.children || [], strapiUrl))}</code></pre>`;
-      
+
       case 'link':
         return `<a href="${block.url || '#'}" ${block.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${convertInlineNodes(block.children || [], strapiUrl)}</a>`;
-      
+
       case 'image':
         const imageUrl = block.url || (block.image?.data?.attributes?.url || block.image?.url);
-        const fullImageUrl = imageUrl 
+        const fullImageUrl = imageUrl
           ? (imageUrl.startsWith('http') ? imageUrl : `${strapiUrl}${imageUrl}`)
           : '';
         return `<img src="${fullImageUrl}" alt="${block.alt || ''}" />`;
-      
+
       default:
         // For unknown block types, try to render children if available
         if (block.children) {
@@ -301,7 +319,7 @@ function convertBlocksToHTML(blocks: any[], strapiUrl: string): string {
 // Convert Strapi dynamic zone blocks
 function convertDynamicZoneBlock(block: any, strapiUrl: string): string {
   const component = block.__component;
-  
+
   // Handle rich text component
   if (component.includes('rich-text') || component.includes('richtext')) {
     if (block.body) {
@@ -311,27 +329,27 @@ function convertDynamicZoneBlock(block: any, strapiUrl: string): string {
       return typeof block.content === 'string' ? block.content : convertBlocksToHTML(Array.isArray(block.content) ? block.content : [block.content], strapiUrl);
     }
   }
-  
+
   // Handle paragraph component
   if (component.includes('paragraph') && block.text) {
     return `<p>${escapeHtml(block.text)}</p>`;
   }
-  
+
   // Handle heading component
   if (component.includes('heading') && block.text) {
     const level = block.level || 2;
     return `<h${level}>${escapeHtml(block.text)}</h${level}>`;
   }
-  
+
   // Handle image component
   if (component.includes('image')) {
     const imageUrl = block.image?.data?.attributes?.url || block.image?.url || block.url;
-    const fullImageUrl = imageUrl 
+    const fullImageUrl = imageUrl
       ? (imageUrl.startsWith('http') ? imageUrl : `${strapiUrl}${imageUrl}`)
       : '';
     return `<img src="${fullImageUrl}" alt="${block.alt || block.caption || ''}" />`;
   }
-  
+
   // Default: try to render any text/content fields
   if (block.text) {
     return `<p>${escapeHtml(block.text)}</p>`;
@@ -339,7 +357,7 @@ function convertDynamicZoneBlock(block: any, strapiUrl: string): string {
   if (block.content) {
     return typeof block.content === 'string' ? block.content : '';
   }
-  
+
   return '';
 }
 
@@ -348,29 +366,29 @@ function convertInlineNodes(nodes: any[], strapiUrl: string): string {
   if (!Array.isArray(nodes)) {
     return '';
   }
-  
+
   return nodes.map(node => {
     if (typeof node === 'string') {
       return escapeHtml(node);
     }
-    
+
     if (node.type === 'text') {
       let text = escapeHtml(node.text || '');
-      
+
       // Apply formatting
       if (node.bold) text = `<strong>${text}</strong>`;
       if (node.italic) text = `<em>${text}</em>`;
       if (node.underline) text = `<u>${text}</u>`;
       if (node.strikethrough) text = `<s>${text}</s>`;
       if (node.code) text = `<code>${text}</code>`;
-      
+
       return text;
     }
-    
+
     if (node.type === 'link') {
       return `<a href="${node.url || '#'}" ${node.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${convertInlineNodes(node.children || [], strapiUrl)}</a>`;
     }
-    
+
     return '';
   }).join('');
 }
@@ -389,11 +407,9 @@ function escapeHtml(text: string): string {
 
 export async function getPosts(): Promise<BlogPost[]> {
   try {
-    // For media fields (cover, avatar), don't use wildcards - just specify the field
-    // For relations (author), use populate to get nested fields
-    const populate = 'populate[cover]=true&populate[author][populate][avatar]=true';
-    const response = await fetchFromStrapi(`/api/articles?${populate}`) as any;
-    
+    // Use deep populate to get all nested fields (cover, author, avatar)
+    const response = await fetchFromStrapi(`/api/articles?populate=deep`) as any;
+
     // Handle different response structures
     let articles: any[] = [];
     if (response.data && Array.isArray(response.data)) {
@@ -404,7 +420,7 @@ export async function getPosts(): Promise<BlogPost[]> {
       console.error('Unexpected Strapi response structure:', response);
       return [];
     }
-    
+
     return articles.map(transformStrapiArticle);
   } catch (error) {
     console.error('Error fetching posts from Strapi:', error);
@@ -414,12 +430,10 @@ export async function getPosts(): Promise<BlogPost[]> {
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
-    // For media fields (cover, avatar), don't use wildcards - just specify the field
-    // For relations (author), use populate to get nested fields
-    const populate = 'populate[cover]=true&populate[author][populate][avatar]=true';
+    // Use deep populate to get all nested fields (cover, author, avatar)
     const filters = `filters[slug][$eq]=${slug}`;
-    const response = await fetchFromStrapi(`/api/articles?${populate}&${filters}`) as any;
-    
+    const response = await fetchFromStrapi(`/api/articles?populate=deep&${filters}`) as any;
+
     // Handle different response structures
     let articles: any[] = [];
     if (response.data && Array.isArray(response.data)) {
@@ -430,11 +444,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       // Single article response
       articles = [response.data];
     }
-    
+
     if (articles.length === 0) {
       return null;
     }
-    
+
     return transformStrapiArticle(articles[0]);
   } catch (error) {
     console.error('Error fetching post from Strapi:', error);
