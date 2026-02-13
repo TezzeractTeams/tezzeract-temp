@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { TezzeractH1 } from "./ui/TezzeractH1";
 import TezzeractText from "./ui/TezzeractText";
 import TezzeractButtonLight from "./ui/TezzeractButtonLight";
@@ -121,37 +122,37 @@ export default function LandingHero() {
       <svg width="0" height="0" style={{ position: 'relative' }}>
         <defs>
           <clipPath id="landing-hero-clip-desktop" clipPathUnits="objectBoundingBox">
-            <path d={desktopPath}/>
+            <path d={desktopPath} />
           </clipPath>
           <clipPath id="landing-hero-clip-tablet" clipPathUnits="objectBoundingBox">
-            <path d={tabletPath}/>
+            <path d={tabletPath} />
           </clipPath>
           <clipPath id="landing-hero-clip-mobile" clipPathUnits="objectBoundingBox">
-            <path d={mobilePath}/>
+            <path d={mobilePath} />
           </clipPath>
         </defs>
       </svg>
       <div className="landing-hero md:justify-center md:pl-12 lg:pl-24 px-4 flex flex-col h-full relative">
-        
-        <div className="flex flex-row gap-4 relative z-10">
-        <div className="flex flex-col gap-0 md:gap-3 lg:gap-4 w-full md:w-[60%] md:pt-0 pt-26">
-        <TezzeractH1 variant="light" className="text-white pb-2 md:pb-3 lg:pb-4 md:w-full lg:w-[700px] w-full text-3xl md:text-6xl lg:text-7xl">
-          Discover talent,
-        
-          form remote teams &
 
-          start growing!
-        </TezzeractH1>
-        <TezzeractText variant="light" className="pt-4 pb-4 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
-        Tezzeract focuses on helping businesses grow digitally by providing access to <br className="hidden  md:block" /> scalable remote teams of professionals, tailored to meet your unique business needs. 
-        </TezzeractText >
-        <a href="https://tezzeract.lt/bookcall" target="_blank" rel="noopener noreferrer" className="self-center md:self-start cursor-pointer transition-transform duration-200 ">
-          <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] text-sm md:text-base cursor-pointer">Book a call with a vetting expert</TezzeractButtonLight>
-        </a>
-        </div>
-        
-        {/* Desktop Talent Cards Container with absolute positioning (lg and above) */}
-        {/* <div className="hidden lg:block absolute inset-0 z-2 pointer-events-none">
+        <div className="flex flex-row gap-4 relative z-10">
+          <div className="flex flex-col gap-0 md:gap-3 lg:gap-4 w-full md:w-[60%] md:pt-0 pt-26">
+            <TezzeractH1 variant="light" className="text-white pb-2 md:pb-3 lg:pb-4 md:w-full lg:w-[700px] w-full text-3xl md:text-6xl lg:text-7xl">
+              Discover talent,
+
+              form remote teams &
+
+              start growing!
+            </TezzeractH1>
+            <TezzeractText variant="light" className="pt-4 pb-4 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
+              Tezzeract focuses on helping businesses grow digitally by providing access to <br className="hidden  md:block" /> scalable remote teams of professionals, tailored to meet your unique business needs.
+            </TezzeractText >
+            <Link href="/book-a-call" className="self-center md:self-start cursor-pointer transition-transform duration-200">
+              <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] text-sm md:text-base cursor-pointer">Book a call with a vetting expert</TezzeractButtonLight>
+            </Link>
+          </div>
+
+          {/* Desktop Talent Cards Container with absolute positioning (lg and above) */}
+          {/* <div className="hidden lg:block absolute inset-0 z-2 pointer-events-none">
           {talentImages.map((talent) => (
             <div
               key={talent.id}
@@ -168,9 +169,9 @@ export default function LandingHero() {
             </div>
           ))}
         </div> */}
-        
-        {/* Tablet Talent Cards Container with absolute positioning (md to lg) */}
-        {/* <div className="hidden md:block lg:hidden absolute inset-0 z-2 pointer-events-none">
+
+          {/* Tablet Talent Cards Container with absolute positioning (md to lg) */}
+          {/* <div className="hidden md:block lg:hidden absolute inset-0 z-2 pointer-events-none">
           {talentImages.map((talent) => (
             <div
               key={talent.id}
@@ -189,9 +190,9 @@ export default function LandingHero() {
             </div>
           ))}
         </div> */}
-        
+
         </div>
-        
+
         {/* Mobile Talent Cards Container with absolute positioning */}
         {/* <div className="block md:hidden absolute right-0 top-0 z-2" style={{ width: "100%", height: "100%" }}>
           {talentImages.map((talent) => (
@@ -212,10 +213,10 @@ export default function LandingHero() {
             </div>
           ))}
         </div> */}
-        
 
-     
-        <div 
+
+
+        <div
           className="absolute pointer-events-none z-0 md:z-auto left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-15%] lg:right-[-30%] bottom-[-10%] md:bottom-[0%] md:top-[40%] lg:top-[10%] w-[120%] md:w-[70%] lg:w-[110%] h-[60%] md:h-[75%] lg:h-full"
         >
           {/* Desktop Image */}
@@ -262,20 +263,20 @@ export default function LandingHero() {
         }
       `}</style>
 
-<div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[12%] lg:bottom-[11%] block w-[calc(100%-2rem)] md:w-[55vw] lg:w-[50vw]">
-          <Testimonial
-            quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. "
-            name="Gabriele Mirabile"
-            className=" hidden lg:block "
-            title="Chief Marketing Officer"
-            company="Beentouch"
-            rating={5}
-          />
-       
+      <div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[12%] lg:bottom-[11%] block w-[calc(100%-2rem)] md:w-[55vw] lg:w-[50vw]">
+        <Testimonial
+          quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. "
+          name="Gabriele Mirabile"
+          className=" hidden lg:block "
+          title="Chief Marketing Officer"
+          company="Beentouch"
+          rating={5}
+        />
 
-        </div>
-        
-   
+
+      </div>
+
+
     </div>
-  );  
+  );
 }
