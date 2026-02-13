@@ -24,10 +24,10 @@ export default function TextSection() {
     const heading = headingRef.current;
     const container = containerRef.current;
     const textSpans = heading.querySelectorAll("span.text-word");
-    
+
     // Check if mobile view (typically 768px and below)
     const isMobile = window.innerWidth < 768;
-    
+
     // Set initial state for text spans
     gsap.set(textSpans, {
       opacity: 0,
@@ -119,22 +119,22 @@ export default function TextSection() {
         <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>{"\u00A0"}on</span>
         <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>{"\u00A0"}demand</span>
         <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>{"\u00A0"}</span>
-        
+
         {/* Avatar 1 */}
         <span
           ref={avatar1Ref}
           className="inline-flex align-middle mx-2 md:mx-4 relative -top-1"
         >
-          <div className="w-8 h-8 md:w-10 md:h-10 lg:w-15 lg:h-15 overflow-hidden relative">
+          <div className="w-8 h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 overflow-hidden relative rounded-2xl border border-gray-100 shadow-sm">
             <Image
-              src="/TezzzeractAvatar.png"
-              alt="Tezzeract Avatar"
+              src="/assets/avatars/Kotchakorn.jpeg"
+              alt="Kotchakorn Avatar"
               fill
               className="object-cover"
             />
           </div>
         </span>
-        
+
         {/* enabling businesses to */}
         <span className="text-word" style={{ display: "inline-block" }}>,</span>
         <span className="text-word" style={{ display: "inline-block" }}>{"\u00A0"}enabling</span>
@@ -147,7 +147,7 @@ export default function TextSection() {
         <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}scale</span>
         <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}teams</span>
         <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}</span>
-        
+
         {/* Pill Avatar + Button */}
         <span
           ref={avatar2Ref}
@@ -162,7 +162,7 @@ export default function TextSection() {
             />
           </div>
         </span>
-        
+
         {/* under */}
         <span className="text-word" style={{ display: "inline-block" }}>under</span>
         <br className="hidden md:block" />
