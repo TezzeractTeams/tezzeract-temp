@@ -22,8 +22,8 @@ export default function BookACallPage() {
     return (
         <><div className="flex flex-col lg:flex-row h-screen w-full overflow-hidden bg-white">
             {/* Left Content Area - Approx 60% on desktop */}
-            <div className="w-full lg:w-[60%] h-full overflow-y-auto px-6 py-12 md:px-16 md:py-20 lg:px-24 lg:py-24 flex flex-col bg-white lg:rounded-r-[48px] rounded-b-[40px] z-20 shadow-2xl">
-                <div className="max-w-3xl w-full mx-auto lg:mx-0">
+            <div className="w-full lg:w-[70%] h-full overflow-y-auto scrollbar-hide px-6 py-12 md:px-16 md:py-20 lg:px-24 lg:py-12 flex flex-col bg-white lg:rounded-r-[48px] z-20 shadow-2xl">
+                <div className="w-full mx-auto lg:mx-0">
                     <Link href="/">
                         <Image
                             src="/tezzeractLogo.svg"
@@ -35,13 +35,16 @@ export default function BookACallPage() {
 
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-[#1A1A1A] mb-14 leading-tighter tracking-tight">
                         Take the first step <br />
-                        to your <span className="text-[#0068B5] font-light">Dream <br />Team.</span>
+                        to your{" "}
+                        <span className="bg-gradient-to-r from-[#0068B5] to-[#00A3FF] bg-clip-text text-transparent font-light">
+                            Dream <br /> Team.
+                        </span>
                     </h1>
 
-                    <div className="bg-white rounded-[32px] border border-[#EEEEEE] shadow-sm p-4 md:p-6 mb-24">
+                    <div className="border border-gray-200 rounded-3xl px-6 mb-2 shadow-sm">
                         <Cal
                             calLink="shanilka-rajapaksha-b5mqme/30min"
-                            style={{ width: "100%", height: "100%", minHeight: "500px" }}
+                            style={{ width: "100%", height: "100%", minHeight: "600px" }}
                             config={{ layout: "month_view", theme: "light" }} />
                     </div>
                 </div>
