@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import PortfolioSection from "../components/PortfolioSection";
 import BlogSection from "../components/BlogSection";
 import PricingSection from "../components/PricingSection";
-import SnapScrollProvider from "../components/SnapScrollProvider";
+import PinnedSection from "../components/PinnedSection";
 import { getPortfolios } from "@/app/lib/portfolio";
 
 export default async function Home() {
@@ -26,16 +26,26 @@ export default async function Home() {
 
   return (
     <div className="w-full overflow-x-hidden">
-      <SnapScrollProvider />
       <Header />
       <LandingHero />
       <LogoStrip />
       <TextSection />
       <MeetingBoxSection />
-      <div id="snap-teams">
-        <TeamsSection />
-      </div>
+      <TeamsSection />
 
+
+
+      <PinnedSection pinDuration="1000vh">
+        <div
+          className="flex w-full flex-col gap-4 rounded-[30px] md:rounded-[30px] lg:rounded-[30px] relative "
+          style={{
+            background: 'radial-gradient(64.55% 66.78% at 0% 0%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
+
+          }}
+        >
+          <BentoGrid />
+        </div>
+      </PinnedSection>
 
       <div
         className="flex w-full flex-col gap-4 rounded-[30px] md:rounded-[30px] lg:rounded-[30px] relative "
@@ -44,12 +54,7 @@ export default async function Home() {
 
         }}
       >
-        <div id="snap-bento">
-          <BentoGrid />
-        </div>
-        <div id="snap-portfolio">
-          <PortfolioSection initialData={portfolios} />
-        </div>
+        <PortfolioSection initialData={portfolios} />
       </div>
 
       <BlogSection />

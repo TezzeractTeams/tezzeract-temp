@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree, Manrope } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "./components/SmoothScroll";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -30,7 +31,7 @@ export default function RootLayout({
         className={`${figtree.variable} ${manrope.variable} antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
