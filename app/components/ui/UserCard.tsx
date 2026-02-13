@@ -15,12 +15,12 @@ const UserCard = ({ name, position, avatar }: UserCardProps) => {
         <Image
           src={avatar}
           alt={name}
-          width={48}
-          height={48}
+          width={128}
+          height={128}
           className="object-cover w-full h-full"
         />
       </div>
-      
+
       {/* Name and Title */}
       <div className="flex flex-col">
         <span className="text-black font-normal text-sm md:text-base">

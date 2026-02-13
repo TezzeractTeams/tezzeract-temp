@@ -120,15 +120,15 @@ function toHtmlContent(content: unknown): string {
 }
 
 async function fetchFromStrapi(endpoint: string) {
-  const strapiUrl =
-    process.env.NEXT_PUBLIC_STRAPI_URL ||
-    (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : '');
+  const strapiUrl = (process.env.NEXT_PUBLIC_STRAPI_URL || '').replace(/\/$/, '');
 
-  if (!strapiUrl) {
+  if (!strapiUrl && process.env.NODE_ENV !== 'development') {
     throw new Error('NEXT_PUBLIC_STRAPI_URL environment variable is not set');
   }
 
+  const baseUrl = strapiUrl || 'http://localhost:1337';
   const apiKey = process.env.STRAPI_API_KEY;
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
@@ -137,7 +137,11 @@ async function fetchFromStrapi(endpoint: string) {
     headers.Authorization = `Bearer ${apiKey}`;
   }
 
-  const response = await fetch(`${strapiUrl}${endpoint}`, {
+  // Ensure endpoint starts with / and handle joining safely
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const fullUrl = `${baseUrl}${cleanEndpoint}`;
+
+  const response = await fetch(fullUrl, {
     headers,
     next: { revalidate: 3600 },
   });

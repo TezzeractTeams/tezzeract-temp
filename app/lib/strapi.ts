@@ -61,30 +61,30 @@ interface StrapiSingleResponse {
 }
 
 async function fetchFromStrapi(endpoint: string) {
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL ||
-    (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : '');
+  const strapiUrl = (process.env.NEXT_PUBLIC_STRAPI_URL || '').replace(/\/$/, '');
 
-  if (!strapiUrl) {
+  if (!strapiUrl && process.env.NODE_ENV !== 'development') {
     throw new Error('NEXT_PUBLIC_STRAPI_URL environment variable is not set');
   }
 
+  const baseUrl = strapiUrl || 'http://localhost:1337';
   const apiKey = process.env.STRAPI_API_KEY;
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
 
-  // Add API key to headers if provided
   if (apiKey) {
     headers['Authorization'] = `Bearer ${apiKey}`;
   }
 
-  const fullUrl = `${strapiUrl}${endpoint}`;
+  // Ensure endpoint starts with / and join without double slash
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const fullUrl = `${baseUrl}${cleanEndpoint}`;
 
   const res = await fetch(fullUrl, {
     headers,
-    // Add cache revalidation for better performance
-    next: { revalidate: 60 } // Revalidate every 60 seconds
+    next: { revalidate: 60 }
   });
 
   if (!res.ok) {
@@ -407,8 +407,8 @@ function escapeHtml(text: string): string {
 
 export async function getPosts(): Promise<BlogPost[]> {
   try {
-    // Use deep populate to get all nested fields (cover, author, avatar)
-    const response = await fetchFromStrapi(`/api/articles?populate=deep`) as any;
+    const populate = 'populate[cover]=true&populate[author][populate][avatar]=true';
+    const response = await fetchFromStrapi(`/api/articles?${populate}`) as any;
 
     // Handle different response structures
     let articles: any[] = [];
@@ -430,9 +430,9 @@ export async function getPosts(): Promise<BlogPost[]> {
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
-    // Use deep populate to get all nested fields (cover, author, avatar)
+    const populate = 'populate[cover]=true&populate[author][populate][avatar]=true';
     const filters = `filters[slug][$eq]=${slug}`;
-    const response = await fetchFromStrapi(`/api/articles?populate=deep&${filters}`) as any;
+    const response = await fetchFromStrapi(`/api/articles?${populate}&${filters}`) as any;
 
     // Handle different response structures
     let articles: any[] = [];
