@@ -48,9 +48,11 @@ const MobileMenu = () => (
         ease: [0.4, 0, 0.2, 1],
       }}
     >
-      <TezzeractButton className="mt-2 w-[150px]">
-        Book a call
-      </TezzeractButton>
+      <Link href="/book-a-call" className="block">
+        <TezzeractButton className="mt-2 w-[150px]">
+          Book a call
+        </TezzeractButton>
+      </Link>
     </motion.div>
   </motion.div>
 );
@@ -165,9 +167,11 @@ export default function Header() {
 
               {/* BUTTON */}
               <div className="hidden lg:block flex-shrink-0">
-                <TezzeractButton className="w-[180px] min-w-[140px]">
-                  Book a call
-                </TezzeractButton>
+                <Link href="/book-a-call">
+                  <TezzeractButton className="w-[180px] min-w-[140px]">
+                    Book a call
+                  </TezzeractButton>
+                </Link>
               </div>
 
               {/* MOBILE TOGGLE */}
@@ -277,9 +281,11 @@ export default function Header() {
 
               {/* BUTTON (Smaller wrapper if needed, but keeping same for now or hiding if too small) */}
               <div className="hidden lg:block flex-shrink-0">
-                <TezzeractButton className="w-[110px] min-w-[110px]">
-                  Book a call
-                </TezzeractButton>
+                <Link href="/book-a-call">
+                  <TezzeractButton className="w-[110px] min-w-[110px]">
+                    Book a call
+                  </TezzeractButton>
+                </Link>
               </div>
 
               {/* MOBILE TOGGLE (Floating) */}

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { TezzeractH1 } from "./ui/TezzeractH1";
 import TezzeractText from "./ui/TezzeractText";
 import TezzeractButtonLight from "./ui/TezzeractButtonLight";
@@ -145,9 +146,9 @@ export default function LandingHero() {
             <TezzeractText variant="light" className="pt-4 pb-4 md:pb-3 lg:pb-4 w-full md:w-[96%] text-center md:text-left text-sm md:text-lg lg:text-lg">
               Tezzeract focuses on helping businesses grow digitally by providing access to <br className="hidden  md:block" /> scalable remote teams of professionals, tailored to meet your unique business needs.
             </TezzeractText >
-            <a href="/bookcall" target="_blank" rel="noopener noreferrer" className="self-center md:self-start cursor-pointer transition-transform duration-200 ">
-              <TezzeractButtonLight className="w-200px md:w-[280px] lg:w-[300px] text-sm md:text-base cursor-pointer">Book a call with a vetting expert</TezzeractButtonLight>
-            </a>
+            <Link href="/book-a-call" className="self-center md:self-start cursor-pointer transition-transform duration-200">
+              <TezzeractButtonLight className="w-[200px] md:w-[280px] lg:w-[300px] text-sm md:text-base cursor-pointer">Book a call with a vetting expert</TezzeractButtonLight>
+            </Link>
           </div>
 
           {/* Desktop Talent Cards Container with absolute positioning (lg and above) */}
@@ -216,7 +217,7 @@ export default function LandingHero() {
 
 
         <div
-          className="absolute pointer-events-none z-0 md:z-auto left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-15%] lg:right-[-67%] bottom-[-10%] md:bottom-[0%] md:top-[40%] lg:top-[10%] w-[120%] md:w-[70%] lg:w-[180%] h-[60%] md:h-[75%] lg:h-[120%]"
+          className="absolute pointer-events-none z-0 md:z-auto left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-15%] lg:right-[-30%] bottom-[-10%] md:bottom-[0%] md:top-[40%] lg:top-[10%] w-[120%] md:w-[70%] lg:w-[110%] h-[60%] md:h-[75%] lg:h-full"
         >
           {/* Desktop Image */}
           <Image
