@@ -12,8 +12,8 @@ export default async function BlogSection() {
         Explore the knowledge base
       </TezzeractH1>
       <p className="text-[#555555] font-light text-base md:text-lg lg:pb-16 pb-8 md:pb-16 lg:w-[75%] md:w-[80%] w-full mx-auto text-center">
-      Learn how startups and growing companies build scalable remote teams using subscription based models. Tezzeract shares practical guides on remote teams as a service, remote teams on demand, and 
-      proven ways to scale teams without hiring full-time employees so you can move faster with less risk.      </p>
+        Learn how startups and growing companies build scalable remote teams using subscription based models. Tezzeract shares practical guides on remote teams as a service, remote teams on demand, and
+        proven ways to scale teams without hiring full-time employees so you can move faster with less risk.      </p>
       <div className="w-full mx-auto">
         {posts.length === 0 && (
           <div className="text-center py-10">
@@ -23,8 +23,8 @@ export default async function BlogSection() {
         {posts.length > 0 && (
           <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {posts.map((article) => {
-              const imageUrl = article.cover?.url || '/default-image.png';
-              
+              const imageUrl = article.cover?.url || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop';
+
               return (
                 <div key={article.id} className="relative z-10">
                   <BlogCard

@@ -22,28 +22,21 @@ export default function TeamsSection() {
       <div className="w-full  ">
         <div className="relative rounded-[30px] lg:pt-3 overflow-hidden lg:h-[500px] h-[450px] md:h-[300px]">
           {/* Smooth gradual gradient background - light blue top-left to darker blue bottom-right */}
-          <div 
+          <div
             className="absolute inset-0"
             style={{
               background: "linear-gradient(135deg, rgba(135, 206, 250, 0.9) 0%, rgba(116, 182, 253, 0.95) 20%, #2196F3 40%, #1976D2 60%, #1565C0 80%, #00378A 100%)"
             }}
           />
-          
+
           {/* Subtle edge definition - clean aesthetic */}
           <div className="absolute inset-0 " />
-          
+
           {/* Content Container - relative for absolute child */}
           <div className="relative  p-4 md:p-8 lg:p-24">
             {/* Layer 1 (back): Slider full width, behind text */}
-            <div 
-              ref={(el) => {
-                if (el) {
-                  const rect = el.getBoundingClientRect();
-                  const sliderEl = el.querySelector('[class*="ServiceSlider"]') as HTMLElement;
-                  const sliderRect = sliderEl?.getBoundingClientRect();
-                  fetch('http://127.0.0.1:7242/ingest/69aca90b-7973-4e12-aca1-b9909e760da5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'TeamsSection.tsx:38',message:'Parent container measurements',data:{parentHeight:rect.height,parentWidth:rect.width,parentTop:rect.top,parentBottom:rect.bottom,hasOverflowHidden:el.classList.contains('overflow-hidden'),sliderTop:sliderRect?.top,sliderBottom:sliderRect?.bottom,sliderHeight:sliderRect?.height},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'C,D'})}).catch(()=>{});
-                }
-              }}
+            <div
+
               className="absolute top-80 md:top-10 inset-0 z-0 flex items-center justify-center overflow-visible pointer-events-auto"
             >
               <div className="w-full  md:px-0 lg:px-16  ml-0 md:ml-[500px] lg:ml-[200px] xl:ml-[850px]">
@@ -60,7 +53,7 @@ export default function TeamsSection() {
                 </h2>
               </div>
               {/* Right Side - Spacer so slider shows through from behind */}
-             
+
             </div>
           </div>
         </div>

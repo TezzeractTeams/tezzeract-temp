@@ -10,19 +10,20 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-figtree);
   --animate-shiny-text: shiny-text 8s infinite;
-  --animate-ripple: ripple var(--duration, 2s) ease calc(var(--i, 0) * 0.2s)
-    infinite;
+  --animate-ripple: ripple var(--duration, 2s) ease calc(var(--i, 0) * 0.2s) infinite;
   --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
   --animate-scroll-right: scroll-right 35s linear infinite;
   --animate-scroll-left: scroll-left 35s linear infinite;
 }
 
 @keyframes shiny-text {
+
   0%,
   90%,
   100% {
     background-position: calc(-100% - var(--shiny-width)) 0;
   }
+
   30%,
   60% {
     background-position: calc(100% + var(--shiny-width)) 0;
@@ -30,10 +31,12 @@
 }
 
 @keyframes ripple {
+
   0%,
   100% {
     transform: translate(-50%, -50%) scale(1);
   }
+
   50% {
     transform: translate(-50%, -50%) scale(0.9);
   }
@@ -41,13 +44,11 @@
 
 @keyframes orbit {
   0% {
-    transform: translate(-50%, -50%) rotate(calc(var(--angle) * 1deg))
-      translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    transform: translate(-50%, -50%) rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
   }
+
   100% {
-    transform: translate(-50%, -50%) rotate(calc(var(--angle) * 1deg + 360deg))
-      translateY(calc(var(--radius) * 1px))
-      rotate(calc((var(--angle) * -1deg) - 360deg));
+    transform: translate(-50%, -50%) rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
   }
 }
 
@@ -55,6 +56,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-33.333%);
   }
@@ -64,6 +66,7 @@
   0% {
     transform: translateX(-33.333%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -78,9 +81,31 @@
 
 html {
   background: #ffffff;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
+  /* Disabled for Lenis */
   overflow-x: hidden;
   width: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 body {
@@ -99,8 +124,10 @@ body {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* BentoBox responsive styles - prevents hydration mismatch */
@@ -174,7 +201,7 @@ body {
     font-size: 2rem;
     margin-top: 3rem;
   }
-  
+
   .blog-content p {
     font-size: 18px;
   }

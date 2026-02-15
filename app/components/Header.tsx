@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
 import { TezzeractButton } from "./ui/TezzeractButton";
 
@@ -11,8 +12,8 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about-us", label: "About us" },
-  { href: "/community", label: "Community" },
-  { href: "/portfolio", label: "Portfolio" },
+
+  { href: "/projects", label: "Projects" },
 ];
 
 // MobileMenu component - moved outside to avoid creating during render
@@ -59,12 +60,16 @@ const MobileMenu = () => (
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const { scrollY } = useScroll();
 
   useEffect(() => {
+    setMounted(true);
     const checkDesktop = () => {
       setIsDesktop(window.innerWidth >= 1024); // lg breakpoint for desktop/webview
     };
@@ -127,7 +132,7 @@ export default function Header() {
             >
               {/* LOGO */}
               <div className="shrink-0">
-                <Link href="/" className="block pl-3 sm:pl-0 w-[150px] md:w-[120%] lg:w-[220px]">
+                <Link href="/" className="block pl-3 sm:pl-0 w-[150px] md:w-[120%] lg:w-[180px]">
                   <Image
                     src="/tezzeractLogo.svg"
                     alt="Tezzeract Logo"
@@ -144,10 +149,16 @@ export default function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="group relative inline-block px-3 py-1.5 font-light transition-colors text-white hover:text-white/80"
+                    className={`group relative inline-block px-3 py-1.5 font-light transition-colors ${(mounted && isHome) || !mounted ? "text-white hover:text-white/80" : ""}`}
                   >
-                    <span className="absolute  inset-0 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                    <span className="relative inline-block text-white">
+                    <span className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${(mounted && isHome) || !mounted ? "bg-white/30" : "bg-blue-500/10"}`} />
+                    <span className={`relative inline-block ${(mounted && isHome) || !mounted ? "text-white" : "text-transparent"}`}
+                      style={mounted && !isHome ? {
+                        backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                      } : {}}
+                    >
                       {link.label}
                     </span>
                   </a>
@@ -172,7 +183,7 @@ export default function Header() {
                   <motion.svg
                     className="h-6 w-6"
                     fill="none"
-                    stroke="currentColor"
+                    stroke={(mounted && isHome) || !mounted ? "currentColor" : "#0068B5"}
                     viewBox="0 0 24 24"
                     animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -207,13 +218,13 @@ export default function Header() {
               initial={{
                 y: -100,
                 opacity: 0,
-                width: isMobile ? "95%" : isTablet ? "85%" : "54%",
+                width: isMobile ? "98%" : isTablet ? "94%" : "56%",
                 height: isMobile ? "80px" : "50px",
               }}
               animate={{
                 y: 20,
                 opacity: 1,
-                width: isMobile ? "95%" : isTablet ? "85%" : "54%",
+                width: isMobile ? "98%" : isTablet ? "94%" : "56%",
                 height: isMobile ? "50px" : "50px",
               }}
               exit={{ y: -100, opacity: 0 }}
@@ -225,17 +236,18 @@ export default function Header() {
                 borderRadius: "15px",
                 left: 0,
                 right: 0,
-                margin: "0 auto"
+                margin: "0 auto",
+                maxWidth: isMobile ? "none" : isTablet ? "none" : "57vw"
               }}
               className={`pointer-events-auto fixed flex justify-between items-center isolate ${isMobile ? "px-4 border border-white/10" : "px-4 sm:px-6 lg:px-[4px] border-2 border-white/25"}`}
             >
               {/* LOGO (Smaller) */}
               <motion.div
-                className="flex-shrink-0"
+                className="flex-shrink-0 bg-red"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: isMobile ? 0.7 : 0.6 }}
               >
-                <Link href="/" className="block w-full md:w-[120%] lg:w-[220px]">
+                <Link href="/" className="block -ml-4 md:-ml-0 lg:-ml-0 w-full md:w-[120%] lg:w-[220px]">
                   <Image
                     src="/tezzeractLogo.svg"
                     alt="Tezzeract Logo"
@@ -247,7 +259,7 @@ export default function Header() {
               </motion.div>
 
               {/* NAV LINKS (Gradient Text) */}
-              <div className="hidden lg:flex items-center space-x-8 flex-shrink min-w-0">
+              <div className="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-shrink min-w-0">
                 {navLinks.map((link) => (
                   <a
                     key={link.href}

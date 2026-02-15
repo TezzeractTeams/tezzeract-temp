@@ -263,7 +263,7 @@ export default function LandingHero() {
         }
       `}</style>
 
-      <div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[12%] lg:bottom-[11%] block w-[calc(100%-2rem)] md:w-[55vw] lg:w-[50vw]">
+      <div className=" absolute overflow-hidden right-0 md:right-4 bottom-[15%] md:bottom-[12%] lg:bottom-[13%] block w-[calc(100%-2rem)] md:w-[55vw] lg:w-[50vw]">
         <Testimonial
           quote="Tezzeract teams works with us just as our own existing team and it was very easy to collaborate. "
           name="Gabriele Mirabile"
