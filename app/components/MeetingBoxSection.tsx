@@ -32,19 +32,19 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber, number
           className="object-contain w-full h-full"
         />
       </div>
-      
+
       {/* Number and text content - side by side on mobile, stacked on desktop */}
       <div className="order-1 md:order-2 flex flex-row md:flex-col items-start gap-4 md:gap-0 mb-6 md:mb-4 z-20">
         {/* Step indicator */}
         <div className="relative z-20 shrink-0 -ml-8 md:ml-0 md:mb-4">
-          <div 
+          <div
             ref={numberRef}
             className="bg-gradient-to-br from-[#00A9EE] to-[#00378A] rounded-lg w-10 h-10 flex items-center justify-center shadow-md"
           >
             <span className="text-white text-lg font-semibold">{stepNumber}</span>
           </div>
         </div>
-        
+
         {/* Text content */}
         <div className="flex-1 flex flex-col">
           <h2 className="text-black text-3xl font-light mb-3 leading-tight">
@@ -104,13 +104,13 @@ export default function MeetingBoxSection() {
         let x = 0;
         let y = 0;
         let current: HTMLElement | null = element;
-        
+
         while (current && current !== ancestor) {
           x += current.offsetLeft;
           y += current.offsetTop;
           current = current.offsetParent as HTMLElement | null;
         }
-        
+
         return { x, y };
       };
 
@@ -126,7 +126,7 @@ export default function MeetingBoxSection() {
         const totalHeight = num3CenterY - num1CenterY;
         const reducedHeight = totalHeight;
         const heightOffset = (totalHeight - reducedHeight) / 2;
-        
+
         gsap.set(verticalLineRef.current, {
           x: num1CenterX - 1, // Center the 0.5 width line
           top: num1CenterY + heightOffset,
@@ -183,14 +183,14 @@ export default function MeetingBoxSection() {
   return (
     <section ref={sectionRef} className="w-full py-0 md:py-16 px-4 bg-white relative">
       {/* Continuous line spanning full screen width - hidden on small screens */}
-      <div 
+      <div
         ref={lineRef}
-        className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-gradient-to-r from-[#00A9EE] to-[#00378A] z-0 top-[364px]" 
+        className="hidden md:block absolute -left-4 -right-4 h-0.5 bg-gradient-to-r from-[#00A9EE] to-[#00378A] z-0 top-[364px]"
       />
       {/* Vertical line from number 1 to number 3 - visible only on mobile */}
-      <div 
+      <div
         ref={verticalLineRef}
-        className="block md:hidden absolute left-0 w-0.5 bg-gradient-to-b from-[#00A9EE] to-[#00378A] z-0" 
+        className="block md:hidden absolute left-0 w-0.5 bg-gradient-to-b from-[#00A9EE] to-[#00378A] z-0"
       />
       <div className="w-full max-w-7xl mx-auto pl-6 md:pl-0">
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-24">
@@ -199,7 +199,7 @@ export default function MeetingBoxSection() {
               stepNumber={1}
               title="Discover & Match Talent"
               description="We assess your goals, timelines, and skill requirements to match you with vetted professionals from our global talent pool—ready to integrate into your workflow."
-              imageSrc="/MeetingBox3.jpg"
+              imageSrc="/assets/avatars/meet1.png"
               imageAlt="Blood test illustration"
               numberRef={number1Ref}
             />
@@ -209,7 +209,7 @@ export default function MeetingBoxSection() {
               stepNumber={2}
               title="An actionable plan"
               description="Easy to understand results and a clear health plan with tailored recommendations on diet, lifestyle changes & supplements."
-              imageSrc="/MeetingBox3.png"
+              imageSrc="/assets/avatars/meet2.png"
               imageAlt="Health plan illustration"
             />
           </div>
@@ -218,7 +218,7 @@ export default function MeetingBoxSection() {
               stepNumber={3}
               title="A connected ecosystem"
               description="You can book additional diagnostics, buy curated supplements with members-only discounts in your Superpower dashboard."
-              imageSrc="/assets/scale.png"
+              imageSrc="/assets/avatars/meet3.png"
               imageAlt="Ecosystem illustration"
               numberRef={number3Ref}
             />
