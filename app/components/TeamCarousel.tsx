@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
+import React, { useRef, useEffect, useLayoutEffect, useState, useMemo } from "react";
 import Image from "next/image";
 
 export interface TeamMember {
@@ -48,20 +48,30 @@ function CarouselRow({ items, direction, speed = 0.5 }: CarouselRowProps) {
   useEffect(() => {
     if (!isReady || singleSetWidth === 0 || !contentRef.current) return;
 
-    const animate = () => {
+    let lastTime = 0;
+    const animate = (time: number) => {
       if (!contentRef.current) return;
+
+      if (!lastTime) lastTime = time;
+      const deltaTime = time - lastTime;
+      lastTime = time;
+
+      // Adjust speed based on frame time for consistent motion (60fps baseline)
+      const adjustedSpeed = speed * (deltaTime / 16.66);
+
       if (direction === "left") {
-        positionRef.current += speed;
+        positionRef.current += adjustedSpeed;
         if (positionRef.current >= singleSetWidth) {
-          positionRef.current = positionRef.current - singleSetWidth;
+          positionRef.current -= singleSetWidth;
         }
       } else {
-        positionRef.current -= speed;
+        positionRef.current -= adjustedSpeed;
         if (positionRef.current <= 0) {
-          positionRef.current = positionRef.current + singleSetWidth;
+          positionRef.current += singleSetWidth;
         }
       }
-      contentRef.current.style.transform = `translateX(-${positionRef.current}px)`;
+
+      contentRef.current.style.transform = `translate3d(-${positionRef.current}px, 0, 0)`;
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
@@ -103,9 +113,15 @@ function CarouselRow({ items, direction, speed = 0.5 }: CarouselRowProps) {
 }
 
 export default function TeamCarousel({ items }: TeamCarouselProps) {
-  const half = Math.ceil(items.length / 2);
-  const row1Items = items.slice(0, half);
-  const row2Items = items.slice(half);
+  // Randomize items for each row
+  const row1Items = useMemo(() => {
+    return [...items].sort(() => Math.random() - 0.5);
+  }, [items]);
+
+  const row2Items = useMemo(() => {
+    return [...items].sort(() => Math.random() - 0.5);
+  }, [items]);
+
   const minItems = 2;
   const filledRow1 = row1Items.length >= minItems ? row1Items : items;
   const filledRow2 = row2Items.length >= minItems ? row2Items : items;
@@ -120,10 +136,10 @@ export default function TeamCarousel({ items }: TeamCarouselProps) {
     >
       <div className="flex flex-col md:gap-10 gap-6">
         <div className="w-full flex justify-center">
-          <CarouselRow items={filledRow1} direction="right" speed={0.5} />
+          <CarouselRow items={filledRow1} direction="right" speed={0.8} />
         </div>
         <div className="w-full flex justify-center" style={{ transform: "translateY(4px)" }}>
-          <CarouselRow items={filledRow2} direction="left" speed={0.5} />
+          <CarouselRow items={filledRow2} direction="left" speed={0.8} />
         </div>
       </div>
     </div>

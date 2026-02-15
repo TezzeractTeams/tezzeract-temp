@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react";
+import Image from "next/image";
 import { Ripple } from "./Ripple";
 import { File, Settings, Search, Zap, Star, Heart } from "lucide-react";
 import { OrbitingCircles } from "./OrbitingCircles";
@@ -23,7 +24,6 @@ export default function BentoBox1() {
         style={{
           backdropFilter: 'blur(150px)',
           WebkitBackdropFilter: 'blur(150px)',
-          border: '0px solid rgba(255, 255, 255, 0.47)',
           borderRadius: '30px'
         }}
       >
@@ -68,9 +68,8 @@ export default function BentoBox1() {
             path={false}
             verticalOffset="102%"
           >
-            <File />
-            <Settings />
-            <Search />
+            <Image src="/assets/avatars/oneli.png" alt="Oneli" width={60} height={60} className="rounded-full shadow-md" />
+            <Image src="/assets/avatars/wehan.jpg" alt="Wehan" width={60} height={60} className="rounded-full shadow-md" />
           </OrbitingCircles>
           {/* Circle 1: (210 + 1 * 120) * 1.3 / 2 = 214.5px */}
           <OrbitingCircles
@@ -79,10 +78,9 @@ export default function BentoBox1() {
             reverse
             verticalOffset="102%"
           >
-            <File />
-            <Settings />
-            <Search />
-            <Zap />
+            <Image src="/assets/avatars/Nipun.png" alt="Nipun" width={60} height={60} className="rounded-full  shadow-md" />
+            <Image src="/assets/avatars/german%20female.png" alt="German Female" width={60} height={60} className="rounded-full  shadow-md" />
+            <Image src="/assets/avatars/arabfemale.png" alt="Arab Female" width={60} height={60} className="rounded-full  shadow-md" />
           </OrbitingCircles>
         </div>
       </div>
