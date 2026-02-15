@@ -62,7 +62,7 @@ export default async function Home() {
       </div>
 
       <BlogSection />
-      <PricingSection />
+    
       <Footer />
     </div>
   );

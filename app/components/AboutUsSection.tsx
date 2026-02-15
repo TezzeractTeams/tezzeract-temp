@@ -6,14 +6,13 @@ import { TestimonialTooltip } from "./ui/Tooltip";
 import TeamCarousel, { type TeamMember } from "./TeamCarousel";
 
 const teamMembers: TeamMember[] = [
-  { name: "Jhone", title: "Head of Engineering", image: "/box3.jpg" },
-  { name: "Amile", title: "Head of Engineering", image: "/box3.jpg" },
-  { name: "Bob", title: "Head of Engineering", image: "/box3.jpg" },
-  { name: "Michel", title: "Head of Engineering", image: "/box3.jpg" },
-  { name: "David", title: "Head of Engineering", image: "/box3.jpg" },
-  { name: "Jane", title: "Head of Engineering", image: "/box3.jpg" },
-  { name: "Nikolas", title: "Head of Engineering", image: "/box3.jpg" },
-  { name: "Ana", title: "Head of Engineering", image: "/box3.jpg" },
+  { name: "Shanilka Rajapaksha", title: "Founder", image: "/assets/avatars/shanilka.jpeg" },
+  { name: "Nataly Undugodage", title: "Head of People & Culture", image: "/assets/avatars/nataly.jpeg" },
+  { name: "Kotchakorn Janroong", title: "Head of Operations and Business Development", image: "/assets/avatars/Kotchakorn.jpeg" },
+  { name: "Simon Abraham Tecle", title: "Partner Growth and Strategy", image: "/assets/avatars/simon.png" },
+  { name: "Wehan Himsara", title: "Software Engineer", image: "/assets/avatars/wehan.jpg" },
+  { name: "Oneli Kumarasinghe", title: "Web Development & E-commerce Specialist", image: "/assets/avatars/oneli.png" },
+  { name: "Nipun Koshalya", title: "Product, Human Interaction & Motion Design Specialist", image: "/assets/avatars/Nipun.png" },
 ];
 
 export default function AboutUsSection() {

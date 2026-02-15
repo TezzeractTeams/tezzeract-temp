@@ -9,14 +9,14 @@ export interface TezzeractButtonProps extends React.ButtonHTMLAttributes<HTMLBut
 export const TezzeractButton = React.forwardRef<HTMLButtonElement, TezzeractButtonProps>(
   ({ className, fullWidth = false, children, ...props }, ref) => {
     // Base styles from Figma with smooth transitions
-    const baseStyles = "inline-flex pointer flex-row items-center text-[14px] justify-center gap-2 font-thin focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden whitespace-nowrap";
-    
+    const baseStyles = "inline-flex cursor-pointer flex-row items-center text-[14px] justify-center gap-2 font-thin focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden whitespace-nowrap";
+
     // Layout and spacing
     const layoutStyles = "max-h-10 px-6 py-3 rounded-xl";
-    
+
     // Border and text
     const borderStyles = "border border-white/30 text-white";
-    
+
     // Width style
     const widthStyle = fullWidth ? "w-full" : "";
 
