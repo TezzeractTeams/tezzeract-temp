@@ -197,8 +197,8 @@ export default function MeetingBoxSection() {
           <div className="relative z-10">
             <MeetingBox
               stepNumber={1}
-              title="Discover & Match Talent"
-              description="We assess your goals, timelines, and skill requirements to match you with vetted professionals from our global talent pool—ready to integrate into your workflow."
+              title="Start with a Discovery Call"
+              description="Start with a call to discuss your goals, challenges, and the skills required. We assess your needs and define the right team structure."
               imageSrc="/assets/avatars/meet1.png"
               imageAlt="Blood test illustration"
               numberRef={number1Ref}
@@ -207,8 +207,8 @@ export default function MeetingBoxSection() {
           <div className="relative z-10">
             <MeetingBox
               stepNumber={2}
-              title="An actionable plan"
-              description="Easy to understand results and a clear health plan with tailored recommendations on diet, lifestyle changes & supplements."
+              title="Build Your Team"
+              description="Access talent on demand and assemble a specialized team across tech, marketing, design, and analytics, equipped to deliver from day one."
               imageSrc="/assets/avatars/meet2.png"
               imageAlt="Health plan illustration"
             />
@@ -216,8 +216,8 @@ export default function MeetingBoxSection() {
           <div className="relative z-10">
             <MeetingBox
               stepNumber={3}
-              title="A connected ecosystem"
-              description="You can book additional diagnostics, buy curated supplements with members-only discounts in your Superpower dashboard."
+              title="Launch and Scale"
+              description="Start execution immediately and scale your team as your business grows, adapting resources without the friction of traditional hiring."
               imageSrc="/assets/avatars/meet3.png"
               imageAlt="Ecosystem illustration"
               numberRef={number3Ref}
