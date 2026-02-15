@@ -17,24 +17,28 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
 
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
-            ScrollTrigger.create({
-                trigger: triggerRef.current,
-                start: "top top",
-                end: `+=${pinDuration}`,
-                pin: true,
-                pinSpacing: true,
-                scrub: true,
-                markers: false, // Set to true for debugging
-                onLeave: () => {
-                    // Get the next sibling element (Portfolio section)
-                    const nextSection = containerRef.current?.nextElementSibling as HTMLElement;
-                    if (nextSection && lenis) {
-                        // Use Lenis to smoothly scroll to the next section
-                        lenis.scrollTo(nextSection, {
-                            duration: 1.5,
-                            offset: 0,
-                        });
-                    }
+            // Only apply pinning on desktop (lg and up). Mobile/tablet scroll normally.
+            ScrollTrigger.matchMedia({
+                "(min-width: 1024px)": () => {
+                    const st = ScrollTrigger.create({
+                        trigger: triggerRef.current,
+                        start: "top top",
+                        end: `+=${pinDuration}`,
+                        pin: true,
+                        pinSpacing: true,
+                        scrub: true,
+                        markers: false,
+                        onLeave: () => {
+                            const nextSection = containerRef.current?.nextElementSibling as HTMLElement;
+                            if (nextSection && lenis) {
+                                lenis.scrollTo(nextSection, {
+                                    duration: 1.5,
+                                    offset: 0,
+                                });
+                            }
+                        },
+                    });
+                    return () => st.kill();
                 },
             });
         }, containerRef);
