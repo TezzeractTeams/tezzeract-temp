@@ -4,15 +4,16 @@ import React from "react";
 import ServiceSlider from "./ui/ServiceSlider";
 
 const services = [
-  { name: "Product Development", avatarSrc: "/box3.jpg", avatarAlt: "Product Development" },
-  { name: "Web Development", avatarSrc: "/box3.jpg", avatarAlt: "Web Development" },
-  { name: "Digital Marketing", avatarSrc: "/box3.jpg", avatarAlt: "Digital Marketing" },
-  { name: "UI/UX Design", avatarSrc: "/box3.jpg", avatarAlt: "UI/UX Design" },
-  { name: "E-Commerce", avatarSrc: "/box3.jpg", avatarAlt: "E-Commerce" },
-  { name: "Branding & Creative", avatarSrc: "/box3.jpg", avatarAlt: "Branding & Creative" },
-  { name: "Content & SEO", avatarSrc: "/box3.jpg", avatarAlt: "Content & SEO" },
-  { name: "Dedicated Remote Teams", avatarSrc: "/box3.jpg", avatarAlt: "Dedicated Remote Teams" },
-  { name: "Paid Ads & Performance Marketing", avatarSrc: "/box3.jpg", avatarAlt: "Paid Ads & Performance Marketing" },
+  { name: "Product Development", avatarSrc: "/assets/avatars/Nipun.png", avatarAlt: "Product Development" },
+  { name: "Web Development", avatarSrc: "/assets/avatars/wehan.jpg", avatarAlt: "Web Development" },
+  { name: "Digital Transformation", avatarSrc: "/assets/avatars/simon.png", avatarAlt: "Digital Marketing" },
+  { name: "Social Media Marketing", avatarSrc: "/assets/avatars/nataly.jpeg", avatarAlt: "UI/UX Design" },
+  { name: "Business Consultancy", avatarSrc: "/assets/avatars/laura.png", avatarAlt: "E-Commerce" },
+  { name: "Branding & Creative", avatarSrc: "/assets/avatars/nila.jpeg", avatarAlt: "Branding & Creative" },
+  { name: "E-Commerce", avatarSrc: "/assets/avatars/southmale.png", avatarAlt: "Branding & Creative" },
+  { name: "Content & SEO", avatarSrc: "/assets/avatars/oneli.png", avatarAlt: "Content & SEO" },
+  { name: "AI & Automation", avatarSrc: "/assets/avatars/sakith.png", avatarAlt: "Dedicated Remote Teams" },
+  { name: "Paid Ads & Performance Marketing", avatarSrc: "/assets/avatars/shanilka.jpeg", avatarAlt: "Paid Ads & Performance Marketing" },
 ];
 
 export default function TeamsSection() {
