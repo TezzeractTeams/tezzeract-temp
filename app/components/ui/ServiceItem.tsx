@@ -11,7 +11,6 @@ interface ServiceItemProps {
 
 export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const isPaidAds = name === "Paid Ads & Performance Marketing";
 
   return (
     <div
@@ -33,17 +32,17 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
         <span
           className={`
             text-2xl md:text-2xl lg:text-4xl font-light  tracking-tighter  whitespace-nowrap transition-all duration-300 ease-in-out
-            ${isHovered 
-              ? "text-white font-light" 
+            ${isHovered
+              ? "text-white font-light"
               : "text-white/50"
             }
           `}
         >
           {name}
         </span>
-        
+
         {/* Arrow - smooth opacity transition */}
-        <div 
+        <div
           className="flex items-center transition-opacity px-2 duration-300 ease-in-out"
           style={{
             opacity: isHovered ? 1 : 0,
@@ -57,49 +56,27 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
             className="w-auto h-3 md:h-"
           />
         </div>
-        
-        {/* Avatar or SVG Icon */}
-        {isPaidAds ? (
-          <div
+
+        <div
+          className={`
+            relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
+            ${isHovered
+              ? "ring-2 ring-white/30"
+              : ""
+            }
+          `}
+        >
+          <Image
+            src={avatarSrc}
+            alt={avatarAlt || name}
+            width={40}
+            height={40}
             className={`
-              relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300 ease-in-out
-              ${isHovered 
-                ? "" 
-                : ""
-              }
+              object-cover w-full h-full transition-all duration-300 ease-in-out
+              ${isHovered ? "opacity-100 scale-105" : "opacity-60"}
             `}
-          >
-            <img
-              src="/assets/Ads.svg"
-              alt={avatarAlt || name}
-              className={`
-                w-full h-full transition-all duration-300 ease-in-out
-                ${isHovered ? "opacity-100 scale-105" : "opacity-60"}
-              `}
-            />
-          </div>
-        ) : (
-          <div
-            className={`
-              relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
-              ${isHovered 
-                ? "ring-2 ring-white/30" 
-                : ""
-              }
-            `}
-          >
-            <Image
-              src={avatarSrc}
-              alt={avatarAlt || name}
-              width={40}
-              height={40}
-              className={`
-                object-cover w-full h-full transition-all duration-300 ease-in-out
-                ${isHovered ? "opacity-100 scale-105" : "opacity-60"}
-              `}
-            />
-          </div>
-        )}
+          />
+        </div>
       </div>
     </div>
   );
