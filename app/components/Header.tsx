@@ -47,7 +47,7 @@ const MobileMenu = () => (
         ease: [0.4, 0, 0.2, 1],
       }}
     >
-      <Link href="/book-a-call" className="block">
+      <Link href="/get-started" className="block">
         <TezzeractButton className="mt-2 w-[150px]">
           Book a call
         </TezzeractButton>
@@ -165,9 +165,9 @@ export default function Header() {
 
               {/* BUTTON */}
               <div className="hidden lg:block flex-shrink-0">
-                <Link href="/book-a-call">
+                <Link href="/get-started">
                   <TezzeractButton className="w-[180px] min-w-[140px]">
-                    Book a call
+                    Get started
                   </TezzeractButton>
                 </Link>
               </div>
@@ -279,9 +279,9 @@ export default function Header() {
 
               {/* BUTTON (Smaller wrapper if needed, but keeping same for now or hiding if too small) */}
               <div className="hidden lg:block flex-shrink-0">
-                <Link href="/book-a-call">
+                <Link href="/get-started">
                   <TezzeractButton className="w-[110px] min-w-[110px]">
-                    Book a call
+                    Get started
                   </TezzeractButton>
                 </Link>
               </div>
