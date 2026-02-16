@@ -92,7 +92,7 @@ function CarouselRow({ items, direction, speed = 0.5 }: CarouselRowProps) {
       >
         {duplicatedItems.map((member, index) => (
           <div key={`${member.name}-${index}`} className="flex-shrink-0 flex flex-row items-center gap-3 md:gap-4">
-            <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl overflow-hidden flex-shrink-0 grayscale">
+            <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl overflow-hidden flex-shrink-0">
               <Image
                 src={member.image}
                 alt={member.name}
