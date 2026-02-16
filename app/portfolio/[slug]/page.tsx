@@ -86,7 +86,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ slug
         <div className="flex flex-wrap justify-center gap-10 md:gap-16 mb-24">
           {teamMembers.map((member, index) => (
             <div key={index} className="flex items-center gap-4">
-              <div className="relative w-14 h-14 rounded-2xl overflow-hidden grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+              <div className="relative w-14 h-14 rounded-2xl overflow-hidden transition-all duration-500">
                 <Image
                   src={member.image}
                   alt={member.name}
