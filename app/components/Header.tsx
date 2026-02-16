@@ -19,8 +19,7 @@ const navLinks = [
 // MobileMenu component - moved outside to avoid creating during render
 const MobileMenu = () => (
   <motion.div
-    className="lg:hidden bg-white rounded-3xl mt-2 py-4 px-6 space-y-3 shadow-lg w-full"
-    initial="hidden"
+    className="lg:hidden bg-white/80 backdrop-blur-xl rounded-2xl mt-2 py-4 px-6 shadow-md w-full" initial="hidden"
     animate="visible"
   >
     {navLinks.map((link, index) => (
@@ -114,8 +113,7 @@ export default function Header() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 bg-white/1 backdrop-blur-[30px] z-40 lg:hidden"
-          />
+            className="fixed inset-0 bg-white/1 backdrop-blur-[30px] z-40 lg:hidden" />
         )}
       </AnimatePresence>
 
