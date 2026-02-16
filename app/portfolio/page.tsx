@@ -43,9 +43,9 @@ export default async function PortfolioPage() {
             <div className="bg-white -mt-20 w-full rounded-t-[40px] z-10 relative px-4 md:px-8 pt-20 pb-20">
                 <div className="w-full mx-auto">
                     {portfolios.length > 0 ? (
-                        <div className="flex flex-col md:flex-row flex-wrap justify-center gap-4 md:gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1600px] mx-auto">
                             {portfolios.map((item) => (
-                                <div key={item.id} className="w-full md:w-[800px]">
+                                <div key={item.id} className="w-full">
                                     <PortfolioCard
                                         tag={item.tag}
                                         caseStudyTitle={item.caseStudyTitle}
