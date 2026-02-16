@@ -10,7 +10,9 @@ import PortfolioSection from "../components/PortfolioSection";
 import BlogSection from "../components/BlogSection";
 import PricingSection from "../components/PricingSection";
 import PinnedSection from "../components/PinnedSection";
+import Preloader from "../components/Preloader";
 import { getPortfolios } from "@/app/lib/portfolio";
+
 
 export default async function Home() {
   const portfoliosData = await getPortfolios();
@@ -26,7 +28,9 @@ export default async function Home() {
 
   return (
     <div className="w-full overflow-x-hidden">
+      <Preloader />
       <Header />
+
       <LandingHero />
       <LogoStrip />
       <TextSection />
@@ -37,7 +41,7 @@ export default async function Home() {
 
       <PinnedSection pinDuration="1000vh">
         <div
-          className="flex w-full flex-col gap-4 rounded-[30px] md:rounded-[30px] lg:rounded-[30px] relative "
+          className="flex w-full flex-col gap-4 rounded-t-[30px] relative "
           style={{
             background: 'radial-gradient(64.55% 66.78% at 0% 0%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
 
@@ -48,9 +52,9 @@ export default async function Home() {
       </PinnedSection>
 
       <div
-        className="flex w-full flex-col gap-4 rounded-[30px] md:rounded-[30px] lg:rounded-[30px] relative "
+        className="flex w-full flex-col gap-4 rounded-b-[30px] relative "
         style={{
-          background: 'radial-gradient(64.55% 66.78% at 0% 0%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
+          background: 'radial-gradient(64.55% 66.78% at 10% 100%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
 
         }}
       >
@@ -58,7 +62,7 @@ export default async function Home() {
       </div>
 
       <BlogSection />
-      <PricingSection />
+    
       <Footer />
     </div>
   );
