@@ -65,12 +65,13 @@ export const TestimonialTooltip = () => {
                 initial={{ opacity: 0, y: 20, scale: 0.6 }}
                 animate={{
                   opacity: 1,
-                  y: 0,
+                  y: 30,
+                  x: -100,
                   scale: 1,
                   transition: {
                     type: "spring",
                     stiffness: 260,
-                    damping: 10,
+                    damping: 30,
                   },
                 }}
                 exit={{ opacity: 0, y: 20, scale: 0.6 }}

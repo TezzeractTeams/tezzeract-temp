@@ -12,32 +12,25 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    text: "Tezzeract teams works with us just as our own exisiting team and it was very easy to collaborate.",
-    name: "Gabriele Mirabile",
-    title: "Chief Marketing Officer",
-    company: "Beentouch s.r.l.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+    text: "The Tezzeract team approached our project with a highly collaborative approach, taking the time to fully understand our mission, values, and audience.",
+    name: "Chief Marketing Officer",
+    title: "Beentouch",
+    company: "Founder – United by Music for Charity",
+    avatar: "/assets/avatars/gabriele.jpg"
   },
   {
-    text: "The platform has revolutionized our workflow. Seamless integration and incredible support from the Tezzeract team.",
-    name: "Sarah Johnson",
-    title: "CEO",
-    company: "TechCorp",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
+    text: "Working with Tezzeract on our regional communications strategy in Asia has been an exceptional experience.",
+    name: "Regional Communications Director - Asia",
+    title: "Heifer International",
+    company: "gurpreet.bhatia@heif",
+    avatar: "/assets/avatars/asianfemale.png"
   },
   {
-    text: "Outstanding service and innovative solutions. Tezzeract has become an essential part of our daily operations.",
-    name: "Michael Chen",
-    title: "CTO",
-    company: "InnovateLabs",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-  },
-  {
-    text: "Best decision we made this year. The collaboration tools are intuitive and the team is always responsive.",
-    name: "Emily Rodriguez",
-    title: "Product Manager",
-    company: "StartupHub",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+    text: "Tezzeract has been an invaluable partner in optimizing our website performance and developing several projects from scratch.",
+    name: "Marius Fittler",
+    title: "Creative Director",
+    company: "Panomatics VR International",
+    avatar: "/assets/avatars/germanmale.png"
   }
 ];
 
@@ -45,10 +38,10 @@ export default function BentoBox5() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const currentTestimonial = testimonials[currentIndex];
-
   // Auto-rotate testimonials with smooth transitions
   useEffect(() => {
+    if (testimonials.length === 0) return;
+
     const interval = setInterval(() => {
       setIsAnimating(true);
 
@@ -60,6 +53,18 @@ export default function BentoBox5() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Safety check to ensure index is always valid
+  useEffect(() => {
+    if (currentIndex >= testimonials.length) {
+      setCurrentIndex(0);
+    }
+  }, [currentIndex]);
+
+  const currentTestimonial = testimonials[currentIndex];
+
+  // If no testimonials or current is undefined, don't crash
+  if (!currentTestimonial) return null;
 
   return (
     <>
