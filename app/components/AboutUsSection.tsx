@@ -30,26 +30,26 @@ export default function AboutUsSection() {
       >
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter">
           <span className="text-[#00A9EE] font-light">Teams</span>{" "}
-          <span className="inline-flex items-center text-3xl md:text-4xl lg:text-5xl">
+          <span className="inline-flex items-center">
             <Image
               src="/assets/Teams.svg"
               alt="Teams"
-              width={30}
-              height={30}
-              className="inline-block"
+              width={60}
+              height={60}
+              className="inline-block w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16"
             />
           </span>{" "}
           <span className="text-gray-700">built to scale</span>
           <br />
           <span className="text-gray-700"> with your business</span>{" "}
           <span className="text-[#00A9EE] font-light">goals</span>{" "}
-          <span className="inline-flex items-center text-3xl md:text-4xl lg:text-5xl">
+          <span className="inline-flex items-center">
             <Image
               src="/assets/Goals.svg"
               alt="Goals"
-              width={30}
-              height={30}
-              className="inline-block"
+              width={60}
+              height={60}
+              className="inline-block w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16"
             />
           </span>{" "}
           <br />
