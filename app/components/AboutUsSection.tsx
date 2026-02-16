@@ -13,6 +13,8 @@ const teamMembers: TeamMember[] = [
   { name: "Wehan Himsara", title: "Software Engineer", image: "/assets/avatars/wehan.jpg" },
   { name: "Oneli Kumarasinghe", title: "Web Development & E-commerce Specialist", image: "/assets/avatars/oneli.png" },
   { name: "Nipun Koshalya", title: "Product, Human Interaction & Motion Design Specialist", image: "/assets/avatars/Nipun.png" },
+  { name: "Sakith Seneviratne", title: "Associate Software Engineer", image: "/assets/avatars/sakith.png" },
+  { name: "Laura Sardinha", title: "Consultant Marketing & PR", image: "/assets/avatars/laura.png" },
 ];
 
 export default function AboutUsSection() {

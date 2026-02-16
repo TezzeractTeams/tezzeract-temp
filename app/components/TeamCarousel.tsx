@@ -102,8 +102,8 @@ function CarouselRow({ items, direction, speed = 0.5 }: CarouselRowProps) {
               />
             </div>
             <div className="flex flex-col text-left">
-              <h3 className="text-gray-700 text-base md:text-lg font-medium">{member.name}</h3>
-              <p className="text-gray-500 text-sm md:text-base">{member.title}</p>
+              <h3 className="text-gray-700 text-base md:text-lg font-light">{member.name}</h3>
+              <p className="text-gray-500 text-sm md:text-base font-light">{member.title}</p>
             </div>
           </div>
         ))}
@@ -113,18 +113,24 @@ function CarouselRow({ items, direction, speed = 0.5 }: CarouselRowProps) {
 }
 
 export default function TeamCarousel({ items }: TeamCarouselProps) {
-  // Randomize items for each row
-  const row1Items = useMemo(() => {
-    return [...items].sort(() => Math.random() - 0.5);
+  // Define specific team members for each row as requested
+  // Top row: Shanilka, Wehan, Sakith Seneviratne, Nataly, Laura Sardinha
+  const topRowMembers = useMemo(() => {
+    const names = ["Shanilka Rajapaksha", "Wehan Himsara", "Sakith Seneviratne", "Nataly Undugodage", "Laura Sardinha"];
+    return names.map(name => {
+      const found = items.find(item => item.name.toLowerCase().includes(name.split(' ')[0].toLowerCase()));
+      return found || { name, title: "Team Member", image: "/assets/avatars/germanfemale.png" };
+    });
   }, [items]);
 
-  const row2Items = useMemo(() => {
-    return [...items].sort(() => Math.random() - 0.5);
+  // Bottom row: Nipun, Oneli, Simon, Kotchakorn
+  const bottomRowMembers = useMemo(() => {
+    const names = ["Nipun Koshalya", "Oneli Kumarasinghe", "Simon Abraham Tecle", "Kotchakorn Janroong"];
+    return names.map(name => {
+      const found = items.find(item => item.name.toLowerCase().includes(name.split(' ')[0].toLowerCase()));
+      return found || { name, title: "Team Member", image: "/assets/avatars/germanfemale.png" };
+    });
   }, [items]);
-
-  const minItems = 2;
-  const filledRow1 = row1Items.length >= minItems ? row1Items : items;
-  const filledRow2 = row2Items.length >= minItems ? row2Items : items;
 
   return (
     <div
@@ -134,12 +140,12 @@ export default function TeamCarousel({ items }: TeamCarouselProps) {
         WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
       }}
     >
-      <div className="flex flex-col md:gap-10 gap-6">
+      <div className="flex flex-col md:gap-14 gap-6">
         <div className="w-full flex justify-center">
-          <CarouselRow items={filledRow1} direction="right" speed={0.8} />
+          <CarouselRow items={topRowMembers} direction="right" speed={0.8} />
         </div>
         <div className="w-full flex justify-center" style={{ transform: "translateY(4px)" }}>
-          <CarouselRow items={filledRow2} direction="left" speed={0.8} />
+          <CarouselRow items={bottomRowMembers} direction="left" speed={0.8} />
         </div>
       </div>
     </div>
