@@ -59,10 +59,10 @@ export const FAQ = () => {
   };
 
   return (
-    <section className="">
-      <div className="w-full max-w-5xl mx-auto px-6 z-10 ">
+    <section className="relative pb-12 md:pb-16">
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 z-10 overflow-x-hidden">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-8xl font-light text-transparent mb-4"
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-light text-transparent mb-4"
           style={{
             backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
             WebkitBackgroundClip: "text",
@@ -72,20 +72,20 @@ export const FAQ = () => {
           </h2>
           
           <div className="space-y-6 md:space-y-8 text-center">
-            <p className="text-base md:text-3xl text-gray-600 leading-tighter">
+            <p className="text-base md:text-2xl lg:text-3xl text-gray-600 leading-tighter">
               Everything you need to know about our remote teams, flexible pricing, and how to get started.
             </p>
           </div>
         </div>
-<div className="h-[100vh]">
-        <div className="space-y-4">
+        <div>
+          <div className="space-y-4">
           {faqData.map((faq, index) => (
             <div key={index} className="">
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full text-left py-6 px-4 flex justify-between items-center hover:bg-black-800/50 transition-colors duration-200 rounded-lg"
+                className="w-full text-left py-4 md:py-6 px-4 flex justify-between items-center hover:bg-black-800/50 transition-colors duration-200 rounded-lg"
               >
-                <span className="text-lg font-medium pr-4 text-[#0E1934]">
+                <span className="text-base md:text-lg font-medium pr-4 text-[#0E1934] overflow-x-hidden">
                   {faq.question}
                 </span>
                 <ChevronDown
@@ -108,7 +108,6 @@ export const FAQ = () => {
             </div>
           ))}
         </div>
-
         </div>
       </div>
     </section>

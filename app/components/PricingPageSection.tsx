@@ -19,7 +19,7 @@ const teamMembers: TeamMember[] = [
 
 export default function PricingPageSection() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Main Heading */}
       <div
         className="flex items-center justify-center text-center h-[85vh] pb-20 "
@@ -86,7 +86,7 @@ export default function PricingPageSection() {
 
 
       {/* Content Section - White Background */}
-      <div className="bg-white -mt-40 w-full rounded-t-4xl z-2 px-4 md:px-8 lg:px-24 pt-40 pb-20">
+      <div className="bg-white -mt-40 w-full rounded-t-4xl z-2 px-4 md:px-8 lg:px-24 pt-40 pb-20 overflow-x-hidden">
         <PricingSection />
 
 

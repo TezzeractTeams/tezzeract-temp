@@ -138,7 +138,7 @@ const PricingCard = ({
 
   return (
     <div
-      className={`relative flex flex-col rounded-3xl p-8 md:p-10 h-full ${t.border}`}
+      className={`relative flex flex-col rounded-3xl p-6 md:p-8 lg:p-10 h-full min-h-0 ${t.border}`}
       style={{ background: t.background }}
     >
       <h3
@@ -208,7 +208,7 @@ const PricingCard = ({
 
       <div className="flex items-center gap-4 mb-4">
         <div className="flex-1 h-px" style={{ backgroundColor: t.dividerColor }} />
-        <span className="text-sm whitespace-nowrap" style={{ color: t.labelColor }}>
+        <span className="text-sm sm:whitespace-nowrap" style={{ color: t.labelColor }}>
           Talent Specializations Covered
         </span>
         <div className="flex-1 h-px" style={{ backgroundColor: t.dividerColor }} />
