@@ -32,12 +32,7 @@ export default function Footer() {
             >
               Privacy Policy
             </a>
-            <a
-              href="#"
-              className="text-white hover:text-white/80 transition-colors"
-            >
-              Terms & Conditions
-            </a>
+            
           </div>
 
           {/* Column 3 - Social Media */}
