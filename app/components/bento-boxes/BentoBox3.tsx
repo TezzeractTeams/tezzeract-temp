@@ -3,15 +3,15 @@ import Image from "next/image";
 
 export default function BentoBox3() {
   return (
-    <div className="h-[60vh] w-full sm:mt-[7vh] rounded-2xl bg-gradient-to-br from-black via-[#001122] to-[#003366] relative overflow-hidden">
+    <div className="h-[60vh] w-full sm:mt-[7vh] rounded-[30px] bg-gradient-to-br from-black via-[#001122] to-[#003366] relative overflow-hidden">
       <div className="h-full w-full flex flex-col">
         {/* Top part - Text */}
         <div className="flex-shrink-0 p-6 md:p-8 lg:p-10">
           <div className="text-white">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-2 md:mb-4">
+            <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light mb-2 md:mb-4">
               120+
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl font-light text-white/90">
+            <p className="text-[16px] sm:text-2xl md:text-xl lg:text-3xl xl:text-2xl 2xl:text-3xl font-light text-white/90">
               Successfully Completed
             </p>
             <p className="text-lg md:text-xl lg:text-2xl font-light text-white/90">

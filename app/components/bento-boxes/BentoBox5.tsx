@@ -7,7 +7,6 @@ interface Testimonial {
   name: string;
   title: string;
   company: string;
-  avatar: string;
 }
 
 const testimonials: Testimonial[] = [
@@ -16,21 +15,18 @@ const testimonials: Testimonial[] = [
     name: "Gabriele Mirabile",
     title: "Chief Marketing Officer – Beentouch",
     company: "Founder – United by Music for Charity",
-    avatar: "/assets/avatars/gabriele.jpg"
   },
   {
     text: "Working with Tezzeract on our regional communications strategy in Asia has been an exceptional experience.",
-    name: "RGurpreet Bhatia",
+    name: "Gurpreet Bhatia",
     title: "Regional Communications Director - Asia",
     company: "Heifer International",
-    avatar: "/assets/avatars/asianfemale.png"
   },
   {
     text: "Tezzeract has been an invaluable partner in optimizing our website performance and developing several projects from scratch.",
     name: "Marius Fittler",
     title: "Creative Director",
     company: "Panomatics VR International",
-    avatar: "/assets/avatars/germanmale.png"
   }
 ];
 
@@ -104,14 +100,6 @@ export default function BentoBox5() {
 
           {/* Author info - fixed height */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mt-2 sm:mt-4 md:mt-9 flex-shrink-0 h-[50px] sm:h-[60px] md:h-[72px]">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 border-2 border-white/30 overflow-hidden flex-shrink-0 transition-opacity duration-500 ease-in-out" style={{ opacity: isAnimating ? 0 : 1 }}>
-              <img
-                key={`avatar-${currentIndex}`}
-                src={currentTestimonial.avatar}
-                alt={currentTestimonial.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
             <div className="flex flex-col min-w-0 flex-1 transition-opacity duration-500 ease-in-out" style={{ opacity: isAnimating ? 0 : 1 }}>
               <p key={`name-${currentIndex}`} className="text-white font-bold text-sm sm:text-base truncate">{currentTestimonial.name}</p>
               <p key={`title-${currentIndex}`} className="text-white/90 text-xs sm:text-sm truncate">{currentTestimonial.title}</p>
