@@ -1,4 +1,4 @@
-import React from "react";
+fstudioimport React from "react";
 import Image from "next/image";
 
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
               className="w-auto h-10 md:h-12"
             />
             <a className="text-white/80 text-md md:text-md text-left">
-              © Copyright 2026. Tezzeract Pvt Ltd. Studio.
+              © Copyright 2026. Tezzeract Pvt Ltd.
               <br />
               All rights reserved.
             </a>
