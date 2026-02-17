@@ -30,7 +30,7 @@ export default function PortfolioCard({
 
       {/* Gradient blur overlay */}
       <div
-        className="absolute bottom-0 sm:h-[40%] md:h-[60%] lg:h-[35%] left-0 right-0 pointer-events-none"
+        className="absolute bottom-0 sm:h-[40%] md:h-[60%] lg:h-[40%] group-hover:sm:h-[50%] group-hover:md:h-[70%] group-hover:lg:h-[40%] left-0 right-0 pointer-events-none transition-all duration-300"
         style={{
 
           borderRadius: '0 0 30px 30px',
@@ -41,7 +41,7 @@ export default function PortfolioCard({
       />
 
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 px-4 py-2 md:px-4 md:py-0 lg:py-10 lg:px-10 transition-transform duration-300 group-hover:-translate-y-2">
+      <div className="  z-10 px-4 py-2 md:px-4 md:py-0 lg:py-2 lg:px-10 transition-transform duration-300 group-hover:-translate-y-2">
         {/* Tag */}
         <div className="mb-3 inline-block">
           <span
@@ -64,14 +64,14 @@ export default function PortfolioCard({
         </div>
 
         {/* Case Study Title */}
-        <h3 className="text-sm sm:text-lg md:text-base lg:text-2xl text-white font-light tracking-tight mb-4">
+        <h3 className="text-sm sm:text-lg md:text-base lg:text-2xl text-white font-light tracking-tight">
           {caseStudyTitle}
         </h3>
 
         {/* Read the Full Case Study Link - Hidden by default, appears on hover */}
         <Link
           href={`/portfolio/${slug || '#'}`}
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-white w-fit cursor-pointer"
+          className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-white w-fit py-[1vh] cursor-pointer"
         >
           <span className="text-sm font-light  underline">Read the Full Case Study</span>
           <ArrowUpRight className="h-4 w-4 shrink-0" />
