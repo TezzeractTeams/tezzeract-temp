@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TezzeractButton } from "./ui/TezzeractButton";
@@ -171,7 +172,9 @@ export default function TextSection() {
         <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}single</span>
         <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}subscription.</span>
       </h2>
-      <TezzeractButton ref={buttonRef} className="w-[200px] mt-10">Book a call</TezzeractButton>
+      <Link href="/get-started" className="block w-fit mx-auto mt-10">
+        <TezzeractButton ref={buttonRef} className="w-[200px]">Book a call</TezzeractButton>
+      </Link>
     </div>
   );
 }

@@ -17,10 +17,9 @@ export default function CommunitySection() {
 />
       {/* Main Heading */}
       <div
-        className="flex items-center justify-center text-center h-[85vh] pb-20"
+        className="flex items-center justify-center text-center h-[85vh] pb-20 bg-cover bg-center bg-no-repeat"
         style={{
-          background:
-            "radial-gradient(160.39% 60.24% at 50% 90%,rgb(0, 135, 239) 1.02%, #96D6F2 37.56%, #FFFFFF 70%)",
+          backgroundImage: "url('/assets/aboutbg.png')",
         }}
       >
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter">

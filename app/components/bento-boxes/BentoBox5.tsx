@@ -13,16 +13,16 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     text: "The Tezzeract team approached our project with a highly collaborative approach, taking the time to fully understand our mission, values, and audience.",
-    name: "Chief Marketing Officer",
-    title: "Beentouch",
+    name: "Gabriele Mirabile",
+    title: "Chief Marketing Officer – Beentouch",
     company: "Founder – United by Music for Charity",
     avatar: "/assets/avatars/gabriele.jpg"
   },
   {
     text: "Working with Tezzeract on our regional communications strategy in Asia has been an exceptional experience.",
-    name: "Regional Communications Director - Asia",
-    title: "Heifer International",
-    company: "gurpreet.bhatia@heif",
+    name: "RGurpreet Bhatia",
+    title: "Regional Communications Director - Asia",
+    company: "Heifer International",
     avatar: "/assets/avatars/asianfemale.png"
   },
   {
