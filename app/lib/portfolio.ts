@@ -79,6 +79,24 @@ type RawPortfolio = {
   description?: unknown;
   Description?: unknown;
   authors?: unknown;
+  Challenge_heading?: string;
+  challenge_heading?: string;
+  Challenge_Description?: string;
+  challenge_description?: string;
+  Approach_image?: RawPortfolioImage[] | RawPortfolioImage | { data?: { attributes?: { url?: string } }; url?: string };
+  approach_image?: RawPortfolioImage[] | RawPortfolioImage | { data?: { attributes?: { url?: string } }; url?: string };
+  Approach_text?: string;
+  approach_text?: string;
+  Solution_text?: string;
+  solution_text?: string;
+  Solution_images?: RawPortfolioImage[] | RawPortfolioImage | { data?: RawPortfolioImage[] | RawPortfolioImage };
+  solution_images?: RawPortfolioImage[] | RawPortfolioImage | { data?: RawPortfolioImage[] | RawPortfolioImage };
+  Impact1?: unknown;
+  impact1?: unknown;
+  Impact2?: unknown;
+  impact2?: unknown;
+  Impact3?: unknown;
+  impact3?: unknown;
 }
 
 type RichTextNode = {
@@ -209,6 +227,7 @@ function slugify(text: string): string {
 }
 
 // Helper to extract image URL from Strapi image field
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractImageUrl(imageField: any, strapiUrl: string): string | undefined {
   if (!imageField) return undefined;
 
@@ -261,9 +280,11 @@ function extractImageUrl(imageField: any, strapiUrl: string): string | undefined
 
 // Helper to extract authors array from Strapi
 // Try to extract avatar from portfolio response first (might be partially populated)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractAuthors(authorsField: any, strapiUrl: string): Array<{ name: string; position: string; avatar?: { url: string } }> | undefined {
   if (!authorsField) return undefined;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let authorsArray: any[] = [];
   if (Array.isArray(authorsField.data)) {
     authorsArray = authorsField.data;
@@ -275,6 +296,7 @@ function extractAuthors(authorsField: any, strapiUrl: string): Array<{ name: str
 
   if (authorsArray.length === 0) return undefined;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return authorsArray.map((author: any) => {
     // Handle both structures: with attributes wrapper and without
     const attrs = author.attributes || author;
@@ -390,19 +412,24 @@ function transformPortfolio(item: RawPortfolio): Portfolio {
   let solutionImages: Array<{ url: string }> | undefined;
   if (attrs?.Solution_images || attrs?.solution_images) {
     const solutionImagesField = attrs.Solution_images || attrs.solution_images;
-    if (Array.isArray(solutionImagesField?.data)) {
+    // Check if solutionImagesField is an object with a data property
+    if (solutionImagesField && typeof solutionImagesField === 'object' && !Array.isArray(solutionImagesField) && 'data' in solutionImagesField && Array.isArray(solutionImagesField.data)) {
       solutionImages = solutionImagesField.data
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((img: any) => {
           const url = extractImageUrl(img, strapiUrl);
           return url ? { url } : null;
         })
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .filter((img: any) => img !== null) as Array<{ url: string }>;
     } else if (Array.isArray(solutionImagesField)) {
       solutionImages = solutionImagesField
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((img: any) => {
           const url = extractImageUrl(img, strapiUrl);
           return url ? { url } : null;
         })
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .filter((img: any) => img !== null) as Array<{ url: string }>;
     }
     if (solutionImages && solutionImages.length === 0) {
@@ -465,7 +492,7 @@ async function fetchAuthorsWithAvatars(authorIds: number[]): Promise<Map<number,
     // Strapi returns 500/400 errors with populate - try simpler approach
     const endpointNames = ['authors', 'author'];
     
-    let authorsMap = new Map<number, { name: string; position: string; avatar?: { url: string } }>();
+    const authorsMap = new Map<number, { name: string; position: string; avatar?: { url: string } }>();
     
     // Try fetching authors individually instead of using filters[id][$in]
     // This might avoid the 500 error
@@ -481,12 +508,14 @@ async function fetchAuthorsWithAvatars(authorIds: number[]): Promise<Map<number,
           const allAuthors = Array.isArray(data?.data) ? data.data : [];
           
           // Filter to only the authors we need
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const neededAuthors = allAuthors.filter((author: any) => {
             const id = author.id || author.attributes?.id || author.documentId || author.attributes?.documentId;
             return id && authorIds.includes(Number(id));
           });
           
           if (neededAuthors.length > 0) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             neededAuthors.forEach((author: any) => {
               const attrs = author.attributes || author;
               const id = author.id || attrs?.id || author.documentId || attrs?.documentId;
@@ -513,6 +542,7 @@ async function fetchAuthorsWithAvatars(authorIds: number[]): Promise<Map<number,
           const authorsArray = Array.isArray(data?.data) ? data.data : [];
 
           if (authorsArray.length > 0) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             authorsArray.forEach((author: any) => {
               const attrs = author.attributes || author;
               const id = author.id || attrs?.id || author.documentId || attrs?.documentId;
@@ -529,13 +559,13 @@ async function fetchAuthorsWithAvatars(authorIds: number[]): Promise<Map<number,
             if (authorsMap.size > 0) return authorsMap;
           }
         }
-      } catch (err) {
+      } catch {
         continue;
       }
       }
 
     return authorsMap;
-  } catch (error) {
+  } catch {
     return new Map();
   }
 }
@@ -550,15 +580,21 @@ function extractAuthorIds(portfolios: RawPortfolio[]): number[] {
     
     if (!authorsField) return;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let authorsArray: any[] = [];
-    if (Array.isArray(authorsField.data)) {
-      authorsArray = authorsField.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (authorsField && typeof authorsField === 'object' && 'data' in authorsField && Array.isArray((authorsField as any).data)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      authorsArray = (authorsField as any).data;
     } else if (Array.isArray(authorsField)) {
       authorsArray = authorsField;
-    } else if (authorsField.data && !Array.isArray(authorsField.data)) {
-      authorsArray = [authorsField.data];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } else if (authorsField && typeof authorsField === 'object' && 'data' in authorsField && !Array.isArray((authorsField as any).data)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      authorsArray = [(authorsField as any).data];
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     authorsArray.forEach((author: any) => {
       // Try multiple ways to get the ID (Strapi can structure this differently)
       const id = author.id || author.attributes?.id || author.documentId || author.attributes?.documentId;
@@ -586,7 +622,7 @@ export const getPortfolios = cache(async (): Promise<Portfolio[]> => {
     if (authorIds.length > 0) {
       try {
         authorsMap = await fetchAuthorsWithAvatars(authorIds);
-      } catch (error) {
+      } catch {
         // Silently fail - authors will show without avatars
       }
     }
@@ -600,15 +636,21 @@ export const getPortfolios = cache(async (): Promise<Portfolio[]> => {
         const attrs = item?.attributes || item;
         const authorsField = attrs?.authors;
         
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let authorsArray: any[] = [];
-        if (Array.isArray(authorsField?.data)) {
-          authorsArray = authorsField.data;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (authorsField && typeof authorsField === 'object' && 'data' in authorsField && Array.isArray((authorsField as any).data)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          authorsArray = (authorsField as any).data;
         } else if (Array.isArray(authorsField)) {
           authorsArray = authorsField;
-        } else if (authorsField?.data && !Array.isArray(authorsField.data)) {
-          authorsArray = [authorsField.data];
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } else if (authorsField && typeof authorsField === 'object' && 'data' in authorsField && !Array.isArray((authorsField as any).data)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          authorsArray = [(authorsField as any).data];
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         portfolio.authors = authorsArray.map((author: any) => {
           // Try multiple ways to get the ID (must match extractAuthorIds and fetchAuthorsWithAvatars logic)
           const id = author.id || author.attributes?.id || author.documentId || author.attributes?.documentId;
@@ -672,7 +714,7 @@ export const getPortfolios = cache(async (): Promise<Portfolio[]> => {
     });
 
     return portfolios.filter((item: Portfolio) => item.title && item.title !== 'Untitled Portfolio');
-  } catch (error) {
+  } catch {
     return [];
   }
 });
@@ -682,7 +724,7 @@ export const getPortfolioBySlug = cache(async (slug: string): Promise<Portfolio 
     // Reuse getPortfolios - avoids duplicate API calls (generateMetadata + page share cache)
     const portfolios = await getPortfolios();
     return portfolios.find((p) => p.slug === slug) ?? null;
-  } catch (error) {
+  } catch {
     return null;
   }
 });
