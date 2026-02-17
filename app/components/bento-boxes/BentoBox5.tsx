@@ -67,14 +67,13 @@ export default function BentoBox5() {
   if (!currentTestimonial) return null;
 
   return (
-    <>
+    <div className="h-[50vh]">
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id="bento-shape-5" clipPathUnits="objectBoundingBox">
             <path
               transform="scale(-1, 1) translate(-1, 0)"
-              d="M0 0L0.028 0H0.6105C0.626 0 0.6385 0.009 0.6385 0.02V0.09C0.6385 0.102 0.651 0.11 0.6665 0.11H0.972C0.9875 0.11 1 0.118 1 0.13V0.979C1 0.99 0.9875 1 0.972 1H0.028C0.0125 1 0 0.99 0 0.979V0Z"
-            />
+              d="M0 0.02C0 0.009 0.0125 0 0.028 0H0.6105C0.626 0 0.6385 0.009 0.6385 0.02V0.12C0.6385 0.132 0.651 0.14 0.6665 0.14H0.972C0.9875 0.14 1 0.148 1 0.16V0.979C1 0.99 0.9875 1 0.972 1H0.028C0.0125 1 0 0.99 0 0.979V0.02Z" />
           </clipPath>
         </defs>
       </svg>
@@ -121,6 +120,6 @@ export default function BentoBox5() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

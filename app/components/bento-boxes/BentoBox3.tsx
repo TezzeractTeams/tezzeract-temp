@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function BentoBox3() {
   return (
-    <div className="h-[650px] w-full sm:mt-[55px] rounded-2xl bg-gradient-to-br from-black via-[#001122] to-[#003366] relative overflow-hidden">
+    <div className="h-[60vh] w-full sm:mt-[65px] rounded-2xl bg-gradient-to-br from-black via-[#001122] to-[#003366] relative overflow-hidden">
       <div className="h-full w-full flex flex-col">
         {/* Top part - Text */}
         <div className="flex-shrink-0 p-6 md:p-8 lg:p-10">
@@ -19,7 +19,7 @@ export default function BentoBox3() {
             </p>
           </div>
         </div>
-        
+
         {/* Bottom part - Image */}
         <div className="flex-1 relative overflow-hidden">
           <Image
