@@ -1,12 +1,45 @@
+import { cache } from 'react';
+
 export interface Portfolio {
   id: number;
   slug: string;
   title: string;
   tag?: string;
+  tags?: string[];
+  Tag1?: string;
+  Tag2?: string;
+  Tag3?: string;
   content: string;
   cover?: {
     url: string;
   };
+  logo?: {
+    url: string;
+  };
+  authors?: Array<{
+    name: string;
+    position: string;
+    avatar?: {
+      url: string;
+    };
+  }>;
+  image?: {
+    url: string;
+  };
+  description?: string;
+  Challenge_heading?: string;
+  Challenge_Description?: string;
+  Approach_image?: {
+    url: string;
+  };
+  Approach_text?: string;
+  Solution_text?: string;
+  Solution_images?: Array<{
+    url: string;
+  }>;
+  Impact1?: string;
+  Impact2?: string;
+  Impact3?: string;
 }
 
 type RawPortfolioImage = {
@@ -25,6 +58,9 @@ type RawPortfolio = {
   slug?: string;
   tag?: string;
   Tag?: string;
+  Tag1?: string;
+  Tag2?: string;
+  Tag3?: string;
   title?: string;
   Title?: string;
   name?: string;
@@ -38,7 +74,12 @@ type RawPortfolio = {
   cover?: { data?: { attributes?: { url?: string } }; url?: string };
   image?: { data?: { attributes?: { url?: string } }; url?: string };
   Image?: RawPortfolioImage[] | RawPortfolioImage;
-};
+  logo?: unknown;
+  Logo?: unknown;
+  description?: unknown;
+  Description?: unknown;
+  authors?: unknown;
+}
 
 type RichTextNode = {
   type?: string;
@@ -167,36 +208,140 @@ function slugify(text: string): string {
     .replace(/-+$/, '');      // Trim - from end of text
 }
 
+// Helper to extract image URL from Strapi image field
+function extractImageUrl(imageField: any, strapiUrl: string): string | undefined {
+  if (!imageField) return undefined;
+
+  // Handle arrays - take first element (common for Strapi media fields)
+  let imageObj = imageField;
+  if (Array.isArray(imageField)) {
+    if (imageField.length === 0) return undefined;
+    imageObj = imageField[0];
+  }
+
+  // Handle nested data structure (Strapi v4 relation format)
+  if (imageObj?.data) {
+    if (Array.isArray(imageObj.data)) {
+      if (imageObj.data.length === 0) return undefined;
+      imageObj = imageObj.data[0];
+    } else {
+      imageObj = imageObj.data;
+    }
+  }
+
+  // Handle attributes wrapper
+  if (imageObj?.attributes) {
+    imageObj = imageObj.attributes;
+  }
+
+  let url: string | undefined;
+
+  // Check for direct URL (Cloudinary or external URLs)
+  if (imageObj?.url && typeof imageObj.url === 'string') {
+    url = imageObj.url;
+  }
+  // Check formats (prefer large > medium > small > thumbnail)
+  else if (imageObj?.formats?.large?.url) {
+    url = imageObj.formats.large.url;
+  } else if (imageObj?.formats?.medium?.url) {
+    url = imageObj.formats.medium.url;
+  } else if (imageObj?.formats?.small?.url) {
+    url = imageObj.formats.small.url;
+  } else if (imageObj?.formats?.thumbnail?.url) {
+    url = imageObj.formats.thumbnail.url;
+  }
+  else if (typeof imageObj === 'string') {
+    url = imageObj;
+  }
+
+  if (!url) return undefined;
+
+  return url.startsWith('http') ? url : `${strapiUrl}${url}`;
+}
+
+// Helper to extract authors array from Strapi
+// Try to extract avatar from portfolio response first (might be partially populated)
+function extractAuthors(authorsField: any, strapiUrl: string): Array<{ name: string; position: string; avatar?: { url: string } }> | undefined {
+  if (!authorsField) return undefined;
+
+  let authorsArray: any[] = [];
+  if (Array.isArray(authorsField.data)) {
+    authorsArray = authorsField.data;
+  } else if (Array.isArray(authorsField)) {
+    authorsArray = authorsField;
+  } else if (authorsField.data && !Array.isArray(authorsField.data)) {
+    authorsArray = [authorsField.data];
+  }
+
+  if (authorsArray.length === 0) return undefined;
+
+  return authorsArray.map((author: any) => {
+    // Handle both structures: with attributes wrapper and without
+    const attrs = author.attributes || author;
+    
+    // Extract name and position
+    const name = attrs?.name || author.name || 'Unknown';
+    const position = attrs?.position || attrs?.Position || attrs?.job || attrs?.Job || author.position || author.Position || author.job || author.Job || '';
+    
+    // Try to extract avatar - check multiple possible structures
+    // Since hasAttributes: false, avatar might be at top level or nested
+    let avatarUrl = extractImageUrl(attrs?.avatar, strapiUrl);
+    
+    // If not found in attrs, check top level
+    if (!avatarUrl && author.avatar) {
+      avatarUrl = extractImageUrl(author.avatar, strapiUrl);
+    }
+    
+    // If still not found, check deeper nested structures
+    if (!avatarUrl) {
+      // Check author.attributes.avatar.data.attributes.url (full nested structure)
+      if (attrs?.avatar?.data?.attributes?.url) {
+        const url = attrs.avatar.data.attributes.url;
+        avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+      }
+      // Check author.attributes.avatar.data.url
+      else if (attrs?.avatar?.data?.url) {
+        const url = attrs.avatar.data.url;
+        avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+      }
+      // Check author.avatar.data.attributes.url (top level avatar)
+      else if (author.avatar?.data?.attributes?.url) {
+        const url = author.avatar.data.attributes.url;
+        avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+      }
+      // Check author.avatar.data.url (top level avatar)
+      else if (author.avatar?.data?.url) {
+        const url = author.avatar.data.url;
+        avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+      }
+    }
+
+    return {
+      name,
+      position,
+      avatar: avatarUrl ? { url: avatarUrl } : undefined,
+    };
+  });
+}
+
 function transformPortfolio(item: RawPortfolio): Portfolio {
   const attrs = item?.attributes || item;
   const strapiUrl =
     process.env.NEXT_PUBLIC_STRAPI_URL ||
     (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : '');
-  const firstImageRaw = Array.isArray(attrs?.Image) ? attrs.Image[0] : attrs?.Image;
-  const firstImage = (firstImageRaw as any)?.data?.attributes || (firstImageRaw as any)?.attributes || firstImageRaw;
+  
+  // Extract main Image field (capital I - matches Strapi field name)
+  const imageUrl = extractImageUrl(attrs?.Image, strapiUrl);
+  
+  // Use Image as cover (main portfolio image)
+  const coverUrl = imageUrl || '';
 
-  const rawImageUrl =
-    firstImage?.url ||
-    firstImage?.formats?.large?.url ||
-    firstImage?.formats?.medium?.url ||
-    firstImage?.formats?.small?.url ||
-    attrs?.cover?.data?.attributes?.url ||
-    attrs?.cover?.url ||
-    attrs?.image?.data?.attributes?.url ||
-    attrs?.image?.url ||
-    '';
-
-  const coverUrl = rawImageUrl
-    ? rawImageUrl.startsWith('http')
-      ? rawImageUrl
-      : `${strapiUrl}${rawImageUrl}`
-    : '';
-
+  // Extract title from Name field (matches Strapi field name)
   const title =
+    attrs?.Name ||
+    attrs?.name ||
     attrs?.title ||
     attrs?.Title ||
-    attrs?.name ||
-    attrs?.Name ||
     attrs?.portfolioName ||
     attrs?.portfolio_title ||
     'Untitled Portfolio';
@@ -205,53 +350,339 @@ function transformPortfolio(item: RawPortfolio): Portfolio {
   const rawSlug = attrs?.slug;
   const slug = rawSlug || slugify(title) || item?.documentId || attrs?.documentId || String(item?.id ?? attrs?.id ?? '');
 
+  // Collect tags
+  const tags: string[] = [];
+  if (attrs?.Tag1) tags.push(attrs.Tag1);
+  if (attrs?.Tag2) tags.push(attrs.Tag2);
+  if (attrs?.Tag3) tags.push(attrs.Tag3);
+
+  // If no new tags, fallback to the old tag field if it exists
+  const finalTag = attrs?.Tag1 || attrs?.tag || attrs?.Tag;
+
+  // Extract logo (capital L - matches Strapi field name)
+  const logoUrl = extractImageUrl(attrs?.Logo || attrs?.logo, strapiUrl);
+
+  // Extract authors
+  const authors = extractAuthors(attrs?.authors, strapiUrl);
+
+  // Image already extracted above as coverUrl, reuse for image field
+  // (Image is the main portfolio image)
+
+  // Extract description (Strapi rich text → HTML)
+  const descriptionRaw = attrs?.description ?? attrs?.Description;
+  const description = descriptionRaw !== undefined && descriptionRaw !== null
+    ? (typeof descriptionRaw === 'string' && descriptionRaw.trim().startsWith('<')
+        ? descriptionRaw
+        : toHtmlContent(descriptionRaw))
+    : undefined;
+  const descriptionFinal = (description && description.trim()) ? description : undefined;
+
+  // Extract Challenge fields
+  const challengeHeading = attrs?.Challenge_heading || attrs?.challenge_heading || undefined;
+  const challengeDescription = attrs?.Challenge_Description || attrs?.challenge_description || undefined;
+
+  // Extract Approach fields
+  const approachImageUrl = extractImageUrl(attrs?.Approach_image || attrs?.approach_image, strapiUrl);
+  const approachText = attrs?.Approach_text || attrs?.approach_text || undefined;
+
+  // Extract Solution fields
+  const solutionText = attrs?.Solution_text || attrs?.solution_text || undefined;
+  let solutionImages: Array<{ url: string }> | undefined;
+  if (attrs?.Solution_images || attrs?.solution_images) {
+    const solutionImagesField = attrs.Solution_images || attrs.solution_images;
+    if (Array.isArray(solutionImagesField?.data)) {
+      solutionImages = solutionImagesField.data
+        .map((img: any) => {
+          const url = extractImageUrl(img, strapiUrl);
+          return url ? { url } : null;
+        })
+        .filter((img: any) => img !== null) as Array<{ url: string }>;
+    } else if (Array.isArray(solutionImagesField)) {
+      solutionImages = solutionImagesField
+        .map((img: any) => {
+          const url = extractImageUrl(img, strapiUrl);
+          return url ? { url } : null;
+        })
+        .filter((img: any) => img !== null) as Array<{ url: string }>;
+    }
+    if (solutionImages && solutionImages.length === 0) {
+      solutionImages = undefined;
+    }
+  }
+
+  // Extract Impact fields (rich text)
+  const impact1 = attrs?.Impact1 || attrs?.impact1 ? toHtmlContent(attrs.Impact1 || attrs.impact1) : undefined;
+  const impact2 = attrs?.Impact2 || attrs?.impact2 ? toHtmlContent(attrs.Impact2 || attrs.impact2) : undefined;
+  const impact3 = attrs?.Impact3 || attrs?.impact3 ? toHtmlContent(attrs.Impact3 || attrs.impact3) : undefined;
+
   return {
     id: item?.id ?? attrs?.id ?? 0,
     slug,
     title,
-    tag: attrs?.tag || attrs?.Tag || undefined,
+    tag: finalTag || 'Case Study',
+    tags: tags.length > 0 ? tags : [finalTag || 'Case Study'],
+    Tag1: attrs?.Tag1,
+    Tag2: attrs?.Tag2,
+    Tag3: attrs?.Tag3,
     content: toHtmlContent(attrs?.content || attrs?.Content || attrs?.body || attrs?.blocks || ''),
     cover: coverUrl ? { url: coverUrl } : undefined,
+    logo: logoUrl ? { url: logoUrl } : undefined,
+    authors,
+    image: coverUrl ? { url: coverUrl } : undefined, // Image field is the main portfolio image
+    description: descriptionFinal,
+    Challenge_heading: challengeHeading,
+    Challenge_Description: challengeDescription,
+    Approach_image: approachImageUrl ? { url: approachImageUrl } : undefined,
+    Approach_text: approachText,
+    Solution_text: solutionText,
+    Solution_images: solutionImages,
+    Impact1: impact1,
+    Impact2: impact2,
+    Impact3: impact3,
   };
 }
 
-export async function getPortfolios(): Promise<Portfolio[]> {
+// Use populate=* only - nested populate for authors causes Strapi 500 Internal Server Error
+// We'll fetch authors separately with avatars and merge them
+const PORTFOLIO_POPULATE = 'populate=*';
+
+// Fetch authors with avatars populated
+// Note: API endpoint name might be 'authors', 'author', or something else - check your Strapi Content-Type
+async function fetchAuthorsWithAvatars(authorIds: number[]): Promise<Map<number, { name: string; position: string; avatar?: { url: string } }>> {
+  if (authorIds.length === 0) return new Map();
+
   try {
-    const response = await fetchFromStrapi('/api/portfolios?populate=*');
-    const data = Array.isArray(response?.data) ? response.data : [];
-    // Ensure we filter out items that don't have enough data to be useful
-    return data.map(transformPortfolio).filter((item: Portfolio) => item.title && item.title !== 'Untitled Portfolio');
-  } catch (error) {
-    console.error('Error fetching portfolios from Strapi:', error);
-    return [];
-  }
-}
-
-export async function getPortfolioBySlug(slug: string): Promise<Portfolio | null> {
-  try {
-    const response = await fetchFromStrapi('/api/portfolios?populate=*');
-    const data = Array.isArray(response?.data) ? (response.data as RawPortfolio[]) : [];
-
-    // 1. Try to find by direct match (if we had a slug field)
-    // 2. Try to match by slugified title
-    // 3. Fallback to documentId or ID (for backward compatibility or direct links)
-
-    const matched = data.find((item: RawPortfolio) => {
-      const p = transformPortfolio(item);
-      return (
-        p.slug === slug ||
-        String(item.id) === slug ||
-        String(item.documentId) === slug
-      );
-    });
-
-    if (matched) {
-      return transformPortfolio(matched);
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL?.replace(/\/$/, '') || 'http://localhost:1337';
+    const apiKey = process.env.STRAPI_API_KEY;
+    const headers: HeadersInit = { 'Content-Type': 'application/json' };
+    if (apiKey) {
+      headers.Authorization = `Bearer ${apiKey}`;
     }
 
-    return null;
+    const idsString = authorIds.join(',');
+    
+    // User confirmed endpoint names: 'author' (singular) and 'authors' (plural)
+    // Strapi returns 500/400 errors with populate - try simpler approach
+    const endpointNames = ['authors', 'author'];
+    
+    let authorsMap = new Map<number, { name: string; position: string; avatar?: { url: string } }>();
+    
+    // Try fetching authors individually instead of using filters[id][$in]
+    // This might avoid the 500 error
+    for (const endpointName of endpointNames) {
+      try {
+        // Strategy 1: Fetch all authors and filter client-side
+        // This avoids the filters[id][$in] syntax that was causing 500 errors
+        const urlAll = `${strapiUrl}/api/${endpointName}?populate[avatar]=true&pagination[limit]=100`;
+        const responseAll = await fetch(urlAll, { headers, next: { revalidate: 3600 } });
+        
+        if (responseAll.ok) {
+          const data = await responseAll.json();
+          const allAuthors = Array.isArray(data?.data) ? data.data : [];
+          
+          // Filter to only the authors we need
+          const neededAuthors = allAuthors.filter((author: any) => {
+            const id = author.id || author.attributes?.id || author.documentId || author.attributes?.documentId;
+            return id && authorIds.includes(Number(id));
+          });
+          
+          if (neededAuthors.length > 0) {
+            neededAuthors.forEach((author: any) => {
+              const attrs = author.attributes || author;
+              const id = author.id || attrs?.id || author.documentId || attrs?.documentId;
+              if (!id) return;
+              
+              const avatarUrl = extractImageUrl(attrs?.avatar || author.avatar, strapiUrl);
+              authorsMap.set(Number(id), {
+                name: attrs?.name || author.name || 'Unknown',
+                position: attrs?.position || attrs?.Position || attrs?.job || attrs?.Job || author.position || author.Job || '',
+                avatar: avatarUrl ? { url: avatarUrl } : undefined,
+              });
+            });
+            
+            if (authorsMap.size > 0) return authorsMap;
+          }
+        }
+        
+        // Strategy 2: Fallback - try with filters[id][$in] (original approach)
+        const url = `${strapiUrl}/api/${endpointName}?filters[id][$in]=${idsString}&populate[avatar]=true`;
+        const response = await fetch(url, { headers, next: { revalidate: 3600 } });
+        
+        if (response.ok) {
+          const data = await response.json();
+          const authorsArray = Array.isArray(data?.data) ? data.data : [];
+
+          if (authorsArray.length > 0) {
+            authorsArray.forEach((author: any) => {
+              const attrs = author.attributes || author;
+              const id = author.id || attrs?.id || author.documentId || attrs?.documentId;
+              if (!id) return;
+
+              const avatarUrl = extractImageUrl(attrs?.avatar || author.avatar, strapiUrl);
+              authorsMap.set(Number(id), {
+                name: attrs?.name || author.name || 'Unknown',
+                position: attrs?.position || attrs?.Position || attrs?.job || attrs?.Job || author.position || author.Job || '',
+                avatar: avatarUrl ? { url: avatarUrl } : undefined,
+              });
+            });
+            
+            if (authorsMap.size > 0) return authorsMap;
+          }
+        }
+      } catch (err) {
+        continue;
+      }
+      }
+
+    return authorsMap;
   } catch (error) {
-    console.error('Error fetching single portfolio from Strapi:', error);
-    return null;
+    return new Map();
   }
 }
+
+// Extract author IDs from raw portfolio data
+function extractAuthorIds(portfolios: RawPortfolio[]): number[] {
+  const authorIds = new Set<number>();
+  
+  portfolios.forEach((item: RawPortfolio) => {
+    const attrs = item?.attributes || item;
+    const authorsField = attrs?.authors;
+    
+    if (!authorsField) return;
+
+    let authorsArray: any[] = [];
+    if (Array.isArray(authorsField.data)) {
+      authorsArray = authorsField.data;
+    } else if (Array.isArray(authorsField)) {
+      authorsArray = authorsField;
+    } else if (authorsField.data && !Array.isArray(authorsField.data)) {
+      authorsArray = [authorsField.data];
+    }
+
+    authorsArray.forEach((author: any) => {
+      // Try multiple ways to get the ID (Strapi can structure this differently)
+      const id = author.id || author.attributes?.id || author.documentId || author.attributes?.documentId;
+      if (id) authorIds.add(Number(id)); // Ensure it's a number
+    });
+  });
+
+  return Array.from(authorIds);
+}
+
+export const getPortfolios = cache(async (): Promise<Portfolio[]> => {
+  try {
+    // Step 1: Fetch portfolios
+    const response = await fetchFromStrapi(`/api/portfolios?${PORTFOLIO_POPULATE}`);
+    const data = Array.isArray(response?.data) ? response.data : [];
+    
+    if (data.length === 0) return [];
+
+    // Step 2: Extract author IDs and fetch authors with avatars
+    // Avatars are NOT in portfolio response (populate=* doesn't populate nested relations)
+    // We MUST fetch authors separately to get avatars
+    const authorIds = extractAuthorIds(data);
+    let authorsMap = new Map<number, { name: string; position: string; avatar?: { url: string } }>();
+    
+    if (authorIds.length > 0) {
+      try {
+        authorsMap = await fetchAuthorsWithAvatars(authorIds);
+      } catch (error) {
+        // Silently fail - authors will show without avatars
+      }
+    }
+
+    // Step 3: Transform portfolios and merge author avatars
+    const portfolios = data.map((item: RawPortfolio) => {
+      const portfolio = transformPortfolio(item);
+      
+      // Replace authors with enriched data from authorsMap
+      if (portfolio.authors && portfolio.authors.length > 0) {
+        const attrs = item?.attributes || item;
+        const authorsField = attrs?.authors;
+        
+        let authorsArray: any[] = [];
+        if (Array.isArray(authorsField?.data)) {
+          authorsArray = authorsField.data;
+        } else if (Array.isArray(authorsField)) {
+          authorsArray = authorsField;
+        } else if (authorsField?.data && !Array.isArray(authorsField.data)) {
+          authorsArray = [authorsField.data];
+        }
+
+        portfolio.authors = authorsArray.map((author: any) => {
+          // Try multiple ways to get the ID (must match extractAuthorIds and fetchAuthorsWithAvatars logic)
+          const id = author.id || author.attributes?.id || author.documentId || author.attributes?.documentId;
+          const enrichedAuthor = id && authorsMap.size > 0 ? authorsMap.get(Number(id)) : null;
+          
+          // Use enriched author if available (from separate fetch)
+          if (enrichedAuthor) {
+            return enrichedAuthor;
+          }
+          
+          // Fallback: Extract from portfolio response (this is what we're using now)
+          // Since separate fetch fails, rely on portfolio response
+          // Author structure: hasAttributes: false, so check both top level and attrs
+          const attrs = author.attributes || author;
+          const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL?.replace(/\/$/, '') || 'http://localhost:1337';
+          
+          const name = attrs?.name || author.name || 'Unknown';
+          const position = attrs?.position || attrs?.Position || attrs?.job || attrs?.Job || author.position || author.Position || author.job || author.Job || '';
+          
+          // Try multiple ways to extract avatar from portfolio response
+          let avatarUrl = extractImageUrl(attrs?.avatar, strapiUrl);
+          
+          // Check top level avatar (since hasAttributes: false)
+          if (!avatarUrl && author.avatar) {
+            avatarUrl = extractImageUrl(author.avatar, strapiUrl);
+          }
+          
+          // If still not found, check deeper nested structures
+          if (!avatarUrl) {
+            // Check author.attributes.avatar.data.attributes.url
+            if (attrs?.avatar?.data?.attributes?.url) {
+              const url = attrs.avatar.data.attributes.url;
+              avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+            }
+            // Check author.attributes.avatar.data.url
+            else if (attrs?.avatar?.data?.url) {
+              const url = attrs.avatar.data.url;
+              avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+            }
+            // Check author.avatar.data.attributes.url (top level)
+            else if (author.avatar?.data?.attributes?.url) {
+              const url = author.avatar.data.attributes.url;
+              avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+            }
+            // Check author.avatar.data.url (top level)
+            else if (author.avatar?.data?.url) {
+              const url = author.avatar.data.url;
+              avatarUrl = url.startsWith('http') ? url : `${strapiUrl}${url}`;
+            }
+          }
+          
+          return {
+            name,
+            position,
+            avatar: avatarUrl ? { url: avatarUrl } : undefined,
+          };
+        });
+      }
+      
+      return portfolio;
+    });
+
+    return portfolios.filter((item: Portfolio) => item.title && item.title !== 'Untitled Portfolio');
+  } catch (error) {
+    return [];
+  }
+});
+
+export const getPortfolioBySlug = cache(async (slug: string): Promise<Portfolio | null> => {
+  try {
+    // Reuse getPortfolios - avoids duplicate API calls (generateMetadata + page share cache)
+    const portfolios = await getPortfolios();
+    return portfolios.find((p) => p.slug === slug) ?? null;
+  } catch (error) {
+    return null;
+  }
+});
