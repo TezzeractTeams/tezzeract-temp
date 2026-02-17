@@ -3,7 +3,7 @@ import { AnimatedShinyText } from "./AnimatedShinyText";
 
 export default function BentoBox4() {
   return (
-    <div className="h-full w-full rounded-2xl bg-gradient-to-br from-[#D6ECFF] via-[#27AAE1] to-[#00378A] flex flex-col relative p-6 md:p-8">
+    <div className="h-[96%] w-full rounded-2xl bg-gradient-to-br from-[#D6ECFF] via-[#27AAE1] to-[#00378A] flex flex-col relative p-6 md:p-8">
       {/* Industry Expertise Label */}
       <div className="absolute top-5 left-6 sm:top-4 sm:left-4 md:top-6 md:left-6 lg:top-8 lg:left-8 z-10">
         <div className="px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
