@@ -13,7 +13,7 @@ export default function BentoGrid() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">          {/* Column 1 - Left */}
           <div className="flex flex-col gap-4 h-full">
             {/* Box 1 - Top Left (medium-dark gray) */}
-            <div className="flex-1">
+            <div className="h-fit">
               <BentoBox1 />
             </div>
             {/* Box 2 - Bottom Left (white with light blue gradient) */}
@@ -23,7 +23,7 @@ export default function BentoGrid() {
           </div>
 
           {/* Column 2 - Middle */}
-          <div className="flex flex-col gap-4 h-full">
+          <div className="flex flex-col gap-4 h-[60vh]">
             {/* Box 3 - Spans both rows (white with light blue gradient) */}
             <div className="flex-[2]">
               <BentoBox3 />
