@@ -189,7 +189,7 @@ function ScrollingRow({ logos, direction, className }: ScrollingRowProps) {
 
 export default function BentoBox6() {
   return (
-    <div className="max-h-[400px] sm:max-h-[450px] md:max-h-[500px] lg:max-h-[45vh] w-full rounded-2xl bg-[#1E293B] flex flex-col justify-between gap-4 sm:gap-5 md:gap-6  sm:pt-6  pb-2 sm:pb-6 md:pb-2 overflow-hidden">
+    <div className="h-[45vh] w-full rounded-2xl bg-[#1E293B] flex flex-col justify-between gap-4 sm:gap-5 md:gap-6  sm:pt-6  pb-2 sm:pb-6 md:pb-2 overflow-hidden">
       {/* Text content at the top */}
       <div className="p-5 sm:px-6 md:px-10">
         <p className="text-white text-[16px] sm:text-base md:text-xl xl:text-3xl font-light leading-tight">
