@@ -17,7 +17,7 @@ export default function Footer() {
               className="w-auto h-10 md:h-12"
             />
             <a className="text-white/80 text-md md:text-md text-left">
-              © Copyright 2026. Tezzeract Pvt Ltd. Studio.
+              © Copyright 2026. Tezzeract Pvt Ltd.
               <br />
               All rights reserved.
             </a>
@@ -32,12 +32,7 @@ export default function Footer() {
             >
               Privacy Policy
             </a>
-            <a
-              href="#"
-              className="text-white hover:text-white/80 transition-colors"
-            >
-              Terms & Conditions
-            </a>
+            
           </div>
 
           {/* Column 3 - Social Media */}
