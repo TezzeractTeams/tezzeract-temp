@@ -70,7 +70,7 @@ export default function PortfolioCard({
 
         {/* Read the Full Case Study Link - Hidden by default, appears on hover */}
         <Link
-          href={`/portfolio/${slug || '#'}`}
+          href={`/projects/${slug || '#'}`}
           className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-white w-fit cursor-pointer"
         >
           <span className="text-sm font-light  underline">Read the Full Case Study</span>

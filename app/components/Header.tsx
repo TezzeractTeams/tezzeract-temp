@@ -13,7 +13,7 @@ const navLinks = [
   { href: "/pricing", label: "Pricing" },
   { href: "/about-us", label: "About us" },
 
-  { href: "/portfolio", label: "Portfolio" },
+  { href: "/projects", label: "Projects" },
 ];
 
 // MobileMenu component - moved outside to avoid creating during render
@@ -161,7 +161,7 @@ export default function Header() {
                         className="absolute inset-0 -z-10"
                         style={{
                           borderRadius: "9999px",
-                          backgroundColor: (mounted && isHome) || !mounted ? "rgba(255,255,255,0.3)" : "rgba(0, 104, 181, 0.1)",
+                          backgroundColor: (mounted && isHome) || !mounted ? "rgba(0, 121, 207, 0.35)" : "rgba(41, 191, 255, 0.1)",
                         }}
                         transition={{ type: "tween", duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
                       />
@@ -293,7 +293,7 @@ export default function Header() {
                         className="absolute inset-0 -z-10"
                         style={{
                           borderRadius: "9999px",
-                          backgroundColor: "rgba(0, 104, 181, 0.1)",
+                          backgroundColor: "rgba(231, 240, 255, 0.32)",
                         }}
                         transition={{ type: "tween", duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
                       />
