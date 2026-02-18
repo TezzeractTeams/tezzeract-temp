@@ -65,8 +65,8 @@ export const TestimonialTooltip = () => {
                 initial={{ opacity: 0, y: 20, scale: 0.6 }}
                 animate={{
                   opacity: 1,
-                  y: 30,
-                  x: -100,
+                  y: 25,
+                  x: -115,
                   scale: 1,
                   transition: {
                     type: "spring",
@@ -97,7 +97,7 @@ export const TestimonialTooltip = () => {
             width={100}
             src={testimonial.image}
             alt={testimonial.name}
-            className="object-cover !m-0 !p-0 object-top rounded-full h-14 w-14 border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
+            className="object-cover !m-0 !p-0 object-top rounded-full h-14 w-14  group-hover:scale-105 group-hover:z-30 relative transition duration-500"
           />
         </div>
       ))}
