@@ -29,9 +29,10 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
                         scrub: true,
                         markers: false,
                         onLeave: () => {
-                            const nextSection = containerRef.current?.nextElementSibling as HTMLElement;
-                            if (nextSection && lenis) {
-                                lenis.scrollTo(nextSection, {
+                            // When pin ends, smoothly snap to portfolio section
+                            const portfolioSection = document.getElementById("portfolio-section");
+                            if (portfolioSection && lenis) {
+                                lenis.scrollTo(portfolioSection, {
                                     duration: 1.5,
                                     offset: 0,
                                 });
