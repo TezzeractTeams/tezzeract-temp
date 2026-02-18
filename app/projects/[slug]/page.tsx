@@ -18,17 +18,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!portfolio) {
     return {
-      title: 'Portfolio Not Found',
+      title: 'Project Not Found',
     };
   }
 
   return {
     title: portfolio.title,
-    description: portfolio.tag || 'Portfolio case study',
+    description: portfolio.tag || 'Project case study',
   };
 }
 
-export default async function PortfolioPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const portfolio = await getPortfolioBySlug(slug);
 

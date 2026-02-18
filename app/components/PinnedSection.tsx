@@ -4,6 +4,7 @@ import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "lenis/react";
+import { PinnedScrollContext } from "@/app/context/PinnedScrollContext";
 
 interface PinnedSectionProps {
     children: React.ReactNode;
@@ -13,10 +14,11 @@ interface PinnedSectionProps {
 export default function PinnedSection({ children, pinDuration = "100%" }: PinnedSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLDivElement>(null);
+    const isPinnedRef = useRef(false);
     const lenis = useLenis();
 
     useLayoutEffect(() => {
-        let ctx = gsap.context(() => {
+        const ctx = gsap.context(() => {
             // Only apply pinning on desktop (lg and up). Mobile/tablet scroll normally.
             ScrollTrigger.matchMedia({
                 "(min-width: 1024px)": () => {
@@ -28,6 +30,9 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
                         pinSpacing: true,
                         scrub: true,
                         markers: false,
+                        onUpdate: (self) => {
+                            isPinnedRef.current = self.isActive;
+                        },
                         onLeave: () => {
                             // When pin ends, smoothly snap to portfolio section
                             const portfolioSection = document.getElementById("portfolio-section");
@@ -48,10 +53,12 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
     }, [pinDuration, lenis]);
 
     return (
-        <div ref={containerRef} className="w-full">
-            <div ref={triggerRef} className="w-full">
-                {children}
+        <PinnedScrollContext.Provider value={{ isPinnedRef }}>
+            <div ref={containerRef} className="w-full">
+                <div ref={triggerRef} className="w-full">
+                    {children}
+                </div>
             </div>
-        </div>
+        </PinnedScrollContext.Provider>
     );
 }

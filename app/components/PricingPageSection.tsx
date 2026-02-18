@@ -48,7 +48,7 @@ export default function PricingPageSection() {
               alt="Teams"
               width={70}
               height={70}
-              className="inline-block"
+              className="inline-block w-6 h-6 md:w-10 md:h-10 lg:w-16 lg:h-16"
             />
           </span>{" "}
           <span className="text-gray-700">with</span>{" "}
@@ -79,7 +79,7 @@ export default function PricingPageSection() {
               alt="Goals"
               width={70}
               height={70}
-              className="inline-block"
+              className="inline-block w-6 h-6 md:w-10 md:h-10 lg:w-16 lg:h-16"
             />
           </span>{" "}
         </h1>

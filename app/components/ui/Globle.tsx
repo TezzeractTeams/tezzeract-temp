@@ -5,11 +5,12 @@ import createGlobe, { COBEOptions } from "cobe"
 import { useLenis } from "lenis/react"
 import { useMotionValue, useSpring } from "motion/react"
 
+import { usePinnedScroll } from "@/app/context/PinnedScrollContext"
 import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
 const SCROLL_TO_PHI = 0.0015
-const BOOST_DECAY = 0.92
+const BOOST_DECAY = 0.72
 
 const MARKER_LOCATIONS: [number, number][] = [
   [6.9271, 79.8612],     // Sri Lanka - Colombo
@@ -62,6 +63,7 @@ export function Globe({
   const pointerInteracting = useRef<number | null>(null)
   const pointerInteractionMovement = useRef(0)
   const scrollSpinBoost = useRef(0)
+  const pinnedScroll = usePinnedScroll()
   const lenis = useLenis()
 
   const r = useMotionValue(0)
@@ -89,10 +91,14 @@ export function Globe({
   useEffect(() => {
     if (!lenis) return
     const unsubscribe = lenis.on("scroll", (e: { velocity: number }) => {
-      scrollSpinBoost.current += e.velocity * SCROLL_TO_PHI
+      const shouldApplyScroll =
+        pinnedScroll?.isPinnedRef.current ?? false
+      if (shouldApplyScroll) {
+        scrollSpinBoost.current += e.velocity * SCROLL_TO_PHI
+      }
     })
     return () => unsubscribe()
-  }, [lenis])
+  }, [lenis, pinnedScroll])
 
   useEffect(() => {
     const onResize = () => {

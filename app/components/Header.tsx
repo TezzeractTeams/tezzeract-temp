@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence, LayoutGroup } from "motion/react";
 import { TezzeractButton } from "./ui/TezzeractButton";
 
 // Navigation Links Data
@@ -13,7 +13,7 @@ const navLinks = [
   { href: "/pricing", label: "Pricing" },
   { href: "/about-us", label: "About us" },
 
-  { href: "/portfolio", label: "Portfolio" },
+  { href: "/projects", label: "Projects" },
 ];
 
 // MobileMenu component - moved outside to avoid creating during render
@@ -59,6 +59,7 @@ const MobileMenu = () => (
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -142,14 +143,29 @@ export default function Header() {
               </div>
 
               {/* DESKTOP NAV */}
-              <div className="hidden lg:flex items-center space-x-8 shrink min-w-0">
+              <LayoutGroup id="fixed-nav-pill">
+              <div
+                className="hidden lg:flex items-center space-x-8 shrink min-w-0"
+                onMouseLeave={() => setHoveredNav(null)}
+              >
                 {navLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
-                    className={`group relative inline-block px-3 py-1.5 font-light transition-colors ${(mounted && isHome) || !mounted ? "text-white hover:text-white/80" : ""}`}
+                    onMouseEnter={() => setHoveredNav(link.href)}
+                    className={`relative inline-block px-3 py-1.5 font-light transition-colors ${(mounted && isHome) || !mounted ? "text-white hover:text-white/80" : ""}`}
                   >
-                    <span className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${(mounted && isHome) || !mounted ? "bg-white/30" : "bg-blue-500/10"}`} />
+                    {hoveredNav === link.href && (
+                      <motion.div
+                        layoutId="nav-pill"
+                        className="absolute inset-0 -z-10"
+                        style={{
+                          borderRadius: "9999px",
+                          backgroundColor: (mounted && isHome) || !mounted ? "rgba(0, 121, 207, 0.35)" : "rgba(41, 191, 255, 0.1)",
+                        }}
+                        transition={{ type: "tween", duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+                      />
+                    )}
                     <span className={`relative inline-block ${(mounted && isHome) || !mounted ? "text-white" : "text-transparent"}`}
                       style={mounted && !isHome ? {
                         backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
@@ -162,6 +178,7 @@ export default function Header() {
                   </a>
                 ))}
               </div>
+              </LayoutGroup>
 
               {/* BUTTON */}
               <div className="hidden lg:block flex-shrink-0">
@@ -213,6 +230,7 @@ export default function Header() {
           ) : (
             <motion.nav
               key="floating-header"
+              layoutRoot
               initial={{
                 y: -100,
                 opacity: 0,
@@ -257,13 +275,29 @@ export default function Header() {
               </motion.div>
 
               {/* NAV LINKS (Gradient Text) */}
-              <div className="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-shrink min-w-0">
+              <LayoutGroup id="floating-nav-pill">
+              <div
+                className="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-shrink min-w-0"
+                onMouseLeave={() => setHoveredNav(null)}
+              >
                 {navLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
+                    onMouseEnter={() => setHoveredNav(link.href)}
                     className="group font-normal relative inline-block px-3 py-1.5 transition-colors"
                   >
+                    {hoveredNav === link.href && (
+                      <motion.div
+                        layoutId="nav-pill"
+                        className="absolute inset-0 -z-10"
+                        style={{
+                          borderRadius: "9999px",
+                          backgroundColor: "rgba(231, 240, 255, 0.32)",
+                        }}
+                        transition={{ type: "tween", duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+                      />
+                    )}
                     <span className="relative inline-block text-transparent group-hover:opacity-80"
                       style={{
                         backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
@@ -276,6 +310,7 @@ export default function Header() {
                   </a>
                 ))}
               </div>
+              </LayoutGroup>
 
               {/* BUTTON (Smaller wrapper if needed, but keeping same for now or hiding if too small) */}
               <div className="hidden lg:block flex-shrink-0">

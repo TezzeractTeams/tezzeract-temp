@@ -3,16 +3,25 @@ import { Globe } from "../ui/Globle";
 
 export default function BentoBox2() {
   return (
-    <div className="max-h-[400px] sm:max-h-[450px] md:max-h-[500px] lg:max-h-[45vh] w-full rounded-[30px] bg-gradient-to-tr from-[#F3F3F3] via-white to-[#00A9EE] relative overflow-hidden">
-      <div className="relative flex flex-col size-full overflow-hidden pt-4 sm:pt-5 md:pt-6 lg:pt-9 pb-20 sm:pb-32 md:pb-40 lg:pb-52 xl:pb-60 px-5 sm:px-5 md:px-6 lg:px-9">
-        <p className="text-[#242424] text-[16px] sm:text-2xl md:text-xl lg:text-3xl xl:text-2xl 2xl:text-3xl font-light mb-2 sm:mb-3 md:mb-4 leading-tight">
-          Our teams have provided services to businesses globally across
-        </p>
-        <span className="pointer-events-none bg-gradient-to-b from-[#00378A] to-[#00A9EE] bg-clip-text text-left text-5xl sm:text-4xl lg:text-7xl font-light text-transparent  tracking-tighter">
-          12+ countries
-        </span>
-        <div className="flex justify-center -mt-[10px] sm:-mt-[15px] md:mt-[100px] lg:-mt-[25px]">
-          <Globe className="relative top-15 sm:top-6 md:top-0 lg:top-10 xl:top-12 max-w-full sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1400px] scale-150 sm:scale-110 md:scale-250 lg:scale-130 xl:scale-140" />
+    <div className="max-h-[400px] sm:max-h-[450px] md:max-h-[500px] lg:h-[45vh] w-full rounded-[30px] bg-[#F5F5F5] border border-[#00A9EE]/30 relative overflow-hidden">
+      <div className="flex flex-row h-full min-h-[280px] px-5 sm:px-5 md:px-6 lg:px-9 py-6 lg:py-9">
+        {/* Left - Text */}
+        <div className="flex-1 flex flex-col justify-center min-w-0">
+          <p className="text-[16px] sm:text-xl md:text-xl lg:text-2xl xl:text-3xl font-light mb-2 sm:mb-3 md:mb-4 tracking-tighter leading-tight text-black/90">
+            Our teams have provided services to businesses globally across
+          </p>
+          <span className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tighter bg-gradient-to-r from-[#00378A] via-[#00A9EE] to-[#00378A] bg-clip-text text-transparent">
+            120+
+          </span>
+          <span className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter bg-gradient-to-r from-[#00378A] via-[#00A9EE] to-[#00378A] bg-clip-text text-transparent">
+            countries
+          </span>
+        </div>
+        {/* Right - Globe (half visible) */}
+        <div className="flex-1 relative  min-h-0">
+          <div className="absolute -right-[100%] top-1/2 -translate-y-1/2 w-[200%] aspect-square">
+            <Globe className="!relative w-full h-full !max-w-none" />
+          </div>
         </div>
       </div>
     </div>
