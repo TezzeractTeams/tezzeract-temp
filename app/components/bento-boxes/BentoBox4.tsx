@@ -13,7 +13,7 @@ export default function BentoBox4() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col justify-center mt-10 sm:mt-8 md:mt-0 lg:mt-16 px-2 sm:px-0">
         <div className="flex flex-col gap-2 sm:gap-3 md:gap-1 lg:gap-4">
-          <p className="text-white text-lg md:text-xl lg:text-2xl md:pt-10 lg:pt-0 xl:text-3xl font-light">
+          <p className="text-white tracking-tighter text-lg md:text-xl lg:text-2xl md:pt-10 lg:pt-0 xl:text-3xl font-light">
             Specialities across
           </p>
           <h2 className="text-white text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight tracking-tighter break-words">
