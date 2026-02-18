@@ -27,20 +27,22 @@ export default async function PortfolioPage() {
             <Header />
 
             {/* Hero Section - Matching About Us Aesthetic */}
-            <div
-                className="flex items-center justify-center text-center h-[60vh] pb-20"
-                style={{
-                    background: "radial-gradient(160.39% 60.24% at 50% 90%,rgb(0, 135, 239) 1.02%, #96D6F2 37.56%, #FFFFFF 70%)",
-                }}
-            >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter">
+            <div className="relative flex items-center justify-center text-center h-[60vh] pb-20 overflow-hidden">
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-md scale-4000"
+                    style={{
+                        backgroundImage: "url('/assets/aboutbg.png')",
+                    }}
+                    aria-hidden
+                />
+                <h1 className="relative z-10 text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter">
                     <span className="text-[#00A9EE] font-light">Our</span>{" "}
                     <span className="text-gray-700">Work</span>
                 </h1>
             </div>
 
             {/* Content Section - Matching About Us layout structure */}
-            <div className="bg-white -mt-20 w-full rounded-t-[40px] z-10 relative px-4 md:px-8 pt-20 pb-20">
+            <div className="relative bg-white -mt-20 w-full rounded-t-[40px] z-10 overflow-hidden px-4 md:px-8 pt-20 pb-20">
                 <div className="w-full mx-auto">
                     {portfolios.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1600px] mx-auto">
