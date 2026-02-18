@@ -39,7 +39,7 @@ export default async function Home() {
 
 
 
-      <PinnedSection pinDuration="1000vh">
+      <PinnedSection pinDuration="1500vh">
         <div
           className="flex w-full flex-col gap-4 rounded-t-[30px] relative "
           style={{

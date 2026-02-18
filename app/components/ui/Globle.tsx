@@ -2,11 +2,14 @@
 
 import { useEffect, useRef } from "react"
 import createGlobe, { COBEOptions } from "cobe"
+import { useLenis } from "lenis/react"
 import { useMotionValue, useSpring } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
+const SCROLL_TO_PHI = 0.0015
+const BOOST_DECAY = 0.92
 
 const MARKER_LOCATIONS: [number, number][] = [
   [6.9271, 79.8612],     // Sri Lanka - Colombo
@@ -58,6 +61,8 @@ export function Globe({
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<number | null>(null)
   const pointerInteractionMovement = useRef(0)
+  const scrollSpinBoost = useRef(0)
+  const lenis = useLenis()
 
   const r = useMotionValue(0)
   const rs = useSpring(r, {
@@ -82,6 +87,14 @@ export function Globe({
   }
 
   useEffect(() => {
+    if (!lenis) return
+    const unsubscribe = lenis.on("scroll", (e: { velocity: number }) => {
+      scrollSpinBoost.current += e.velocity * SCROLL_TO_PHI
+    })
+    return () => unsubscribe()
+  }, [lenis])
+
+  useEffect(() => {
     const onResize = () => {
       if (canvasRef.current) {
         width = canvasRef.current.offsetWidth
@@ -96,7 +109,10 @@ export function Globe({
       width: width * 2,
       height: width * 2,
       onRender: (state: Record<string, any>) => {
-        if (!pointerInteracting.current) phi += 0.005
+        if (!pointerInteracting.current) phi += 0.003
+        const boost = scrollSpinBoost.current
+        phi += boost
+        scrollSpinBoost.current *= BOOST_DECAY
         state.phi = phi + rs.get()
         state.width = width * 2
         state.height = width * 2
