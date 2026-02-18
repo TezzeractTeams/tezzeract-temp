@@ -8,6 +8,27 @@ import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
 
+const MARKER_LOCATIONS: [number, number][] = [
+  [6.9271, 79.8612],     // Sri Lanka - Colombo
+  [28.6139, 77.2090],    // India - New Delhi
+  [22.3193, 114.1694],   // Hong Kong
+  [41.9028, 12.4964],    // Italy - Rome
+  [48.8566, 2.3522],     // France - Paris
+  [38.7223, -9.1393],    // Portugal - Lisbon
+  [39.9612, -82.9988],   // USA - Ohio (Columbus)
+  [34.0522, -118.2437],  // USA - California (Los Angeles)
+  [34.7465, -92.2896],   // USA - Arkansas (Little Rock)
+  [1.3521, 103.8198],    // Singapore
+  [13.7563, 100.5018],   // Thailand - Bangkok
+  [51.5074, -0.1278],    // United Kingdom - London
+  [52.52, 13.405],       // Germany - Berlin
+  [54.6872, 25.2797],    // Lithuania - Vilnius
+]
+
+const BASE_MARKER_SIZE = 0.08
+const PULSE_MIN = 0.06
+const PULSE_MAX = 0.12
+
 const GLOBE_CONFIG: COBEOptions = {
   width: 800,
   height: 800,
@@ -22,22 +43,7 @@ const GLOBE_CONFIG: COBEOptions = {
   baseColor: [1, 1, 1],
   markerColor: [39 / 255, 170 / 255, 225 / 255],
   glowColor: [1, 1, 1],
-  markers: [
-    { location: [6.9271, 79.8612], size: 0.08 },    // Sri Lanka - Colombo
-    { location: [28.6139, 77.2090], size: 0.08 },   // India - New Delhi
-    { location: [22.3193, 114.1694], size: 0.08 },  // Hong Kong
-    { location: [41.9028, 12.4964], size: 0.08 },   // Italy - Rome
-    { location: [48.8566, 2.3522], size: 0.08 },     // France - Paris
-    { location: [38.7223, -9.1393], size: 0.08 },   // Portugal - Lisbon
-    { location: [39.9612, -82.9988], size: 0.08 },   // USA - Ohio (Columbus)
-    { location: [34.0522, -118.2437], size: 0.08 },  // USA - California (Los Angeles)
-    { location: [34.7465, -92.2896], size: 0.08 },   // USA - Arkansas (Little Rock)
-    { location: [1.3521, 103.8198], size: 0.08 },   // Singapore
-    { location: [13.7563, 100.5018], size: 0.08 },   // Thailand - Bangkok
-    { location: [51.5074, -0.1278], size: 0.08 },   // United Kingdom - London
-    { location: [52.52, 13.405], size: 0.08 },      // Germany - Berlin
-    { location: [54.6872, 25.2797], size: 0.08 },   // Lithuania - Vilnius
-  ],
+  markers: MARKER_LOCATIONS.map((location) => ({ location, size: BASE_MARKER_SIZE })),
 }
 
 export function Globe({
@@ -94,6 +100,11 @@ export function Globe({
         state.phi = phi + rs.get()
         state.width = width * 2
         state.height = width * 2
+        // Pulsing effect: oscillate marker size between PULSE_MIN and PULSE_MAX
+        const t = performance.now() * 0.001
+        const pulse = (Math.sin(t * 2) + 1) * 0.5
+        const size = PULSE_MIN + pulse * (PULSE_MAX - PULSE_MIN)
+        state.markers = MARKER_LOCATIONS.map((location) => ({ location, size }))
       },
     })
 
