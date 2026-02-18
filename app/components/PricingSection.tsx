@@ -176,7 +176,7 @@ const PricingCard = ({
 
       <div className="mb-8">
         <div 
-          className="inline-flex items-center gap-3 py-1 sm:px-3 sm:py-1.5 !w-fit md:py-2 rounded-full backdrop-blur-lg border border-white/30"
+          className="inline-flex items-center gap-3 px-4 py-1 sm:px-3 sm:py-1.5 !w-fit md:py-2 rounded-full backdrop-blur-lg border border-white/30"
           style={{ backgroundColor: t.badgeBg }}
         > 
           <PersonIcon color={t.badgeSecondaryColor} />
