@@ -23,7 +23,7 @@ export default function AboutUsSection() {
       {/* Main Heading */}
       <div className="relative flex items-center justify-center text-center h-[85vh] pb-20 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-md scale-105"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-md scale-4000"
           style={{
             backgroundImage: "url('/assets/aboutbg.png')",
           }}

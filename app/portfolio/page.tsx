@@ -29,7 +29,7 @@ export default async function PortfolioPage() {
             {/* Hero Section - Matching About Us Aesthetic */}
             <div className="relative flex items-center justify-center text-center h-[60vh] pb-20 overflow-hidden">
                 <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-md scale-5000"
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-md scale-4000"
                     style={{
                         backgroundImage: "url('/assets/aboutbg.png')",
                     }}

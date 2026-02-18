@@ -23,16 +23,20 @@ const GLOBE_CONFIG: COBEOptions = {
   markerColor: [39 / 255, 170 / 255, 225 / 255],
   glowColor: [1, 1, 1],
   markers: [
-    { location: [14.5995, 120.9842], size: 0.03 },
-    { location: [19.076, 72.8777], size: 0.1 },
-    { location: [23.8103, 90.4125], size: 0.05 },
-    { location: [30.0444, 31.2357], size: 0.07 },
-    { location: [39.9042, 116.4074], size: 0.08 },
-    { location: [-23.5505, -46.6333], size: 0.1 },
-    { location: [19.4326, -99.1332], size: 0.1 },
-    { location: [40.7128, -74.006], size: 0.1 },
-    { location: [34.6937, 135.5022], size: 0.05 },
-    { location: [41.0082, 28.9784], size: 0.06 },
+    { location: [6.9271, 79.8612], size: 0.08 },    // Sri Lanka - Colombo
+    { location: [28.6139, 77.2090], size: 0.08 },   // India - New Delhi
+    { location: [22.3193, 114.1694], size: 0.08 },  // Hong Kong
+    { location: [41.9028, 12.4964], size: 0.08 },   // Italy - Rome
+    { location: [48.8566, 2.3522], size: 0.08 },     // France - Paris
+    { location: [38.7223, -9.1393], size: 0.08 },   // Portugal - Lisbon
+    { location: [39.9612, -82.9988], size: 0.08 },   // USA - Ohio (Columbus)
+    { location: [34.0522, -118.2437], size: 0.08 },  // USA - California (Los Angeles)
+    { location: [34.7465, -92.2896], size: 0.08 },   // USA - Arkansas (Little Rock)
+    { location: [1.3521, 103.8198], size: 0.08 },   // Singapore
+    { location: [13.7563, 100.5018], size: 0.08 },   // Thailand - Bangkok
+    { location: [51.5074, -0.1278], size: 0.08 },   // United Kingdom - London
+    { location: [52.52, 13.405], size: 0.08 },      // Germany - Berlin
+    { location: [54.6872, 25.2797], size: 0.08 },   // Lithuania - Vilnius
   ],
 }
 
