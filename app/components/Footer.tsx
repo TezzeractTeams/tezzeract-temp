@@ -24,7 +24,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2 - Legal */}
-          <div className="flex flex-col gap-2 md:gap-3 items-start text-left pl-12">
+          <div className="flex flex-col gap-2 md:gap-3 items-start text-left pl-0 md:pl-0 lg:pl-12">
             <h4 className="text-white/60 text-sm font-light mb-2">Legal</h4>
             <a
               href="/privacy-policy"

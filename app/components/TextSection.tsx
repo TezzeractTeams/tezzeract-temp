@@ -154,7 +154,7 @@ export default function TextSection() {
           ref={avatar2Ref}
           className="inline-flex align-middle mx-2 md:mx-4 relative -top-1"
         >
-          <div className="w-16 h-12 md:w-24 md:h-10 lg:w-32 lg:h-15 relative">
+          <div className="w-16 h-16 md:w-24 md:h-10 lg:w-40 lg:h-15 relative">
             <Image
               src="/assets/avatars/recGroup.png"
               alt="Tezzeract Team"
