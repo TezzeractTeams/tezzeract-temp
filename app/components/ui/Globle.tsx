@@ -2,11 +2,35 @@
 
 import { useEffect, useRef } from "react"
 import createGlobe, { COBEOptions } from "cobe"
+import { useLenis } from "lenis/react"
 import { useMotionValue, useSpring } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
+const SCROLL_TO_PHI = 0.0015
+const BOOST_DECAY = 0.92
+
+const MARKER_LOCATIONS: [number, number][] = [
+  [6.9271, 79.8612],     // Sri Lanka - Colombo
+  [28.6139, 77.2090],    // India - New Delhi
+  [22.3193, 114.1694],   // Hong Kong
+  [41.9028, 12.4964],    // Italy - Rome
+  [48.8566, 2.3522],     // France - Paris
+  [38.7223, -9.1393],    // Portugal - Lisbon
+  [39.9612, -82.9988],   // USA - Ohio (Columbus)
+  [34.0522, -118.2437],  // USA - California (Los Angeles)
+  [34.7465, -92.2896],   // USA - Arkansas (Little Rock)
+  [1.3521, 103.8198],    // Singapore
+  [13.7563, 100.5018],   // Thailand - Bangkok
+  [51.5074, -0.1278],    // United Kingdom - London
+  [52.52, 13.405],       // Germany - Berlin
+  [54.6872, 25.2797],    // Lithuania - Vilnius
+]
+
+const BASE_MARKER_SIZE = 0.08
+const PULSE_MIN = 0.06
+const PULSE_MAX = 0.12
 
 const GLOBE_CONFIG: COBEOptions = {
   width: 800,
@@ -22,18 +46,7 @@ const GLOBE_CONFIG: COBEOptions = {
   baseColor: [1, 1, 1],
   markerColor: [39 / 255, 170 / 255, 225 / 255],
   glowColor: [1, 1, 1],
-  markers: [
-    { location: [14.5995, 120.9842], size: 0.03 },
-    { location: [19.076, 72.8777], size: 0.1 },
-    { location: [23.8103, 90.4125], size: 0.05 },
-    { location: [30.0444, 31.2357], size: 0.07 },
-    { location: [39.9042, 116.4074], size: 0.08 },
-    { location: [-23.5505, -46.6333], size: 0.1 },
-    { location: [19.4326, -99.1332], size: 0.1 },
-    { location: [40.7128, -74.006], size: 0.1 },
-    { location: [34.6937, 135.5022], size: 0.05 },
-    { location: [41.0082, 28.9784], size: 0.06 },
-  ],
+  markers: MARKER_LOCATIONS.map((location) => ({ location, size: BASE_MARKER_SIZE })),
 }
 
 export function Globe({
@@ -48,6 +61,8 @@ export function Globe({
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<number | null>(null)
   const pointerInteractionMovement = useRef(0)
+  const scrollSpinBoost = useRef(0)
+  const lenis = useLenis()
 
   const r = useMotionValue(0)
   const rs = useSpring(r, {
@@ -72,6 +87,14 @@ export function Globe({
   }
 
   useEffect(() => {
+    if (!lenis) return
+    const unsubscribe = lenis.on("scroll", (e: { velocity: number }) => {
+      scrollSpinBoost.current += e.velocity * SCROLL_TO_PHI
+    })
+    return () => unsubscribe()
+  }, [lenis])
+
+  useEffect(() => {
     const onResize = () => {
       if (canvasRef.current) {
         width = canvasRef.current.offsetWidth
@@ -86,10 +109,18 @@ export function Globe({
       width: width * 2,
       height: width * 2,
       onRender: (state: Record<string, any>) => {
-        if (!pointerInteracting.current) phi += 0.005
+        if (!pointerInteracting.current) phi += 0.003
+        const boost = scrollSpinBoost.current
+        phi += boost
+        scrollSpinBoost.current *= BOOST_DECAY
         state.phi = phi + rs.get()
         state.width = width * 2
         state.height = width * 2
+        // Pulsing effect: oscillate marker size between PULSE_MIN and PULSE_MAX
+        const t = performance.now() * 0.001
+        const pulse = (Math.sin(t * 2) + 1) * 0.5
+        const size = PULSE_MIN + pulse * (PULSE_MAX - PULSE_MIN)
+        state.markers = MARKER_LOCATIONS.map((location) => ({ location, size }))
       },
     })
 

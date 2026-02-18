@@ -7,30 +7,27 @@ interface Testimonial {
   name: string;
   title: string;
   company: string;
-  avatar: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     text: "The Tezzeract team approached our project with a highly collaborative approach, taking the time to fully understand our mission, values, and audience.",
-    name: "Chief Marketing Officer",
-    title: "Beentouch",
+    name: "Gabriele Mirabile",
+    title: "Chief Marketing Officer – Beentouch",
     company: "Founder – United by Music for Charity",
     avatar: "/assets/Gabriele-Mirabile.jpg"
   },
   {
     text: "Working with Tezzeract on our regional communications strategy in Asia has been an exceptional experience.",
-    name: "Regional Communications Director - Asia",
-    title: "Heifer International",
-    company: "gurpreet.bhatia@heif",
-    avatar: "/assets/avatars/asianfemale.png"
+    name: "Gurpreet Bhatia",
+    title: "Regional Communications Director - Asia",
+    company: "Heifer International",
   },
   {
     text: "Tezzeract has been an invaluable partner in optimizing our website performance and developing several projects from scratch.",
     name: "Marius Fittler",
     title: "Creative Director",
     company: "Panomatics VR International",
-    avatar: "/assets/avatars/germanmale.png"
   }
 ];
 
@@ -95,7 +92,7 @@ export default function BentoBox5() {
           <div className="flex flex-col justify-start pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-2 sm:pb-4 md:pb-6 h-[180px] sm:h-[200px] md:h-[240px] lg:h-[260px] xl:h-[280px]">
             <p
               key={currentIndex}
-              className="text-white text-[16px] md:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out break-words"
+              className="text-white mt-10 sm:mt-0 text-[32px] md:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-[90%] transition-opacity duration-500 ease-in-out break-words"
               style={{ opacity: isAnimating ? 0 : 1 }}
             >
               {currentTestimonial.text}
@@ -104,14 +101,6 @@ export default function BentoBox5() {
 
           {/* Author info - fixed height */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mt-2 sm:mt-4 md:mt-9 flex-shrink-0 h-[50px] sm:h-[60px] md:h-[72px]">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 border-2 border-white/30 overflow-hidden flex-shrink-0 transition-opacity duration-500 ease-in-out" style={{ opacity: isAnimating ? 0 : 1 }}>
-              <img
-                key={`avatar-${currentIndex}`}
-                src={currentTestimonial.avatar}
-                alt={currentTestimonial.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
             <div className="flex flex-col min-w-0 flex-1 transition-opacity duration-500 ease-in-out" style={{ opacity: isAnimating ? 0 : 1 }}>
               <p key={`name-${currentIndex}`} className="text-white font-bold text-sm sm:text-base truncate">{currentTestimonial.name}</p>
               <p key={`title-${currentIndex}`} className="text-white/90 text-xs sm:text-sm truncate">{currentTestimonial.title}</p>
