@@ -4,6 +4,7 @@ import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "lenis/react";
+import { PinnedScrollContext } from "@/app/context/PinnedScrollContext";
 
 interface PinnedSectionProps {
     children: React.ReactNode;
@@ -13,6 +14,7 @@ interface PinnedSectionProps {
 export default function PinnedSection({ children, pinDuration = "100%" }: PinnedSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLDivElement>(null);
+    const isPinnedRef = useRef(false);
     const lenis = useLenis();
 
     useLayoutEffect(() => {
@@ -28,7 +30,11 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
                         pinSpacing: true,
                         scrub: true,
                         markers: false,
+                        onUpdate: (self) => {
+                            isPinnedRef.current = self.isActive;
+                        },
                         onLeave: () => {
+                            isPinnedRef.current = false;
                             const nextSection = containerRef.current?.nextElementSibling as HTMLElement;
                             if (nextSection && lenis) {
                                 lenis.scrollTo(nextSection, {
@@ -47,10 +53,12 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
     }, [pinDuration, lenis]);
 
     return (
-        <div ref={containerRef} className="w-full">
-            <div ref={triggerRef} className="w-full">
-                {children}
+        <PinnedScrollContext.Provider value={{ isPinnedRef }}>
+            <div ref={containerRef} className="w-full">
+                <div ref={triggerRef} className="w-full">
+                    {children}
+                </div>
             </div>
-        </div>
+        </PinnedScrollContext.Provider>
     );
 }
