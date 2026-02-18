@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
 const SCROLL_TO_PHI = 0.0015
-const BOOST_DECAY = 0.92
+const BOOST_DECAY = 0.72
 
 const MARKER_LOCATIONS: [number, number][] = [
   [6.9271, 79.8612],     // Sri Lanka - Colombo

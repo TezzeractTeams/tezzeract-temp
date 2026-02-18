@@ -110,16 +110,16 @@ export default function TextSection() {
     >
       <h2 ref={headingRef} className="md:text-[60px] text-[36px] leading-[1.5] text-gray-400 font-light tracking-tighter">
         {/* Tezzeract */}
-        <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>Tezzeract</span>
+        <span className="text-word bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>Tezzeract</span>
         <span className="text-word" style={{ display: "inline-block" }}>{"\u00A0"}offers</span>
         <span className="text-word" style={{ display: "inline-block" }}>{"\u00A0"}access</span>
         <span className="text-word" style={{ display: "inline-block" }}>{"\u00A0"}to</span>
         <br className="hidden md:block" />
         {/* talent on demand */}
-        <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>{"\u00A0"}talent</span>
-        <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>{"\u00A0"}on</span>
-        <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>{"\u00A0"}demand</span>
-        <span className="text-word text-[#0077b6]" style={{ display: "inline-block" }}>{"\u00A0"}</span>
+        <span className="text-word bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}talent</span>
+        <span className="text-word bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}on</span>
+        <span className="text-word bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}demand</span>
+        <span className="text-word bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}</span>
 
         {/* Avatar 1 */}
         <span
@@ -143,11 +143,11 @@ export default function TextSection() {
         <span className="text-word" style={{ display: "inline-block" }}>{"\u00A0"}to</span>
         <br className="hidden md:block" />
         {/* form and scale teams */}
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>form</span>
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}and</span>
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}scale</span>
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}teams</span>
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>form</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}and</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}scale</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}teams</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}</span>
 
         {/* Pill Avatar + Button */}
         <span
@@ -168,9 +168,9 @@ export default function TextSection() {
         <span className="text-word" style={{ display: "inline-block" }}>under</span>
         <br className="hidden md:block" />
         {/* a single subscription */}
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>a</span>
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}single</span>
-        <span className="text-word text-[#0077b6] font-light" style={{ display: "inline-block" }}>{"\u00A0"}subscription.</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>a</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}single</span>
+        <span className="text-word font-light bg-gradient-to-r from-[#0068B5] to-[#00A9EE] bg-clip-text text-transparent" style={{ display: "inline-block" }}>{"\u00A0"}subscription.</span>
       </h2>
       <Link href="/get-started" className="block w-fit mx-auto mt-10">
         <TezzeractButton ref={buttonRef} className="w-[200px]">Book a call</TezzeractButton>
