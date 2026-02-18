@@ -59,7 +59,7 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
 
         <div
           className={`
-            relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
+            relative w-8 h-8 md:w-10 md:h-10 rounded-2xl overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out
             ${isHovered
               ? "ring-2 ring-white/30"
               : ""
