@@ -3,7 +3,7 @@ import { Globe } from "../ui/Globle";
 
 export default function BentoBox2() {
   return (
-    <div className="max-h-[400px] sm:max-h-[450px] md:max-h-[500px] lg:max-h-[45vh] w-full rounded-[30px] bg-[#F5F5F5] border border-[#00A9EE]/30 relative overflow-hidden">
+    <div className="max-h-[400px] sm:max-h-[450px] md:max-h-[500px] lg:h-[45vh] w-full rounded-[30px] bg-[#F5F5F5] border border-[#00A9EE]/30 relative overflow-hidden">
       <div className="flex flex-row h-full min-h-[280px] px-5 sm:px-5 md:px-6 lg:px-9 py-6 lg:py-9">
         {/* Left - Text */}
         <div className="flex-1 flex flex-col justify-center min-w-0">
