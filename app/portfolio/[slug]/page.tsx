@@ -230,7 +230,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ slug
                 .map((impact, index) => (
                   <div key={index} className="text-center">
                     <div
-                      className="text-gray-500 font-light leading-relaxed max-w-[280px] mx-auto"
+                      className="impact-content text-gray-500 font-light leading-relaxed max-w-[280px] mx-auto [&_strong]:font-semibold [&_strong]:text-gray-700 [&_em]:italic [&_u]:underline [&_a]:text-gray-700 [&_a]:underline [&_a:hover]:text-gray-900 [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_h1]:text-2xl [&_h1]:font-light [&_h1]:mb-4 [&_h2]:text-xl [&_h2]:font-light [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-light [&_h3]:mb-2 [&_p]:mb-2 [&_ul]:list-disc [&_ul]:list-inside [&_ul]:mb-2 [&_ol]:list-decimal [&_ol]:list-inside [&_ol]:mb-2 [&_li]:mb-1 [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-2"
                       dangerouslySetInnerHTML={{ __html: impact! }}
                     />
                   </div>
