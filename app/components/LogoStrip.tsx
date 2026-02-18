@@ -69,7 +69,7 @@ export default function LogoStrip({ className }: LogoStripProps) {
 
   return (
     <div 
-      className={`relative w-full overflow-hidden ${className || ""}`}
+      className={`relative w-full min-h-[80px] overflow-hidden ${className || ""}`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -86,18 +86,17 @@ export default function LogoStrip({ className }: LogoStripProps) {
         {duplicatedLogos.map((logo, index) => (
           <div
             key={`${logo.name}-${index}`}
-            className="shrink-0 flex items-center justify-center"
-            style={{
-              width: "120px",
-            }}
+            className="shrink-0 flex items-center justify-center w-[120px] h-10"
           >
-            <Image
-              src={logo.logoSrc}
-              alt={logo.name}
-              width={120}
-              height={40}
-              className="object-contain py-6 opacity-90 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-            />
+            <div className="relative w-full h-full">
+              <Image
+                src={logo.logoSrc}
+                alt={logo.name}
+                fill
+                sizes="120px"
+                className="object-contain object-center opacity-90 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+              />
+            </div>
           </div>
         ))}
       </div>
