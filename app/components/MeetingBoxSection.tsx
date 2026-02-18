@@ -27,9 +27,10 @@ const MeetingBox = ({ title, description, imageSrc, imageAlt, stepNumber, number
         <Image
           src={imageSrc}
           alt={imageAlt}
-          width={200}
-          height={200}
+          width={600}
+          height={600}
           className="object-contain w-full h-full"
+          quality={90}
         />
       </div>
 
