@@ -40,7 +40,7 @@ export default function Footer() {
             <h4 className="text-white/60 text-sm font-light mb-2">
               Social Media
             </h4>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               <a
                 href="https://www.linkedin.com/company/tezzeractofficial/"
                 className="text-white hover:text-white/80 transition-colors"

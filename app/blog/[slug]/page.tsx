@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import UserCard from "@/app/components/ui/UserCard";
 import TezzeractH1 from "@/app/components/ui/TezzeractH1";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import ScrollToTop from "@/app/components/ScrollToTop";
 
 // Generate static params for all blog posts (for static generation)
 export async function generateStaticParams() {
@@ -38,7 +41,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white font-manrope">
+      <ScrollToTop />
+      <Header />
       {/* Cover Image */}
       {post.cover && (
         <div className="w-full h-[400px] md:h-[500px] relative overflow-hidden">
@@ -101,6 +106,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           />
         </div>
       </article>
+      <Footer />
     </div>
   );
 }

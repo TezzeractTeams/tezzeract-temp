@@ -104,6 +104,14 @@ type RichTextNode = {
   level?: number;
   text?: string;
   children?: RichTextNode[];
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikethrough?: boolean;
+  code?: boolean;
+  url?: string;
+  newTab?: boolean;
+  format?: string;
 };
 
 function escapeHtml(text: string): string {
@@ -115,6 +123,43 @@ function escapeHtml(text: string): string {
     "'": '&#039;',
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+// Convert inline nodes (text, bold, italic, links, etc.) to HTML
+function convertInlineNodes(nodes: RichTextNode[]): string {
+  if (!Array.isArray(nodes)) {
+    return '';
+  }
+
+  return nodes.map(node => {
+    if (typeof node === 'string') {
+      return escapeHtml(node);
+    }
+
+    if (node.type === 'text' || (!node.type && node.text !== undefined)) {
+      let text = escapeHtml(node.text || '');
+
+      // Apply formatting (bold, italic, etc.)
+      if (node.bold) text = `<strong>${text}</strong>`;
+      if (node.italic) text = `<em>${text}</em>`;
+      if (node.underline) text = `<u>${text}</u>`;
+      if (node.strikethrough) text = `<s>${text}</s>`;
+      if (node.code) text = `<code>${text}</code>`;
+
+      return text;
+    }
+
+    if (node.type === 'link') {
+      return `<a href="${node.url || '#'}" ${node.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${convertInlineNodes(node.children || [])}</a>`;
+    }
+
+    // Handle nested children
+    if (node.children && Array.isArray(node.children)) {
+      return convertInlineNodes(node.children);
+    }
+
+    return '';
+  }).join('');
 }
 
 function toHtmlContent(content: unknown): string {
@@ -142,21 +187,53 @@ function toHtmlContent(content: unknown): string {
       .map((block: unknown) => {
         if (typeof block === 'string') return `<p>${escapeHtml(block)}</p>`;
         const blockNode = typeof block === 'object' && block !== null ? (block as RichTextNode) : undefined;
-        if (blockNode?.type === 'heading') {
+        if (!blockNode) return '';
+
+        // Handle heading
+        if (blockNode.type === 'heading') {
           const level = blockNode.level || 2;
-          const text = (blockNode.children || [])
-            .map((child: RichTextNode) => child?.text || '')
-            .join('');
-          return `<h${level}>${escapeHtml(text)}</h${level}>`;
+          return `<h${level}>${convertInlineNodes(blockNode.children || [])}</h${level}>`;
         }
-        if (blockNode?.type === 'paragraph') {
-          const text = (blockNode.children || [])
-            .map((child: RichTextNode) => child?.text || '')
-            .join('');
-          return `<p>${escapeHtml(text)}</p>`;
+
+        // Handle paragraph
+        if (blockNode.type === 'paragraph') {
+          return `<p>${convertInlineNodes(blockNode.children || [])}</p>`;
         }
-        if (blockNode?.text) return `<p>${escapeHtml(blockNode.text)}</p>`;
-        if (blockNode?.children) return toHtmlContent(blockNode.children);
+
+        // Handle list
+        if (blockNode.type === 'list') {
+          const listTag = blockNode.format === 'ordered' ? 'ol' : 'ul';
+          const items = (blockNode.children || [])
+            .map((item: RichTextNode) => `<li>${convertInlineNodes(item.children || [])}</li>`)
+            .join('');
+          return `<${listTag}>${items}</${listTag}>`;
+        }
+
+        // Handle quote
+        if (blockNode.type === 'quote') {
+          return `<blockquote>${convertInlineNodes(blockNode.children || [])}</blockquote>`;
+        }
+
+        // Handle code
+        if (blockNode.type === 'code') {
+          return `<pre><code>${escapeHtml(convertInlineNodes(blockNode.children || []))}</code></pre>`;
+        }
+
+        // Handle link block
+        if (blockNode.type === 'link') {
+          return `<a href="${blockNode.url || '#'}" ${blockNode.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${convertInlineNodes(blockNode.children || [])}</a>`;
+        }
+
+        // Fallback: if it has text, wrap in paragraph
+        if (blockNode.text) {
+          return `<p>${convertInlineNodes([blockNode])}</p>`;
+        }
+
+        // If it has children, process them
+        if (blockNode.children && Array.isArray(blockNode.children)) {
+          return toHtmlContent(blockNode.children);
+        }
+
         return '';
       })
       .join('\n');
@@ -171,7 +248,7 @@ function toHtmlContent(content: unknown): string {
       return toHtmlContent(contentNode.children);
     }
     if (contentNode.text) {
-      return `<p>${escapeHtml(contentNode.text)}</p>`;
+      return `<p>${convertInlineNodes([contentNode])}</p>`;
     }
   }
 

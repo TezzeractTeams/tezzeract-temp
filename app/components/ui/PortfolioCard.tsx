@@ -16,7 +16,7 @@ export default function PortfolioCard({
   slug,
 }: PortfolioCardProps) {
   return (
-    <div className="rounded-[30px] flex flex-col justify-end overflow-hidden relative group w-full aspect-[3/4] md:aspect-[4/3]">
+    <div className="rounded-[30px] h-[40vh] md:h-auto lg:h-auto flex flex-col justify-end overflow-hidden relative group w-full aspect-[3/4] md:aspect-[4/3]">
       {/* Background Image */}
       <Image
         src={image}
@@ -30,7 +30,7 @@ export default function PortfolioCard({
 
       {/* Gradient blur overlay */}
       <div
-        className="absolute bottom-0 sm:h-[40%] md:h-[60%] lg:h-[40%] group-hover:sm:h-[50%] group-hover:md:h-[70%] group-hover:lg:h-[40%] left-0 right-0 pointer-events-none transition-all duration-300"
+        className="absolute bottom-0 h-[45%] sm:h-[40%] md:h-[60%] lg:h-[40%] group-hover:h-[40%] group-hover:sm:h-[50%] group-hover:md:h-[70%] group-hover:lg:h-[40%] left-0 right-0 pointer-events-none transition-all duration-300"
         style={{
 
           borderRadius: '0 0 30px 30px',
@@ -41,7 +41,7 @@ export default function PortfolioCard({
       />
 
       {/* Content */}
-      <div className="  z-10 px-4 py-2 md:px-4 md:py-0 lg:py-2 lg:px-10 transition-transform duration-300 group-hover:-translate-y-2">
+      <div className="  z-10 px-4  md:px-4 md:py-0 lg:py-2 lg:px-10 transition-transform duration-300 group-hover:-translate-y-2">
         {/* Tag */}
         <div className="mb-3 inline-block">
           <span
