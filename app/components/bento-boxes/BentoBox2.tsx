@@ -11,7 +11,7 @@ export default function BentoBox2() {
             Our teams have provided services to businesses globally across
           </p>
           <span className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tighter bg-gradient-to-r from-[#00378A] via-[#00A9EE] to-[#00378A] bg-clip-text text-transparent">
-            120+
+            12+
           </span>
           <span className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter bg-gradient-to-r from-[#00378A] via-[#00A9EE] to-[#00378A] bg-clip-text text-transparent">
             countries

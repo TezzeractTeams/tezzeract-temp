@@ -74,7 +74,7 @@ export default function BentoBox5() {
         </defs>
       </svg>
       <div
-        className="bento-box-5 h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 rounded-xl"
+        className="bento-box-5 h-[50vh] sm:h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 rounded-xl"
         style={{
           backgroundImage: 'url(/bento5.png)',
           backgroundSize: 'cover',
