@@ -89,10 +89,10 @@ export default function BentoBox5() {
         <div className="relative z-10 flex flex-col p-4 sm:p-6 md:p-1 lg:p-10 h-full justify-between text-white min-h-0">
 
           {/* Testimonial text - fixed height area */}
-          <div className="flex flex-col tracking-tighter justify-start pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-2 sm:pb-4 md:pb-6 h-[180px] sm:h-[200px] md:h-[240px] lg:h-[260px] xl:h-[280px]">
+          <div className="flex flex-col tracking-tighter leading-tight justify-start pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-2 sm:pb-4 md:pb-6 h-[180px] sm:h-[200px] md:h-[240px] lg:h-[260px] xl:h-[280px]">
             <p
               key={currentIndex}
-              className="text-white mt-10 sm:mt-0 text-[32px] md:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-full transition-opacity duration-500 ease-in-out break-words"
+              className="text-white mt-10 sm:mt-0 text-[28px] md:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-full transition-opacity duration-500 ease-in-out break-words"
               style={{ opacity: isAnimating ? 0 : 1 }}
             >
               {currentTestimonial.text}
