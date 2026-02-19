@@ -16,7 +16,10 @@ export default function PortfolioCard({
   slug,
 }: PortfolioCardProps) {
   return (
-    <div className="rounded-[30px] h-[40vh] md:h-auto lg:h-auto flex flex-col justify-end overflow-hidden relative group w-full aspect-[3/4] md:aspect-[4/3]">
+    <Link
+      href={`/projects/${slug || '#'}`}
+      className="rounded-[30px] h-[40vh] md:h-auto lg:h-auto flex flex-col justify-end overflow-hidden relative group w-full aspect-[3/4] md:aspect-[4/3] cursor-pointer"
+    >
       {/* Background Image */}
       <Image
         src={image}
@@ -69,14 +72,11 @@ export default function PortfolioCard({
         </h3>
 
         {/* Read the Full Case Study Link - Hidden by default, appears on hover */}
-        <Link
-          href={`/projects/${slug || '#'}`}
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-white w-fit cursor-pointer"
-        >
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-white w-fit">
           <span className="text-sm font-light  underline">Read the Full Case Study</span>
           <ArrowUpRight className="h-4 w-4 shrink-0" />
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
