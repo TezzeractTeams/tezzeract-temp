@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="w-full px-6 md:w-[90%] lg:w-[90%] xl:w-[70%] mx-auto grid grid-cols-2 lg:flex lg:flex-row lg:justify-between gap-6 md:gap-8">
           
           {/* Column 1 - Logo + Copyright */}
-          <div className="flex flex-row lg:flex-col  items-start lg:items-start gap-4 lg:gap-8">
+          <div className="flex flex-col lg:flex-col  items-start lg:items-start gap-4 lg:gap-8">
             <Image
               src="/assets/TezzeractSquare.svg"
               alt="Tezzeract Logo"
@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2 - Pages */}
-          <div className="flex flex-col gap-2 md:gap-3 pt-5 sm:pt-0 items-start text-left">
+          <div className="flex flex-col gap-2 md:gap-3 items-start text-left">
             <h4 className="text-white/60 text-sm font-light mb-2">Pages</h4>
             <div className="grid grid-cols-2 gap-3">
               <a
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3 - Social Media */}
-          <div className="flex flex-col gap-2 md:gap-3 pt-5 sm:pt-0 items-start text-left">
+            <div className="flex flex-col gap-2 md:gap-3 items-start pt-5 lg:pt-0 text-left">
             <h4 className="text-white/60 text-sm font-light mb-2">
               Social Media
             </h4>
@@ -95,7 +95,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4 - Legal */}
-          <div className="flex flex-col gap-2 md:gap-3 items-start text-left ">
+            <div className="flex flex-col gap-2 md:gap-3 items-start text-left pt-5 lg:pt-0">
             <h4 className="text-white/60 text-sm font-light mb-2">Legal</h4>
             <a
               href="/privacy-policy"
