@@ -98,15 +98,15 @@ function ScrollingRow({ logos, direction, className, scrollBoostRef }: Scrolling
     <div className={`relative overflow-hidden w-full ${className || ""}`}>
       <div
         ref={elRef}
-        className="flex flex-nowrap gap-4 sm:gap-5 md:gap-6 will-change-transform"
+        className="flex flex-nowrap gap-2 sm:gap-4 md:gap-5 lg:gap-6 will-change-transform"
         style={{ width: "max-content" }}
       >
         {logos.map((logoConfig, index) => (
           <div
             key={`${logoConfig.name}-${index}`}
-            className="flex-shrink-0 w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[70px] md:h-[70px] rounded-xl sm:rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-300"
+            className="flex-shrink-0 w-[36px] h-[36px] sm:w-[44px] sm:h-[44px] md:w-[56px] md:h-[56px] lg:w-[70px] lg:h-[70px] rounded-lg sm:rounded-xl md:rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-300"
           >
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10">
+            <div className="relative w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10">
               <Image src={logoConfig.src} alt={logoConfig.alt} fill className="object-contain" />
             </div>
           </div>
@@ -142,8 +142,8 @@ export default function BentoBox6() {
   }, []);
 
   return (
-    <div className="h-[45vh] w-full rounded-[30px] bg-[#1E293B] flex flex-col justify-between gap-4 sm:gap-5 md:gap-6 sm:pt-6 pb-2 sm:pb-6 md:pb-2 overflow-hidden">
-      <div className="p-5 sm:px-6 md:px-10">
+    <div className="h-[45vh] min-h-[200px] w-full rounded-[30px] bg-[#1E293B] flex flex-col justify-between gap-3 sm:gap-5 md:gap-6 sm:pt-6 pb-2 sm:pb-6 md:pb-2 overflow-hidden">
+      <div className="p-4 sm:p-5 sm:px-6 md:px-10 md:pt-6">
         <p className="text-white tracking-tighter text-[32px] sm:text-base md:text-xl xl:text-3xl font-light leading-tight">
           Teams built for high productivity and ready to execute across tools in tech, marketing, design, and analytics
         </p>
