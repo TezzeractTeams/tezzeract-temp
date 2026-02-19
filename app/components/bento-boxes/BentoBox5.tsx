@@ -63,7 +63,7 @@ export default function BentoBox5() {
   if (!currentTestimonial) return null;
 
   return (
-    <div className="h-[50vh]">
+    <div className="sm:h-[50vh]">
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id="bento-shape-5" clipPathUnits="objectBoundingBox">
@@ -85,13 +85,13 @@ export default function BentoBox5() {
         }}
       >
         {/* Content inside shape */}
-        <div className="relative z-10 flex flex-col p-4 sm:p-6 md:p-1 lg:p-10 h-full justify-between text-white min-h-0">
+        <div className="relative z-10 flex flex-col p-4 sm:p-6 md:p-1 lg:p-10 -mt-10 sm:mt-0  h-full justify-between text-white min-h-0">
 
           {/* Testimonial text - fixed height area */}
           <div className="flex flex-col tracking-tighter leading-tight justify-start pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-2 sm:pb-4 md:pb-6 h-[180px] sm:h-[200px] md:h-[240px] lg:h-[260px] xl:h-[280px]">
             <p
               key={currentIndex}
-              className="text-white mt-10 sm:mt-0 text-[28px] md:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-full transition-opacity duration-500 ease-in-out break-words"
+              className="text-white mt-10 sm:mt-0 text-[24px] md:text-xl xl:text-2xl 2xl:text-3xl font-light max-w-[95%] sm:max-w-full transition-opacity duration-500 ease-in-out break-words"
               style={{ opacity: isAnimating ? 0 : 1 }}
             >
               {currentTestimonial.text}

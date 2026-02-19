@@ -4,7 +4,7 @@ import { AnimatedShinyText } from "./AnimatedShinyText";
 
 export default function BentoBox4() {
   return (
-    <div className="h-[28vh] w-full rounded-[30px] bg-[linear-gradient(35deg,#00378A_0%,#27AAE1_64%,#D6ECFF_100%)] flex flex-col relative p-6 md:p-8 overflow-hidden">
+    <div className="sm:h-[28vh] w-full rounded-[30px] bg-[linear-gradient(35deg,#00378A_0%,#27AAE1_64%,#D6ECFF_100%)] flex flex-col relative p-6 md:p-8 overflow-hidden">
       {/* 3D Logo - Top Left Corner */}
       <div className="absolute -top-10 right-4 sm:-right-15 z-0 w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 transition-all duration-300">
         <Image
@@ -12,7 +12,7 @@ export default function BentoBox4() {
           alt="Tezzeract"
           width={160}
           height={160}
-          className="w-full h-full object-contain opacity-90 scale-100 sm:scale-110 md:scale-125 lg:scale-200 transition-transform duration-300"
+          className="w-full h-full object-contain opacity-90 scale-300 sm:scale-110 md:scale-125 lg:scale-200 transition-transform duration-300"
         />
       </div>
       {/* Industry Expertise Label */}

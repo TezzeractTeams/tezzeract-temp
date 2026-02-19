@@ -8,7 +8,7 @@ import { OrbitingCircles } from "./OrbitingCircles";
 
 export default function BentoBox1() {
   return (
-    <div className="h-[50vh]">
+    <div className="sm:h-[50vh]">
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id="bento-shape-1" clipPathUnits="objectBoundingBox">
@@ -30,7 +30,7 @@ export default function BentoBox1() {
         <div className="absolute top-4 left-4 md:top-6 md:left-3 z-10 pointer-events-none">
           <div className="text-white p-5">
             <div className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tighter">250+</div>
-            <p className="text-[16px]  md:text-xl lg:text-3xl font-light leading-tight pr-10 lg:pr-25 mt-1">
+            <p className="text-[18px]  md:text-xl lg:text-3xl font-light leading-tight pr-10 lg:pr-25 mt-1">
               professionals across the world, specialised across multiple domains.
             </p>
           </div>

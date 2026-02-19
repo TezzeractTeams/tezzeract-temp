@@ -143,8 +143,8 @@ export default function BentoBox6() {
 
   return (
     <div className="h-[45vh] min-h-[200px] w-full rounded-[30px] bg-[#1E293B] flex flex-col justify-between gap-3 sm:gap-5 md:gap-6 sm:pt-6 pb-2 sm:pb-6 md:pb-2 overflow-hidden">
-      <div className="p-4 sm:p-5 sm:px-6 md:px-10 md:pt-6">
-        <p className="text-white tracking-tighter text-[32px] sm:text-base md:text-xl xl:text-3xl font-light leading-tight">
+      <div className="p-6 sm:p-5 sm:px-6 md:px-10 md:pt-6">
+        <p className="text-white tracking-tighter text-[24px] sm:text-base md:text-xl xl:text-3xl font-light leading-tight">
           Teams built for high productivity and ready to execute across tools in tech, marketing, design, and analytics
         </p>
       </div>
