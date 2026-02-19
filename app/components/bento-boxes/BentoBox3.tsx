@@ -20,11 +20,9 @@ export default function BentoBox3() {
               120+
             </h2>
             <p className="text-[16px] sm:text-2xl md:text-xl lg:text-3xl xl:text-2xl 2xl:text-3xl tracking-tighter  font-light text-black/90">
-              Successfully Completed
+              Successfully Completed <br></br>Projects
             </p>
-            <p className="text-lg md:text-xl lg:text-2xl font-light text-white/90">
-              Projects
-            </p>
+    xs
           </div>
         </div>
 
