@@ -22,8 +22,8 @@ export default function BentoGrid() {
             </div>
           </div>
 
-          {/* Column 2 - Middle */}
-          <div className="flex flex-col gap-4 h-[60vh]">
+          {/* Column 2 - Middle: on mobile allow natural height so BentoBox4 is visible; on md+ use 60vh for grid balance */}
+          <div className="flex flex-col gap-4 h-auto md:h-[60vh]">
             {/* Box 3 - Spans both rows (white with light blue gradient) */}
             <div className="flex-[2]">
               <BentoBox3 />

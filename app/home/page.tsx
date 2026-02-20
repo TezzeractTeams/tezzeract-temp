@@ -52,9 +52,9 @@ export default async function Home() {
       </PinnedSection>
 
       <div
-        className="flex w-full flex-col gap-4 rounded-b-[30px] relative "
+        className="flex w-full flex-col gap-4 sm:rounded-b-[30px] relative "
         style={{
-          background: 'radial-gradient(64.55% 66.78% at 10% 100%, #00A9EE 0%, #00378A 24.5%, #121212 74.04%)',
+          background: 'black',
 
         }}
       >
