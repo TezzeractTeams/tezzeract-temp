@@ -69,12 +69,14 @@ export default function ServiceItem({ name, avatarSrc, avatarAlt }: ServiceItemP
           <Image
             src={avatarSrc}
             alt={avatarAlt || name}
-            width={40}
-            height={40}
+            width={80}
+            height={80}
             className={`
               object-cover w-full h-full transition-all duration-300 ease-in-out
-              ${isHovered ? "opacity-100 scale-105" : "opacity-60"}
+              ${isHovered ? "opacity-100 scale-100" : "opacity-60"}
             `}
+            quality={90}
+            priority={false}
           />
         </div>
       </div>

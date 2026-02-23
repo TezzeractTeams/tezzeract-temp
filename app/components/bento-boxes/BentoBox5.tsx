@@ -16,6 +16,7 @@ const testimonials: Testimonial[] = [
     name: "Gabriele Mirabile",
     title: "Chief Marketing Officer – Beentouch",
     company: "Founder – United by Music for Charity",
+    
   },
   {
     text: "Working with Tezzeract on our regional communications strategy in Asia has been an exceptional experience.",

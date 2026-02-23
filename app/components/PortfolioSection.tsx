@@ -51,7 +51,7 @@ function PortfolioSection({ initialData = [] }: PortfolioSectionProps) {
   const swiperItems = [...portfolioItems, ...portfolioItems, ...portfolioItems, ...portfolioItems];
 
   return (
-    <div className='bg-transparent py-10 md:py-20'>
+    <div id="portfolio-section" className='bg-transparent py-10 md:py-20'>
       <TezzeractH1 variant="dark" className="text-center md:text-center text-4xl md:text-6xl mb-12">Work That Creates Impact</TezzeractH1>
       <p className="text-[#ffffff] font-light text-base md:text-lg lg:pb-16 pb-8 md:pb-16 lg:w-[60%] md:w-[80%] px-4 w-full mx-auto text-center">
         Tezzeract teams deliver high-impact projects across tech, marketing, design, and analytics. Specialized, tool-ready, and execution-focused, they help businesses scale and succeed.
