@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizePackageImports: ['gsap', 'three', '@react-three/fiber', 'framer-motion', 'motion'],
+  },
+  compress: true,
 };
 
 export default nextConfig;

@@ -33,7 +33,7 @@ export default function BentoBox3() {
             alt="Portfolio showcase"
             fill
             className="object-cover object-center mt-20 scale-200"
-            priority
+            loading="lazy"
             style={{ transition: 'transform 1s' }}
           />
         </div>

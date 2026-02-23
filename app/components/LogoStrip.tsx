@@ -95,6 +95,7 @@ export default function LogoStrip({ className }: LogoStripProps) {
                 fill
                 sizes="120px"
                 className="object-contain object-center opacity-90 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                loading="lazy"
               />
             </div>
           </div>

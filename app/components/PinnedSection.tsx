@@ -6,6 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "lenis/react";
 import { PinnedScrollContext } from "@/app/context/PinnedScrollContext";
 
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
 interface PinnedSectionProps {
     children: React.ReactNode;
     pinDuration?: string | number;

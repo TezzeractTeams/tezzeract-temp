@@ -14,7 +14,7 @@ export default function Preloader() {
         const timer = setTimeout(() => {
             setLoading(false);
             document.body.style.overflow = "auto";
-        }, 2000); // 2 seconds duration
+        }, 500); // 500ms duration
 
         return () => {
             document.body.style.overflow = "auto";
