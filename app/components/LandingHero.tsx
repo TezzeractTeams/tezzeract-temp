@@ -133,6 +133,17 @@ export default function LandingHero() {
         </defs>
       </svg>
       <div className="landing-hero md:justify-center md:pl-12 lg:pl-24 px-4 flex flex-col h-full relative">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/herobg.webp"
+            alt="Hero background"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
 
         <div className="flex flex-row gap-4 relative z-10">
           <div className="flex flex-col gap-0 md:gap-3 lg:gap-4 w-full md:w-[60%] md:pt-0 pt-26">
@@ -244,10 +255,7 @@ export default function LandingHero() {
           clip-path: url(#landing-hero-clip-desktop);
           height: 83vh;
           width: 100%;
-          background-image: url('/herobg.webp');
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
+          position: relative;
         }
 
         @media (min-width: 768px) and (max-width: 1023px) {

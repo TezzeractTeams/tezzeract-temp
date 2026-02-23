@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface Testimonial {
   text: string;
@@ -77,14 +78,21 @@ export default function BentoBox5() {
       <div
         className="bento-box-5 h-[50vh] sm:h-full w-full flex flex-col relative overflow-hidden p-4 sm:p-6 md:p-8 rounded-xl"
         style={{
-          backgroundImage: 'url(/bento5.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
           backgroundColor: '#00A9EE',
           borderRadius: '30px'
         }}
       >
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/bento5.png"
+            alt="Bento box 5 background"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 33vw"
+            loading="lazy"
+          />
+        </div>
         {/* Content inside shape */}
         <div className="relative z-10 flex flex-col p-4 sm:p-6 md:p-1 lg:p-10 -mt-10 sm:mt-0  h-full justify-between text-white min-h-0">
 

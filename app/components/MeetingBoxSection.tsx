@@ -3,12 +3,6 @@
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// Register ScrollTrigger plugin
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface MeetingBoxProps {
   title: string;
@@ -73,111 +67,128 @@ export default function MeetingBoxSection() {
 
     let horizontalAnimation: gsap.core.Tween | null = null;
     let verticalAnimation: gsap.core.Tween | null = null;
+    let ScrollTrigger: any = null;
+    let handleResize: (() => void) | null = null;
 
-    // Horizontal line animation (desktop/tablet) - original implementation
-    if (lineRef.current) {
-      // Set initial state: line scaled to 0, anchored to left
-      gsap.set(lineRef.current, {
-        scaleX: 0,
-        transformOrigin: "left",
-      });
+    // Lazy load ScrollTrigger
+    const initScrollTrigger = async () => {
+      const module = await import("gsap/ScrollTrigger");
+      ScrollTrigger = module.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+      
+      if (!ScrollTrigger || !section) return;
 
-      // Create ScrollTrigger animation
-      horizontalAnimation = gsap.to(lineRef.current, {
-        scaleX: 1,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 50%",
-          end: "bottom 20%",
-          scrub: true,
-        },
-      });
-    }
+      // Horizontal line animation (desktop/tablet) - original implementation
+      if (lineRef.current) {
+        // Set initial state: line scaled to 0, anchored to left
+        gsap.set(lineRef.current, {
+          scaleX: 0,
+          transformOrigin: "left",
+        });
 
-    // Vertical line animation (mobile)
-    const updateVerticalLinePositions = () => {
-      if (!number1Ref.current || !number3Ref.current || !section) return;
-
-      // Helper to get position relative to ancestor
-      const getRelativePosition = (element: HTMLElement, ancestor: HTMLElement) => {
-        let x = 0;
-        let y = 0;
-        let current: HTMLElement | null = element;
-
-        while (current && current !== ancestor) {
-          x += current.offsetLeft;
-          y += current.offsetTop;
-          current = current.offsetParent as HTMLElement | null;
-        }
-
-        return { x, y };
-      };
-
-      const num1Pos = getRelativePosition(number1Ref.current, section);
-      const num3Pos = getRelativePosition(number3Ref.current, section);
-
-      const num1CenterX = num1Pos.x + number1Ref.current.offsetWidth / 2;
-      const num1CenterY = num1Pos.y + number1Ref.current.offsetHeight / 2;
-      const num3CenterY = num3Pos.y + number3Ref.current.offsetHeight / 2;
-
-      // Vertical line animation (mobile)
-      if (verticalLineRef.current && window.innerWidth < 768) {
-        const totalHeight = num3CenterY - num1CenterY;
-        const reducedHeight = totalHeight;
-        const heightOffset = (totalHeight - reducedHeight) / 2;
-
-        gsap.set(verticalLineRef.current, {
-          x: num1CenterX - 1, // Center the 0.5 width line
-          top: num1CenterY + heightOffset,
-          height: reducedHeight,
-          scaleY: 0,
-          transformOrigin: "top",
+        // Create ScrollTrigger animation
+        horizontalAnimation = gsap.to(lineRef.current, {
+          scaleX: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 50%",
+            end: "bottom 20%",
+            scrub: true,
+          },
         });
       }
-    };
 
-    // Initial setup for vertical line
-    updateVerticalLinePositions();
+      // Vertical line animation (mobile)
+      const updateVerticalLinePositions = () => {
+        if (!number1Ref.current || !number3Ref.current || !section) return;
 
-    // Vertical line animation (mobile)
-    if (verticalLineRef.current && number1Ref.current && number3Ref.current) {
-      verticalAnimation = gsap.to(verticalLineRef.current, {
-        scaleY: 1,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 10%",
-          end: "bottom 40%",
-          scrub: true,
-          onRefresh: updateVerticalLinePositions,
-        },
-      });
-    }
+        // Helper to get position relative to ancestor
+        const getRelativePosition = (element: HTMLElement, ancestor: HTMLElement) => {
+          let x = 0;
+          let y = 0;
+          let current: HTMLElement | null = element;
 
-    // Handle window resize for vertical line only
-    const handleResize = () => {
+          while (current && current !== ancestor) {
+            x += current.offsetLeft;
+            y += current.offsetTop;
+            current = current.offsetParent as HTMLElement | null;
+          }
+
+          return { x, y };
+        };
+
+        const num1Pos = getRelativePosition(number1Ref.current, section);
+        const num3Pos = getRelativePosition(number3Ref.current, section);
+
+        const num1CenterX = num1Pos.x + number1Ref.current.offsetWidth / 2;
+        const num1CenterY = num1Pos.y + number1Ref.current.offsetHeight / 2;
+        const num3CenterY = num3Pos.y + number3Ref.current.offsetHeight / 2;
+
+        // Vertical line animation (mobile)
+        if (verticalLineRef.current && window.innerWidth < 768) {
+          const totalHeight = num3CenterY - num1CenterY;
+          const reducedHeight = totalHeight;
+          const heightOffset = (totalHeight - reducedHeight) / 2;
+
+          gsap.set(verticalLineRef.current, {
+            x: num1CenterX - 1, // Center the 0.5 width line
+            top: num1CenterY + heightOffset,
+            height: reducedHeight,
+            scaleY: 0,
+            transformOrigin: "top",
+          });
+        }
+      };
+
+      // Initial setup for vertical line
       updateVerticalLinePositions();
-      ScrollTrigger.refresh();
+
+      // Vertical line animation (mobile)
+      if (verticalLineRef.current && number1Ref.current && number3Ref.current) {
+        verticalAnimation = gsap.to(verticalLineRef.current, {
+          scaleY: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 10%",
+            end: "bottom 40%",
+            scrub: true,
+            onRefresh: updateVerticalLinePositions,
+          },
+        });
+      }
+
+      // Handle window resize for vertical line only
+      handleResize = () => {
+        updateVerticalLinePositions();
+        if (ScrollTrigger) ScrollTrigger.refresh();
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      // Refresh ScrollTrigger to ensure proper initialization
+      if (ScrollTrigger) ScrollTrigger.refresh();
     };
 
-    window.addEventListener("resize", handleResize);
-
-    // Refresh ScrollTrigger to ensure proper initialization
-    ScrollTrigger.refresh();
+    initScrollTrigger();
 
     // Cleanup
     return () => {
-      window.removeEventListener("resize", handleResize);
+      if (handleResize) {
+        window.removeEventListener("resize", handleResize);
+      }
       if (horizontalAnimation) horizontalAnimation.kill();
       if (verticalAnimation) verticalAnimation.kill();
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === section) {
-          trigger.kill();
-        }
-      });
+      if (ScrollTrigger) {
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.vars.trigger === section) {
+            trigger.kill();
+          }
+        });
+      }
     };
   }, []);
 

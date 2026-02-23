@@ -4,13 +4,7 @@ import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TezzeractButton } from "./ui/TezzeractButton";
-
-// Register ScrollTrigger plugin
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function TextSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,84 +16,101 @@ export default function TextSection() {
   useEffect(() => {
     if (!headingRef.current || !containerRef.current) return;
 
-    const heading = headingRef.current;
-    const container = containerRef.current;
-    const textSpans = heading.querySelectorAll("span.text-word");
+    let textTl: gsap.core.Timeline | null = null;
+    let imageTl: gsap.core.Timeline | null = null;
+    let ScrollTrigger: any = null;
+    
+    // Lazy load ScrollTrigger
+    const initScrollTrigger = async () => {
+      const module = await import("gsap/ScrollTrigger");
+      ScrollTrigger = module.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+      
+      if (!ScrollTrigger || !headingRef.current || !containerRef.current) return;
 
-    // Check if mobile view (typically 768px and below)
-    const isMobile = window.innerWidth < 768;
+      const heading = headingRef.current;
+      const container = containerRef.current;
+      const textSpans = heading.querySelectorAll("span.text-word");
 
-    // Set initial state for text spans
-    gsap.set(textSpans, {
-      opacity: 0,
-      y: 50,
-    });
+      // Check if mobile view (typically 768px and below)
+      const isMobile = window.innerWidth < 768;
 
-    // Set initial state for images
-    gsap.set([avatar1Ref.current, avatar2Ref.current], {
-      opacity: 0,
-      scale: 0.8,
-    });
-
-    // Set initial state for button
-    if (buttonRef.current) {
-      gsap.set(buttonRef.current, {
+      // Set initial state for text spans
+      gsap.set(textSpans, {
         opacity: 0,
-        y: 40,
+        y: 50,
       });
-    }
 
-    // Create timeline for text animation with scroll scrub
-    // Start earlier on mobile (top 95%) vs desktop (top 90%)
-    const textTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: isMobile ? "top 95%" : "top 90%",
-        end: "bottom 40%",
-        scrub: 1, // Smooth scrubbing, tied to scroll position
-      },
-    });
+      // Set initial state for images
+      gsap.set([avatar1Ref.current, avatar2Ref.current], {
+        opacity: 0,
+        scale: 0.8,
+      });
 
-    textTl.to(textSpans, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      stagger: 0.05,
-      ease: "power3.out",
-    }).to(buttonRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: "power3.out",
-    }, "-=1"); // Start much earlier in the animation sequence
+      // Set initial state for button
+      if (buttonRef.current) {
+        gsap.set(buttonRef.current, {
+          opacity: 0,
+          y: 40,
+        });
+      }
 
-    // Animate images with scroll scrub
-    // Start earlier on mobile (top 85%) vs desktop (top 80%)
-    const imageTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: isMobile ? "top 85%" : "top 80%",
-        end: "bottom 10%",
-        scrub: 1, // Smooth scrubbing, tied to scroll position
-      },
-    });
+      // Create timeline for text animation with scroll scrub
+      // Start earlier on mobile (top 95%) vs desktop (top 90%)
+      textTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: isMobile ? "top 95%" : "top 90%",
+          end: "bottom 40%",
+          scrub: 1, // Smooth scrubbing, tied to scroll position
+        },
+      });
 
-    imageTl.to([avatar1Ref.current, avatar2Ref.current], {
-      opacity: 1,
-      scale: 1,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power2.out",
-    });
+      textTl.to(textSpans, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.05,
+        ease: "power3.out",
+      }).to(buttonRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      }, "-=1"); // Start much earlier in the animation sequence
+
+      // Animate images with scroll scrub
+      // Start earlier on mobile (top 85%) vs desktop (top 80%)
+      imageTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: isMobile ? "top 85%" : "top 80%",
+          end: "bottom 10%",
+          scrub: 1, // Smooth scrubbing, tied to scroll position
+        },
+      });
+
+      imageTl.to([avatar1Ref.current, avatar2Ref.current], {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+      });
+    };
+
+    initScrollTrigger();
 
     return () => {
-      textTl.kill();
-      imageTl.kill();
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === container) {
-          trigger.kill();
-        }
-      });
+      if (textTl) textTl.kill();
+      if (imageTl) imageTl.kill();
+      if (ScrollTrigger) {
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.vars.trigger === containerRef.current) {
+            trigger.kill();
+          }
+        });
+      }
     };
   }, []);
 
@@ -132,6 +143,7 @@ export default function TextSection() {
               alt="Kotchakorn Avatar"
               fill
               className="object-cover"
+              loading="lazy"
             />
           </div>
         </span>
@@ -160,6 +172,7 @@ export default function TextSection() {
               alt="Tezzeract Team"
               fill
               className="object-contain"
+              loading="lazy"
             />
           </div>
         </span>

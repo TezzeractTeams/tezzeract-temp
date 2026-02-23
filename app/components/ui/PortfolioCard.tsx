@@ -28,6 +28,7 @@ export default function PortfolioCard({
         className="object-cover"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
         quality={100}
+        loading="lazy"
       />
 
 

@@ -1,21 +1,35 @@
+import dynamic from "next/dynamic";
 import Header from "../components/Header";
 import LandingHero from "../components/LandingHero";
 import LogoStrip from "../components/LogoStrip";
 import MeetingBoxSection from "../components/MeetingBoxSection";
 import TeamsSection from "../components/TeamsSection";
 import TextSection from "../components/TextSection";
-import BentoGrid from "../components/BentoGrid";
-import Footer from "../components/Footer";
-import PortfolioSection from "../components/PortfolioSection";
-import BlogSection from "../components/BlogSection";
-import PricingSection from "../components/PricingSection";
 import PinnedSection from "../components/PinnedSection";
 import Preloader from "../components/Preloader";
 import { getPortfolios } from "@/app/lib/portfolio";
+import { getPosts } from "@/app/lib/strapi";
+
+// Dynamic imports for below-the-fold components
+const BentoGrid = dynamic(() => import("../components/BentoGrid"), {
+  loading: () => <div className="w-full h-[800px] bg-gradient-to-br from-[#00A9EE] to-[#00378A]" />,
+});
+
+const PortfolioSection = dynamic(() => import("../components/PortfolioSection"), {
+  loading: () => <div className="w-full h-[600px] bg-black" />,
+});
+
+const BlogSection = dynamic(() => import("../components/BlogSection"));
+
+const Footer = dynamic(() => import("../components/Footer"));
 
 
 export default async function Home() {
-  const portfoliosData = await getPortfolios();
+  // Parallelize API calls
+  const [portfoliosData, postsData] = await Promise.all([
+    getPortfolios(),
+    getPosts(),
+  ]);
 
   // Map domain Portfolio objects to the UI PortfolioItem format
   const portfolios = portfoliosData.map(p => ({
@@ -61,7 +75,7 @@ export default async function Home() {
         <PortfolioSection initialData={portfolios} />
       </div>
 
-      <BlogSection />
+      <BlogSection initialPosts={postsData} />
     
       <Footer />
     </div>
