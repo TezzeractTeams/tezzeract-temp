@@ -6,7 +6,7 @@ import SmoothScroll from "./components/SmoothScroll";
 const figtree = Figtree({
   variable: "--font-figtree",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["300", "600", "700"],
   display: "swap",
 });
 
