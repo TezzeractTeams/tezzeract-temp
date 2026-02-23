@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    qualities: [100, 75],
   },
   experimental: {
     optimizePackageImports: ['gsap', 'three', '@react-three/fiber', 'framer-motion', 'motion'],
