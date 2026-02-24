@@ -26,6 +26,7 @@ export default function PrivacyContactForm() {
                     <input
                         type="text"
                         id="subject"
+                        name="subject"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A9EE] focus:border-transparent outline-none transition-all text-gray-800"
@@ -37,6 +38,7 @@ export default function PrivacyContactForm() {
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                     <textarea
                         id="message"
+                        name="message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         rows={4}
