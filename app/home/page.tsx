@@ -6,7 +6,7 @@ import MeetingBoxSection from "../components/MeetingBoxSection";
 import TeamsSection from "../components/TeamsSection";
 import TextSection from "../components/TextSection";
 import PinnedSection from "../components/PinnedSection";
-import Preloader from "../components/Preloader";
+// import Preloader from "../components/Preloader"; // Temporarily disabled for page speed testing
 import { getPortfolios } from "@/app/lib/portfolio";
 import { getPosts } from "@/app/lib/strapi";
 
@@ -42,7 +42,7 @@ export default async function Home() {
 
   return (
     <div className="w-full overflow-x-hidden">
-      <Preloader />
+      {/* <Preloader /> */} {/* Temporarily disabled for page speed testing */}
       <Header />
 
       <LandingHero />
