@@ -137,7 +137,7 @@ export default function TextSection() {
           ref={avatar1Ref}
           className="inline-flex align-middle mx-2 md:mx-4 relative -top-1"
         >
-          <div className="w-8 h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 overflow-hidden relative rounded-2xl border border-gray-100 shadow-sm">
+          <div className="w-8 h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 overflow-hidden relative sm:rounded-2xl rounded-xl border border-gray-100 shadow-sm">
             <Image
               src="/assets/avatars/Kotchakorn.jpeg"
               alt="Kotchakorn Avatar"
@@ -166,7 +166,7 @@ export default function TextSection() {
           ref={avatar2Ref}
           className="inline-flex align-middle mx-2 md:mx-4 relative -top-1"
         >
-          <div className="w-24 h-24 md:w-24 md:h-10 lg:w-40 lg:h-15 relative">
+          <div className="w-28 h-28 md:w-24 md:h-10 lg:w-40 lg:h-15 relative">
             <Image
               src="/assets/avatars/recGroup.png"
               alt="Tezzeract Team"
