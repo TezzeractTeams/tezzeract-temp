@@ -10,7 +10,7 @@ import PortfolioSection from "../components/PortfolioSection";
 import BlogSection from "../components/BlogSection";
 import PricingSection from "../components/PricingSection";
 import PinnedSection from "../components/PinnedSection";
-import Preloader from "../components/Preloader";
+// import Preloader from "../components/Preloader"; // Temporarily disabled for page speed testing
 import { getPortfolios } from "@/app/lib/portfolio";
 
 
@@ -28,7 +28,7 @@ export default async function Home() {
 
   return (
     <div className="w-full overflow-x-hidden">
-      <Preloader />
+      {/* <Preloader /> */} {/* Temporarily disabled for page speed testing */}
       <Header />
 
       <LandingHero />
