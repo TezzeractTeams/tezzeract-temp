@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { TestimonialTooltip } from "./ui/Tooltip";
 import TeamCarousel, { type TeamMember } from "./TeamCarousel";
+import DreamTeamSection from "./DreamTeamSection";
 
 const teamMembers: TeamMember[] = [
   { name: "Shanilka Rajapaksha", title: "Founder", image: "/assets/avatars/shanilka.jpeg" },
@@ -68,6 +69,7 @@ export default function AboutUsSection() {
             We&apos;re on a mission to make teaming up feel effortless—no matter where you&apos;re
             based.
           </p>
+          <DreamTeamSection />
           <div className="space-y-6 md:space-y-8 text-left">
             <p className="text-base md:text-lg text-gray-600 leading-relaxed">
               Tezzeract helps startups and growing businesses across North America, Europe, the

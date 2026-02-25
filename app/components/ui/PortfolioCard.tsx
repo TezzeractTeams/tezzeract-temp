@@ -32,15 +32,12 @@ export default function PortfolioCard({
       />
 
 
-      {/* Gradient blur overlay */}
+      {/* Gradient overlay */}
       <div
         className="absolute bottom-0 h-[45%] sm:h-[40%] md:h-[60%] lg:h-[40%] group-hover:h-[40%] group-hover:sm:h-[50%] group-hover:md:h-[70%] group-hover:lg:h-[40%] left-0 right-0 pointer-events-none transition-all duration-300"
         style={{
-
           borderRadius: '0 0 30px 30px',
-          background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 00%, rgba(4, 4, 4, 0.5) 100%)',
-          backdropFilter: 'blur(4px)',
-          WebkitBackdropFilter: 'blur(4px)',
+          background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)',
         }}
       />
 
