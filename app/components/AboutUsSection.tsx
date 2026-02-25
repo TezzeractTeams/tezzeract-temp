@@ -1,10 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { TestimonialTooltip } from "./ui/Tooltip";
 import TeamCarousel, { type TeamMember } from "./TeamCarousel";
 import DreamTeamSection from "./DreamTeamSection";
+
+const HERO_BUBBLES = [
+  { icon: "/assets/avatars/devhero.svg", alt: "Development", style: { top: "-15%", left: "18%" }, styleMd: { top: "15%", left: "28%" }, drift: { x: [0, 12, 0], y: [0, -8, 0] }, driftMd: { x: [0, 30, 0], y: [0, -10, 0] }, duration: 6, delay: 0.5 },
+  { icon: "/assets/avatars/createhero.svg", alt: "Design", style: { top: "-50%", right: "28%", left: "auto" }, styleMd: { top: "20%", right: "20%", left: "auto" }, drift: { x: [0, -10, 0], y: [0, 5, 0] }, driftMd: { x: [0, -30, 0], y: [0, 6, 0] }, duration: 6.5, delay: 0.5 },
+  { icon: "/assets/avatars/adverthero.svg", alt: "Marketing", style: { top: "90%", left: "18%" }, styleMd: { top: "70%", left: "20%" }, drift: { x: [0, 10, 0], y: [0, -5, 0] }, driftMd: { x: [0, 30, 0], y: [0, -7, 0] }, duration: 6.2, delay: 0.2 },
+  { icon: "/assets/avatars/insighthero.svg", alt: "Analytics", style: { top: "92%", right: "18%", left: "auto" }, styleMd: { top: "70%", right: "8%", left: "auto" }, drift: { x: [0, -4, 0], y: [0, 4, 0] }, driftMd: { x: [0, -4, 0], y: [0, 5, 0] }, duration: 6.8, delay: 0.8 },
+];
 
 const teamMembers: TeamMember[] = [
   { name: "Shanilka Rajapaksha", title: "Founder", image: "/assets/avatars/shanilka.jpeg" },
@@ -19,10 +27,20 @@ const teamMembers: TeamMember[] = [
 ];
 
 export default function AboutUsSection() {
+  const [isMd, setIsMd] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsMd(mq.matches);
+    const fn = () => setIsMd(mq.matches);
+    mq.addEventListener("change", fn);
+    return () => mq.removeEventListener("change", fn);
+  }, []);
+
   return (
     <div>
       {/* Main Heading */}
-      <div className="relative flex items-center justify-center text-center h-[85vh] pb-20 overflow-hidden">
+      <div className="relative flex items-center justify-center text-center min-h-[60vh] h-[75vh] md:h-[85vh] pb-12 md:pb-20 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-md scale-4000"
           style={{
@@ -30,46 +48,80 @@ export default function AboutUsSection() {
           }}
           aria-hidden
         />
-        <h1 className="relative z-10 text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter">
-          <span className="text-[#00A9EE] font-light">Teams</span>{" "}
-          <span className="inline-flex items-center">
-            <Image
-              src="/assets/Teams.svg"
-              alt="Teams"
-              width={60}
-              height={60}
-              className="inline-block w-6 h-6 md:w-10 md:h-10 lg:w-16 lg:h-16"
-            />
-          </span>{" "}
-          <span className="text-gray-700">built to scale</span>
-          <br />
-          <span className="text-gray-700"> with your business</span>{" "}
-          <span className="text-[#00A9EE] font-light">goals</span>{" "}
-          <span className="inline-flex items-center">
-            <Image
-              src="/assets/Goals.svg"
-              alt="Goals"
-              width={60}
-              height={60}
-              className="inline-block w-6 h-6 md:w-10 md:h-10 lg:w-16 lg:h-16"
-            />
-          </span>{" "}
-          <br />
-          <span className="text-gray-700"> at every stage.</span>
-        </h1>
+        <div className="relative z-10 flex flex-col items-center justify-center w-full">
+          {/* Hero Bubbles */}
+          {HERO_BUBBLES.map((bubble, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-20 lg:h-20 rounded-full flex items-center justify-center cursor-default pointer-events-auto backdrop-blur-[2px] transition-all duration-300"
+              style={{
+                ...(isMd ? bubble.styleMd : bubble.style),
+                border: "2px solid rgba(0, 169, 238, 0.5)",
+                backgroundColor: "rgba(239, 250, 255, 0.45)",
+                boxShadow: "0 2px 12px rgba(0, 55, 138, 0.08)",
+              }}
+              animate={{
+                x: [...(isMd ? bubble.driftMd : bubble.drift).x],
+                y: [...(isMd ? bubble.driftMd : bubble.drift).y],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: bubble.duration,
+                delay: bubble.delay,
+                ease: "easeInOut",
+              }}
+            >
+              <Image
+                src={bubble.icon}
+                alt={bubble.alt}
+                width={60}
+                height={60}
+                className="w-6 h-6 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-10 lg:h-10 object-contain opacity-90"
+              />
+            </motion.div>
+          ))}
+          <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl font-light leading-tight mb-4 tracking-tighter text-gray-700 px-4 max-w-[90vw]">
+            We&apos;re on a{" "}
+            <span
+              className="font-light"
+              style={{
+                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              mission
+            </span>
+            <br />
+            to make teaming up
+            <br />
+            feel effortless
+          </h1>
+        </div>
       </div>
 
 
       {/* Content Section - White Background */}
-      <div className="relative bg-white -mt-40 w-full rounded-t-4xl z-10 overflow-hidden px-4 md:px-8 lg:px-24 pt-40 pb-20">
+      <div className="relative bg-white -mt-24 md:-mt-40 w-full rounded-t-4xl z-10 overflow-hidden px-4 sm:px-6 md:px-8 lg:px-24 pt-24 md:pt-40 pb-12 md:pb-20">
         <TestimonialTooltip />
         <div className="max-w-5xl mx-auto">
           {/* Mission & Text Section */}
-          <p className="text-center text-xl md:text-2xl lg:text-3xl text-gray-700 font-light mb-12 md:mb-16 leading-tight tracking-tighter">
-            We&apos;re on a mission to make teaming up feel effortless—no matter where you&apos;re
+          <p className="text-center text-base sm:text-lg md:text-2xl lg:text-3xl text-gray-700 font-light mb-8 sm:mb-12 md:mb-16 leading-tight tracking-tighter">
+            We&apos;re on a{" "}
+            <span
+              style={{
+                backgroundImage: "linear-gradient(to right, #0068B5, #00A9EE)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              mission
+            </span>{" "}
+            to make teaming up feel effortless—no matter where you&apos;re
             based.
           </p>
-          <DreamTeamSection />
           <div className="space-y-6 md:space-y-8 text-left">
             <p className="text-base md:text-lg text-gray-600 leading-relaxed">
               Tezzeract helps startups and growing businesses across North America, Europe, the
@@ -91,6 +143,7 @@ export default function AboutUsSection() {
             </p>
           </div>
         </div>
+        <DreamTeamSection />
 
         {/* Team Carousel */}
         <div className="pt-12 md:pt-16">
