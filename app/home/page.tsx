@@ -5,6 +5,7 @@ import LogoStrip from "../components/LogoStrip";
 import MeetingBoxSection from "../components/MeetingBoxSection";
 import TeamsSection from "../components/TeamsSection";
 import TextSection from "../components/TextSection";
+import TwoFeatureCardsSection from "../components/TwoFeatureCardsSection";
 import PinnedSection from "../components/PinnedSection";
 // import Preloader from "../components/Preloader"; // Temporarily disabled for page speed testing
 import { getPortfolios } from "@/app/lib/portfolio";
@@ -51,7 +52,7 @@ export default async function Home() {
       <MeetingBoxSection />
       <TeamsSection />
 
-
+      <TwoFeatureCardsSection />
 
       <PinnedSection pinDuration="800vh">
         <div
