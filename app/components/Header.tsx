@@ -23,9 +23,8 @@ const MobileMenu = () => (
     animate="visible"
   >
     {navLinks.map((link, index) => (
-      <motion.a
+      <motion.div
         key={link.href}
-        href={link.href}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -33,10 +32,11 @@ const MobileMenu = () => (
           duration: 0.3,
           ease: [0.4, 0, 0.2, 1],
         }}
-        className="block text-[#0068B5] hover:text-[#00A9EE] transition-colors py-2"
       >
-        {link.label}
-      </motion.a>
+        <Link href={link.href} className="block text-[#0068B5] hover:text-[#00A9EE] transition-colors py-2">
+          {link.label}
+        </Link>
+      </motion.div>
     ))}
     <motion.div
       initial={{ opacity: 0, y: -10 }}
@@ -149,7 +149,7 @@ export default function Header() {
                 onMouseLeave={() => setHoveredNav(null)}
               >
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onMouseEnter={() => setHoveredNav(link.href)}
@@ -175,7 +175,7 @@ export default function Header() {
                     >
                       {link.label}
                     </span>
-                  </a>
+                  </Link>
                 ))}
               </div>
               </LayoutGroup>
@@ -281,7 +281,7 @@ export default function Header() {
                 onMouseLeave={() => setHoveredNav(null)}
               >
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onMouseEnter={() => setHoveredNav(link.href)}
@@ -307,7 +307,7 @@ export default function Header() {
                     >
                       {link.label}
                     </span>
-                  </a>
+                  </Link>
                 ))}
               </div>
               </LayoutGroup>
