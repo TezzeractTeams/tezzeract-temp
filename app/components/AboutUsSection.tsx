@@ -143,7 +143,6 @@ export default function AboutUsSection() {
             </p>
           </div>
         </div>
-        <DreamTeamSection />
 
         {/* Team Carousel */}
         <div className="pt-12 md:pt-16">
