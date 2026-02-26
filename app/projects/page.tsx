@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PortfolioCard from "../components/ui/PortfolioCard";
 import { getPortfolios, type Portfolio } from "@/app/lib/portfolio";
-import Image from "next/image";
 
 export default async function ProjectsPage() {
     // Use a try-catch block to handle potential data fetching errors gracefully
@@ -29,7 +28,7 @@ export default async function ProjectsPage() {
             {/* Hero Section - Matching About Us Aesthetic */}
             <div className="relative flex items-center justify-center text-center h-[60vh] pb-20 overflow-hidden">
                 <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-md scale-4000"
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[1000px] scale-[1.15]"
                     style={{
                         backgroundImage: "url('/assets/aboutbg.png')",
                     }}

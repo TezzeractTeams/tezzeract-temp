@@ -52,7 +52,6 @@ export default async function Home() {
       <MeetingBoxSection />
       <TeamsSection />
 
-      <TwoFeatureCardsSection />
 
       <PinnedSection pinDuration="800vh">
         <div

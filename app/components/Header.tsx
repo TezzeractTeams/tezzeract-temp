@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -67,6 +67,7 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const { scrollY } = useScroll();
+  const lastAppliedRef = useRef<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
@@ -79,7 +80,12 @@ export default function Header() {
   }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 100);
+    const y = latest;
+    const prev = lastAppliedRef.current;
+    const next = prev ? y > 30 : y > 180;
+    if (next === lastAppliedRef.current) return;
+    lastAppliedRef.current = next;
+    setScrolled(next);
   });
 
   useEffect(() => {
