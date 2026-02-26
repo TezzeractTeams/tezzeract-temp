@@ -72,7 +72,7 @@ export const FAQ = () => {
           </h2>
           
           <div className="space-y-6 md:space-y-8 text-center">
-            <p className="text-base md:text-2xl lg:text-3xl text-gray-600 leading-tighter">
+            <p className="text-base md:text-2xl lg:text-3xl text-gray-600 leading-tighter tracking-tighter">
               Everything you need to know about our remote teams, flexible pricing, and how to get started.
             </p>
           </div>

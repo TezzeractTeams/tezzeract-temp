@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -28,36 +29,36 @@ export default function Footer() {
           <div className="flex flex-col gap-2 md:gap-3 items-start text-left">
             <h4 className="text-white/60 text-sm font-light mb-2">Pages</h4>
             <div className="grid grid-cols-2 gap-3">
-              <a
+              <Link
                 href="/about-us"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 About us
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/community"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Community
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/home"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Home
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/projects"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Projects
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/pricing"
                 className="text-white hover:text-white/80 transition-colors"
               >
                 Pricing
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -97,12 +98,12 @@ export default function Footer() {
           {/* Column 4 - Legal */}
             <div className="flex flex-col gap-2 md:gap-3 items-start text-left pt-5 lg:pt-0">
             <h4 className="text-white/60 text-sm font-light mb-2">Legal</h4>
-            <a
+            <Link
               href="/privacy-policy"
               className="text-white hover:text-white/80 transition-colors"
             >
               Privacy Policy
-            </a>
+            </Link>
             
           </div>
         </div>

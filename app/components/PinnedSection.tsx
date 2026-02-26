@@ -18,19 +18,26 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLDivElement>(null);
     const isPinnedRef = useRef(false);
+    const ctxRef = useRef<gsap.Context | null>(null);
     const lenis = useLenis();
 
     useLayoutEffect(() => {
         // Function to check if mobile
         const checkIsMobile = () => window.innerWidth < 1024;
         
-        // Set initial state
+        // If mobile, skip ScrollTrigger initialization entirely
         if (checkIsMobile()) {
             isPinnedRef.current = false;
+            // Clean up any existing ScrollTrigger instances if switching from desktop to mobile
+            if (ctxRef.current) {
+                ctxRef.current.revert();
+                ctxRef.current = null;
+            }
+            return;
         }
 
+        // Only initialize ScrollTrigger on desktop screens
         const ctx = gsap.context(() => {
-            // Only apply pinning on desktop (lg and up). Mobile/tablet scroll normally.
             ScrollTrigger.matchMedia({
                 "(min-width: 1024px)": () => {
                     // Double check we're still on desktop before creating trigger
@@ -68,17 +75,20 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
                     });
                     return () => st.kill();
                 },
-                // Explicitly handle mobile - ensure no pinning
-                "(max-width: 1023px)": () => {
-                    isPinnedRef.current = false;
-                },
             });
         }, containerRef);
+        
+        ctxRef.current = ctx;
 
-        // Handle resize to ensure mobile state is maintained
+        // Handle resize to clean up ScrollTrigger when switching from desktop to mobile
         const handleResize = () => {
             if (checkIsMobile()) {
                 isPinnedRef.current = false;
+                // Clean up ScrollTrigger when switching to mobile
+                if (ctxRef.current) {
+                    ctxRef.current.revert();
+                    ctxRef.current = null;
+                }
             }
         };
         
@@ -86,7 +96,10 @@ export default function PinnedSection({ children, pinDuration = "100%" }: Pinned
 
         return () => {
             window.removeEventListener('resize', handleResize);
-            ctx.revert();
+            if (ctxRef.current) {
+                ctxRef.current.revert();
+                ctxRef.current = null;
+            }
         };
     }, [pinDuration, lenis]);
 
