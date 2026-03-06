@@ -93,18 +93,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         {/* Hero Image / Showcase Section */}
         {(portfolio.image || portfolio.cover) && (
           <div className="relative w-full aspect-[16/10] mb-32 px-4 md:px-0">
-            <div className="w-full h-full bg-[#F5F5F5] rounded-[32px] md:rounded-[64px] overflow-hidden flex items-center justify-center p-8 md:p-20 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.08)] border border-gray-100">
-              <div className="relative w-full h-full max-w-4xl mx-auto flex items-center justify-center group">
-                <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.02]">
-                  <Image
-                    src={(portfolio.image || portfolio.cover)!.url}
-                    alt={portfolio.title}
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              </div>
+            <div className="relative w-full h-full rounded-[32px] md:rounded-[64px] overflow-hidden shadow-[0_20px_80px_-20px_rgba(0,0,0,0.08)] border border-gray-100 group">
+              <Image
+                src={(portfolio.image || portfolio.cover)!.url}
+                alt={portfolio.title}
+                fill
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                priority
+              />
             </div>
           </div>
         )}
@@ -155,15 +151,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </div>
               )}
               {portfolio.Approach_image && (
-                <div className="w-full aspect-video bg-white rounded-[32px] md:rounded-[64px] border border-gray-100 mb-12 flex items-center justify-center shadow-sm overflow-hidden">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={portfolio.Approach_image.url}
-                      alt="Our Approach"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
+                <div className="relative w-full aspect-video rounded-[32px] md:rounded-[64px] border border-gray-100 mb-12 shadow-sm overflow-hidden">
+                  <Image
+                    src={portfolio.Approach_image.url}
+                    alt="Our Approach"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               )}
             </section>
@@ -186,15 +180,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <div className="space-y-8">
                 {/* Main Mockup - First image */}
                 {portfolio.Solution_images[0] && (
-                  <div className="w-full aspect-[16/10] bg-[#F5F5F5] rounded-[32px] md:rounded-[64px] flex items-center justify-center p-8 md:p-20 border border-gray-100 overflow-hidden">
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={portfolio.Solution_images[0].url}
-                        alt="Solution Main"
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
+                  <div className="relative w-full aspect-[16/10] rounded-[32px] md:rounded-[64px] border border-gray-100 overflow-hidden">
+                    <Image
+                      src={portfolio.Solution_images[0].url}
+                      alt="Solution Main"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 )}
 
@@ -202,15 +194,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 {portfolio.Solution_images.length > 1 && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {portfolio.Solution_images.slice(1, 3).map((img, index) => (
-                      <div key={index} className="aspect-square bg-[#F5F5F5] rounded-[32px] md:rounded-[64px] p-8 md:p-12 border border-gray-100 overflow-hidden">
-                        <div className="w-full h-full relative">
-                          <Image
-                            src={img.url}
-                            alt={`Solution Side ${index + 1}`}
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
+                      <div key={index} className="relative aspect-square rounded-[32px] md:rounded-[64px] border border-gray-100 overflow-hidden">
+                        <Image
+                          src={img.url}
+                          alt={`Solution Side ${index + 1}`}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                     ))}
                   </div>
