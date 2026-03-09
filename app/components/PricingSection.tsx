@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { AnimatedShinyText } from "./bento-boxes/AnimatedShinyText";
 
 export interface PricingCardTheme {
@@ -219,23 +220,44 @@ const PricingCard = ({
       </p>
 
       <div className="mt-auto">
-        <span
-          className="text-4xl md:text-5xl font-light"
-          style={
-            isGradient(t.priceColor)
-              ? {
-                  background: t.priceColor,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }
-              : { color: t.priceColor }
-          }
-        >
-          {typeof price === "number" ? `$${price.toLocaleString()}` : price}
-        </span>
+        {typeof price === "string" ? (
+          <Link
+            href="/get-started"
+            className="text-4xl md:text-5xl font-light hover:opacity-80 transition-opacity"
+            style={
+              isGradient(t.priceColor)
+                ? {
+                    background: t.priceColor,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }
+                : { color: t.priceColor }
+            }
+          >
+            {price}
+          </Link>
+        ) : (
+          <span
+            className="text-4xl md:text-5xl font-light"
+            style={
+              isGradient(t.priceColor)
+                ? {
+                    background: t.priceColor,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }
+                : { color: t.priceColor }
+            }
+          >
+            {`$${price.toLocaleString()}`}
+          </span>
+        )}
         {typeof price === "number" && (
-          <span className="text-base md:text-lg" style={{ color: t.priceSuffixColor }}>/month</span>
+          <span className="text-base md:text-lg" style={{ color: t.priceSuffixColor }}>
+            /month
+          </span>
         )}
       </div>
     </div>
