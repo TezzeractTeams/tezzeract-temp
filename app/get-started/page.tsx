@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { TezzeractButton } from "../components/ui/TezzeractButton";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import Footer from "../components/Footer";
 
@@ -24,14 +25,24 @@ export default function BookACallPage() {
             {/* Left Content Area - Approx 60% on desktop */}
             <div className="w-full lg:w-[70%] h-full overflow-y-auto scrollbar-hide px-6 py-12 md:px-16 md:py-20 lg:px-24 lg:py-12 flex flex-col bg-white lg:rounded-r-[48px] z-20 shadow-2xl">
                 <div className="w-full mx-auto lg:mx-0">
-                    <Link href="/">
-                        <Image
-                            src="/tezzeractLogo.svg"
-                            alt="Tezzeract Logo"
-                            width={160}
-                            height={45}
-                            className="mb-14" />
-                    </Link>
+                    <div className="flex justify-between items-center mb-14">
+                        <Link href="/">
+                            <Image
+                                src="/tezzeractLogo.svg"
+                                alt="Tezzeract Logo"
+                                width={160}
+                                height={45}
+                                className="" />
+                        </Link>
+                        <Link href="/">
+                            <TezzeractButton>
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                                </svg>
+                                Back to Home
+                            </TezzeractButton>
+                        </Link>
+                    </div>
 
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-[#1A1A1A] mb-14 leading-tighter tracking-tight">
                         Take the first step <br />
