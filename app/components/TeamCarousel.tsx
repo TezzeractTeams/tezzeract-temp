@@ -123,9 +123,9 @@ export default function TeamCarousel({ items }: TeamCarouselProps) {
     });
   }, [items]);
 
-  // Bottom row: Nipun, Oneli, Simon, Kotchakorn
+  // Bottom row: Nipun, Oneli, Simon, Kotchakorn, Nithya
   const bottomRowMembers = useMemo(() => {
-    const names = ["Nipun Koshalya", "Oneli Kumarasinghe", "Simon Abraham Tecle", "Kotchakorn Janroong"];
+    const names = ["Nipun Koshalya", "Oneli Kumarasinghe", "Simon Abraham Tecle", "Kotchakorn Janroong", "Nithya Silva"];
     return names.map(name => {
       const found = items.find(item => item.name.toLowerCase().includes(name.split(' ')[0].toLowerCase()));
       return found || { name, title: "Team Member", image: "/assets/avatars/germanfemale.png" };

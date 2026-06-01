@@ -791,7 +791,10 @@ export const getPortfolios = cache(async (): Promise<Portfolio[]> => {
     });
 
     return portfolios.filter((item: Portfolio) => item.title && item.title !== 'Untitled Portfolio');
-  } catch {
+  } catch (err) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[getPortfolios] Failed to load portfolios from Strapi:', err);
+    }
     return [];
   }
 });

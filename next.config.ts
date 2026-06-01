@@ -1,6 +1,18 @@
 import type { NextConfig } from "next";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+// Directory that contains this config file (always the real app root).
+// Do not use `__dirname` here — Next may evaluate the config in a context where it resolves
+// incorrectly, which sends Turbopack looking for `tailwindcss` in the parent folder and
+// causes repeated resolution failures.
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  // Pin Turbopack root when multiple lockfiles exist (e.g. parent yarn.lock + this repo's pnpm-lock).
+  turbopack: {
+    root: projectRoot,
+  },
   images: {
     remotePatterns: [
       {

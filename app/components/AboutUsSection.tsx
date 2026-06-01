@@ -18,6 +18,7 @@ const teamMembers: TeamMember[] = [
   { name: "Shanilka Rajapaksha", title: "Founder", image: "/assets/avatars/shanilka.jpeg" },
   { name: "Nataly Undugodage", title: "Head of People & Culture", image: "/assets/avatars/nataly.jpeg" },
   { name: "Kotchakorn Janroong", title: "Head of Operations and Business Development", image: "/assets/avatars/Kotchakorn.jpeg" },
+  { name: "Nithya Silva", title: "Chief Operations Officer", image: "/assets/avatars/nithya.jpeg" },
   { name: "Simon Abraham Tecle", title: "Partner Growth and Strategy", image: "/assets/avatars/simon.png" },
   { name: "Wehan Himsara", title: "Software Engineer", image: "/assets/avatars/wehan.jpg" },
   { name: "Oneli Kumarasinghe", title: "Web Development & E-commerce Specialist", image: "/assets/avatars/oneli.png" },
