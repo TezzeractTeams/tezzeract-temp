@@ -68,7 +68,7 @@ async function fetchFromStrapi(endpoint: string) {
   }
 
   const baseUrl = strapiUrl || 'http://localhost:1337';
-  const apiKey = process.env.STRAPI_API_KEY;
+  const apiKey = process.env.STRAPI_API_KEY?.trim();
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',

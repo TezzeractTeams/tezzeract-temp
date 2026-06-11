@@ -143,9 +143,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <section>
               <h2 className="text-4xl md:text-6xl font-light text-center text-gray-900 mb-20 px-4">Our Approach</h2>
               {portfolio.Approach_text && (
-                <div className="max-w-3xl mx-auto text-center px-6 mb-12">
+                <div className="max-w-3xl mx-auto px-6 mb-12">
                   <div
-                    className="text-lg md:text-xl text-gray-500 font-light leading-relaxed"
+                    className="rich-text text-left text-lg md:text-xl text-gray-500 font-light leading-relaxed [&_strong]:font-semibold [&_strong]:text-gray-700 [&_ol]:list-decimal [&_ol]:list-inside [&_ol]:mb-4 [&_ul]:list-disc [&_ul]:list-inside [&_ul]:mt-2 [&_ul]:mb-2 [&_li]:mb-2 [&_p]:mb-3"
                     dangerouslySetInnerHTML={{ __html: portfolio.Approach_text }}
                   />
                 </div>
@@ -172,7 +172,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <h2 className="text-4xl md:text-6xl font-light text-center text-gray-900 mb-16 px-4">Solution</h2>
             {portfolio.Solution_text && (
               <div className="max-w-5xl mx-auto text-center text-lg md:text-xl text-gray-500 font-light leading-relaxed mb-16 px-6">
-                <div dangerouslySetInnerHTML={{ __html: portfolio.Solution_text }} />
+                <div
+                  className="rich-text [&_strong]:font-semibold [&_strong]:text-gray-700 [&_ol]:list-decimal [&_ol]:list-inside [&_ol]:mb-4 [&_ul]:list-disc [&_ul]:list-inside [&_ul]:mt-2 [&_ul]:mb-2 [&_li]:mb-2 [&_p]:mb-3"
+                  dangerouslySetInnerHTML={{ __html: portfolio.Solution_text }}
+                />
               </div>
             )}
 
