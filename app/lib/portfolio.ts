@@ -139,7 +139,6 @@ function convertInlineNodes(nodes: RichTextNode[]): string {
     if (node.type === 'text' || (!node.type && node.text !== undefined)) {
       let text = escapeHtml(node.text || '');
 
-      // Apply formatting (bold, italic, etc.)
       if (node.bold) text = `<strong>${text}</strong>`;
       if (node.italic) text = `<em>${text}</em>`;
       if (node.underline) text = `<u>${text}</u>`;
@@ -153,13 +152,104 @@ function convertInlineNodes(nodes: RichTextNode[]): string {
       return `<a href="${node.url || '#'}" ${node.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${convertInlineNodes(node.children || [])}</a>`;
     }
 
-    // Handle nested children
-    if (node.children && Array.isArray(node.children)) {
-      return convertInlineNodes(node.children);
+    if (node.type === 'list') {
+      return renderListBlock(node);
+    }
+
+    if (node.type === 'list-item') {
+      return convertListItemContent(node.children || []);
+    }
+
+    if (node.type === 'paragraph') {
+      return convertInlineNodes(node.children || []);
     }
 
     return '';
   }).join('');
+}
+
+function convertListItemContent(nodes: RichTextNode[]): string {
+  if (!Array.isArray(nodes)) {
+    return '';
+  }
+
+  return nodes.map(node => {
+    if (node.type === 'list') {
+      return renderListBlock(node);
+    }
+    if (node.type === 'list-item') {
+      return convertListItemContent(node.children || []);
+    }
+    if (node.type === 'paragraph') {
+      return convertInlineNodes(node.children || []);
+    }
+    return convertInlineNodes([node]);
+  }).join('');
+}
+
+// Strapi nests bullet lists as siblings inside ordered lists (list-item, list, list-item, list...)
+function renderListBlock(block: RichTextNode): string {
+  const listTag = block.format === 'ordered' ? 'ol' : 'ul';
+  const children = block.children || [];
+  let html = '';
+  let i = 0;
+
+  while (i < children.length) {
+    const child = children[i];
+
+    if (child.type === 'list-item') {
+      let itemContent = convertListItemContent(child.children || []);
+      if (i + 1 < children.length && children[i + 1].type === 'list') {
+        itemContent += renderListBlock(children[i + 1]);
+        i += 2;
+      } else {
+        i += 1;
+      }
+      html += `<li>${itemContent}</li>`;
+    } else if (child.type === 'list') {
+      const nested = renderListBlock(child);
+      if (html.endsWith('</li>')) {
+        html = html.slice(0, -5) + nested + '</li>';
+      } else {
+        html += nested;
+      }
+      i += 1;
+    } else {
+      html += `<li>${convertInlineNodes(child.children || [child])}</li>`;
+      i += 1;
+    }
+  }
+
+  return `<${listTag}>${html}</${listTag}>`;
+}
+
+function convertBlockNode(blockNode: RichTextNode): string {
+  switch (blockNode.type) {
+    case 'heading': {
+      const level = blockNode.level || 2;
+      return `<h${level}>${convertInlineNodes(blockNode.children || [])}</h${level}>`;
+    }
+    case 'paragraph':
+      return `<p>${convertInlineNodes(blockNode.children || [])}</p>`;
+    case 'list':
+      return renderListBlock(blockNode);
+    case 'list-item':
+      return `<li>${convertListItemContent(blockNode.children || [])}</li>`;
+    case 'quote':
+      return `<blockquote>${convertInlineNodes(blockNode.children || [])}</blockquote>`;
+    case 'code':
+      return `<pre><code>${escapeHtml(convertInlineNodes(blockNode.children || []))}</code></pre>`;
+    case 'link':
+      return `<a href="${blockNode.url || '#'}" ${blockNode.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${convertInlineNodes(blockNode.children || [])}</a>`;
+    default:
+      if (blockNode.text) {
+        return `<p>${convertInlineNodes([blockNode])}</p>`;
+      }
+      if (blockNode.children && Array.isArray(blockNode.children)) {
+        return toHtmlContent(blockNode.children);
+      }
+      return '';
+  }
 }
 
 function toHtmlContent(content: unknown): string {
@@ -188,53 +278,7 @@ function toHtmlContent(content: unknown): string {
         if (typeof block === 'string') return `<p>${escapeHtml(block)}</p>`;
         const blockNode = typeof block === 'object' && block !== null ? (block as RichTextNode) : undefined;
         if (!blockNode) return '';
-
-        // Handle heading
-        if (blockNode.type === 'heading') {
-          const level = blockNode.level || 2;
-          return `<h${level}>${convertInlineNodes(blockNode.children || [])}</h${level}>`;
-        }
-
-        // Handle paragraph
-        if (blockNode.type === 'paragraph') {
-          return `<p>${convertInlineNodes(blockNode.children || [])}</p>`;
-        }
-
-        // Handle list
-        if (blockNode.type === 'list') {
-          const listTag = blockNode.format === 'ordered' ? 'ol' : 'ul';
-          const items = (blockNode.children || [])
-            .map((item: RichTextNode) => `<li>${convertInlineNodes(item.children || [])}</li>`)
-            .join('');
-          return `<${listTag}>${items}</${listTag}>`;
-        }
-
-        // Handle quote
-        if (blockNode.type === 'quote') {
-          return `<blockquote>${convertInlineNodes(blockNode.children || [])}</blockquote>`;
-        }
-
-        // Handle code
-        if (blockNode.type === 'code') {
-          return `<pre><code>${escapeHtml(convertInlineNodes(blockNode.children || []))}</code></pre>`;
-        }
-
-        // Handle link block
-        if (blockNode.type === 'link') {
-          return `<a href="${blockNode.url || '#'}" ${blockNode.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${convertInlineNodes(blockNode.children || [])}</a>`;
-        }
-
-        // Fallback: if it has text, wrap in paragraph
-        if (blockNode.text) {
-          return `<p>${convertInlineNodes([blockNode])}</p>`;
-        }
-
-        // If it has children, process them
-        if (blockNode.children && Array.isArray(blockNode.children)) {
-          return toHtmlContent(blockNode.children);
-        }
-
-        return '';
+        return convertBlockNode(blockNode);
       })
       .join('\n');
   }
@@ -243,6 +287,9 @@ function toHtmlContent(content: unknown): string {
     const contentNode = content as RichTextNode;
     if (contentNode.type === 'doc' && Array.isArray(contentNode.children)) {
       return toHtmlContent(contentNode.children);
+    }
+    if (contentNode.type) {
+      return convertBlockNode(contentNode);
     }
     if (Array.isArray(contentNode.children)) {
       return toHtmlContent(contentNode.children);
@@ -263,7 +310,7 @@ async function fetchFromStrapi(endpoint: string) {
   }
 
   const baseUrl = strapiUrl || 'http://localhost:1337';
-  const apiKey = process.env.STRAPI_API_KEY;
+  const apiKey = process.env.STRAPI_API_KEY?.trim();
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -271,6 +318,8 @@ async function fetchFromStrapi(endpoint: string) {
 
   if (apiKey) {
     headers.Authorization = `Bearer ${apiKey}`;
+  } else if (process.env.NODE_ENV === 'development') {
+    console.warn('[portfolio] STRAPI_API_KEY is missing — Strapi may return 401/403 for protected content.');
   }
 
   // Ensure endpoint starts with / and handle joining safely
@@ -284,6 +333,11 @@ async function fetchFromStrapi(endpoint: string) {
 
   if (!response.ok) {
     const errorText = await response.text();
+    if (process.env.NODE_ENV === 'development' && (response.status === 401 || response.status === 403)) {
+      console.error(
+        `[portfolio] Strapi auth failed (${response.status}). Update STRAPI_API_KEY in .env with a valid token from Strapi Admin → Settings → API Tokens, then restart the dev server.`
+      );
+    }
     throw new Error(`Failed to fetch from Strapi: ${response.status} ${errorText}`);
   }
 
@@ -569,7 +623,7 @@ async function fetchAuthorsWithAvatars(authorIds: number[]): Promise<Map<number,
 
   try {
     const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL?.replace(/\/$/, '') || 'http://localhost:1337';
-    const apiKey = process.env.STRAPI_API_KEY;
+    const apiKey = process.env.STRAPI_API_KEY?.trim();
     const headers: HeadersInit = { 'Content-Type': 'application/json' };
     if (apiKey) {
       headers.Authorization = `Bearer ${apiKey}`;
