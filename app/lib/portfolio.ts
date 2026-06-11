@@ -85,8 +85,8 @@ type RawPortfolio = {
   challenge_description?: string;
   Approach_image?: RawPortfolioImage[] | RawPortfolioImage | { data?: { attributes?: { url?: string } }; url?: string };
   approach_image?: RawPortfolioImage[] | RawPortfolioImage | { data?: { attributes?: { url?: string } }; url?: string };
-  Approach_text?: string;
-  approach_text?: string;
+  Approach_text?: unknown;
+  approach_text?: unknown;
   Solution_text?: string;
   solution_text?: string;
   Solution_images?: RawPortfolioImage[] | RawPortfolioImage | { data?: RawPortfolioImage[] | RawPortfolioImage };
@@ -482,7 +482,13 @@ function transformPortfolio(item: RawPortfolio): Portfolio {
 
   // Extract Approach fields
   const approachImageUrl = extractImageUrl(attrs?.Approach_image || attrs?.approach_image, strapiUrl);
-  const approachText = attrs?.Approach_text || attrs?.approach_text || undefined;
+  const approachTextRaw = attrs?.Approach_text ?? attrs?.approach_text;
+  const approachText = approachTextRaw !== undefined && approachTextRaw !== null
+    ? (typeof approachTextRaw === 'string' && approachTextRaw.trim().startsWith('<')
+        ? approachTextRaw
+        : toHtmlContent(approachTextRaw))
+    : undefined;
+  const approachTextFinal = (approachText && approachText.trim()) ? approachText : undefined;
 
   // Extract Solution fields
   const solutionText = attrs?.Solution_text || attrs?.solution_text || undefined;
@@ -537,7 +543,7 @@ function transformPortfolio(item: RawPortfolio): Portfolio {
     Challenge_heading: challengeHeading,
     Challenge_Description: challengeDescription,
     Approach_image: approachImageUrl ? { url: approachImageUrl } : undefined,
-    Approach_text: approachText,
+    Approach_text: approachTextFinal,
     Solution_text: solutionText,
     Solution_images: solutionImages,
     Impact1: impact1,
