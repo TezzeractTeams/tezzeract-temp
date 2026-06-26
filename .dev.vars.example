@@ -1,0 +1,4 @@
+NEXTJS_ENV=development
+NEXT_PUBLIC_STRAPI_URL=https://tezzeract-strapi-backend.onrender.com
+NEXT_PUBLIC_SITE_URL=https://tezzeract.com
+STRAPI_API_KEY=your-local-strapi-api-key-here
