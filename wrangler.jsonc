@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "tezzeract",
+  "name": "tezzeract-temp",
   "compatibility_date": "2025-06-26",
   "compatibility_flags": [
     "nodejs_compat",
@@ -14,7 +14,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "tezzeract"
+      "service": "tezzeract-temp"
     }
   ],
   "images": {
