@@ -8,7 +8,7 @@ interface BlogSectionProps {
 }
 
 export default function BlogSection({ initialPosts = [] }: BlogSectionProps) {
-  const posts = initialPosts;
+  const posts = initialPosts.slice(0, 4);
 
   return (
     <section className="w-full pt-26 py-14 lg:px-8 px-2 bg-white relative">
