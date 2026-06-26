@@ -24,5 +24,8 @@
   ],
   "images": {
     "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": true
   }
 }
